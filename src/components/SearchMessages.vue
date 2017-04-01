@@ -26,7 +26,7 @@ mark{
   import Old from './Old.vue'
   import Message from './Message.vue'
   import BottomLoader from 'bz-bottom-loader'
-  import Mark from 'mark.js'
+  // import Mark from 'mark.js'
 
   module.exports = {
     components: {
@@ -92,7 +92,7 @@ mark{
         this.show_old = true
         // 高亮查找的key
         this.$nextTick(function () {
-          var instance = new Mark(this.$el)
+          var instance = new window.Mark(this.$el)
           instance.mark(this.search_key)
         })
       }

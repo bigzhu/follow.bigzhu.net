@@ -82,32 +82,34 @@
   }
 </style>
 <template>
-  <div class="ui middle aligned center aligned grid login">
-    <div class="column">
-      <div class="ui header logo">
-        <img src="../assets/logo.png">
-      </div>
-      <p class="discription">{{ $t("Login.title") }}</p>
-      <!-- <p>猥琐的跟踪牛人/美女的一举一动</p> -->
-      <form class="ui large form oauth-width-bz">
-        <div class="ui login">
-          <oauth2 :oauths="oauths" :url="url" :function_name="function_name"></oauth2>
-          <!-- </br> -->
-          <p>{{ $t("Login.withoutsns") }} <a href="/#guest"> {{ $t("Login.hangout") }}</a></p>
-        </div>
-      </form>      
-    </div>
-  </div>
-  <div class="ui middle aligned center aligned grid login-footer">
-    <div class="column">
-      <a href="/about.html">{{ $t("Login.about") }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="##" class="download-app">{{ $t("Login.phone") }}</a>
-    </div>
-  </div>
-  <div class="ui flowing popup top left transition visible animating scale out phone-bz">
-    <div class="ui column divided center aligned grid">
+  <div>
+    <div class="ui middle aligned center aligned grid login">
       <div class="column">
-        <a href="/static/follow_center.apk" target="blank"><img src="../assets/andriod.svg">&nbsp;&nbsp;&nbsp;{{ $t("Login.andriod") }}</a>
+        <div class="ui header logo">
+          <img src="../assets/logo.png">
+        </div>
+        <p class="discription">{{ $t("Login.title") }}</p>
+        <!-- <p>猥琐的跟踪牛人/美女的一举一动</p> -->
+        <form class="ui large form oauth-width-bz">
+          <div class="ui login">
+            <oauth2 :oauths="oauths" :url="url" :function_name="function_name"></oauth2>
+            <!-- </br> -->
+            <p>{{ $t("Login.withoutsns") }} <a href="/#guest"> {{ $t("Login.hangout") }}</a></p>
+          </div>
+        </form>      
+      </div>
+    </div>
+    <div class="ui middle aligned center aligned grid login-footer">
+      <div class="column">
+        <a href="/about.html">{{ $t("Login.about") }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="##" class="download-app">{{ $t("Login.phone") }}</a>
+      </div>
+    </div>
+    <div class="ui flowing popup top left transition visible animating scale out phone-bz">
+      <div class="ui column divided center aligned grid">
+        <div class="column">
+          <a href="/static/follow_center.apk" target="blank"><img src="../assets/andriod.svg">&nbsp;&nbsp;&nbsp;{{ $t("Login.andriod") }}</a>
+        </div>
       </div>
     </div>
   </div>
