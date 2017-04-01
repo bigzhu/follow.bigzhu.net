@@ -17,7 +17,7 @@
       </div>
     </transition>
 
-    <message v-for='message in messages' :message='message'>
+    <message v-for='message in messages' :message='message' :key="message.id">
     </message>
     <div v-show="followed_god_count>0 && unread_message_count===0" class="no-message">
       <p>{{ $t("Messages.nomessage") }}

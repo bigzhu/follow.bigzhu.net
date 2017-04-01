@@ -13,7 +13,7 @@ mark{
     <div class='ui center aligned basic segment'>
       <old :god_name="god_name" :search_key="search_key"></old>
     </div>
-    <message v-for="message in messages" :message='message'>
+    <message v-for="message in messages" :message='message' :key="message.id">
     </message>
 
     <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !new_loading}"></div>

@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <router-link :to="{'name': route_name, params: {'cat': cat.cat}}" v-for="cat in cats" :class="{'active': $route.params.cat === cat.cat}" class="item">
+        <router-link :to="{'name': route_name, params: {'cat': cat.cat}}" v-for="cat in cats" :key="cat.id" :class="{'active': $route.params.cat === cat.cat}" class="item">
           {{cat.cat}}
         </router-link>
       </div>

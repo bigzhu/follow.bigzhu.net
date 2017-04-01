@@ -7,7 +7,7 @@
           </cat>
         </div>
         <div class="twelve wide column no-padding-bz">
-          <god-item v-for="god in not_my_gods" :god="god" class="god-item">
+          <god-item v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
           </god-item>
           <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !loading}"></div>
           <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>

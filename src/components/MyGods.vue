@@ -14,7 +14,7 @@
               <i class="search icon"></i>
             </div>
           </div>
-          <god-item v-for="god in ordered_my_gods" :god="god" is_my="true">
+          <god-item v-for="god in ordered_my_gods" :god="god" :key="god.id" is_my="true">
           </god-item>
         </div>
       </div>
