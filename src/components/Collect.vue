@@ -1,6 +1,6 @@
 <template>
   <div class="ui main container">
-    <img v-show="show_how_to_use_collect" class="ui fluid image" src="../../static/assets/how_to_use_collection.jpg">
+    <img v-show="show_how_to_use_collect" class="ui fluid image" src="../assets/how_to_use_collection.jpg">
     <div class="ui stackable grid">
       <div class="row">
         <div class="eleven wide column no-padding-bz">

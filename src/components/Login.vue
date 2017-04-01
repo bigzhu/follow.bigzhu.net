@@ -85,7 +85,7 @@
   <div class="ui middle aligned center aligned grid login">
     <div class="column">
       <div class="ui header logo">
-        <img src="../../static/assets/logo.png">
+        <img src="../assets/logo.png">
       </div>
       <p class="discription">{{ $t("Login.title") }}</p>
       <!-- <p>猥琐的跟踪牛人/美女的一举一动</p> -->
@@ -107,7 +107,7 @@
   <div class="ui flowing popup top left transition visible animating scale out phone-bz">
     <div class="ui column divided center aligned grid">
       <div class="column">
-        <a href="/static/follow_center.apk" target="blank"><img src="../../static/assets/andriod.svg">&nbsp;&nbsp;&nbsp;{{ $t("Login.andriod") }}</a>
+        <a href="/static/follow_center.apk" target="blank"><img src="../assets/andriod.svg">&nbsp;&nbsp;&nbsp;{{ $t("Login.andriod") }}</a>
       </div>
     </div>
   </div>

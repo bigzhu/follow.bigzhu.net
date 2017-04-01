@@ -4,13 +4,13 @@
       <old></old>
     </div>
     <div v-show="followed_god_count===0" class="no-message">
-      <img src="../../static/assets/no-message.svg">
+      <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
     </div>
 
     <transition name="slide-fade">
       <div v-show="!checkLogin() && show_no_login" class="no-message">
-        <img src="../../static/assets/no-message.svg">
+        <img src="../assets/no-message.svg">
         <p>
           <a href="/login.html">{{ $t("Messages.login") }}</a>{{ $t("Messages.description") }}
         </p>

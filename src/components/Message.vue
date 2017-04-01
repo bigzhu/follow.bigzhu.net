@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import store from '../store'
   import $ from 'jquery'
   import GodCard from './GodCard'
   import Twitter from './Twitter'
@@ -134,7 +133,7 @@
         return this.message.href
       },
       god_info: function () {
-        let god_info = store.state.god_infos[this.message.user_name.toLowerCase()]
+        let god_info = this.$store.state.god_infos[this.message.user_name.toLowerCase()]
         if (god_info) {
           return god_info
         }
