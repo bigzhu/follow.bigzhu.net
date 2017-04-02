@@ -40,12 +40,16 @@
 </script>
 
 <style>
+  .layout-header {
+    box-shadow: none;
+  }
   .toolbar.menu-bz {
     padding: inherit;
   }
   .toolbar-item {
     border-top: .5px solid rgba(0,0,0,.05);
     justify-content: flex-start;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.09);
   }
 
   .menu-item:hover {
