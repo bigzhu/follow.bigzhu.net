@@ -17,13 +17,13 @@
         </q-toolbar-title>
         <q-search placeholder="搜索" class="white toolbar-search" v-model="searchModel" ></q-search>
       </div>
-      <div slot="header" class="toolbar dark inverted">
-        <button>
+      <div slot="header" class="toolbar dark inverted toolbar-item">
+        <a class="menu-item" href="javascript:;">
           寻他
-        </button>
-        <button>
+        </a>
+        <a class="menu-item" href="javascript:;">
           传记
-        </button>
+        </a>
       </div>
       <router-view class="layout-view"></router-view>
     </q-layout>
@@ -38,8 +38,26 @@
 </script>
 
 <style>
+  .toolbar-item {
+    justify-content: flex-start;
+  }
+
+  .menu-item:hover {
+    background: rgba(0,0,0,.03);
+    color: rgba(0,0,0,.7);
+  }
+  .menu-item {
+    padding: 1em 2em;
+    color: rgba(0,0,0,.5);
+  }
+
   html {
     font-size: 14px;
+    font-family: Lato,arial,Microsoft YaHei,"sans-serif";
+    line-height: 1.5;
+    font-weight: 400;
+    background-color: #fafafa;
+    color: rgba(0,0,0,.76);
   }
   .toolbar-title > div {
     padding-top: .9rem;
@@ -63,5 +81,4 @@
   body.desktop .q-search.white .q-search-input:focus {
     color: rgba(0,0,0,.8);
   }
-
 </style>
