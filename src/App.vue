@@ -2,7 +2,7 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
-      <div slot="header" class="toolbar dark inverted menu-bz">
+      <div slot="header" class="toolbar dark inverted menu-bz header-one-bz">
         <!-- opens drawer using its ref -->
         <button
           class="hide-on-drawer-visible"
@@ -15,7 +15,7 @@
           Follow Center
         </q-toolbar-title>
         <q-search placeholder="搜索" class="white toolbar-search" v-model="searchModel" ></q-search>
-        <a class="menu-item" href="javascript:;">
+        <a class="menu-item login-bz" href="javascript:;">
           登录
         </a>
       </div>
@@ -40,6 +40,12 @@
 </script>
 
 <style>
+  .menu-item.login-bz {
+    padding: 22px 16px;
+  }
+  .header-one-bz {
+    height: 65px;
+  }
   .layout-header {
     box-shadow: none;
   }
@@ -70,7 +76,7 @@
     color: rgba(0,0,0,.76);
   }
   .toolbar-title > div {
-    padding-top: .9rem;
+    padding: .93rem;
     font-size: 1.5rem;
     font-weight: 600;
   }
