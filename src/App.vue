@@ -3,7 +3,6 @@
   <div id="q-app">
     <q-layout>
       <div slot="header" class="toolbar dark inverted">
-
         <!-- opens drawer using its ref -->
         <button
           class="hide-on-drawer-visible"
@@ -16,6 +15,9 @@
           Follow Center
         </q-toolbar-title>
         <q-search placeholder="搜索" class="white toolbar-search" v-model="searchModel" ></q-search>
+        <a class="menu-item" href="javascript:;">
+          登录
+        </a>
       </div>
       <div slot="header" class="toolbar dark inverted toolbar-item">
         <a class="menu-item" href="javascript:;">
@@ -39,6 +41,7 @@
 
 <style>
   .toolbar-item {
+    border-top: .5px solid rgba(0,0,0,.05);
     justify-content: flex-start;
   }
 
