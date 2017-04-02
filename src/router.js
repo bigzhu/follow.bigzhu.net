@@ -25,6 +25,8 @@ export default new VueRouter({
     { path: '/', name: 'Main', component: Main }, // Default
     { path: '/Recommand', name: 'Recommand', component: load('Recommand') },
     { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
+    { path: '/TheMessage', name: 'TheMessage', component: load('TheMessage') },
+    { path: '/God', name: 'God', component: load('God') },
     { path: '*', component: load('Error404') } // Not found
   ]
 })
