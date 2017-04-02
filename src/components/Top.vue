@@ -21,7 +21,7 @@
       }
     },
     mounted () {
-      $(this.$el).popup()
+      // $(this.$el).popup()
     },
     methods: {
       top: function () {

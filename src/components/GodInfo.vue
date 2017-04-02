@@ -68,7 +68,6 @@
 
 <script>
   import GodRemark from './GodRemark'
-  import $ from 'jquery'
   import Follow from './Follow'
   export default {
     components: {
@@ -112,11 +111,13 @@
     },
     mounted () {
       this.setGodInfo()
+      /* bigzhu fix
       $(this.$el).find('.button').popup(
         {
           inline: true
         }
       )
+      */
     },
     watch: {
       'god_info': {

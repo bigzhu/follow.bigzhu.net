@@ -51,7 +51,7 @@
     },
     mounted () {
       if (this.god_name) { this.$store.dispatch('getGod', this.god_name) }
-      $('body').visibility()
+      // $('body').visibility()
     },
     watch: {
       '$route': 'getGodInfo'

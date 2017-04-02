@@ -34,7 +34,7 @@
       }
     },
     mounted () {
-      $(this.$el).popup()
+      // $(this.$el).popup()
     },
     methods: {
       updateLast: function () {

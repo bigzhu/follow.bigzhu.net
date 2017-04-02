@@ -22,8 +22,9 @@ export default new VueRouter({
    */
 
   routes: [
-    { path: '/Main', name: 'Main', component: load('Main') }, // Default
     { path: '/', name: 'Main', component: Main }, // Default
+    { path: '/Recommand', name: 'Recommand', component: load('Recommand') },
+    { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
     { path: '*', component: load('Error404') } // Not found
   ]
 })

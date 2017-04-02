@@ -38,7 +38,6 @@
 
 <script>
   import Vue from 'vue'
-  import $ from 'jquery'
   export default {
     props: [],
     components: {
@@ -64,7 +63,7 @@
     mounted: function () {
       this.$store.dispatch('getRegisteredCount')
       this.$nextTick(function () {
-        $(this.$el).find('.ui.dropdown').dropdown()
+        // $(this.$el).find('.ui.dropdown').dropdown()
         // code that assumes this.$el is in-document
       })
     },

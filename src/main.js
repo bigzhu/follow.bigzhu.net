@@ -11,6 +11,17 @@ import Vuex from 'vuex'
 import Quasar from 'quasar'
 import router from './router'
 
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+// set lang
+var lang = window.localStorage.getItem('lang') || 'cn'
+Vue.config.lang = lang
+// set locales
+import locales from './locales'
+Object.keys(locales).forEach(function (lang) {
+  Vue.locale(lang, locales[lang])
+})
+
 Vue.use(Quasar) // Install Quasar Framework
 Vue.use(Vuex)
 
