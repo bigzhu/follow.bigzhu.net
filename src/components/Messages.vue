@@ -44,7 +44,7 @@
   import Message from './Message.vue'
   import checkLogin from 'bz-lib/functions/checkLogin'
 
-  module.exports = {
+  export default {
     components: {
       Old,
       Message,

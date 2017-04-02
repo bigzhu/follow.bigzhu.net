@@ -14,7 +14,8 @@
           <img class="logo-img" src="./assets/logo.svg">
           Follow Center
         </q-toolbar-title>
-        <q-search placeholder="搜索" class="white toolbar-search" v-model="searchModel" ></q-search>
+        <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"  ></q-search>
+
         <a class="menu-item login-bz" href="javascript:;">
           登录
         </a>
@@ -36,7 +37,15 @@
   /*
   * Root component
   */
-  export default {}
+  import store from './store'
+  export default {
+    store,
+    data () {
+      return {
+        search_value: ''
+      }
+    }
+  }
 </script>
 
 <style>

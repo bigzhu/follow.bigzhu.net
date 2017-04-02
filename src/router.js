@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 function load (component) {
   return () => System.import(`components/${component}.vue`)
 }
+import Main from './components/Main.vue'
 
 export default new VueRouter({
   /*
@@ -21,7 +22,8 @@ export default new VueRouter({
    */
 
   routes: [
-    { path: '/', component: load('Main') }, // Default
+    { path: '/Main', name: 'Main', component: load('Main') }, // Default
+    { path: '/', name: 'Main', component: Main }, // Default
     { path: '*', component: load('Error404') } // Not found
   ]
 })
