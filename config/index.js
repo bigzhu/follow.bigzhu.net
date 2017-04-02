@@ -1,5 +1,9 @@
 var path = require('path')
-
+var my_proxy = {}
+try {
+  my_proxy = require(process.cwd() + '/proxy.js')
+} catch (err) {
+}
 module.exports = {
   // Webpack aliases
   aliases: {
@@ -47,7 +51,7 @@ module.exports = {
     // Proxy your API if using any.
     // Also see /build/script.dev.js and search for "proxy api requests"
     // https://github.com/chimurai/http-proxy-middleware
-    proxyTable: {}
+    proxyTable: my_proxy
   }
 }
 
