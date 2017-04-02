@@ -2,7 +2,7 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
-      <div slot="header" class="toolbar dark inverted">
+      <div slot="header" class="toolbar dark inverted menu-bz">
         <!-- opens drawer using its ref -->
         <button
           class="hide-on-drawer-visible"
@@ -19,7 +19,7 @@
           登录
         </a>
       </div>
-      <div slot="header" class="toolbar dark inverted toolbar-item">
+      <div slot="header" class="toolbar dark inverted menu-bz toolbar-item">
         <a class="menu-item" href="javascript:;">
           寻他
         </a>
@@ -40,6 +40,9 @@
 </script>
 
 <style>
+  .toolbar.menu-bz {
+    padding: inherit;
+  }
   .toolbar-item {
     border-top: .5px solid rgba(0,0,0,.05);
     justify-content: flex-start;
