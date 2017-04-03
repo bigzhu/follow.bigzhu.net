@@ -1,4 +1,33 @@
 <template>
+  <div class="card">
+    <div class="item two-lines">
+      <img src="statics/linux-avatar.png" class="item-primary">
+      <div class="item-content  has-secondary">
+        <div>Joe</div>
+        <div>Web Developer</div>
+      </div>
+      <div class="item-secondary stamp">
+        23 minutes ago.
+      </div>
+    </div>
+    <div class="card-content">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div> 
+    <div class="card-actions">
+      <div class="text-primary"><i>thumb_up</i> 11k likes </div> 
+      <div class="text-primary"><i>mode_comment</i> 8 comments </div> 
+      <div class="auto">
+      </div> 
+      <div class="text-grey-6">
+        23 minutes ago.
+      </div>
+    </div>
+  </div>
+
+
+  <!--
   <div :id="'id_'+ message.id" class="card">
     <div class="card-content article-bz">
       <a target="_blank" :href="href">
@@ -20,7 +49,6 @@
       </a>
       <a @mouseleave="anki_color='#B3B3B3'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hidden-bz':!message.anki}" class="anki-bz">
         <svg width="17px" height="18px" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
           <desc>Created with Sketch.</desc>
           <defs>
             <rect id="path-1" x="0" y="1.2" width="13.9658778" height="14.8427295" rx="3"></rect>
@@ -51,6 +79,7 @@
       </a>
     </div>
   </div>
+  -->
 </template>
 
 <script>
@@ -105,18 +134,18 @@
         // var tool_tips_target = $(this.$el).find('.show-god-info')
         // var popup_content = $(this.$el).find('.ui.card')
         // $(tool_tips_target).popup(
-        //   {
-        //     popup: $(popup_content),
-        //     lastResort: true,
-        //     position: 'bottom left',
-        //     hoverable: true,
-        //     delay: {
-        //       show: 100,
-        //       hide: 500
-        //     },
-        //     onShow: self.getGodInfo
-        //   }
-        // )
+          //   {
+            //     popup: $(popup_content),
+            //     lastResort: true,
+            //     position: 'bottom left',
+            //     hoverable: true,
+            //     delay: {
+              //       show: 100,
+              //       hide: 500
+              //     },
+              //     onShow: self.getGodInfo
+              //   }
+      // )
       })
     },
     computed: {
