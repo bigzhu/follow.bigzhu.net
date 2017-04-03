@@ -1,13 +1,16 @@
 <template>
   <div class="card">
     <div class="item two-lines">
-      <img src="statics/linux-avatar.png" class="item-primary">
+      <img :src="avatar" class="item-primary">
       <div class="item-content  has-secondary">
-        <div>Joe</div>
-        <div>Web Developer</div>
+        <div>{{message.name}}</div>
+        <div>类型</div>
       </div>
-      <div class="item-secondary stamp">
-        23 minutes ago.
+      <div class="item-secondary stamp long-bz">
+        <a target="_blank" :href="href">
+          <i :class="'fa fa-'+ message.m_type + ' fa-2x' "></i>
+        </a>
+        <time-len :the_time="message.created_at" :lang="lang"></time-len>
       </div>
     </div>
     <div class="card-content">
@@ -207,6 +210,11 @@
 </script>
 
 <style>
+  .item > .item-secondary.stamp.long-bz {
+    width: 75px;
+  }
+
+
   .card {
     width: 100%;
   }
