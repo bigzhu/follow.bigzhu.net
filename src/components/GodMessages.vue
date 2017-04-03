@@ -46,6 +46,11 @@
       },
       messages () {
         return this.$store.state.gods_messages[this.god_name]
+        // if (this.$store.state.gods_messages[this.god_name].length > 0) {
+        //   return [this.$store.state.gods_messages[this.god_name][10]]
+        // } else {
+        //   return []
+        // }
       }
     },
     mounted () {

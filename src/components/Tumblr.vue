@@ -7,7 +7,7 @@
     <template v-for="media in medias" :media="media">
       <p class="description" v-html="media.caption"></p>
       <a @click="openImg(media.img_url)">
-        <img :src="media.img_url" class="ui image" >
+        <img :src="media.img_url" class="responsive" >
       </a>
       <br>
     </template>
