@@ -1,9 +1,8 @@
 <template>
   <div>
-    <i v-show="!old_loading">history</i>
     <spinner v-show="old_loading" :size="14" name="tail"></spinner>
     <a @click='old' href='javascript:void(0)' class='history-search-bz loading'>
-      <i v-show="!old_loading" class='icon history'></i>
+      <i v-show="!old_loading">history</i>
       {{ $t("Old.search") }}
     </a>
   </div>
