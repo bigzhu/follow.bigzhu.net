@@ -57,6 +57,7 @@
   }
   .layout-header {
     box-shadow: none;
+    border-bottom: none;
   }
   .toolbar.menu-bz {
     padding: inherit;
