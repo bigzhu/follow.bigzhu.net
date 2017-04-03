@@ -2,7 +2,7 @@
   <div>
     <div class="description word-wrap-bz" v-html="description"></div>
     <a @click="openImg(img_url)">
-      <img :src="img_url" class="ui image padding-top-bz">
+      <img :src="img_url" class="responsive">
     </a>
   </div>
 </template>

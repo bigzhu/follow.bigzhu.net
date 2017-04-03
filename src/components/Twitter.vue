@@ -4,7 +4,7 @@
     </div>
     <div v-for="media in medias">
       <a @click="openImg(media.img_url)" href='javascript:void(0)'>
-        <img v-show="media.videos.length===0" :src="media.img_url" class="ui image padding-top-bz" >
+        <img v-show="media.videos.length===0" :src="media.img_url" class="responsive" >
       </a>
       <video v-for="video in media.videos" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4' class="padding-top-bz">
         <source :src="video.url">

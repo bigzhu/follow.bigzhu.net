@@ -1,6 +1,6 @@
 <template>
-  <div :id="'id_'+ message.id" class="ui fluid card message-bz">
-    <div class="content article-bz">
+  <div :id="'id_'+ message.id" class="card">
+    <div class="card-content article-bz">
       <a target="_blank" :href="href">
         <i :class="'right floated ' + message.m_type + ' icon god-icon-bz icon-bz'"></i>
       </a>
@@ -178,6 +178,10 @@
 </script>
 
 <style>
+  .card {
+    width: 100%;
+  }
+
   .ui.card.message-bz {
     border-radius: 0.06em;
     box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);
