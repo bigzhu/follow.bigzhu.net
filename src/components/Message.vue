@@ -210,83 +210,10 @@
 </script>
 
 <style>
+  .card {
+    background: #FFF;
+  }
   .item > .item-secondary.stamp.long-bz {
     width: 75px;
-  }
-
-
-  .card {
-    width: 100%;
-  }
-
-  .ui.card.message-bz {
-    border-radius: 0.06em;
-    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);
-    position: relative;
-  }
-  .like-bz {
-    padding: 0.5em 0.5em 0em 0em;
-  }
-  .like-bz a {
-    float: right;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: rgba(0, 0, 0, 0.3);
-  }
-  .hidden-bz {
-    transition: color 0.3s ease;
-    transition: visibility 0s, opacity 0.3s linear;
-    opacity: 0;
-  }
-  .ui.card.message-bz:hover {
-    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.15);
-  }
-  .ui.card.message-bz:hover .hidden-bz {
-    visibility: visible;
-    opacity: 1;
-  }
-  .ui.card .meta.time-bz {
-    font-size: 12px;
-    padding-right: 4px;
-    padding-top: 1.2px;
-  }
-  .ui.card > .content.article-bz {
-    padding: 1em 1em 0em 1em;
-    font-size: 14px;
-  }
-  i.icon.icon-bz {
-    margin-right: 0;
-  }
-  .more-infor-bz:hover {
-    color: #54B98F;
-  }
-  .bookmark-bz:hover {
-    color: #FBBD08;
-  }
-  .bookmark.light-bz {
-    color: #FBBD08;
-  }
-  .content-bz {
-    margin-top: 0.5em;
-  }
-  .anki-bz svg{
-    margin-right: 0.2rem;
-    margin-top: 0.22rem;
-  }
-  .anki-bz:hover {
-    color: #57ADE3;
-  }
-  @media (max-width: 767px) {
-    .hidden-bz {
-      visibility: visible;
-      opacity: 1;
-      position: static;
-    }
-    .message-bz {
-      box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 1px 3px 0px !important;
-    }
-    .anki-bz svg{
-      margin-top: 0.11rem;
-    }
   }
 </style>
