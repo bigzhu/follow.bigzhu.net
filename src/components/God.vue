@@ -1,14 +1,11 @@
 <template>
-  <div class="ui main container">
-    <div class="ui stackable grid">
-      <div class="row">
-        <div class="eleven wide column no-padding-bz">
-          <messages :god_name="god_name"></messages>
-        </div>
-        <div class="five wide column computer only">
-          <div class="godblank-bz"></div>
-          <god-info v-show="god_info" :god_info="god_info"></god-info>
-        </div>
+  <div class="layout-padding">
+    <div class="row gutter items-start">
+      <messages :god_name="god_name" class="width-4of5"></messages>
+      <div class="width-1of5">
+          <div class="blank-bz"></div>
+          <god-info v-show="god_name" :god_info="god_info"></god-info>
+          <right-info></right-info>
       </div>
     </div>
     <top></top>
