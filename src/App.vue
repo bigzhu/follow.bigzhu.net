@@ -2,6 +2,7 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
+      <div slot="header">
       <div slot="header" class="toolbar dark inverted menu-bz header-one-bz">
         <!-- opens drawer using its ref -->
         <button
@@ -27,6 +28,7 @@
         <a class="menu-item" href="javascript:;">
           传记
         </a>
+      </div>
       </div>
       <div class="layout-view">
         <router-view></router-view>
