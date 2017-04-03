@@ -7,7 +7,7 @@
         >
         <i>menu</i>
       </button>
-      <q-toolbar-title :padding="2">
+      <q-toolbar-title>
         <img class="logo-img" src="../assets/logo.svg">
         Follow Center
       </q-toolbar-title>

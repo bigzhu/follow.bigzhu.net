@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div :class="{ 'invisible_bz': followed_god_count===0 || new_loading}" class='ui center aligned basic segment history-bz'>
+    <div :class="{ 'invisible_bz': followed_god_count===0 || new_loading}" class="center-container-bz" >
       <old></old>
     </div>
+
     <div v-show="followed_god_count===0" class="no-message">
       <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
@@ -137,24 +138,8 @@
 </script>
 
 <style>
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-active {
-    padding-left: 10px;
-    opacity: 0;
-  }
-
-  .invisible_bz {/*隐藏占位*/
-    visibility:hidden;
-  };
-  .ui.segment.history-bz {
-    padding: 0;
-  }
-  .ui.segment.history-bz:first-child {
-    margin-top: 1em;
+  .center-container-bz {
+    display:  flex;
+    justify-content: center;
   }
 </style>
