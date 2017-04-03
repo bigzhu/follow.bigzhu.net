@@ -20,13 +20,14 @@ export default new VueRouter({
    * If switching back to default "hash" mode, don't forget to set the
    * build publicPath back to '' so Cordova builds work again.
    */
-
+  mode: 'history',
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/', name: 'Main', component: Main }, // Default
     { path: '/Recommand', name: 'Recommand', component: load('Recommand') },
     { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
-    { path: '/TheMessage', name: 'TheMessage', component: load('TheMessage') },
-    { path: '/God', name: 'God', component: load('God') },
+    { path: '/TheMessage/:message_id', name: 'TheMessage', component: load('TheMessage') },
+    { path: '/God/:god_name', name: 'God', component: load('God') },
     { path: '*', component: load('Error404') } // Not found
   ]
 })

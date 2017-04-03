@@ -24,7 +24,6 @@
     },
     data () {
       return {
-        search_value: ''
       }
     }
   }

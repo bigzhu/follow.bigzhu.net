@@ -23,7 +23,7 @@
   import Message from './Message'
   import BottomLoader from 'bz-bottom-loader'
 
-  module.exports = {
+  export default {
     components: {
       Old,
       Message,

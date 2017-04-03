@@ -8,7 +8,7 @@
 <script>
   import Message from './Message.vue'
 
-  module.exports = {
+  export default {
     components: {
       Message
     },

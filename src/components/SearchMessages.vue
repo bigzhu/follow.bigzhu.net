@@ -28,7 +28,7 @@ mark{
   import BottomLoader from 'bz-bottom-loader'
   // import Mark from 'mark.js'
 
-  module.exports = {
+  export default {
     components: {
       Old,
       Message,

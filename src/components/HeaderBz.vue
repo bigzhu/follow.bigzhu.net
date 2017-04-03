@@ -37,6 +37,7 @@
     },
     data: function () {
       return {
+        search_value: ''
       }
     },
     mounted: function () {

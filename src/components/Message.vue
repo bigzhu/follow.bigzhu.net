@@ -14,9 +14,7 @@
       </div>
     </div>
     <div class="card-content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      <component class="content-bz" :is="message.m_type" :message="message"></component>
     </div> 
     <div class="card-actions">
       <div class="text-primary"><i>thumb_up</i> 11k likes </div> 
