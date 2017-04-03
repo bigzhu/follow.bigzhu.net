@@ -28,7 +28,9 @@
           传记
         </a>
       </div>
-      <router-view class="layout-view"></router-view>
+      <div class="layout-view">
+        <router-view></router-view>
+      </div>
     </q-layout>
   </div>
 </template>

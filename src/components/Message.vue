@@ -102,21 +102,21 @@
           })
         }
         // this.$store.dispatch('getIntersectionObserver').observe(this.$el)
-        var tool_tips_target = $(this.$el).find('.show-god-info')
-        var popup_content = $(this.$el).find('.ui.card')
-        $(tool_tips_target).popup(
-          {
-            popup: $(popup_content),
-            lastResort: true,
-            position: 'bottom left',
-            hoverable: true,
-            delay: {
-              show: 100,
-              hide: 500
-            },
-            onShow: self.getGodInfo
-          }
-        )
+        // var tool_tips_target = $(this.$el).find('.show-god-info')
+        // var popup_content = $(this.$el).find('.ui.card')
+        // $(tool_tips_target).popup(
+        //   {
+        //     popup: $(popup_content),
+        //     lastResort: true,
+        //     position: 'bottom left',
+        //     hoverable: true,
+        //     delay: {
+        //       show: 100,
+        //       hide: 500
+        //     },
+        //     onShow: self.getGodInfo
+        //   }
+        // )
       })
     },
     computed: {
