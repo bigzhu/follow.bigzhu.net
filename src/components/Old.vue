@@ -30,4 +30,7 @@
   .old-bz {
     padding-bottom: 1rem;
   }
+  a {
+    color: #515151;
+  }
 </style>

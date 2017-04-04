@@ -3,7 +3,8 @@
 // 1. use next line to activate CUSTOM STYLE (./src/themes)
 // require(`./themes/app.${__THEME}.styl`)
 // 2. or, use next line to activate DEFAULT QUASAR STYLE
-require(`quasar/dist/quasar.${__THEME}.css`)
+// require(`quasar/dist/quasar.${__THEME}.css`)
+require(`./themes/app.${__THEME}.styl`)
 // ==============================
 
 import Vue from 'vue'
