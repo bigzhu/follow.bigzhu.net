@@ -1,12 +1,15 @@
 <template>
   <div class="card">
-    <div class="item two-lines">
-      <img :src="avatar" class="item-primary">
-      <div class="item-content  has-secondary">
+    <div class="item two-lines bz">
+      <img :src="avatar" class="item-primary avatar bz">
+      <div class="item-content has-secondary bz">
         <router-link :to="{ name: 'God', params: { god_name: message.user_name }}" class="user-name-a">
           {{message.name}}
         </router-link>
-        <div class="stamp">类型</div>
+        <br>
+        <router-link :to="{ name: 'Recommand', params: { cat: '类型' }}" class="stamp">
+          类型
+        </router-link>
       </div>
       <div class="item-secondary stamp long-bz">
         <a target="_blank" :href="href">
@@ -210,6 +213,23 @@
 </script>
 
 <style>
+  .item.two-lines.bz {
+    height: 3rem;
+  }
+  .item.two-lines > .item-content.bz > .stamp{
+    font-size: 12px;
+  }
+  .item.two-lines > .item-content.bz {
+    margin-left: 3.5rem;
+    padding-top: .84rem;
+    font-size: 1rem;
+  }
+  .item.two-lines > img.item-primary.bz {
+    top: 1rem;
+    left: 1rem;
+    width: 2rem;
+    height: 2rem;
+  }
   .fa-size-bz.fa.fa-1x {
     font-size: 1rem;
     vertical-align: baseline;

@@ -24,7 +24,7 @@ export default new VueRouter({
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/', name: 'Main', component: Main }, // Default
-    { path: '/Recommand', name: 'Recommand', component: load('Recommand') },
+    { path: '/Recommand/:cat', name: 'Recommand', component: load('Recommand') },
     { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
     { path: '/TheMessage/:message_id', name: 'TheMessage', component: load('TheMessage') },
     { path: '/God/:god_name', name: 'God', component: load('God') },
