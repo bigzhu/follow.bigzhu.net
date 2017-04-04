@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div class="ui card border-radius">
+    <div class="card center-bz">
       <div class="content">
         <div class="description align-center">
           <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
         </div>
       </div>
-      <div class="ui small centered image">
-        <img src="../assets/by_me.png">
-      </div>
+      <img src="../assets/by_me.png" class="qr-bz">
       <div class="content">
         <div class="description align-center">
           <i class="qq icon"></i>{{ $t("RightInfo.qq") }}
@@ -80,6 +78,18 @@
 </script>
 
 <style>
+  .card.center-bz img {
+    clear: both; 
+    display: block; 
+    margin:auto; 
+  }
+  .card.center-bz {
+    text-align: center;
+    padding: 1rem;
+  }
+  .card > img.qr-bz {
+    width: 150px;
+  }
   .footer-element {
     padding-right: 2rem;
   }

@@ -6,7 +6,7 @@
         <router-link :to="{ name: 'God', params: { god_name: message.user_name }}" class="user-name-a">
           {{message.name}}
         </router-link>
-        <div>类型</div>
+        <div class="stamp">类型</div>
       </div>
       <div class="item-secondary stamp long-bz">
         <a target="_blank" :href="href">

@@ -1,8 +1,8 @@
 <template>
   <div class="layout-padding">
     <div class="row gutter items-start">
-      <messages class="width-4of5 no-top-padding-bz"></messages>
-      <div class="width-1of5 no-top-padding-bz">
+      <messages class="width-3of4 no-top-padding-bz"></messages>
+      <div class="auto no-top-padding-bz">
           <div class="blank-padding"></div>
           <god-info v-show="god_name" :god_info="god_info"></god-info>
           <right-info></right-info>
