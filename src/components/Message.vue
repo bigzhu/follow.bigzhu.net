@@ -10,9 +10,9 @@
       </div>
       <div class="item-secondary stamp long-bz">
         <a target="_blank" :href="href">
-          <i :class="'fa fa-'+ message.m_type + ' fa-2x' "></i>
+          <time-len :the_time="message.created_at" :lang="lang"></time-len>
+          <i :class="'fa-size-bz fa fa-'+ message.m_type + ' fa-1x' "></i>
         </a>
-        <time-len :the_time="message.created_at" :lang="lang"></time-len>
       </div>
     </div>
     <div class="card-content">
@@ -210,10 +210,14 @@
 </script>
 
 <style>
+  .fa-size-bz.fa.fa-1x {
+    font-size: 1rem;
+    vertical-align: baseline;
+  }
   .card {
     background: #FFF;
   }
   .item > .item-secondary.stamp.long-bz {
-    width: 75px;
+    width: 20%;
   }
 </style>
