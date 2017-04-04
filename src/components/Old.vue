@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="old-bz">
     <spinner v-show="old_loading" :size="14" name="tail"></spinner>
-    <a @click='old' href='javascript:void(0)' class='history-search-bz loading'>
+    <a @click='old' href='javascript:void(0)'>
       <i v-show="!old_loading">history</i>
       {{ $t("Old.search") }}
     </a>
@@ -27,20 +27,7 @@
 </script>
 
 <style>
-  .history-bz {
-    width: 100%;
-    color: #515151;
-  }
-  .history-search-bz {
-    width: 100%;
-    color: #515151;
-  }
-  .history-search-bz:hover {
-    width: 100%;
-    color: #494949;
-  }
-  .history-search-bz:focus {
-    width: 100%;
-    color: #515151;
+  .old-bz {
+    padding-bottom: 1rem;
   }
 </style>
