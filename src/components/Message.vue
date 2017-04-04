@@ -3,7 +3,9 @@
     <div class="item two-lines">
       <img :src="avatar" class="item-primary">
       <div class="item-content  has-secondary">
-        <div>{{message.name}}</div>
+        <router-link :to="{ name: 'God', params: { god_name: message.user_name }}" class="user-name-a">
+          {{message.name}}
+        </router-link>
         <div>类型</div>
       </div>
       <div class="item-secondary stamp long-bz">
