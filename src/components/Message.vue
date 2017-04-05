@@ -22,8 +22,8 @@
       <component class="content-bz" :is="message.m_type" :message="message"></component>
     </div> 
     <div class="card-actions bz">
-      <div class="text-primary"><i>thumb_up</i> 11k likes </div> 
-      <div class="text-primary"><i>mode_comment</i> 8 comments </div> 
+      <div class="text-primary hidden-bz"><i>thumb_up</i> 11k likes </div> 
+      <div class="text-primary hidden-bz"><i>mode_comment</i> 8 comments </div> 
       <div class="auto">
       </div> 
 
@@ -280,6 +280,8 @@
     height: 100%;
   }
   .card-actions.bz {
+    padding-top: 0;
+    padding-bottom: .5rem;
     font-size: 1rem;
   }
   .item.two-lines.bz {
