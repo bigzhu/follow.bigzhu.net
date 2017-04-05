@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card bz">
     <div class="item two-lines bz">
       <img :src="avatar" class="item-primary avatar bz">
       <div class="item-content has-secondary bz">
@@ -278,8 +278,12 @@
     font-size: 1rem;
     vertical-align: baseline;
   }
-  .card {
+  .card.bz:hover {
+    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.15);
+  }
+  .card.bz {
     background: #FFF;
+    box-shadow: 0.5px 1px 1px 1px rgba(0,0,0,.1);
   }
   .item > .item-secondary.stamp.long-bz {
     width: 20%;
