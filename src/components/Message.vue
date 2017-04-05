@@ -18,7 +18,7 @@
         </a>
       </div>
     </div>
-    <div class="card-content">
+    <div class="card-content green-bz">
       <component class="content-bz" :is="message.m_type" :message="message"></component>
     </div> 
     <div class="card-actions bz">
@@ -250,6 +250,9 @@
 </script>
 
 <style>
+  .card-content.green-bz a {
+    color: #2ea974;
+  }
   @media (max-width: 767px) {
     .hidden-bz {
       visibility: visible;
