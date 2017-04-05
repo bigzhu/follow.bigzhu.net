@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card center-bz">
+    <div class="card center-bz bz">
       <div class="content">
         <div class="description align-center">
           <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
