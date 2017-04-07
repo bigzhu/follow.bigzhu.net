@@ -310,7 +310,6 @@
   }
   .card.bz {
     background: #FFF;
-    box-shadow: 0.5px 1px 1px 1px rgba(0,0,0,.1);
   }
   .item > .item-secondary.stamp.long-bz {
     width: 20%;
