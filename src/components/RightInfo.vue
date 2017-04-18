@@ -74,6 +74,9 @@
 </script>
 
 <style scoped>
+  i {
+    vertical-align:top;
+  }
   info {
     margin: 1rem;
   }
