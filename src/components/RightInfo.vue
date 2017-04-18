@@ -1,28 +1,26 @@
 <template>
   <div>
     <div class="card">
-      <info>
+      <div class="info">
         <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
-      </info>
+      </div>
       <img src="../assets/by_me.png" class="qr-bz">
-      <info>
+      <div class="info">
         <i class="qq icon"></i>{{ $t("RightInfo.qq") }}
-      </info>
+      </div>
     </div>
-    <div v-show="registered_count !== -1" class="footer-content">
+
+    <div class="about">
       <a class="footer-element" href="/about.html">{{ $t("RightInfo.about") }}</a>
       <a class="footer-element" href="http://bigzhu.lorstone.com">{{ $t("RightInfo.blog") }}</a>
       <router-link class="footer-element" :to="{ name: 'ChangeLog'}">{{ $t("RightInfo.changelog") }}</router-link>
-      <div class="ui selection dropdown language">
-        <input type="hidden">
-        <i class="dropdown icon"></i>
-        <div class="default text">{{whichLang()}}</div>
-        <div class="menu">
-          <div class="item" @click="lang='en'" data-value="1">English</div>
-          <div class="item" @click="lang='cn'" data-value="0">中文</div>
-        </div>
-      </div>
+
     </div>
+      <q-select
+        type="list"
+        v-model="lang"
+        :options="lang_options">
+      </q-select>
     <div class="footer-content">
       <span class="footer-element">{{ $t("RightInfo.register") }}：{{registered_count}}</span>
       <span>© 2017 Follow Center</span>
@@ -52,6 +50,16 @@
     },
     data: function () {
       return {
+        lang_options: [
+          {
+            label: 'English',
+            value: 'en'
+          },
+          {
+            label: '中文',
+            value: 'cn'
+          }
+        ]
       }
     },
     mounted: function () {
@@ -74,10 +82,19 @@
 </script>
 
 <style scoped>
+  .about {
+    margin-top: 3rem;
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    display: flex;
+  }
+  .about > * {
+    flex: 1;
+  }
   i {
     vertical-align:top;
   }
-  info {
+  .info {
     margin: 1rem;
   }
   .card {
