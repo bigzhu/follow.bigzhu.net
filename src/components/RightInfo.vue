@@ -1,17 +1,13 @@
 <template>
   <div>
-    <div class="card center-bz bz">
-      <div class="content">
-        <div class="description align-center">
-          <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
-        </div>
-      </div>
+    <div class="card">
+      <info>
+        <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
+      </info>
       <img src="../assets/by_me.png" class="qr-bz">
-      <div class="content">
-        <div class="description align-center">
-          <i class="qq icon"></i>{{ $t("RightInfo.qq") }}
-        </div>
-      </div>
+      <info>
+        <i class="qq icon"></i>{{ $t("RightInfo.qq") }}
+      </info>
     </div>
     <div v-show="registered_count !== -1" class="footer-content">
       <a class="footer-element" href="/about.html">{{ $t("RightInfo.about") }}</a>
@@ -77,29 +73,18 @@
   }
 </script>
 
-<style>
-  .card.center-bz img {
-    clear: both; 
-    display: block; 
-    margin:auto; 
+<style scoped>
+  info {
+    margin: 1rem;
   }
-  .card.center-bz {
-    text-align: center;
-    padding: 1rem;
+  .card {
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
-  .card > img.qr-bz {
-    width: 150px;
-  }
-  .footer-element {
-    padding-right: 2rem;
-  }
-  .footer-content:last-child {
-    margin-top: 0.5rem;
-  }
-  .ui.selection.dropdown.language {
-    border-radius: 1px;
-    min-width: 2rem;
-    max-width: 8rem;
-    margin-top: 1rem;
+  .card  img {
+    width: 10rem;
   }
 </style>
