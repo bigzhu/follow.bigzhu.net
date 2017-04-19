@@ -1,6 +1,10 @@
 <template>
   <div>
-    <button @click="confirm" class="ui circular icon basic button large monitor only un-read-bz" :data-content="$t('UnRead.unread')">
+    <button 
+      @click="confirm"
+      :data-content="$t('UnRead.unread')"
+      class="circular fixed-bottom-right animate-pop"
+      >
       <div data-content="Add users to your feed">
         {{unread_message_count}}
       </div>
@@ -16,6 +20,7 @@
     </div>
   </div>
 </template>
+
 <script>
   import '../assets/mobile.css'
 
@@ -49,12 +54,16 @@
     }
   }
 </script>
-<style>
-  .un-read-bz {
-    position: fixed;
-    right: 1.5em;
+
+<style scoped>
+  button.fixed-bottom-right:hover {
+    background: #FFF;
+    color: rgba(0,0,0,.8);
+  }
+  button.fixed-bottom-right {
+    right: 1rem;
     border: 1px solid #DADADA;
-    bottom: 5em;
+    margin: 1rem;
   }
   @media (min-width: 1100px) and (max-width: 1300px) {
     .un-read-bz {

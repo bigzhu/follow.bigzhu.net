@@ -8,8 +8,8 @@
           <right-info></right-info>
       </div>
     </div>
-    <un-read></un-read>
-    <top></top>
+    <Top></Top>
+    <UnRead></UnRead>
   </div>
 </template>
 
