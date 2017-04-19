@@ -37,8 +37,7 @@
 </template>
 
 <script>
-  import $ from 'jquery'
-  import _ from 'lodash'
+  import {Utils} from 'quasar'
   var get_count = 50
   import Old from './Old.vue'
   import BottomLoader from 'bz-bottom-loader'
@@ -100,13 +99,10 @@
       checkLogin: checkLogin,
       bindScroll: function () {
         let self = this
-        $(window).scroll(
-          _.throttle(
-            function () {
-              self.$store.commit('CHECK_BAR')
-            }, 100
-          )
-        )
+        let scroll_target = Utils.dom.getScrollTarget(this.$el)
+        scroll_target.addEventListener('scroll', function () {
+          self.$store.commit('CHECK_BAR', scroll_target)
+        })
       },
       fetchData: function () {
         if (!this.god_name) {

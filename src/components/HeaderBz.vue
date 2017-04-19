@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='header-bz'>
     <div class="toolbar dark inverted menu-bz header-one-bz">
       <button
         class="hide-on-drawer-visible"

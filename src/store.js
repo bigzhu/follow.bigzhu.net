@@ -80,18 +80,19 @@ export const mutations = {
       return d.god_id !== god_id
     })
   },
-  CHECK_BAR (state, show_bar) {
-    var st = $(window).scrollTop()
-    state.nav_bar_height = $('header').outerHeight()
+  CHECK_BAR (state, scroll_target) {
+    var st = $(scroll_target).scrollTop()
+    state.nav_bar_height = $('.header-bz').outerHeight()
 
     if (Math.abs(state.last_scroll_top - st) <= 5) return
 
     if (st > state.last_scroll_top && st > state.nav_bar_height) {
       state.show_bar = false
     } else {
-      if (st + $(window).height() < $(document).height()) {
-        state.show_bar = true
-      }
+      state.show_bar = true
+      // if (st + $(window).height() < $(document).height()) {
+      //   state.show_bar = true
+      // }
     }
 
     state.last_scroll_top = st

@@ -2,7 +2,7 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
-      <HeaderBz slot="header">
+      <HeaderBz v-show="show_bar" slot="header">
       </HeaderBz>
       <div class="layout-view">
         <router-view></router-view>
@@ -19,6 +19,11 @@
   import HeaderBz from './components/HeaderBz'
   export default {
     store,
+    computed: {
+      show_bar () {
+        return store.state.show_bar
+      }
+    },
     components: {
       HeaderBz
     },

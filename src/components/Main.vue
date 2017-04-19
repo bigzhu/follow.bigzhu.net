@@ -15,7 +15,6 @@
 
 <script>
   import '../assets/mobile.css'
-  import $ from 'jquery'
   import Messages from './Messages'
   import Top from './Top'
   import UnRead from './UnRead'
@@ -56,13 +55,6 @@
       getGodInfo: function () {
         console.log('getGodInfo')
         if (this.god_name) { this.$store.dispatch('getGod', this.god_name) }
-      },
-      top: function () {
-        $('html, body').animate(
-          {
-            scrollTop: '0'
-          }, 300
-        )
       }
     },
     beforeRouteLeave (to, from, next) {
