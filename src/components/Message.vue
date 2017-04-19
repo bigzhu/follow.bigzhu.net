@@ -28,7 +28,7 @@
       </div> 
 
       <router-link :to="{ name:'TheMessage', params:{id:message.id}}" class="more-infor-bz hidden-bz">
-        <i class="ellipsis horizontal icon">more_horiz</i>
+        <i>more_horiz</i>
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hidden-bz':!message.collect}">
         <i :class="{'remove':!message.collect, 'light-bz': message.collect}">bookmark_border</i>
