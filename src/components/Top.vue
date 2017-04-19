@@ -5,7 +5,7 @@
   -->
 
   <button
-    v-back-to-top
+    v-back-to-top.animate="{offset: 500, duration: 200}"
     class="circular fixed-bottom-right animate-pop"
     >
     <i>keyboard_arrow_up</i>

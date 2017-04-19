@@ -1,7 +1,7 @@
 <template>
   <div>
     <button 
-      @click="confirm"
+      @click="$refs['confirm_refalsh_message'].open()"
       :data-content="$t('UnRead.unread')"
       class="circular fixed-bottom-right animate-pop"
       >
@@ -9,22 +9,22 @@
         {{unread_message_count}}
       </div>
     </button>
-    <div class="ui modal update-last-bz">
-      <div class="content">
-        <p>今天以前的资讯不看了?</p>
+
+    <q-modal ref="confirm_refalsh_message">
+      <div class="card">
+        <div class="card-content card-force-top-padding">
+          今天以前的资讯不看了?
+        </div>
+        <div class="card-actions card-no-top-padding">
+          <button class="primary" @click="updateLast">确定</button>
+          <button class="light" @click="$refs.confirm_refalsh_message.close()">取消</button>
+        </div>
       </div>
-      <div class="actions">
-        <div @click="updateLast" class="ui approve button follow-button button-to-follow-bz keppel">确定</div>
-        <div class="ui cancel button follow-button button-to-follow-bz">取消</div>
-      </div>
-    </div>
+    </q-modal>
   </div>
 </template>
 
 <script>
-  import '../assets/mobile.css'
-
-  import $ from 'jquery'
   export default {
     props: [],
     components: {
@@ -47,15 +47,22 @@
         this.$store.dispatch('recordLastMessage', now).then(function (data) {
           window.location.reload()
         })
-      },
-      confirm: function () {
-        $($('.update-last-bz')[0]).modal('show')
       }
     }
   }
 </script>
 
 <style scoped>
+  .card-actions > .primary {
+    padding-right: 1rem;
+  }
+  .light {
+    margin-left: 10%;
+  }
+
+  .card {
+    margin-bottom: 0;
+  }
   button.fixed-bottom-right:hover {
     background: #FFF;
     color: rgba(0,0,0,.8);
