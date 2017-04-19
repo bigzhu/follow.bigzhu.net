@@ -305,12 +305,6 @@
     font-size: 1rem;
     vertical-align: baseline;
   }
-  .card.bz:hover {
-    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.15);
-  }
-  .card.bz {
-    background: #FFF;
-  }
   .item > .item-secondary.stamp.long-bz {
     width: 20%;
   }

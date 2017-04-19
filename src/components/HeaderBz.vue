@@ -64,6 +64,7 @@
 
 <style scoped>
   .toolbar {
+    padding: 0;
     padding-left: 3rem;
   }
   .menu-item.login-bz {

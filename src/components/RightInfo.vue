@@ -118,7 +118,6 @@
     margin: 1rem;
   }
   .card {
-    background: #FFF;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
