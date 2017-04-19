@@ -9,14 +9,14 @@
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
     </div>
 
-    <transition name="slide-fade">
-      <div v-show="!checkLogin() && show_no_login" class="no-message">
+    <q-transition name="slide">
+      <div v-show="show_no_login" class="no-login">
         <img src="../assets/no-message.svg">
         <p>
           <a href="/login.html">{{ $t("Messages.login") }}</a>{{ $t("Messages.description") }}
         </p>
       </div>
-    </transition>
+    </q-transition>
 
     <message v-for='message in messages' :message='message' :key="message.id">
     </message>
@@ -61,7 +61,7 @@
     },
     data: function () {
       return {
-        show_no_login: true
+        show_no_login: false
       }
     },
     computed: {
@@ -83,16 +83,20 @@
       }
     },
     mounted () {
-      if (!this.is_login) {
-        let self = this
-        setTimeout(function () { self.show_no_login = false }, 6000)
-      }
       this.fetchData()
       this.$nextTick(function () {
+        this.showNoLogin()
         this.bindScroll()
       })
     },
     methods: {
+      showNoLogin: function () {
+        if (!this.is_login) {
+          let self = this
+          setTimeout(function () { self.show_no_login = true }, 1500)
+          setTimeout(function () { self.show_no_login = false }, 5000)
+        }
+      },
       checkLogin: checkLogin,
       bindScroll: function () {
         let self = this
@@ -137,7 +141,13 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .no-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
   .center-container-bz {
     display:  flex;
     justify-content: center;
