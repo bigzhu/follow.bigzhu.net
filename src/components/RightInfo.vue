@@ -17,7 +17,7 @@
     </div>
 
     <div class="footer">
-      <span class="footer-element">{{ $t("RightInfo.register") }}：{{registered_count}}</span>
+      <span class="footer-element">{{ $t("RightInfo.register") }}: {{registered_count}}</span>
       <span>© 2017 Follow Center</span>
     </div>
     <q-select
