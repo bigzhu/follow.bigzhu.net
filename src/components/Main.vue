@@ -4,7 +4,6 @@
       <messages class="width-3of4 no-top-padding-bz"></messages>
       <div class="auto no-top-padding-bz bg">
           <div class="blank-padding"></div>
-          <god-info v-show="god_name" :god_info="god_info"></god-info>
           <right-info></right-info>
       </div>
     </div>
@@ -64,7 +63,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .blank-padding {
     padding: 18px;
   }

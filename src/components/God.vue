@@ -1,14 +1,13 @@
 <template>
   <div class="layout-padding">
-    <div class="row gutter items-start">
-      <messages :god_name="god_name" class="width-4of5"></messages>
-      <div class="width-1of5">
-          <div class="blank-bz"></div>
-          <god-info v-show="god_name" :god_info="god_info"></god-info>
-          <right-info></right-info>
+    <div class="row gutter sm-column">
+      <messages :god_name="god_name" class="width-3of4 no-top-padding-bz"></messages>
+      <div class="auto no-top-padding-bz bg">
+          <div class="blank-padding"></div>
+          <GodInfo v-show="god_name" :god_info="god_info"></GodInfo>
       </div>
     </div>
-    <top></top>
+    <Top></Top>
   </div>
 </template>
 
@@ -51,11 +50,11 @@
   }
 </script>
 
-<style >
-  .ui.stackable.grid>.row>.wide.column.no-padding-bz{
-    padding: 0rem!important;
+<style scoped>
+  .blank-padding {
+    padding: 18px;
   }
-  .godblank-bz {
-    margin-top: 49px;
+  .row.gutter> .no-top-padding-bz {
+    padding-top: 0;
   }
 </style>

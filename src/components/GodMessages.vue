@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div v-bind:class="{ 'invisible_bz': !show_old}" class='ui center aligned basic segment history-bz'>
-      <old :god_name="god_name"></old>
-    </div>
+    <old :class="{ 'invisible_bz': !show_old}" :god_name="god_name"></old>
     <message v-for="message in messages" :message='message' :key="message.id"></message>
-    <!--
-    <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !new_loading}"></div>
-    -->
     <div class='ui center aligned basic segment history-bz'>
       <div v-show="new_loading" class="ui active tiny inline loader"></div>
       <a :class="{ 'invisible_bz': !new_loading}" href='javascript:void(0)' class='history-search-bz loading'>

@@ -1,7 +1,10 @@
 <template>
-  <div class="ui center aligned segment info-card-bz">
-    <h4 class="ui header">{{god_info.name}}</h4>
-    <img :src="avatar" id="profile-image" class="ui centered image" />
+  <div class="card">
+    <div class="card-title">
+      {{god_info.name}}
+    </div>
+    <img :src="avatar" class="responsive">
+
     <p class="god-description" v-html="desc">
     </p>
     <god-remark :remark.sync="remark" :god_id="god_info.id"></god-remark>
@@ -102,7 +105,6 @@
         return this.god_info.admin_remark
       },
       avatar: function () {
-        // if (!this.av) {
         if (this.god_info.avatar === '') {
           return '/static/assets/avatar.svg'
         }
@@ -113,9 +115,9 @@
       this.setGodInfo()
       /* bigzhu fix
       $(this.$el).find('.button').popup(
-        {
-          inline: true
-        }
+      {
+      inline: true
+      }
       )
       */
     },
@@ -185,30 +187,15 @@
     }
   }
 </script>
-<style >
-  .ui.button.god-info-button-bz {
-    box-shadow: none!important;
-    border: 0.1em solid rgba(0,0,0,.15);
-    border-radius: 0.06em;
-    font-size: 0.9em;
-    margin-left: 0.5rem;
-  } 
-  .hide{
-    display: none
+
+<style scoped>
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
-  .god-description {
-    margin-top: 1em;
-    overflow: hidden;
-  }
-  .god-description p img {
-    max-width: 100%;
-  }
-  .ui.segment.info-card-bz {
-    border: none;
-    border-radius: 0.06em;
-    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);
-  }
-  .ui.form .inline.field>input.input-bz {
-    border-radius: 0.06em;
+  .card  img {
+    width: 10rem;
   }
 </style>

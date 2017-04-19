@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div :class="{ 'invisible_bz': followed_god_count===0 || new_loading}" class="center-container-bz" >
-      <old></old>
-    </div>
-
+    <old :class="{ 'invisible_bz': followed_god_count===0 || new_loading}"></old>
     <div v-show="followed_god_count===0" class="no-message">
       <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>

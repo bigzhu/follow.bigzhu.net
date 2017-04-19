@@ -26,8 +26,10 @@
   }
 </script>
 
-<style>
+<style scoped>
   .old-bz {
+    display:  flex;
+    justify-content: center;
     padding-bottom: 1rem;
   }
   a {
