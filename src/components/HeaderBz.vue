@@ -50,18 +50,27 @@
 </script>
 
 <style>
+  .q-search.white .q-search-input {
+    background: white;
+    box-shadow: none;
+  }
+  body.desktop .q-search.white .q-search-input:hover {
+    background: none;
+  }
+  body.desktop .q-search.white .q-search-input:focus {
+    color: rgba(0,0,0,.8);
+  }
+</style>
+
+<style scoped>
+  .toolbar {
+    padding-left: 3rem;
+  }
   .menu-item.login-bz {
     padding: 22px 16px;
   }
   .header-one-bz {
     height: 65px;
-  }
-  .layout-header {
-    box-shadow: none;
-    border-bottom: none;
-  }
-  .toolbar.menu-bz {
-    padding: inherit;
   }
   .toolbar-item {
     border-top: .5px solid rgba(0,0,0,.05);
@@ -90,14 +99,5 @@
   .toolbar-search {
     width: auto;
   }
-  .q-search.white .q-search-input {
-    background: white;
-    box-shadow: none;
-  }
-  body.desktop .q-search.white .q-search-input:hover {
-    background: none;
-  }
-  body.desktop .q-search.white .q-search-input:focus {
-    color: rgba(0,0,0,.8);
-  }
 </style>
+
