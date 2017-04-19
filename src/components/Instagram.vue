@@ -44,3 +44,13 @@
     }
   }
 </script>
+
+<style scoped>
+  video, img.responsive {
+    padding-top: 1em
+  }
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

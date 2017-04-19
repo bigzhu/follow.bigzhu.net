@@ -6,7 +6,7 @@
       <a @click="openImg(media.img_url)" href='javascript:void(0)'>
         <img v-show="media.videos.length===0" :src="media.img_url" class="responsive" >
       </a>
-      <video v-for="video in media.videos" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4' class="padding-top-bz">
+      <video v-for="video in media.videos" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4'>
         <source :src="video.url">
       </video>
     </div>
@@ -76,19 +76,11 @@
     }
   }
 </script>
-<style >
-  .padding-top-bz {
+
+<style scoped>
+  video, img.responsive {
     padding-top: 1em
   }
-  /*
-  //现在基本没有小图，所以这个先注释，以后要是出现小图
-  //宽屏幕，加上padding-right，以便于图片上浮时不要紧贴在一起
-  // @media screen and (min-width : 992px){
-    //   .padding-top-bz {
-      //     padding-right:1em
-    //   }
-  // }
-  */
   video {
     max-width: 100%;
     height: auto;

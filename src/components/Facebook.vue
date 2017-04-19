@@ -53,5 +53,8 @@
   }
 </script>
 
-<style>
+<style scoped>
+  img.responsive {
+    padding-top: 1rem;
+  }
 </style>
