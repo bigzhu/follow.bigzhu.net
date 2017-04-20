@@ -2,7 +2,7 @@
   <div class="layout-padding">
     <div class="row gutter sm-column">
       <messages :god_name="god_name" class="width-3of4 no-top-padding-bz"></messages>
-      <div class="auto no-top-padding-bz bg">
+      <div class="width-1of4 no-top-padding-bz bg">
           <div class="blank-padding"></div>
           <GodInfo v-show="god_name" :god_info="god_info"></GodInfo>
       </div>
@@ -14,7 +14,7 @@
 <script>
   import $ from 'jquery'
   import GodInfo from './GodInfo'
-  import Messages from './GodMessages.vue'
+  import Messages from './GodMessages'
   import Top from './Top'
   export default {
     components: {

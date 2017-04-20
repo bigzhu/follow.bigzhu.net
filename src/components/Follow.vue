@@ -1,5 +1,5 @@
 <template>
-  <button v-on:click="toggleFollow"  :class="{'basic': !value, 'keppel': value, 'loading': loading}" class="ui bottom button follow-button">
+  <button v-on:click="toggleFollow" class="primary">
     <i v-show="value==0" class="add icon"></i>{{desc}}
   </button>
 </template>
@@ -70,26 +70,8 @@
   }
 </script>
 
-<style >
-  .ui.button.follow-button {
-    box-shadow: none!important;
-    border: 0.1em solid rgba(0,0,0,.05);
-    border-radius: 0.06em;
-    font-size: 0.9em;
-    margin-right: 0px;
-  } 
-  .ui.keppel.button {
-    background-color: #54B98F;
-    color: #FFF;
-    text-shadow: none;
-    background-image: none;
-  } 
-  .ui.keppel.button:hover {
-    background-color: #54B98F;
-    color: #FFF;
-    text-shadow: none;
-  }
-  .ui.bottom.button.button-to-follow-bz.keppel.button {
-    border: 1px solid #54B98F!important;
+<style scoped>
+  button {
+    margin: 1rem;
   }
 </style>

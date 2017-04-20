@@ -3,65 +3,51 @@
     <div class="card-title">
       {{god_info.name}}
     </div>
+
     <img :src="avatar" class="responsive">
+    <div  class="card-content">{{desc}}</div>
+    <god-remark v-model="remark" :god_id="god_info.id"></god-remark>
 
-    <p class="god-description" v-html="desc">
-    </p>
-    <god-remark :remark.sync="remark" :god_id="god_info.id"></god-remark>
-    <form class="ui form">
-      <div class="inline field">
-        <label>
-          <a :class="{ disabled: !god_info.twitter }" :href="'https://twitter.com/' + god_info.twitter" target="_blank" class="ui circular twitter icon button" data-content="Twitter">
-            <i class="twitter icon"></i>
-          </a>
-        </label>
-        <input v-model="god_info.twitter" @focus="autoInsert('twitter', god_info.name)" :disabled="disable_edit" type="text" class="input-bz">
+    <div class="list">
+      <div class="item two-lines">
+        <i class="item-primary github icon"></i>
+        <div class="item-content">
+          <input class="full-width">
+        </div>
       </div>
-
-      <div class="inline field">
-        <label>
-          <a :class="{ disabled: !god_info.github }" :href="'https://github.com/' + god_info.github" target="_blank" class="ui circular github icon button" data-content="Github">
-            <i class="github icon"></i>
-          </a>
-        </label>
-        <input v-model="god_info.github" @focus="autoInsert('github', god_info.name)" :disabled="disable_edit" type="text" class="input-bz">
+      <div class="item two-lines">
+        <i class="item-primary twitter icon"></i>
+        <div class="item-content">
+          <input class="full-width">
+        </div>
       </div>
-
-      <div class="inline field">
-        <label>
-          <a :class="{ disabled: !god_info.instagram }" :href="'https://instagram.com/'+god_info.instagram" target="_blank" class="ui circular instagram icon button" data-content="Instagram">
-            <i class="instagram icon"></i>
-          </a>
-        </label>
-        <input v-model="god_info.instagram" @focus="autoInsert('instagram', god_info.name)" :disabled="disable_edit" type="text" class="input-bz">
+      <div class="item two-lines">
+        <i class="item-primary instagram icon"></i>
+        <div class="item-content">
+          <input class="full-width">
+        </div>
       </div>
-
-      <div class="inline field">
-        <label>
-          <a :class="{ disabled: !god_info.tumblr }" :href="'http://'+god_info.tumblr+'.tumblr.com'" target="_blank" class="ui circular tumblr icon button" data-content="Tumblr">
-            <i class="tumblr icon"></i>
-          </a>
-        </label>
-        <input v-model="god_info.tumblr" @focus="autoInsert('tumblr', god_info.name)" :disabled="disable_edit" type="text" class="input-bz">
+      <div class="item two-lines">
+        <i class="item-primary tumblr icon"></i>
+        <div class="item-content">
+          <input class="full-width">
+        </div>
       </div>
-
-      <div class="inline field">
-        <label>
-          <a :class="{ disabled: !god_info.facebook }" :href="'https://facebook.com/'+god_info.facebook" target="_blank" class="ui circular facebook icon button" data-content="Facebook">
-            <i class="facebook icon"></i>
-          </a>
-        </label>
-        <input v-model="god_info.facebook" @focus="autoInsert('facebook', god_info.name)" :disabled="disable_edit" type="text" class="input-bz">
+      <div class="item two-lines">
+        <i class="item-primary facebook icon"></i>
+        <div class="item-content">
+          <input class="full-width">
+        </div>
       </div>
-    </form>
+    </div>
 
-    <div class="ui center aligned basic segment">
-      <follow v-model="god_info.followed" :god_id="god_info.id"></follow>
-      <button v-show="disable_edit" @click="save" class="ui basic button god-info-button-bz">
+    <div class="footer">
+      <Follow v-model="god_info.followed" :god_id="god_info.id"></Follow>
+      <button v-show="disable_edit" @click="save" class="light">
         <i class="icon file text"></i>
         {{ $t("GodInfo.edit") }}
       </button>
-      <button v-show="!disable_edit" @click="save" class="ui basic button god-info-button-bz">
+      <button v-show="!disable_edit" @click="save" class="light">
         <i class="icon save"></i>
         {{ $t("GodInfo.save") }}
       </button>
@@ -113,13 +99,6 @@
     },
     mounted () {
       this.setGodInfo()
-      /* bigzhu fix
-      $(this.$el).find('.button').popup(
-      {
-      inline: true
-      }
-      )
-      */
     },
     watch: {
       'god_info': {
@@ -189,13 +168,38 @@
 </script>
 
 <style scoped>
-  .card {
+  .card-title {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
   }
-  .card  img {
-    width: 10rem;
+  .footer {
+    display:  flex;
+    justify-content: center;
+    align-items:center;
+  }
+  .card .list {
+    border-top: initial;
+    border-bottom: initial;
+  }
+  .list {
+    box-shadow: initial;
+  }
+  .item.two-lines {
+    height: 4rem;
+  }
+  input:not(.no-style):focus {
+    border-bottom: .5px solid #494949;
+  }
+  input:not(.no-style):hover {
+    border-bottom: .5px solid #494949;
+  }
+  input:not(.no-style) {
+    border-bottom: .5px solid #eee;
+  }
+  .list.highlight .item:hover {
+    background-color: initial;
+  }
+  .button {
+    margin: 1rem;
   }
 </style>

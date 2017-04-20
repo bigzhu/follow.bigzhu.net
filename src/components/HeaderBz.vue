@@ -8,8 +8,10 @@
         <i>menu</i>
       </button>
       <q-toolbar-title>
+        <router-link :to="{name: 'Main'}">
         <img class="logo-img" src="../assets/logo.svg">
         Follow Center
+      </router-link>
       </q-toolbar-title>
       <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"  ></q-search>
 
