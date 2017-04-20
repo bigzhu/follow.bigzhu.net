@@ -4,7 +4,7 @@
       {{god_info.name}}
     </div>
 
-    <img :src="avatar" class="responsive">
+    <img :src="avatar" class="">
     <div class="card-content">
       <p v-html="desc"></p>
       <GodRemark v-model="remark" :god_id="god_info.id"></GodRemark>
@@ -170,16 +170,17 @@
 </script>
 
 <style scoped>
-  .card-title {
+  .card {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
-  .footer {
-    display:  flex;
-    justify-content: center;
-    align-items:center;
+  .card > img {
+    width: 20rem;
   }
   .card .list {
+    width: 100%;
     border-top: initial;
     border-bottom: initial;
   }
