@@ -5,38 +5,40 @@
     </div>
 
     <img :src="avatar" class="responsive">
-    <div  class="card-content">{{desc}}</div>
-    <god-remark v-model="remark" :god_id="god_info.id"></god-remark>
+    <div class="card-content">
+      <p v-html="desc"></p>
+      <GodRemark v-model="remark" :god_id="god_info.id"></GodRemark>
+    </div>
 
     <div class="list">
       <div class="item two-lines">
         <i class="item-primary github icon"></i>
         <div class="item-content">
-          <input class="full-width">
+          <input v-model="god_info.github" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary twitter icon"></i>
         <div class="item-content">
-          <input class="full-width">
+          <input v-model="god_info.twitter" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary instagram icon"></i>
         <div class="item-content">
-          <input class="full-width">
+          <input v-model="god_info.instagram" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary tumblr icon"></i>
         <div class="item-content">
-          <input class="full-width">
+          <input v-model="god_info.tumblr" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary facebook icon"></i>
         <div class="item-content">
-          <input class="full-width">
+          <input v-model="god_info.facebook" :disabled="disable_edit" class="full-width">
         </div>
       </div>
     </div>

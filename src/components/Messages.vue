@@ -1,7 +1,7 @@
 <template>
   <div>
     <old :class="{ 'invisible_bz': followed_god_count===0 || new_loading}"></old>
-    <div v-show="followed_god_count===0" class="no-message">
+    <div v-show="followed_god_count===0 && checkLogin()" class="no-message">
       <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
     </div>
@@ -22,12 +22,9 @@
         <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
       </p> 
     </div>
-    <div v-show="followed_god_count!==0" class='ui center aligned basic segment history-bz'>
-      <div v-show="new_loading" class="ui active tiny inline loader"></div>
-      <a :class="{ 'invisible_bz': !new_loading}" href='javascript:void(0)' class='history-search-bz loading'>
-        <i v-show="!new_loading" class='icon new'></i>
-        {{ $t("Messages.newmessage") }}
-      </a>
+
+    <div v-show="new_loading" class="row justify-center" style="margin-bottom: 50px;">
+      <spinner name="dots" slot="message" :size="30"></spinner>
     </div>
     <bottom-loader v-on:bottom="call_back"></bottom-loader>
   </div>

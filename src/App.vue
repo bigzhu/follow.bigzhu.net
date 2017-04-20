@@ -2,10 +2,8 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
-    <q-transition name="slide" slot="header">
-      <HeaderBz v-show="show_bar" >
+      <HeaderBz v-show="show_bar" slot="header">
       </HeaderBz>
-    </q-transition>
       <div class="layout-view">
         <router-view></router-view>
       </div>
