@@ -1,12 +1,12 @@
 <template>
   <div>
     <old :class="{ 'invisible_bz': followed_god_count===0 || new_loading}"></old>
-    <div v-show="followed_god_count===0 && checkLogin()" class="no-message">
+    <div v-show="followed_god_count===0 && is_login" class="no-message">
       <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
     </div>
 
-    <q-transition name="slide">
+    <q-transition v-show="!is_login" name="slide">
       <div v-show="show_no_login" class="no-login">
         <img src="../assets/no-message.svg">
         <p>
@@ -58,6 +58,9 @@
       }
     },
     computed: {
+      is_login () {
+        return checkLogin()
+      },
       unread_message_count () {
         return this.$store.state.unread_message_count
       },
