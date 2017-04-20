@@ -6,6 +6,10 @@ Vue.use(VueRouter)
 function load (component) {
   return () => System.import(`components/${component}.vue`)
 }
+
+function assembly (name) {
+  return { path: '/' + name, name: name, component: load(name) }
+}
 import Main from './components/Main.vue'
 
 export default new VueRouter({
@@ -23,6 +27,7 @@ export default new VueRouter({
   mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
+    assembly('UserNameLogin'),
     { path: '/', name: 'Main', component: Main }, // Default
     { path: '/Recommand/:cat', name: 'Recommand', component: load('Recommand') },
     { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
