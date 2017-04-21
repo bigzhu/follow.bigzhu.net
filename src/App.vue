@@ -23,7 +23,7 @@
           <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
             登录
           </a>
-          <a @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item">
+          <a @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
             <img :src="user_info.picture" class="avatar small"></img>
           </a>
         </div>
@@ -132,6 +132,9 @@
   }
 </style>
 <style scoped>
+  .toolbar {
+    padding: 0;
+  }
   .avatar.small {
     width: 2rem;
     height: 2rem;
