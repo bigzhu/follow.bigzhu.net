@@ -13,25 +13,13 @@ function assembly (name) {
 import Main from './components/Main.vue'
 
 let router = new VueRouter({
-  /*
-  * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
-  * it is only to be used only for websites.
-  *
-  * If you decide to go with "history" mode, please also open /config/index.js
-  * and set "build.publicPath" to something other than an empty string.
-  * Example: '/' instead of current ''
-  *
-  * If switching back to default "hash" mode, don't forget to set the
-  * build publicPath back to '' so Cordova builds work again.
-  */
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      console.log('top')
-      return { x: 0, y: 0 }
-    }
+    console.log(savedPosition)
+    const layout = document.getElementsByClassName('layout-view')
+    if (layout.length && to.name === 'God') {
+      layout[0].scrollTop = 0
+    } else return savedPosition
   },
   routes: [
     assembly('UserNameLogin'),

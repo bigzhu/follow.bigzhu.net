@@ -29,7 +29,7 @@
       <div class="auto">
       </div> 
 
-      <router-link :to="{ name:'TheMessage', params:{id:message.id}}" class="more-infor-bz hidden-bz">
+      <router-link :to="{ name:'TheMessage', params: {message_id:message.id}}" class="more-infor-bz hidden-bz">
         <i>more_horiz</i>
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hidden-bz':!message.collect}">

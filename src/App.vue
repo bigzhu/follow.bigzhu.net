@@ -2,10 +2,6 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
-      <!--
-      <HeaderBz v-show="show_bar" slot="header">
-      </HeaderBz>
-      -->
       <div v-show="show_bar" slot="header" class='header-bz'>
         <div class="toolbar dark inverted menu-bz header-one-bz">
           <button
@@ -24,8 +20,11 @@
           </q-toolbar-title>
           <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"  ></q-search>
 
-          <a class="menu-item login-bz" href="javascript:;">
+          <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
             登录
+          </a>
+          <a @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item">
+            <img :src="user_info.picture" class="avatar"></img>
           </a>
         </div>
 
@@ -39,27 +38,38 @@
         </div>
       </div>
 
-      <q-drawer ref="header_drawer" class="mobile-only">
+      <q-drawer left-side swipe-only ref="header_drawer">
         <div class="toolbar light">
           <q-toolbar-title :padding="1">
-            Drawer
+            Follow Center
           </q-toolbar-title>
         </div>
 
         <div class="list no-border platform-delimiter">
-          <q-drawer-link icon="view_quilt" to="/showcase/layout" exact>
-            About Layout
+          <q-drawer-link icon="" to="/showcase/layout" exact>
+            寻他
           </q-drawer-link>
           <hr>
-          <div class="list-label">Layout Components</div>
-          <q-drawer-link icon="build" to="/showcase/layout/toolbar">
-            Toolbar
+          <q-drawer-link icon="" to="/showcase/layout/toolbar">
+            传记
           </q-drawer-link>
-          <q-drawer-link icon="tab" to="/showcase/layout/tabs">
-            Tabs
+        </div>
+      </q-drawer>
+
+      <q-drawer right-side swipe-only ref="user_info_drawer">
+        <div class="toolbar light">
+          <q-toolbar-title :padding="1">
+            <img :src="user_info.picture" class="avatar"></img> {{user_info.user_name}}
+          </q-toolbar-title>
+        </div>
+
+        <div class="list no-border platform-delimiter">
+          <q-drawer-link icon="" to="/showcase/layout" exact>
+            设置
           </q-drawer-link>
-          <q-drawer-link icon="compare_arrows" to="/showcase/layout/drawer">
-            Layout Drawer
+          <hr>
+          <q-drawer-link icon="" to="/showcase/layout/toolbar">
+            退出登录
           </q-drawer-link>
         </div>
       </q-drawer>
@@ -74,17 +84,24 @@
   /*
   * Root component
   */
+  import checkLogin from 'bz-lib/functions/checkLogin'
   import store from './store'
   import HeaderBz from './components/HeaderBz'
   export default {
     store,
     computed: {
+      user_info () {
+        return store.state.p.user_info
+      },
       show_bar () {
         return store.state.show_bar
       }
     },
     components: {
       HeaderBz
+    },
+    mounted () {
+      if (checkLogin()) { this.$store.dispatch('getUserInfo') }
     },
     data () {
       return {
