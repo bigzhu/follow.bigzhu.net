@@ -167,8 +167,16 @@
     vertical-align: middle;
     width: 2.5rem;
   }
-  .toolbar-search {
-    width: auto;
+
+  @media screen and (min-width: 921px) {
+    .toolbar-search {
+      width: auto;
+    }
+  }
+  @media screen and (max-width: 920px) {
+    .toolbar-search {
+      width: 12rem;
+    }
   }
 </style>
 
