@@ -224,7 +224,7 @@
   }
   .anki-bz {
     width: 1rem;
-    height: 100%;
+    height: 21px;
   }
   .card-actions.bz {
     padding-top: 0;
