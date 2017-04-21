@@ -29,9 +29,7 @@
         </div>
 
         <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
-          <a class="menu-item" href="javascript:;">
-            寻他
-          </a>
+          <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
           <a class="menu-item" href="javascript:;">
             传记
           </a>

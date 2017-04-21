@@ -1,34 +1,13 @@
 <template>
-  <div class="cat-bz">
-    <div class="large monitor only">
-      <div class="ui secondary vertical pointing menu loading">
-        <slot></slot>
-        <div class="ui basic segment add-newgod-bz internally celled grid addcat-bz" v-show="just_my">
-          <a  @click="" href="javascript:void(0)" class="ui add-newgod-style" v-show="!add_cat_input_stat" @click="showAddCatInput">
-            <i class="add icon"></i>{{ $t("AddCat.addnewcat") }}
-          </a>
-          <div v-show="add_cat_input_stat" class="ui action input row addcat-style-bz">
-            <input @keyup.13="addCat" v-model="input_cat" id="id_add_cat" type="text" :placeholder="$t('AddCat.example')" class="eleven wide column">
-            <div @click="addCat" class="ui button five wide column addcat-btn-bz">{{ $t("AddCat.add") }}&gt;</div>
-          </div>
-        </div>
-
-        <router-link :to="{'name': route_name, params: {'cat': cat.cat}}" v-for="cat in cats" :key="cat.id" :class="{'active': $route.params.cat === cat.cat}" class="item">
+  <div class="list">
+    <div class="item" v-for="cat in cats">
+      <i class="item-primary">mail</i>
+      <div class="item-content">
+        <router-link :to="{'name': route_name, params: {'cat': cat.cat}}" :class="{'active': $route.params.cat === cat.cat}">
           {{cat.cat}}
         </router-link>
       </div>
     </div>
-    <!--
-    <div class="ui form mobile only">
-      <div class="field">
-        <select v-model="$route.params.cat||''" @change="selectCat" class="ui dropdown">
-          <option v-if="$route.params.cat === 'all'" selected disabled hidden value="all">请选择分类</option>
-          <option v-if="$route.params.cat === 'recommand'" selected disabled hidden value="recommand">请选择分类</option>
-          <option v-for="cat in cats" >{{cat.cat}}</option>
-        </select>
-      </div>
-    </div>
-    -->
   </div>
 </template>
 

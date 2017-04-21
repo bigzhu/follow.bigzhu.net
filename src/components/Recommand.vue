@@ -1,17 +1,13 @@
 <template>
-  <div class="ui main container">
-    <div class="ui stackable grid">
-      <div class="row">
-        <div class="four wide column top-margin">
-          <cat route_name="Recommand">
-          </cat>
-        </div>
-        <div class="twelve wide column no-padding-bz">
-          <god-item v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
-          </god-item>
-          <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !loading}"></div>
-          <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
-        </div>
+  <div class="layout-padding">
+    <div class="row gutter sm-column">
+      <cat route_name="Recommand" class="width-2of5">
+      </cat>
+      <div class="width-5of5">
+        <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
+        </GodItem>
+        <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !loading}"></div>
+        <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
       </div>
     </div>
   </div>

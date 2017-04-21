@@ -70,5 +70,8 @@
   }
 </script>
 
-<style>
+<style scoped>
+  i {
+    vertical-align:top;
+  }
 </style>
