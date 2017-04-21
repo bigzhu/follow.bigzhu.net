@@ -9,9 +9,9 @@
       </button>
       <q-toolbar-title>
         <router-link :to="{name: 'Main'}">
-        <img class="logo-img" src="../assets/logo.svg">
-        Follow Center
-      </router-link>
+          <img class="logo-img" src="../assets/logo.svg">
+          Follow Center
+        </router-link>
       </q-toolbar-title>
       <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"  ></q-search>
 
@@ -19,7 +19,7 @@
         登录
       </a>
     </div>
-    <div class="toolbar dark inverted menu-bz toolbar-item">
+    <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
       <a class="menu-item" href="javascript:;">
         寻他
       </a>
@@ -66,7 +66,6 @@
 
 <style scoped>
   .toolbar {
-    padding: 0;
     padding-left: 3rem;
   }
   .menu-item.login-bz {
