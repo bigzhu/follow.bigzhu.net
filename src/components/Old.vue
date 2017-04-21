@@ -27,6 +27,9 @@
 </script>
 
 <style scoped>
+  .q-spinner {
+    height: 21px;
+  }
   .old-bz {
     display:  flex;
     justify-content: center;
