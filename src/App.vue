@@ -24,7 +24,7 @@
             登录
           </a>
           <a @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item">
-            <img :src="user_info.picture" class="avatar"></img>
+            <img :src="user_info.picture" class="avatar small"></img>
           </a>
         </div>
 
@@ -132,6 +132,10 @@
   }
 </style>
 <style scoped>
+  .avatar.small {
+    width: 2rem;
+    height: 2rem;
+  }
   @media screen and (min-width: 921px) {
     .toolbar {
       padding-left: 3rem;
