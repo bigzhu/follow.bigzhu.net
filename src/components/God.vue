@@ -12,7 +12,6 @@
 </template>
 
 <script>
-  import $ from 'jquery'
   import GodInfo from './GodInfo'
   import Messages from './GodMessages'
   import Top from './Top'
@@ -42,7 +41,6 @@
     mounted () {
       this.$store.dispatch('getGod', this.god_name)
       this.$nextTick(function () {
-        $('body').visibility()
       })
     },
     methods: {
