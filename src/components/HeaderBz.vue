@@ -65,8 +65,10 @@
 </style>
 
 <style scoped>
-  .toolbar {
-    padding-left: 3rem;
+  @media screen and (min-width 921px) {
+    .toolbar {
+      padding-left: 3rem;
+    }
   }
   .menu-item.login-bz {
     padding: 22px 16px;
