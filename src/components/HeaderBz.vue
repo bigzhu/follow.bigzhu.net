@@ -3,7 +3,7 @@
     <div class="toolbar dark inverted menu-bz header-one-bz">
       <button
         class="hide-on-drawer-visible"
-        @click="$refs.drawer.open()"
+        @click="$refs.header_drawer.open()"
         >
         <i>menu</i>
       </button>
@@ -11,7 +11,7 @@
         <router-link :to="{name: 'Main'}">
           <img class="logo-img" src="../assets/logo.svg">
           <span class="desktop-only">
-          Follow Center
+            Follow Center
           </span>
         </router-link>
       </q-toolbar-title>
@@ -21,6 +21,7 @@
         登录
       </a>
     </div>
+
     <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
       <a class="menu-item" href="javascript:;">
         寻他
