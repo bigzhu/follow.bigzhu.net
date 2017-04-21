@@ -10,7 +10,9 @@
       <q-toolbar-title>
         <router-link :to="{name: 'Main'}">
           <img class="logo-img" src="../assets/logo.svg">
+          <span class="desktop-only">
           Follow Center
+          </span>
         </router-link>
       </q-toolbar-title>
       <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"  ></q-search>
@@ -65,7 +67,7 @@
 </style>
 
 <style scoped>
-  @media screen and (min-width 921px) {
+  @media screen and (min-width: 921px) {
     .toolbar {
       padding-left: 3rem;
     }
