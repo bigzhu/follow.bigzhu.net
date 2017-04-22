@@ -9,7 +9,7 @@
         <div class="item two-lines">
           <div class="item-content has-secondary">
             <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-              <b>{{god.name}}</b>
+              <span class="title">{{god.name}}</span>
             </router-link>
             <br>
             {{god.followed_count}} {{ $t("GodItem.follownumber") }}
@@ -121,14 +121,18 @@
 </script>
 
 <style scoped>
-  /* 居中头像 */
-.width-2of5 {
-  height: 17rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.item > .item-secondary.stamp {
-  width: auto;
-}
+  .title {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .width-2of5 {/* 居中头像 */
+    height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item > .item-secondary.stamp {
+    width: auto;
+  }
 </style>
