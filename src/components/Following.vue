@@ -4,6 +4,8 @@
       <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
+        <AddingGodItem>
+        </AddingGodItem>
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
@@ -15,8 +17,10 @@
 </template>
 
 <script>
+  import BottomLoader from 'bz-bottom-loader'
+  import SpinnerBz from './SpinnerBz'
+  import AddingGodItem from './AddingGodItem'
   import AddGodButton from './AddGodButton'
-  import $ from 'jquery'
   import _ from 'lodash'
   import GodItem from './GodItem'
   import AddGod from './AddGod'
@@ -40,6 +44,9 @@
     },
     props: [],
     components: {
+      BottomLoader,
+      SpinnerBz,
+      AddingGodItem,
       AddGodButton,
       AddGod,
       Cat,
@@ -65,14 +72,16 @@
     },
     data: function () {
       return {
+        loading: false,
         key: ''
       }
     },
     mounted () {
       this.$store.dispatch('getMyGods', {cat: this.$route.params.cat})
-      $('body').visibility()
     },
     methods: {
+      bottomCall: function () {
+      },
       add: function (god_name) {
         console.log(god_name)
       },
@@ -87,5 +96,4 @@
   .floating-label {
     width: 30%;
   }
-
 </style>
