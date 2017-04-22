@@ -18,7 +18,7 @@
               </span>
             </router-link>
           </q-toolbar-title>
-          <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"  ></q-search>
+          <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
 
           <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
             登录
@@ -30,7 +30,7 @@
 
         <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
           <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
-          <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='MyGods'}" class="menu-item">{{ $t("App.following") }}</router-link>
+          <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
 
           <a class="menu-item" href="javascript:;">
             传记

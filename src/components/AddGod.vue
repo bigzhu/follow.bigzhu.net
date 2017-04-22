@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div class="ui basic segment add-newgod-bz new-god-bz"> 
-      <a v-show="stat==='button'||stat==='adding'" @click="showAddGodInput" href="javascript:void(0)" class="ui add-newgod-style">
-        <i class="add icon"></i>{{ $t("AddGod.addnewgod") }}
-      </a>
-      <div v-show="stat==='input'" class="ui action input row">
-        <input @keyup.13="add" v-model="input_name" id="id_add_god" type="text" :placeholder="$t('AddGod.example')" class="eleven wide column">
-        <div @click="add" class="ui button five wide column addcat-btn-bz">{{ $t("AddGod.add") }}&gt;</div>
+    <a v-show="stat==='button'||stat==='adding'" @click="showAddGodInput" href="javascript:void(0)">
+      <i>add</i>{{ $t("AddGod.addnewgod") }}
+    </a>
+    <div v-show="stat==='input'" class="ui action input row">
+      <div class="floating-label">
+        <input @keyup.13="add" v-model="input_name" required class="">
+        <label>{{$t('AddGod.example')}}</label>
+        <a @click="add" href="javascript:;">{{ $t("AddGod.add") }}<i>keyboard_arrow_right</i></a>
       </div>
     </div>
     <div v-show="stat==='adding'" class="ui segment newgod-info recommand-god-bz god-item">
@@ -259,6 +260,7 @@
     }
   }
 </script>
+
 <style>
   .ui.segment.add-newgod-bz.new-god-bz {
     margin-top: 1.8rem;

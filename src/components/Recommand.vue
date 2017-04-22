@@ -1,9 +1,9 @@
 <template>
   <div class="layout-padding">
     <div class="row sm-column">
-      <cat route_name="Recommand" class="width-2of5 desktop-only">
+      <cat route_name="Recommand" class="width-1of5 desktop-only">
       </cat>
-      <div class="width-5of5">
+      <div class="width-3of4">
         <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>

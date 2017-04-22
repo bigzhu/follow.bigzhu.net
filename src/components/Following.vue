@@ -1,24 +1,21 @@
 <template>
   <div class="layout-padding">
     <div class="row sm-column">
-      <cat route_name="Following" :just_my="true" class="width-2of5 desktop-only">
+      <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
-      <div class="width-5of5">
-        <add-god class="add-god"></add-god>
-        <div class="ui transparent icon input followed-search">
-          <input v-model="key" type="text" :placeholder="$t('MyGods.search')">
-          <i class="search icon"></i>
-        </div>
+      <div class="width-3of4">
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
         <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
+        <AddGodButton></AddGodButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import AddGodButton from './AddGodButton'
   import $ from 'jquery'
   import _ from 'lodash'
   import GodItem from './GodItem'
@@ -43,6 +40,7 @@
     },
     props: [],
     components: {
+      AddGodButton,
       AddGod,
       Cat,
       GodItem
@@ -81,24 +79,10 @@
     }
   }
 </script>
-<style>
-  .ui.items.no-margin {
-    margin: 0;
+
+<style scoped>
+  .floating-label {
+    width: 30%;
   }
-  @media (max-width : 800px) {
-    .ui.dropdown.remark-god {
-      position: static;
-    }
-    .newgod-name h3 {
-      display: inline;
-    }
-  }
-  .mygod-head {
-    position: relative;
-  }
-  .ui.input.followed-search {
-    position: absolute;
-    right: 0;
-    top: 0.1rem;
-  }
+
 </style>
