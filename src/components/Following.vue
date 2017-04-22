@@ -1,22 +1,18 @@
 <template>
-  <div class="ui main container">
-    <div class="ui stackable grid">
-      <div class="row">
-        <div class="four wide column top-margin">
-          <cat :just_my="true" route_name="MyGods">
-          </cat>
+  <div class="layout-padding">
+    <div class="row sm-column">
+      <cat route_name="Following" :just_my="true" class="width-2of5 desktop-only">
+      </cat>
+      <div class="width-5of5">
+        <add-god class="add-god"></add-god>
+        <div class="ui transparent icon input followed-search">
+          <input v-model="key" type="text" :placeholder="$t('MyGods.search')">
+          <i class="search icon"></i>
         </div>
-        <div class="twelve wide column no-padding-bz">
-          <div class="mygod-head">
-            <add-god class="add-god"></add-god>
-            <div class="ui transparent icon input followed-search">
-              <input v-model="key" type="text" :placeholder="$t('MyGods.search')">
-              <i class="search icon"></i>
-            </div>
-          </div>
-          <god-item v-for="god in ordered_my_gods" :god="god" :key="god.id" is_my="true">
-          </god-item>
-        </div>
+        <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
+        </GodItem>
+        <SpinnerBz :show="loading"></SpinnerBz>
+        <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
       </div>
     </div>
   </div>

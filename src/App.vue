@@ -30,6 +30,8 @@
 
         <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
           <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
+          <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='MyGods'}" class="menu-item">{{ $t("App.following") }}</router-link>
+
           <a class="menu-item" href="javascript:;">
             传记
           </a>
@@ -131,6 +133,7 @@
     color: rgba(0,0,0,.8);
   }
 </style>
+
 <style scoped>
   .toolbar {
     padding: 0;

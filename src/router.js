@@ -22,6 +22,7 @@ let router = new VueRouter({
     } else return savedPosition
   },
   routes: [
+    { path: '/Following/:cat*', name: 'Following', component: load('Following') },
     assembly('UserNameLogin'),
     { path: '/', name: 'Main', component: Main }, // Default
     { path: '/Recommand/:cat*', name: 'Recommand', component: load('Recommand') },
