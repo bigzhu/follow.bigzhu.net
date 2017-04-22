@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <div class="row gutter sm-column">
+    <div class="row sm-column">
       <cat route_name="Recommand" class="width-2of5">
       </cat>
       <div class="width-5of5">

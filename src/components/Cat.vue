@@ -1,13 +1,17 @@
 <template>
   <div class="list">
-    <div class="item" v-for="cat in cats">
-      <i class="item-primary">mail</i>
-      <div class="item-content">
-        <router-link :to="{'name': route_name, params: {'cat': cat.cat}}" :class="{'active': $route.params.cat === cat.cat}">
-          {{cat.cat}}
-        </router-link>
+    <router-link 
+      v-for="cat in cats"
+      tag="div"
+      class="item item-link"
+      :class="{'active': $route.params.cat === cat.cat}"
+      :to="{'name': route_name, params: {'cat': cat.cat}}"
+      >
+      <i class="item-primary">face</i>
+      <div class="item-content has-secondary">
+        <div>{{cat.cat}}</div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -67,8 +71,14 @@
 </script>
 
 <style scoped>
+  .item.active {
+    background:rgba(0,0,0,.03); 
+  }
+  .list {
+    background: #fff;
+  }
   /* 对齐右边 */
-  .row.gutter > .list {
-    margin-top: 1rem;
+  .row > .list {
+    margin-right: 1rem;
   }
 </style>
