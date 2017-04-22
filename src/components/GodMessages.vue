@@ -2,12 +2,8 @@
   <div>
     <old :class="{ 'invisible_bz': !show_old}" :god_name="god_name"></old>
     <message v-for="message in messages" :message='message' :key="message.id"></message>
-    <div class='ui center aligned basic segment history-bz'>
-      <div v-show="new_loading" class="ui active tiny inline loader"></div>
-      <a :class="{ 'invisible_bz': !new_loading}" href='javascript:void(0)' class='history-search-bz loading'>
-        <i v-show="!new_loading" class='icon new'></i>
-        {{ $t("Messages.newmessage") }}
-      </a>
+    <div v-show="new_loading" class="row justify-center" style="margin-bottom: 50px;">
+      <spinner name="dots" slot="message" :size="30"></spinner>
     </div>
     <bottom-loader :el="$el" element_class=".ui.fluid.card" v-on:bottom="call_back"></bottom-loader>
   </div>
