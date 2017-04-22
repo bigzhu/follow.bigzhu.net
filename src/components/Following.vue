@@ -8,7 +8,7 @@
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
         <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
-        <AddGodButton></AddGodButton>
+        <AddGodButton v-on:add="add"></AddGodButton>
       </div>
     </div>
   </div>
@@ -73,6 +73,9 @@
       $('body').visibility()
     },
     methods: {
+      add: function (god_name) {
+        console.log(god_name)
+      },
       disableLoading: function () {
         this.loading = false
       }
