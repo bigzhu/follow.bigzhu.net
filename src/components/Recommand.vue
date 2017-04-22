@@ -62,7 +62,6 @@
       this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function (data) {
         self.disableGodLoading()
       })
-      $('body').visibility()
     },
     attached: function () {
       var tool_tips_target = $(this.$el).find('.show-god-info')
