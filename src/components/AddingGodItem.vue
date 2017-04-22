@@ -201,9 +201,11 @@
       },
       allDone: function (info) {
         this.loading = false
-        this.createGod()
-        this.$store.commit('UNSHIFT_MY_GOD', {cat: this.cat, god: this.god_info})
+        // this.createGod()
+        this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.$store.commit('UNSHIFT_MY_GOD', {cat: this.cat, god: this.god})
         // this.$store.dispatch('queryCat')
+        console.log('emit')
         this.$emit('add_done', this.god_info)
       },
       setGodSocial: function (type) {
