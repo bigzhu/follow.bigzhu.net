@@ -49,6 +49,9 @@
     props: ['god_name'],
     watch: {
       'god_name': function () {
+        if (this.god_name === '') {
+          return
+        }
         this.god.name = this.god_name
         this.getGodInfo()
       }

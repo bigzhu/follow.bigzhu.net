@@ -4,12 +4,12 @@
       <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
-        <AddingGodItem :god_name="god_name">
+        <AddingGodItem v-show="god_name" :god_name="god_name" @add_done="god_name=''">
         </AddingGodItem>
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
-        <BottomLoader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></BottomLoader>
+        <BottomLoader :el="$el" element_class=".god-item" @:bottom="bottomCall"></BottomLoader>
         <AddGodButton v-on:add="add"></AddGodButton>
       </div>
     </div>
