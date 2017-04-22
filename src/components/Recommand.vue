@@ -6,7 +6,7 @@
       <div class="width-5of5">
         <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
-        <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !loading}"></div>
+        <SpinnerBz :show="loading"></SpinnerBz>
         <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
       </div>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import SpinnerBz from './SpinnerBz'
   import $ from 'jquery'
   import GodItem from './GodItem'
   import Cat from './Cat'
@@ -32,6 +33,7 @@
       }
     },
     components: {
+      SpinnerBz,
       Cat,
       GodItem,
       BottomLoader
