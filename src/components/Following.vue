@@ -9,7 +9,7 @@
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
-        <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
+        <BottomLoader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></BottomLoader>
         <AddGodButton v-on:add="add"></AddGodButton>
       </div>
     </div>
