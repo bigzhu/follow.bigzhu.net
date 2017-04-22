@@ -23,7 +23,7 @@
           <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
             登录
           </a>
-          <a @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
+          <a v-show="user_info.user_name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
             <img :src="user_info.picture" class="avatar small"></img>
           </a>
         </div>
@@ -66,9 +66,11 @@
             设置
           </q-drawer-link>
           <hr>
-          <q-drawer-link icon="" to="/showcase/layout/toolbar">
-            退出登录
-          </q-drawer-link>
+          <div class="item item-link drawer-closer router-link-active">
+            <div  class="item-content">
+              <a href="/api_logout">退出登录</a>
+            </div>
+          </div>
         </div>
       </q-drawer>
       <div class="layout-view">

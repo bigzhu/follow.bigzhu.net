@@ -66,38 +66,9 @@
   }
 </script>
 
-<style>
-  #id_add_cat {
-    box-shadow: none;
-    border: none;
-    background-color: transparent;
-    padding: 1rem;
-    border-bottom: 1px solid rgba(34,36,38,.15);
-    border-radius: 0px;
-  }
-  #id_add_god {
-    box-shadow: none;
-    border: none;
-    background-color: transparent;
-    padding: 1rem;
-    border-bottom: 1px solid rgba(34,36,38,.15);
-    border-radius: 0px;
-  }
-  .ui.button.addcat-btn-bz {
-    background-color: transparent;
-  }
-  .ui.input.row.addcat-style-bz {
-    box-shadow: none;
-    border: none;
-    background-color: transparent;
-  }
-  .ui.celled.grid>.row>.column {
-    box-shadow: none;
-  }
-  .ui.segment.add-newgod-bz:last-child {
-    margin-top: 1.8rem;
-  }
-  .ui.segment.add-newgod-bz.celled.grid.addcat-bz {
-    padding: 1rem 0rem;
+<style scoped>
+  /* 对齐右边 */
+  .row.gutter > .list {
+    margin-top: 1rem;
   }
 </style>

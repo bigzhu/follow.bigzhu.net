@@ -1,5 +1,5 @@
 <template>
-  <div class="old-bz">
+  <div :class="{ 'invisible_bz': !show}" class="old-bz">
     <spinner v-show="old_loading" :size="14" name="tail"></spinner>
     <a @click='old' href='javascript:void(0)'>
       <i v-show="!old_loading">history</i>
@@ -15,7 +15,7 @@
         return this.$store.state.old_loading
       }
     },
-    props: ['god_name', 'search_key'],
+    props: ['show', 'god_name', 'search_key'],
     mounted () {
     },
     methods: {
@@ -27,6 +27,9 @@
 </script>
 
 <style scoped>
+  .invisible_bz { /*占位隐藏*/
+    visibility:hidden;
+  };
   .q-spinner {
     height: 21px;
   }

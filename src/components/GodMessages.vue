@@ -1,21 +1,21 @@
 <template>
   <div>
-    <old :class="{ 'invisible_bz': !show_old}" :god_name="god_name"></old>
+    <old :show="show_old" :god_name="god_name"></old>
     <message v-for="message in messages" :message='message' :key="message.id"></message>
-    <div v-show="new_loading" class="row justify-center" style="margin-bottom: 50px;">
-      <spinner name="dots" slot="message" :size="30"></spinner>
-    </div>
+    <SpinnerBz :show="new_loading"></SpinnerBz>
     <bottom-loader :el="$el" element_class=".ui.fluid.card" v-on:bottom="call_back"></bottom-loader>
   </div>
 </template>
 
 <script>
+  import SpinnerBz from './SpinnerBz'
   import Old from './Old'
   import Message from './Message'
   import BottomLoader from 'bz-bottom-loader'
 
   export default {
     components: {
+      SpinnerBz,
       Old,
       Message,
       BottomLoader

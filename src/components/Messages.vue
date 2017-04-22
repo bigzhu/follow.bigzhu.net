@@ -1,6 +1,6 @@
 <template>
   <div>
-    <old :class="{ 'invisible_bz': followed_god_count===0 || new_loading}"></old>
+    <Old :show="!(followed_god_count===0 || new_loading)"></Old>
     <div v-show="followed_god_count===0 && is_login" class="no-message">
       <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
@@ -23,14 +23,13 @@
       </p> 
     </div>
 
-    <div v-show="new_loading" class="row justify-center" style="margin-bottom: 50px;">
-      <spinner name="dots" slot="message" :size="30"></spinner>
-    </div>
+    <SpinnerBz :show="new_loading"></SpinnerBz>
     <bottom-loader v-on:bottom="call_back"></bottom-loader>
   </div>
 </template>
 
 <script>
+  import SpinnerBz from './SpinnerBz'
   import {Utils} from 'quasar'
   var get_count = 50
   import Old from './Old.vue'
@@ -40,6 +39,7 @@
 
   export default {
     components: {
+      SpinnerBz,
       Old,
       Message,
       BottomLoader
