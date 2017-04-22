@@ -73,6 +73,7 @@
 </template>
 
 <script>
+  import checkLogin from 'bz-lib/functions/checkLogin'
   import $ from 'jquery'
   import GodCard from './GodCard'
   import Twitter from './Twitter'
@@ -143,7 +144,7 @@
         return Vue.config.lang
       },
       is_login () {
-        return this.$store.state.p.is_login
+        return checkLogin()
       },
       href: function () {
         if (this.message.m_type === 'github') {
