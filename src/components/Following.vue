@@ -4,7 +4,7 @@
       <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
-        <AddingGodItem>
+        <AddingGodItem :god_name="god_name">
         </AddingGodItem>
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
@@ -72,6 +72,7 @@
     },
     data: function () {
       return {
+        god_name: '',
         loading: false,
         key: ''
       }
@@ -83,7 +84,7 @@
       bottomCall: function () {
       },
       add: function (god_name) {
-        console.log(god_name)
+        this.god_name = god_name
       },
       disableLoading: function () {
         this.loading = false
