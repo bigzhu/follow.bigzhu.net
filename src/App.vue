@@ -46,10 +46,14 @@
         </div>
 
         <div class="list no-border platform-delimiter">
-          <q-drawer-link icon="" to="/showcase/layout" exact>
-            寻他
+          <q-drawer-link icon="" to="{'name': 'Recommand'}" exact>
+            {{ $t("App.whattofollow") }}
           </q-drawer-link>
           <hr>
+          <q-drawer-link v-show="user_info.user_name" :to="{ name:'Following'}" icon="" exact>
+            {{ $t("App.following") }}
+          </q-drawer-link>
+          <hr v-show="user_info.user_name">
           <q-drawer-link icon="" to="/showcase/layout/toolbar">
             传记
           </q-drawer-link>
