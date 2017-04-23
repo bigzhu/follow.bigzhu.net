@@ -46,7 +46,7 @@
         </div>
 
         <div class="list no-border platform-delimiter">
-          <q-drawer-link icon="" to="{'name': 'Recommand'}" exact>
+          <q-drawer-link icon="" :to="{'name': 'Recommand'}" exact>
             {{ $t("App.whattofollow") }}
           </q-drawer-link>
           <hr>
