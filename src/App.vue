@@ -2,41 +2,43 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
-      <div v-show="show_bar" slot="header" class='header-bz'>
-        <div class="toolbar dark inverted menu-bz header-one-bz">
-          <button
-            class="hide-on-drawer-visible"
-            @click="$refs.header_drawer.open()"
-            >
-            <i>menu</i>
-          </button>
-          <q-toolbar-title>
-            <router-link :to="{name: 'Main'}">
-              <img class="logo-img" src="./assets/logo.svg">
-              <span class="desktop-only">
-                Follow Center
-              </span>
-            </router-link>
-          </q-toolbar-title>
-          <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
+      <q-transition name="slide" slot="header">
+        <div v-show="show_bar"  class='header-bz'>
+          <div class="toolbar dark inverted menu-bz header-one-bz">
+            <button
+              class="hide-on-drawer-visible"
+              @click="$refs.header_drawer.open()"
+              >
+              <i>menu</i>
+            </button>
+            <q-toolbar-title>
+              <router-link :to="{name: 'Main'}">
+                <img class="logo-img" src="./assets/logo.svg">
+                <span class="desktop-only">
+                  Follow Center
+                </span>
+              </router-link>
+            </q-toolbar-title>
+            <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
 
-          <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
-            登录
-          </a>
-          <a v-show="user_info.user_name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
-            <img :src="user_info.picture" class="avatar small"></img>
-          </a>
+            <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
+              登录
+            </a>
+            <a v-show="user_info.user_name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
+              <img :src="user_info.picture" class="avatar small"></img>
+            </a>
+          </div>
+
+          <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
+            <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
+            <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
+
+            <a class="menu-item" href="javascript:;">
+              传记
+            </a>
+          </div>
         </div>
-
-        <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
-          <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
-          <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
-
-          <a class="menu-item" href="javascript:;">
-            传记
-          </a>
-        </div>
-      </div>
+      </q-transition>
 
       <q-drawer left-side swipe-only ref="header_drawer">
         <div class="toolbar light">

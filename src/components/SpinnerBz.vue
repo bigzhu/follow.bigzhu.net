@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'invisible_bz': !show}" class="row justify-center" style="margin-bottom: 50px;">
+  <div :class="{ 'hidden_bz': !show}" class="row justify-center" style="margin-bottom: 50px;">
     <spinner name="dots" slot="message" :size="30"></spinner>
   </div>
 </template>
@@ -26,7 +26,4 @@
 </script>
 
 <style scoped>
-  .invisible_bz { /*占位隐藏*/
-    visibility:hidden;
-  };
 </style>
