@@ -89,6 +89,7 @@
 </template>
 
 <script>
+  import {Utils} from 'quasar'
   /*
   * Root component
   */
@@ -110,10 +111,25 @@
     },
     mounted () {
       if (checkLogin()) { this.$store.dispatch('getUserInfo') }
+
+      this.$nextTick(function () {
+        this.bindScroll()
+      })
     },
     data () {
       return {
         search_value: ''
+      }
+    },
+    methods: {
+      bindScroll: function () {
+        let self = this
+        let scroll_target = document.getElementsByClassName('layout-view')
+        scroll_target[0].addEventListener('scroll', Utils.throttle(function () {
+          console.log('scroll in throttle')
+          self.$store.commit('CHECK_BAR', scroll_target)
+        }, 300)
+        )
       }
     }
   }

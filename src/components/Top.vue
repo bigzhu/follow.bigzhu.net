@@ -1,20 +1,13 @@
 <template>
-  <!--
-  <button @click="top" :data-content="$t('Top.backtotop')" class="ui circular basic icon button large monitor only top-bz"><i class="angle up icon"></i></button>
-
-  -->
-
   <button
     v-back-to-top.animate="{offset: 500, duration: 200}"
     class="circular fixed-bottom-right animate-pop"
     >
     <i>keyboard_arrow_up</i>
   </button>
-
 </template>
 
 <script>
-  import $ from 'jquery'
   export default {
     vuex: {
       getters: {
@@ -35,13 +28,6 @@
       // $(this.$el).popup()
     },
     methods: {
-      top: function () {
-        $('html, body').animate(
-          {
-            scrollTop: '0'
-          }, 300
-        )
-      }
     }
   }
 </script>

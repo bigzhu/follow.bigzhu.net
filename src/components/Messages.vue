@@ -30,7 +30,6 @@
 
 <script>
   import SpinnerBz from './SpinnerBz'
-  import {Utils} from 'quasar'
   var get_count = 50
   import Old from './Old.vue'
   import BottomLoader from 'bz-bottom-loader'
@@ -82,7 +81,6 @@
       this.fetchData()
       this.$nextTick(function () {
         this.showNoLogin()
-        this.bindScroll()
       })
     },
     methods: {
@@ -94,15 +92,6 @@
         }
       },
       checkLogin: checkLogin,
-      bindScroll: function () {
-        let self = this
-        let scroll_target = Utils.dom.getScrollTarget(this.$el)
-        scroll_target.addEventListener('scroll', Utils.throttle(function () {
-          console.log('scroll in throttle')
-          self.$store.commit('CHECK_BAR', scroll_target)
-        }, 300)
-        )
-      },
       fetchData: function () {
         if (!this.god_name) {
           if (this.messages.length === 0) {
