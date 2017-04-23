@@ -97,9 +97,11 @@
       bindScroll: function () {
         let self = this
         let scroll_target = Utils.dom.getScrollTarget(this.$el)
-        scroll_target.addEventListener('scroll', function () {
+        scroll_target.addEventListener('scroll', Utils.throttle(function () {
+          console.log('scroll in throttle')
           self.$store.commit('CHECK_BAR', scroll_target)
-        })
+        }, 300)
+        )
       },
       fetchData: function () {
         if (!this.god_name) {
