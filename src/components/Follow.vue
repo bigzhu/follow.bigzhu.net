@@ -1,6 +1,6 @@
 <template>
   <button v-on:click="toggleFollow" class="primary">
-    <i v-show="value==0" class="add icon"></i>{{desc}}
+    <i v-show="value==0">add</i>{{desc}}
   </button>
 </template>
 

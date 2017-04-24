@@ -25,6 +25,7 @@
           <div v-html="description" class="card-content green-bz">
           </div> 
         </div>
+        <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
       </div>
     </div>
   </div>
@@ -121,6 +122,11 @@
 </script>
 
 <style scoped>
+  .follow {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
   .title {
     font-size: 1.1rem;
     font-weight: 500;
