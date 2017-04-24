@@ -86,6 +86,7 @@ export const mutations = {
 
     if (Math.abs(state.last_scroll_top - st) <= 5) return
 
+    // console.log('state.last_scroll_top ' + (state.last_scroll_top))
     if (st > state.last_scroll_top && st > state.nav_bar_height) {
       state.show_bar = false
     } else {
