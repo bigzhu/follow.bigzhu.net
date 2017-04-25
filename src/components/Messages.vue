@@ -18,13 +18,13 @@
     <q-infinite-scroll :handler="loadMore">
       <message v-for='message in messages' :message='message' :key="message.id">
       </message>
-      <div v-show="followed_god_count>0 && unread_message_count===0" class="no-message">
-        <p>{{ $t("Messages.nomessage") }}
-          <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
-        </p> 
-      </div>
       <SpinnerBz :show="new_loading"></SpinnerBz>
     </q-infinite-scroll>
+    <div v-show="followed_god_count>0 && unread_message_count===0" class="no-message">
+      <p>{{ $t("Messages.nomessage") }}
+        <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
+      </p> 
+    </div>
   </div>
 </template>
 
@@ -104,20 +104,20 @@
           }
         }
       },
-      loadMore: function () {
+      loadMore: function (index, done) {
         // 解救强迫症，记录最后一条的time
         // let created_at = this.messages[this.messages.length - 1].created_at
         // this.$store.dispatch('recordLastMessage', created_at)
-        if (!this.new_loading) {
-          this.newMessage(get_count)
-        }
+        this.newMessage(get_count).then(function () {
+          done()
+        })
       },
       newMessage: function (limit = null) {
         let after = null
         if (this.messages.length > 0) {
           after = this.messages[this.messages.length - 1].created_at
         }
-        this.$store.dispatch('getNew', {after: after, limit: limit})
+        return this.$store.dispatch('getNew', {after: after, limit: limit})
       }
     }
   }
