@@ -15,16 +15,16 @@
       </div>
     </q-transition>
 
-    <message v-for='message in messages' :message='message' :key="message.id">
-    </message>
-    <div v-show="followed_god_count>0 && unread_message_count===0" class="no-message">
-      <p>{{ $t("Messages.nomessage") }}
-        <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
-      </p> 
-    </div>
-
-    <SpinnerBz :show="new_loading"></SpinnerBz>
-    <bottom-loader v-on:bottom="call_back"></bottom-loader>
+    <q-infinite-scroll :handler="loadMore">
+      <message v-for='message in messages' :message='message' :key="message.id">
+      </message>
+      <div v-show="followed_god_count>0 && unread_message_count===0" class="no-message">
+        <p>{{ $t("Messages.nomessage") }}
+          <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
+        </p> 
+      </div>
+      <SpinnerBz :show="new_loading"></SpinnerBz>
+    </q-infinite-scroll>
   </div>
 </template>
 
@@ -32,7 +32,6 @@
   import SpinnerBz from './SpinnerBz'
   var get_count = 50
   import Old from './Old.vue'
-  import BottomLoader from 'bz-bottom-loader'
   import Message from './Message.vue'
   import checkLogin from 'bz-lib/functions/checkLogin'
 
@@ -40,8 +39,7 @@
     components: {
       SpinnerBz,
       Old,
-      Message,
-      BottomLoader
+      Message
     },
     watch: {
       '$route': 'fetchData'
@@ -106,7 +104,7 @@
           }
         }
       },
-      call_back: function () {
+      loadMore: function () {
         // 解救强迫症，记录最后一条的time
         // let created_at = this.messages[this.messages.length - 1].created_at
         // this.$store.dispatch('recordLastMessage', created_at)
