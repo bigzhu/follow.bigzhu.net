@@ -115,12 +115,12 @@
     },
     mounted () {
       this.$nextTick(function () {
-        let self = this
-        if (this.is_login) {
-          this.$store.dispatch('getIntersectionObserver').then(function (io) {
-            io.observe(self.$el)
-          })
-        }
+        // let self = this
+        // if (this.is_login) {
+        //   this.$store.dispatch('getIntersectionObserver').then(function (io) {
+        //     io.observe(self.$el)
+        //   })
+        // }
         // this.$store.dispatch('getIntersectionObserver').observe(this.$el)
         // var tool_tips_target = $(this.$el).find('.show-god-info')
         // var popup_content = $(this.$el).find('.ui.card')
