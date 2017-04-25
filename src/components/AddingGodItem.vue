@@ -5,7 +5,7 @@
       v-show="loading"
       name="puff"
       color="#000000"
-      size="10rem"
+      size="17rem"
       class="spinner"
       >
     </spinner>
@@ -250,8 +250,8 @@
     position: absolute;
     left:50%;
     top:50%;
-    margin-left:-5rem;
-    margin-top:-5rem;
+    margin-left:-8.5rem;
+    margin-top:-8.5rem;
   }
 
   .title {
