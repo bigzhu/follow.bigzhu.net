@@ -22,8 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: config[env.prod ? 'build' : 'dev'].publicPath,
-    // filename: 'js/[name].js',
-    filename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].js',
     chunkFilename: 'js/[id].[chunkhash].js'
   },
   resolve: {

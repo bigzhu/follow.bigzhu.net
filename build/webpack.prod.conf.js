@@ -9,6 +9,9 @@ var
   HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var webpackConfig = merge(baseWebpackConfig, {
+  output: {
+    filename: 'js/[name].[chunkhash].js'
+  },
   module: {
     rules: cssUtils.styleRules({
       sourceMap: config.build.productionSourceMap,
