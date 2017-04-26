@@ -12,9 +12,6 @@ import Vuex from 'vuex'
 import Quasar from 'quasar'
 import router from './router'
 
-import VueVirtualScroller from 'vue-virtual-scroller'
-Vue.use(VueVirtualScroller)
-
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 // set lang
