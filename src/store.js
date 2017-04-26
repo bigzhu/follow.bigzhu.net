@@ -92,8 +92,8 @@ export const mutations = {
     } else {
       state.show_bar = true
       // if (st + $(window).height() < $(document).height()) {
-      //   state.show_bar = true
-      // }
+        //   state.show_bar = true
+        // }
     }
 
     state.last_scroll_top = st
@@ -250,12 +250,19 @@ export const mutations = {
     state.search_messages = uniq_messages
   },
   SET_NEW_MESSAGES (state, messages) {
-    let merge_messages = state.messages.concat(messages)
-    let uniq_messages = _.uniqBy(merge_messages, function (d) {
-      return d.id
+    console.log(state.messages.length)
+    if (state.messages.length <= 100) {
+      let merge_messages = state.messages.concat(messages)
+      let uniq_messages = _.uniqBy(merge_messages, function (d) {
+        return d.id
+      }
+      )
+      state.messages = uniq_messages
+    } else { // 如果数量太多, 回到 top, 只要新取到的数
+      let layout = document.getElementsByClassName('layout-view')
+      layout[0].scrollTop = 0
+      state.messages = messages
     }
-    )
-    state.messages = uniq_messages
   }
 }
 // actions
