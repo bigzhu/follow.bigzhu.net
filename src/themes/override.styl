@@ -1,4 +1,14 @@
 // 一些覆盖不可配置样式的
+// 小屏幕一律显示
+@media (max-width: 767px) {
+  .hover-show {
+    opacity: 1;
+  }
+}
+// card hover 时就显示
+.card:hover .hover-show
+  opacity: 1
+// hover 时才显示
 .hover-show
   transition: color 0.3s ease
   transition: visibility 0s, opacity 0.3s linear

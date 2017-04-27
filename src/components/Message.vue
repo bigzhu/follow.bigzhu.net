@@ -23,19 +23,19 @@
     </div> 
     <div class="card-actions bz">
       <!--
-      <div class="text-primary hidden-bz"><i>thumb_up</i> 11k likes </div> 
-      <div class="text-primary hidden-bz"><i>mode_comment</i> 8 comments </div> 
+      <div class="text-primary hover-show"><i>thumb_up</i> 11k likes </div> 
+      <div class="text-primary hover-show"><i>mode_comment</i> 8 comments </div> 
       -->
       <div class="auto">
       </div> 
 
-      <router-link :to="{ name:'TheMessage', params: {message_id:message.id}}" class="more-infor-bz hidden-bz">
+      <router-link :to="{ name:'TheMessage', params: {message_id:message.id}}" class="more-infor-bz hover-show">
         <i>more_horiz</i>
       </router-link>
-      <a @click="toggleCollect(message)" :class="{'hidden-bz':!message.collect}">
+      <a @click="toggleCollect(message)" :class="{'hover-show':!message.collect}">
         <i :class="{'remove':!message.collect, 'light-bz': message.collect}">bookmark_border</i>
       </a>
-      <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hidden-bz':!message.anki}">
+      <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hover-show':!message.anki}">
         <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
           <desc>Created with Sketch.</desc>
@@ -194,34 +194,17 @@
   }
 </script>
 
-<style scoped>
+<style>
   .card-content.green-bz a {
     color: #2ea974;
   }
   @media (max-width: 767px) {
-    .hidden-bz {
-      opacity: 1;
-    }
     .message-bz {
       box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 1px 3px 0px !important;
     }
     .anki-bz svg{
       margin-top: 0.11rem;
     }
-  }
-  .hidden-bz {
-    transition: color 0.3s ease;
-    transition: visibility 0s, opacity 0.3s linear;
-    opacity: 0;
-  }
-  .card.bz:hover .hidden-bz {
-    visibility: visible;
-    opacity: 1;
-  }
-  .anki-bz {
-    vertical-align: middle;
-    width: 1rem;
-    height: 21px;
   }
   .card-actions.bz {
     padding-top: 0;
@@ -251,6 +234,11 @@
 </style>
 
 <style scoped>
+  .anki-bz {
+    vertical-align: middle;
+    width: 1rem;
+    height: 21px;
+  }
   i.icon {
     font-size: 1rem;
     vertical-align: baseline;
