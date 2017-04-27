@@ -2,8 +2,8 @@
   <div>
     <div v-html="value" v-show="!is_edit && value" class="remark-bz"></div>
     <p v-show="is_edit" v-html="value" @blur="save" contenteditable="true" class="remark-edit-content"></p>
-    <button v-show="is_edit" @click="save" class="ui mini basic button save-remark-bz">{{ $t("GodRemark.save") }}</button>
-    <a v-show="!is_edit" @click="edit" href="javascript:void(0)" class="remark-edit-bz">
+    <button v-show="is_edit" @click="save" class="light">{{ $t("GodRemark.save") }}</button>
+    <a v-show="!is_edit" @click="edit" href="javascript:void(0)" class="hover-show">
       <i class="edit icon"></i>
     </a>
   </div>
@@ -55,21 +55,8 @@
   .remark-bz {
     color: rgba(0, 0, 0, 0.5)
   }
-  .remark-edit-bz {
-    color: #757575;
-    transition: visibility 0s, opacity 0.3s linear;
-    opacity: 0;
-  }
-  .ui.segment:hover .remark-edit-bz {
-    visibility: visible;
-    opacity: 1;
-  }
-  .ui.button.save-remark-bz {
-    border-radius: 0.06em;
-  }
   @media (max-width : 767px) {
-    .remark-edit-bz {
-      visibility: visible;
+    .hover-show {
       opacity: 1;
     }
   }

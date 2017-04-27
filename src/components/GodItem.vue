@@ -22,8 +22,8 @@
             <social-badge v-show="god.instagram_user" @show_this="setGodInfo" :info="god.instagram_user" ></social-badge>
             <social-badge v-show="god.facebook_user" @show_this="setGodInfo" :info="god.facebook_user"></social-badge>
           </div>
-          <div v-html="description" class="card-content green-bz">
-          </div> 
+          <div v-html="description" class="card-content green-bz"></div> 
+          <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz"></god-remark>
         </div>
         <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
       </div>
@@ -43,6 +43,11 @@
       },
       is_my: {
       }
+    },
+    components: {
+      SocialBadge,
+      Follow,
+      GodRemark
     },
     watch: {
       god_id: function () {
@@ -84,11 +89,6 @@
         return '/api_sp/' + btoa(this.god_info.avatar)
       }
     },
-    components: {
-      SocialBadge,
-      Follow,
-      GodRemark
-    },
     methods: {
       block: function (god) {
         this.loading = true
@@ -120,6 +120,12 @@
     }
   }
 </script>
+
+<style>
+  .card:hover .hover-show {
+    opacity: 1;
+  }
+</style>
 
 <style scoped>
   .follow {
