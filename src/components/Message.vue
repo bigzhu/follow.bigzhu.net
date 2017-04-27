@@ -32,8 +32,8 @@
       <router-link :to="{ name:'TheMessage', params: {message_id:message.id}}" class="more-infor-bz hover-show">
         <i>more_horiz</i>
       </router-link>
-      <a @click="toggleCollect(message)" :class="{'hover-show':!message.collect}">
-        <i :class="{'remove':!message.collect, 'light-bz': message.collect}">bookmark_border</i>
+      <a @click="toggleCollect(message)" :class="{'hover-show':!message.collect}" class="bookmark">
+        <i :class="{'bookmark-light': message.collect}">bookmark_border</i>
       </a>
       <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hover-show':!message.anki}">
         <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -234,6 +234,12 @@
 </style>
 
 <style scoped>
+  .bookmark:hover {
+    color: #FBBD08;
+  }
+  .bookmark-light {
+    color: #FBBD08;
+  }
   .anki-bz {
     vertical-align: middle;
     width: 1rem;
