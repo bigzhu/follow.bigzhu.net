@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="row sm-column">
+    <div class="row">
       <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5">
         <img :src="avatar" class="responsive">
       </router-link>
@@ -22,13 +22,14 @@
             <social-badge v-show="god.instagram_user" @show_this="setGodInfo" :info="god.instagram_user" ></social-badge>
             <social-badge v-show="god.facebook_user" @show_this="setGodInfo" :info="god.facebook_user"></social-badge>
           </div>
-          <div v-html="description" class="card-content green-bz"></div> 
-          <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz"></god-remark>
         </div>
-        <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
+        <div v-html="description" class="card-content green-bz"></div> 
+        <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz"></god-remark>
       </div>
+      <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -139,7 +140,7 @@
   }
 
   .width-2of5 {/* 居中头像 */
-    height: 17rem;
+    min-height: 17rem;
     display: flex;
     justify-content: center;
     align-items: center;
