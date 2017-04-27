@@ -234,6 +234,9 @@
 </style>
 
 <style scoped>
+  .more-infor-bz:hover {
+    color: #54B98F;
+  }
   .bookmark:hover {
     color: #FBBD08;
   }
