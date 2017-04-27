@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <div class="row gutter sm-column">
+    <div class="row gutter">
       <messages :god_name="god_name" class="width-5of5 no-top-padding-bz"></messages>
       <div class="width-2of5 no-top-padding-bz bg">
           <div class="blank-padding"></div>

@@ -35,8 +35,8 @@
             设置
           </q-drawer-link>
           <hr>
-          <div class="item item-link drawer-closer router-link-active">
-            <div  class="item-content">
+          <div class="item item-link router-link-active">
+            <div class="item-content">
               <a href="/api_logout">退出登录</a>
             </div>
           </div>
