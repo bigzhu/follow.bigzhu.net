@@ -36,37 +36,35 @@
         <i :class="{'remove':!message.collect, 'light-bz': message.collect}">bookmark_border</i>
       </a>
       <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hidden-bz':!message.anki}">
-        <i>
-          <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
-            <desc>Created with Sketch.</desc>
-            <defs>
-              <rect id="path-1" x="0" y="1.2" width="13.9658778" height="14.8427295" rx="3"></rect>
-              <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13.9658778" height="14.8427295" fill="white">
-                <use xlink:href="#path-1"></use>
-              </mask>
-              <linearGradient x1="72.5086929%" y1="34.3563028%" x2="26.5472291%" y2="92.8578943%" id="linearGradient-3">
-                <stop stop-color="#228AD7" offset="0%"></stop>
-                <stop stop-color="#C8E3F5" offset="100%"></stop>
-              </linearGradient>
-              <rect id="path-4" x="0" y="1.2" width="13.9658778" height="14.8427295" rx="3"></rect>
-              <mask id="mask-5" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13.9658778" height="14.8427295" fill="white">
-                <use xlink:href="#path-4"></use>
-              </mask>
-            </defs>
-            <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(51.000000, -271.000000)">
-              <use id="Rectangle" stroke="#979797" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
-              <path d="" id="Path-2" stroke="#979797"></path>
-              <polygon id="Star" stroke="#FFFFFF" stroke-linejoin="round" fill="url(#linearGradient-3)" transform="translate(9.443919, 8.686132) rotate(-19.000000) translate(-9.443919, -8.686132) " points="10.1944045 13.250996 5.68678266 15.6198299 6.54766183 10.6025592 2.90091916 7.04930835 7.94059358 6.31729842 10.1944045 1.75243473 12.4482154 6.31729842 15.9869193 6.8312932 15.2923397 8.8476788 13.8411472 10.6025592 14.1132779 12.1885583 13.1788476 14.8193729"></polygon>
-            </g>
-            <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(51.000000, -271.000000)">
-              <use id="Rectangle" stroke="#767676" mask="url(#mask-5)" stroke-width="2" xlink:href="#path-4"></use>
-              <path d="" id="Path-2" stroke="#979797"></path>
-              <polygon id="Star" stroke="#FFFFFF" stroke-linejoin="round" :fill="[message.anki ? '#57ADE3' : anki_color]" transform="translate(9.443919, 8.686132) rotate(-19.000000) translate(-9.443919, -8.686132) " points="10.1944045 13.250996 5.68678266 15.6198299 6.54766183 10.6025592 2.90091916 7.04930835 7.94059358 6.31729842 10.1944045 1.75243473 12.4482154 6.31729842 15.9869193 6.8312932 15.2923397 8.8476788 13.8411472 10.6025592 14.1132779 12.1885583 13.1788476 14.8193729">
-              </polygon>
-            </g>
-          </svg>
-        </i>
+        <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+          <desc>Created with Sketch.</desc>
+          <defs>
+            <rect id="path-1" x="0" y="1.2" width="13.9658778" height="14.8427295" rx="3"></rect>
+            <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13.9658778" height="14.8427295" fill="white">
+              <use xlink:href="#path-1"></use>
+            </mask>
+            <linearGradient x1="72.5086929%" y1="34.3563028%" x2="26.5472291%" y2="92.8578943%" id="linearGradient-3">
+              <stop stop-color="#228AD7" offset="0%"></stop>
+              <stop stop-color="#C8E3F5" offset="100%"></stop>
+            </linearGradient>
+            <rect id="path-4" x="0" y="1.2" width="13.9658778" height="14.8427295" rx="3"></rect>
+            <mask id="mask-5" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13.9658778" height="14.8427295" fill="white">
+              <use xlink:href="#path-4"></use>
+            </mask>
+          </defs>
+          <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(51.000000, -271.000000)">
+            <use id="Rectangle" stroke="#979797" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+            <path d="" id="Path-2" stroke="#979797"></path>
+            <polygon id="Star" stroke="#FFFFFF" stroke-linejoin="round" fill="url(#linearGradient-3)" transform="translate(9.443919, 8.686132) rotate(-19.000000) translate(-9.443919, -8.686132) " points="10.1944045 13.250996 5.68678266 15.6198299 6.54766183 10.6025592 2.90091916 7.04930835 7.94059358 6.31729842 10.1944045 1.75243473 12.4482154 6.31729842 15.9869193 6.8312932 15.2923397 8.8476788 13.8411472 10.6025592 14.1132779 12.1885583 13.1788476 14.8193729"></polygon>
+          </g>
+          <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(51.000000, -271.000000)">
+            <use id="Rectangle" stroke="#767676" mask="url(#mask-5)" stroke-width="2" xlink:href="#path-4"></use>
+            <path d="" id="Path-2" stroke="#979797"></path>
+            <polygon id="Star" stroke="#FFFFFF" stroke-linejoin="round" :fill="[message.anki ? '#57ADE3' : anki_color]" transform="translate(9.443919, 8.686132) rotate(-19.000000) translate(-9.443919, -8.686132) " points="10.1944045 13.250996 5.68678266 15.6198299 6.54766183 10.6025592 2.90091916 7.04930835 7.94059358 6.31729842 10.1944045 1.75243473 12.4482154 6.31729842 15.9869193 6.8312932 15.2923397 8.8476788 13.8411472 10.6025592 14.1132779 12.1885583 13.1788476 14.8193729">
+            </polygon>
+          </g>
+        </svg>
       </a>
     </div>
   </div>
@@ -196,15 +194,13 @@
   }
 </script>
 
-<style>
+<style scoped>
   .card-content.green-bz a {
     color: #2ea974;
   }
   @media (max-width: 767px) {
     .hidden-bz {
-      visibility: visible;
       opacity: 1;
-      position: static;
     }
     .message-bz {
       box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 1px 3px 0px !important;
@@ -223,6 +219,7 @@
     opacity: 1;
   }
   .anki-bz {
+    vertical-align: middle;
     width: 1rem;
     height: 21px;
   }
