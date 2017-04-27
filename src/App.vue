@@ -62,7 +62,7 @@
             </q-toolbar-title>
             <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
 
-            <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
+            <a v-show="!user_info.user_name" class="menu-item login-bz" href="/login.html">
               登录
             </a>
             <a v-show="user_info.user_name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
