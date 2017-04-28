@@ -40,7 +40,6 @@
 </template>
 
 <script>
-  import $ from 'jquery'
   import CountUp from 'bz-count-up'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
@@ -87,9 +86,6 @@
       showAddGodInput: function () {
         this.input_name = '' // 清空上次的输入
         this.$nextTick(
-          function () {
-            $('#id_add_god').focus()
-          }
         )
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
