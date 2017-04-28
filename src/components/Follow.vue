@@ -71,8 +71,11 @@
 </script>
 
 <style scoped>
+  body.desktop button.primary.followed:not(.disabled):not(.clear):hover, body.desktop button.primary.followed:not(.disabled):not(.clear):focus {
+    background: #54b98f;
+  }
   button.primary.followed {
-    background:  #54b98f;
+    background: #54b98f;
   }
   button {
     margin: 1rem;
