@@ -233,7 +233,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .icon.social-icon {
     font-size: 2rem;
     position: absolute;
