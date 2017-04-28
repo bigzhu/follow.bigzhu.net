@@ -25,7 +25,7 @@
           </div>
         </div>
         <div v-html="description" class="card-content green-bz"></div> 
-        <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz"></god-remark>
+        <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></god-remark>
       </div>
       <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
     </div>
@@ -130,7 +130,10 @@
 
 <style scoped>
   @media (max-width : 920px) { 
-    .item.two-lines > .item-secondary.stamp {
+    .remark { /* 避免关注按钮遮住remark */
+      margin-bottom: 1.5rem;
+    }
+    .item.two-lines > .item-secondary.stamp {/* 社交信息移到下部分 */
       top: 3.5rem;
       left: 1rem;
       right: initial;

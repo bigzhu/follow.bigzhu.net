@@ -58,6 +58,7 @@
 </template>
 
 <script>
+  import myautolinker from '../functions/myautolinker'
   import GodRemark from './GodRemark'
   import Follow from './Follow'
   export default {
@@ -121,7 +122,8 @@
       setGodInfo: function (type) {
         if (type) {
           this.av = this.god_info[type + '_user'].avatar
-          this.desc = this.god_info[type + '_user'].description
+          // this.desc = this.god_info[type + '_user'].description
+          this.desc = myautolinker(this.god_info[type + '_user'].description, type)
         } else {
           if (this.god_info.twitter_user) {
             this.setGodInfo('twitter')
