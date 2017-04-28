@@ -86,7 +86,6 @@ export const mutations = {
 
     if (Math.abs(state.last_scroll_top - st) <= 5) return
 
-    // console.log('state.last_scroll_top ' + (state.last_scroll_top))
     if (st > state.last_scroll_top && st > state.nav_bar_height) {
       state.show_bar = false
     } else {
@@ -173,7 +172,6 @@ export const mutations = {
   FILTER_SEARCH_MESSAGES (state, search_key) { // 从主线messages中把查找的信息过滤出来，避免页面空白
     if (state.messages.length !== 0) {
       state.search_messages = state.messages.filter(function (d) {
-        console.log(d)
         if (d.text && d.content) {
           return (d.text.indexOf(search_key) !== -1 || String(d.content).indexOf(search_key) !== -1)
         }
@@ -250,7 +248,6 @@ export const mutations = {
     state.search_messages = uniq_messages
   },
   SET_NEW_MESSAGES (state, messages) {
-    console.log(state.messages.length)
     if (state.messages.length <= 100) {
       let merge_messages = state.messages.concat(messages)
       let uniq_messages = _.uniqBy(merge_messages, function (d) {
@@ -290,7 +287,6 @@ export const actions = {
             if (entry.target.__vue__.$route.path !== '/') {
               continue
             }
-            console.log(entry.target.__vue__.$route.path)
             dispatch('recordLastMessage', message.created_at)
             state.io.unobserve(entry.target)
           }
@@ -405,8 +401,6 @@ export const actions = {
     return dispatch('get', {url: '/api_new', body: parm, loading: true}).then(function (data) {
       state.unread_message_count = data.unread_message_count
       if (data.messages.length === 0) { // 没有取到数
-        console.log('get new get none')
-        console.log(data.followed_god_count)
         state.followed_god_count = data.followed_god_count
         if (search_key && state.search_messages.length === 0) {
           // oldMessage({ dispatch, state }, {search_key: search_key})
@@ -430,6 +424,7 @@ export const actions = {
       }
       commit('SET_NEW_LOADING', false)
       commit('REFLASH_TIME_LEN')
+      return data
     })
   },
   getCat ({ state, commit, dispatch }, is_my = null) {
@@ -498,7 +493,6 @@ export const actions = {
     })
   },
   recordLastMessage ({ state, commit, dispatch }, time) {
-    console.log('recordLastMessage')
     if (state.last_time > parseInt(time, 10)) {
       return
     }
