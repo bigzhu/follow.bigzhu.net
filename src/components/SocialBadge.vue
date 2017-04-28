@@ -71,7 +71,11 @@
 </script>
 
 <style scoped>
+  a {
+    margin-left: .5rem;
+  }
   i {
+    margin-right: 0;
     vertical-align:top;
   }
 </style>

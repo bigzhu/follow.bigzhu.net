@@ -129,10 +129,9 @@
 </style>
 
 <style scoped>
-
   @media (max-width : 920px) { 
     .item.two-lines > .item-secondary.stamp {
-      top: 42px;
+      top: 3.5rem;
       left: 1rem;
       right: initial;
     }
