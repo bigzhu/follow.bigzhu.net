@@ -1,12 +1,13 @@
 <template>
   <div class="card">
     <div class="row">
-      <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5">
+      <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5 desktop-only">
         <img :src="avatar" class="responsive">
       </router-link>
 
       <div class="width-5of5">
         <div class="item two-lines">
+          <img :src="avatar" class="item-primary mobile-only">
           <div class="item-content has-secondary">
             <router-link :to="{ name: 'God', params: { god_name: god.name }}">
               <span class="title">{{god.name}}</span>
@@ -29,7 +30,6 @@
       <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -129,6 +129,22 @@
 </style>
 
 <style scoped>
+
+  @media (max-width : 920px) { 
+    .item.two-lines > .item-secondary.stamp {
+      top: 42px;
+      left: 1rem;
+      right: initial;
+    }
+  }
+  @media (min-width : 921px) { 
+
+    .item > .item-primary ~ .item-content { /* 桌面上不要空头像的位置 */
+      margin-left: 16px;
+    }
+
+  }
+
   .follow {
     position: absolute;
     right: 0;
