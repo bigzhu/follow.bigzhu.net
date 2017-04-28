@@ -1,5 +1,5 @@
 <template>
-  <button v-on:click="toggleFollow" class="primary">
+  <button :class="{'followed': value}" @click="toggleFollow" class="primary">
     <i v-show="value==0">add</i>{{desc}}
   </button>
 </template>
@@ -71,6 +71,9 @@
 </script>
 
 <style scoped>
+  button.primary.followed {
+    background:  #54b98f;
+  }
   button {
     margin: 1rem;
   }
