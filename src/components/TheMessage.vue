@@ -26,9 +26,7 @@
       }
     },
     mounted () {
-      if (!this.the_message) {
-        this.$store.dispatch('getTheMessage', this.id)
-      }
+      this.$store.dispatch('getTheMessage', this.id)
       this.$nextTick(function () {
       })
     },
