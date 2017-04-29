@@ -1,9 +1,12 @@
 <template>
   <div>
     <div class="description word-wrap-bz" v-html="description"></div>
-    <a @click="openImg(img_url)">
+    <a v-if="!video" @click="openImg(img_url)">
       <img :src="img_url" class="responsive">
     </a>
+    <video v-if="video" :controls="true" type='video/mp4' class="padding-top-bz">
+      <source :src="video">
+    </video>
   </div>
 </template>
 
@@ -14,6 +17,11 @@
   export default {
     props: ['message'],
     computed: {
+      video: function () {
+        if (this.message.extended_entities && this.message.type === 'video') {
+          return this.message.extended_entities.video_url
+        }
+      },
       img_url: function () {
         let img_url = this.message.extended_entities.url
         // img_url = img_url.replace('s640x640', 's1080x1080').replace('s750x750', 's1080x1080') // .replace('/e35/', '/').replace('/e15/', '/')
@@ -46,10 +54,11 @@
 
 <style scoped>
   video, img.responsive {
-    padding-top: 1em
+    padding-top: 1rem
+
   }
   video {
-    max-width: 100%;
-    height: auto;
+    width: auto;
+    max-height: 40rem;
   }
 </style>
