@@ -2,6 +2,7 @@
   <div class="list">
     <router-link 
       v-for="cat in cats"
+      :key="cat.id"
       tag="div"
       class="item item-link"
       :class="{'active': $route.params.cat === cat.cat}"

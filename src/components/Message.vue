@@ -29,7 +29,7 @@
       <div class="auto">
       </div> 
 
-      <router-link :to="{ name:'TheMessage', params: {message_id:message.id}}" class="more-infor-bz hover-show">
+      <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show">
         <i>more_horiz</i>
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hover-show':!message.collect}" class="bookmark">
