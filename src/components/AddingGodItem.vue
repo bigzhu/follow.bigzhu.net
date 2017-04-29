@@ -197,11 +197,10 @@
       },
       allDone: function (info) {
         this.loading = false
-        // this.createGod()
-        this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
-        this.$store.commit('UNSHIFT_MY_GOD', {cat: this.cat, god: this.god})
-        // this.$store.dispatch('queryCat')
-        console.log('emit')
+        Object.assign(this.god_info, this.god)
+        this.god_info.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.god_info.followed = 1
+        this.$store.commit('UNSHIFT_MY_GOD', {cat: this.cat, god: this.god_info})
         this.$emit('add_done', this.god_info)
       },
       setGodSocial: function (type) {
@@ -209,14 +208,6 @@
           this.god_info[type] = this.god_name
           this.god_info[type + '_user'] = this[type + '_info']
         }
-      },
-      createGod: function () {
-        this.setGodSocial('twitter')
-        this.setGodSocial('github')
-        this.setGodSocial('tumblr')
-        this.setGodSocial('instagram')
-        this.setGodSocial('facebook')
-        this.god_info.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
       setGodInfo: function (god_info) {
         this.god_info = god_info
