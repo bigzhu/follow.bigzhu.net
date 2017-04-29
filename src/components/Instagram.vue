@@ -55,10 +55,9 @@
 <style scoped>
   video, img.responsive {
     padding-top: 1rem
-
   }
   video {
-    width: auto;
+    max-width: 100%;
     max-height: 40rem;
   }
 </style>
