@@ -12,6 +12,7 @@
     </div>
   </div>
 </template>
+
 <script>
   import _ from 'lodash'
   import myautolinker from '../functions/myautolinker'

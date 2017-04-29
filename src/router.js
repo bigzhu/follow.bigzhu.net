@@ -27,7 +27,7 @@ let router = new VueRouter({
     { path: '/', name: 'Main', component: Main }, // Default
     { path: '/Recommand/:cat*', name: 'Recommand', component: load('Recommand') },
     { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
-    { path: '/TheMessage/:message_id', name: 'TheMessage', component: load('TheMessage') },
+    { path: '/TheMessage/:id', name: 'TheMessage', component: load('TheMessage') },
     { path: '/God/:god_name', name: 'God', component: load('God') },
     { path: '*', component: load('Error404') } // Not found
   ]
