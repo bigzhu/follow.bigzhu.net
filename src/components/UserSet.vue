@@ -108,7 +108,6 @@
         this.show_anki_input = false
       }
       this.$store.dispatch('getBlock', {count: true}).then(function (data) {
-        console.log(data)
         self.block_count = data.count
       })
       this.$nextTick(function () {

@@ -52,7 +52,6 @@
     },
     methods: {
       getGodInfo: function () {
-        console.log('getGodInfo')
         if (this.god_name) { this.$store.dispatch('getGod', this.god_name) }
       }
     },

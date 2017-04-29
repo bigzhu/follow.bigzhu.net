@@ -61,6 +61,7 @@
   import myautolinker from '../functions/myautolinker'
   import GodRemark from './GodRemark'
   import Follow from './Follow'
+  import default_avatar from '../assets/avatar.svg'
   export default {
     components: {
       GodRemark,
@@ -95,7 +96,7 @@
       },
       avatar: function () {
         if (this.god_info.avatar === '') {
-          return '/static/assets/avatar.svg'
+          return default_avatar
         }
         return (window.bz_url || '') + '/api_sp/' + window.btoa(window.btoa(this.av))
       }

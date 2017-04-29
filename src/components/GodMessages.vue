@@ -60,7 +60,6 @@
     },
     methods: {
       call_back: function () {
-        console.log('bottom')
         this.$store.dispatch('newMessage', {god_name: this.god_name})
       }
     }
