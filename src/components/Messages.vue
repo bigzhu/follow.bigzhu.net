@@ -1,7 +1,7 @@
 <template>
   <div>
     <Old :show="!(followed_god_count===0 || new_loading)"></Old>
-    <div v-show="followed_god_count===0 && is_login" class="no-message">
+    <div v-show="followed_god_count===0 && is_login" class="center-container-bz">
       <img src="../assets/no-message.svg">
       <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
     </div>
@@ -20,7 +20,7 @@
       </message>
       <SpinnerBz :show="new_loading"></SpinnerBz>
     </q-infinite-scroll>
-    <div v-show="followed_god_count>0 && unread_message_count===0" class="no-message">
+    <div v-show="followed_god_count>0 && unread_message_count===0" class="center-container-bz">
       <p>{{ $t("Messages.nomessage") }}
         <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
       </p> 
