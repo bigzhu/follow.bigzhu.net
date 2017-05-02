@@ -36,7 +36,7 @@
                 // videos = [d.video_info.variants[0]]
                 videos = _.filter(d.video_info.variants, {content_type: 'video/mp4'})
                 if (videos.length > 1) {
-                  let video = _.max(videos, function (v) { return v.bitrate })
+                  let video = _.maxBy(videos, function (v) { return v.bitrate })
                   videos = [video] // 还是封成 list ，为遵循多视频考虑
                 }
 
@@ -84,6 +84,6 @@
   }
   video {
     max-width: 100%;
-    height: auto;
+    max-height: 40rem;
   }
 </style>
