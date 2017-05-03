@@ -1,10 +1,14 @@
 // 一些覆盖不可配置样式的
+// 居中的 container
+.center-container-bz
+  display flex
+  flex-direction column
+  justify-content space-between
+  align-items center
 // 小屏幕一律显示
-@media (max-width: 767px) {
-  .hover-show {
+@media (max-width: 767px)
+  .hover-show
     opacity: 1;
-  }
-}
 // card hover 时就显示
 .card:hover .hover-show
   opacity: 1

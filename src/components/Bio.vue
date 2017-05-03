@@ -1,7 +1,7 @@
 <template>
-  <div class="ui container">
+  <div class="layout-padding">
     <!-- ================分割=================== -->
-    <div class="ui center aligned header">
+    <div class="center-container-bz">
       <h3>{{ $t("Bio.toptitle") }}</h3>
       <p class="sub header">{{ $t("Bio.topdescription") }}</p>
     </div>
@@ -22,7 +22,7 @@
         </router-link>
       </div>
       <!-- ================分割=================== -->
-      <div class="ui center aligned header">
+      <div class="center-container-bz">
         <h3>{{ $t("Bio.downtitle") }}</h3>
         <p class="sub header">{{ $t("Bio.downdescription") }}</p>
       </div>
@@ -76,7 +76,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .card-bz {
     font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     color: rgba(0, 0, 0, 0.8);

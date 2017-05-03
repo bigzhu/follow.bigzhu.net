@@ -1,7 +1,7 @@
 <template>
-  <div class="ui container">
-    <div class="ui stackable grid container ">
-      <div class="twelve wide column">
+  <div class="layout-padding">
+    <div class="row gutter sm-column">
+      <div class="width-5of5 no-top-padding-bz">
         <div class="ui segment bio-background">
           <img class="ui fluid image" :src='bio.title_img'>
           <div class="bio-article">
@@ -12,12 +12,16 @@
           <god-item :god='god_info' is_my="true" class="bio-god-card"></god-item>
         </div>
       </div>
-      <div class="four wide column">
-          <right-info></right-info>
+
+      <div class="width-2of5 no-top-padding-bz bg">
+        <div class="blank-padding"></div>
+        <right-info></right-info>
       </div>
     </div>
+    <Top></Top>
   </div>
 </template>
+
 <script>
   import GodItem from './GodItem'
   import _ from 'lodash'
@@ -76,7 +80,8 @@
 
   }
 </script>
-<style>
+
+<style scoped>
   .ui.segment.bio-background {
     border-radius: 0.06em;
     box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);

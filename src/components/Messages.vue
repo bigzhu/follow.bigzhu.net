@@ -134,8 +134,4 @@
     justify-content: space-between;
     align-items: center;
   }
-  .center-container-bz {
-    display:  flex;
-    justify-content: center;
-  }
 </style>
