@@ -127,7 +127,6 @@
   */
   import checkLogin from 'bz-lib/functions/checkLogin'
   import store from './store'
-  import HeaderBz from './components/HeaderBz'
   export default {
     store,
     computed: {
@@ -139,7 +138,6 @@
       }
     },
     components: {
-      HeaderBz
     },
     mounted () {
       if (checkLogin()) { this.$store.dispatch('getUserInfo') }
