@@ -18,7 +18,7 @@
             {{ $t("App.following") }}
           </q-drawer-link>
           <hr v-show="user_info.user_name">
-          <q-drawer-link icon="" to="/showcase/layout/toolbar">
+          <q-drawer-link icon="" to="/Bio">
             传记
           </q-drawer-link>
         </div>
@@ -73,10 +73,7 @@
           <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
             <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
             <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
-
-            <a class="menu-item" href="javascript:;">
-              传记
-            </a>
+            <router-link :to="{ name:'Bio'}" :class="{'active': this.$route.name==='Bio'}" class="menu-item">{{ $t("App.biography") }}</router-link>
           </div>
         </div>
       </q-transition>
