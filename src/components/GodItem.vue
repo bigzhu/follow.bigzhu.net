@@ -27,7 +27,7 @@
         <div v-html="description" class="card-content green-bz"></div> 
         <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></god-remark>
       </div>
-      <Follow v-model="god.followed" :god_id="god.god_id" class="follow"></Follow>
+      <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
     </div>
   </div>
 </template>

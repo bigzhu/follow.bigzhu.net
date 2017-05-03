@@ -3,7 +3,7 @@
     <div class="row gutter sm-column">
       <div class="width-5of5 no-top-padding-bz">
         <div class="ui segment bio-background">
-          <img class="ui fluid image" :src='bio.title_img'>
+          <img class="responsive" :src='bio.title_img'>
           <div class="bio-article">
             <h3>{{bio.title}}</h3>
             <div v-html="bio.text">
@@ -23,11 +23,13 @@
 </template>
 
 <script>
+  import Top from './Top'
   import GodItem from './GodItem'
   import _ from 'lodash'
   import RightInfo from './RightInfo'
   export default {
     components: {
+      Top,
       GodItem,
       RightInfo
     },
