@@ -7,8 +7,8 @@
           {{message.name}}
         </router-link>
         <br>
-        <router-link :to="{ name: 'Recommand', params: { cat: '类型' }}" class="stamp">
-          类型
+        <router-link :to="{ name: 'Recommand', params: { cat: message.cat }}" class="stamp">
+          {{message.cat}}
         </router-link>
       </div>
       <div class="item-secondary stamp long-bz">

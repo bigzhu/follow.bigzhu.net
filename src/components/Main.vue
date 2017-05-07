@@ -4,7 +4,7 @@
       <messages class="width-5of5 no-top-padding-bz"></messages>
       <div class="width-2of5 no-top-padding-bz bg">
           <div class="blank-padding"></div>
-          <right-info></right-info>
+          <RightInfo></RightInfo>
       </div>
     </div>
     <Top></Top>

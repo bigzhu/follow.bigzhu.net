@@ -73,6 +73,7 @@
           <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
             <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
             <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
+            <router-link v-show="user_info.user_name" :to="{ name:'Collect'}" :class="{'active': this.$route.name==='Collect'}" class="menu-item">{{ $t("App.collect") }}</router-link>
             <router-link :to="{ name:'Bio'}" :class="{'active': this.$route.name==='Bio'}" class="menu-item">{{ $t("App.biography") }}</router-link>
           </div>
         </div>

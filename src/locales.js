@@ -83,7 +83,7 @@ let cn = {
     login: '登录',
     whattofollow: '寻他',
     following: '已跟踪',
-    saved: '收藏',
+    collect: '收藏',
     biography: '传记'
   },
   Loading: {
@@ -193,7 +193,7 @@ let en = {
     login: 'Login',
     whattofollow: 'What to follow',
     following: 'Following',
-    saved: 'Saved',
+    collect: 'Saved',
     biography: 'Biography'
   },
   Loading: {

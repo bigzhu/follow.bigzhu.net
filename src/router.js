@@ -22,6 +22,7 @@ let router = new VueRouter({
   //   } else return savedPosition
   // },
   routes: [
+    assembly('Collect'),
     { path: '/BioDetail/:god_name', name: 'BioDetail', component: load('BioDetail') },
     assembly('Bio'),
     { path: '/Following/:cat*', name: 'Following', component: load('Following') },
