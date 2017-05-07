@@ -229,7 +229,7 @@
     height: 2rem;
   }
   .item > .item-secondary.stamp.long-bz {
-    width: 20%;
+    width: 6rem;
   }
 </style>
 
