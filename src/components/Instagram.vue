@@ -4,7 +4,7 @@
     <a v-if="!video" @click="openImg(img_url)">
       <img :src="img_url" class="responsive">
     </a>
-    <video v-if="video" :controls="true" type='video/mp4' class="padding-top-bz">
+    <video v-if="video" :controls="true" type='video/mp4'>
       <source :src="video">
     </video>
   </div>

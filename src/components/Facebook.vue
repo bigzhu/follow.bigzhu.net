@@ -2,9 +2,12 @@
   <div>
     <div class="description word-wrap-bz" v-html="the_text"></div>
     <div class="description word-wrap-bz" v-html="description"></div>
-    <a v-show="img_url" @click="openImg(img_url)">
+    <a v-show="img_url && type!=='video'" @click="openImg(img_url)">
       <img :src="img_url" class="responsive">
     </a>
+    <video v-if="type==='video'" :controls="true" type='video/mp4'>
+      <source :src="video">
+    </video>
   </div>
 </template>
 
@@ -15,6 +18,12 @@
   export default {
     props: ['message'],
     computed: {
+      video: function () {
+        return this.message.extended_entities.source
+      },
+      type: function () {
+        return this.message.type
+      },
       img_url: function () {
         if (this.message.extended_entities.pictrue) {
           let img_url = this.message.extended_entities.pictrue
