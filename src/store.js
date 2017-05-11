@@ -81,7 +81,7 @@ export const mutations = {
   },
   CHECK_BAR (state, scroll_target) {
     var st = scroll_target.scrollTop
-    state.nav_bar_height = document.getElementsByClassName('.header-bz')[0].offsetHeight
+    state.nav_bar_height = document.getElementsByClassName('header-bz')[0].offsetHeight
 
     if (Math.abs(state.last_scroll_top - st) <= 5) return
 

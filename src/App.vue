@@ -152,8 +152,8 @@
     methods: {
       bindScroll: function () {
         let self = this
-        let scroll_target = document.getElementsByClassName('layout-view')
-        scroll_target[0].addEventListener('scroll', Utils.throttle(function () {
+        let scroll_target = document.getElementsByClassName('layout-view')[0]
+        scroll_target.addEventListener('scroll', Utils.throttle(function () {
           self.$store.commit('CHECK_BAR', scroll_target)
         }, 100)
         )

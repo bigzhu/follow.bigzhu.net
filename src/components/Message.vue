@@ -165,7 +165,7 @@
         if (this.message.anki) return
         let self = this
         // let front = $(this.$el).find('.content-bz').html()
-        let front = this.$el.getElementsByClassName('.content-bz').innerHTML
+        let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
         this.$store.dispatch('postAnki', {front: front, message_id: this.message.id}).then(function () {
           self.message.anki = 1
         })

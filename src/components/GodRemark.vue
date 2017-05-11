@@ -37,13 +37,13 @@
         Vue.nextTick(
           function () {
             // $(_this.$el).find('.remark-edit-content').focus()
-            self.$el.getElementsByClassName('.remark-edit-content').focus()
+            self.$el.getElementsByClassName('remark-edit-content')[0].focus()
           }
         )
       },
       save: function () {
         // this.value = $(this.$el).find('.remark-edit-content').html()
-        this.value = this.$el.getElementsByClassName('.remark-edit-content').innerHTML
+        this.value = this.$el.getElementsByClassName('remark-edit-content')[0].innerHTML
         this.$emit('input', this.value)
         this.$store.dispatch('addRemark', {god_id: this.god_id, remark: this.value})
         this.is_edit = false
