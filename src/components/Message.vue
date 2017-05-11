@@ -72,7 +72,6 @@
 
 <script>
   import checkLogin from 'bz-lib/functions/checkLogin'
-  import $ from 'jquery'
   import GodCard from './GodCard'
   import Twitter from './Twitter'
   import Github from './Github'
@@ -165,7 +164,8 @@
       anki: function () {
         if (this.message.anki) return
         let self = this
-        let front = $(this.$el).find('.content-bz').html()
+        // let front = $(this.$el).find('.content-bz').html()
+        let front = this.$el.getElementsByClassName('.content-bz').innerHTML
         this.$store.dispatch('postAnki', {front: front, message_id: this.message.id}).then(function () {
           self.message.anki = 1
         })

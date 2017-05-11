@@ -16,7 +16,6 @@
 
 <script>
   import '../assets/mobile.css'
-  import $ from 'jquery'
   import Messages from './CollectMessages.vue'
   import RightInfo from './RightInfo'
   import UnRead from './UnRead'
@@ -36,7 +35,6 @@
       }
     },
     mounted () {
-      $('body').visibility()
     },
     methods: {
     }

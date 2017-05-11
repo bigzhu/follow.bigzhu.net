@@ -17,7 +17,6 @@
 </template>
 
 <script>
-  import $ from 'jquery'
   export default {
     props: ['just_my', 'route_name'],
     computed: {
@@ -76,9 +75,6 @@
         this.add_cat_input_stat = true
         this.input_cat = '' // 清空上次的输入
         this.$nextTick(
-          function () {
-            $('#id_add_cat').focus()
-          }
         )
       },
       addCat: function () {

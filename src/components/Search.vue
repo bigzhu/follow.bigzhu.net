@@ -1,7 +1,4 @@
-<style >
- /* 查找的高亮*/
-  .highlight { background-color: #FDFD95 }
-</style>
+
 <template>
   <div class="ui main container">
     <div class="ui stackable grid">
@@ -18,7 +15,6 @@
 </template>
 
 <script>
-  import $ from 'jquery'
   import Messages from './SearchMessages'
   import Top from './Top'
   export default {
@@ -34,10 +30,14 @@
     },
     mounted () {
       this.$nextTick(function () {
-        $('body').visibility()
       })
     },
     methods: {
     }
   }
 </script>
+
+<style>
+ /* 查找的高亮*/
+  .highlight { background-color: #FDFD95 }
+</style>

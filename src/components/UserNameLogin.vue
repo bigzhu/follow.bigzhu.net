@@ -1,16 +1,17 @@
 <template>
   <div>
+    <!--
     <login :loading="loading" v-on:check_done="login"></login>
+    -->
   </div>
 </template>
 
 <script>
-  import toastr from 'toastr'
-  import Login from 'bz-login'
+  // import Login from 'bz-login'
   export default {
     props: [],
     components: {
-      Login
+      // Login
     },
     data: function () {
       return {
@@ -28,7 +29,7 @@
         let _this = this
         this.$store.dispatch('login', {user_name: user_name, password: password}).then(function (data) {
           _this.loading = false
-          toastr.info('登录成功')
+          // toastr.info('登录成功')
         })
       }
     }

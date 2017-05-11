@@ -15,7 +15,6 @@
 
 <script>
   import SpinnerBz from './SpinnerBz'
-  import $ from 'jquery'
   import GodItem from './GodItem'
   import Cat from './Cat'
   import BottomLoader from 'bz-bottom-loader'
@@ -64,27 +63,6 @@
       })
     },
     attached: function () {
-      var tool_tips_target = $(this.$el).find('.show-god-info')
-      var popup_content = $(this.$el).find('.ui.card')
-      $(tool_tips_target).popup(
-        {
-          popup: $(popup_content),
-          lastResort: true,
-          position: 'bottom left',
-          hoverable: true,
-          delay: {
-            show: 100,
-            hide: 500
-          },
-          onShow: (
-            function (_this) {
-              return function () {
-                _this.getGodInfo()
-              }
-            }
-          )(this)
-        }
-      )
     },
     computed: {
       loading () {

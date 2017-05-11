@@ -10,7 +10,6 @@
 </template>
 
 <script>
-  import $ from 'jquery'
   import Vue from 'vue'
   export default {
     props: {
@@ -34,15 +33,17 @@
     methods: {
       edit: function () {
         this.is_edit = true
-        let _this = this
+        let self = this
         Vue.nextTick(
           function () {
-            $(_this.$el).find('.remark-edit-content').focus()
+            // $(_this.$el).find('.remark-edit-content').focus()
+            self.$el.getElementsByClassName('.remark-edit-content').focus()
           }
         )
       },
       save: function () {
-        this.value = $(this.$el).find('.remark-edit-content').html()
+        // this.value = $(this.$el).find('.remark-edit-content').html()
+        this.value = this.$el.getElementsByClassName('.remark-edit-content').innerHTML
         this.$emit('input', this.value)
         this.$store.dispatch('addRemark', {god_id: this.god_id, remark: this.value})
         this.is_edit = false

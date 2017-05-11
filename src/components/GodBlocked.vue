@@ -20,7 +20,6 @@
 </template>
 
 <script>
-  import $ from 'jquery'
   import GodItem from './GodItem'
   export default {
     events: {
@@ -52,7 +51,6 @@
     },
     mounted () {
       this.getGods()
-      $('body').visibility()
     },
     methods: {
       getGods: function () {

@@ -4,8 +4,7 @@ if (!global.window) { Vue.use(Vuex) }
 import p from 'bz-lib/module'
 import 'whatwg-fetch'
 import _ from 'lodash'
-import $ from 'jquery'
-import toastr from 'toastr'
+// import toastr from 'toastr'
 function initGodMessage (state, god_name) {
   if (state.gods_messages[god_name] === undefined) {
     Vue.set(state.gods_messages, god_name, [])
@@ -81,8 +80,8 @@ export const mutations = {
     })
   },
   CHECK_BAR (state, scroll_target) {
-    var st = $(scroll_target).scrollTop()
-    state.nav_bar_height = $('.header-bz').outerHeight()
+    var st = scroll_target.scrollTop
+    state.nav_bar_height = document.getElementsByClassName('.header-bz')[0].offsetHeight
 
     if (Math.abs(state.last_scroll_top - st) <= 5) return
 
@@ -90,9 +89,6 @@ export const mutations = {
       state.show_bar = false
     } else {
       state.show_bar = true
-      // if (st + $(window).height() < $(document).height()) {
-        //   state.show_bar = true
-        // }
     }
 
     state.last_scroll_top = st
@@ -292,7 +288,7 @@ export const actions = {
   putGod ({ dispatch, state, actions }, god) {
     var parm = god
     return dispatch('put', {url: '/api_god', body: parm, loading: false}).then(function (data) {
-      toastr.info('成功')
+      // toastr.info('成功')
     })
   },
   addRemark ({ dispatch, state }, parm) {
@@ -318,7 +314,7 @@ export const actions = {
   postBlock ({ state, commit, dispatch }, god_id) {
     let parm = {god_id: god_id}
     return dispatch('post', {url: '/api_block', body: parm, loading: false}).then(function (data) {
-      toastr.info('已屏蔽此人')
+      // toastr.info('已屏蔽此人')
       return data
     })
   },
@@ -348,7 +344,7 @@ export const actions = {
   },
   unfollow ({ state, commit, dispatch }, god_id) {
     return dispatch('delete', '/api_follow/' + god_id).then(function (data) {
-      toastr.info('取消关注')
+      // toastr.info('取消关注')
       commit('REMOVE_THIS_GOD_MESSAGE', god_id)
       return data
     })
@@ -356,7 +352,7 @@ export const actions = {
   follow ({ state, commit, dispatch }, god_id) {
     let parm = {god_id: god_id}
     return dispatch('post', {url: '/api_follow', body: parm, loading: false}).then(function (data) {
-      toastr.info('关注成功')
+      // toastr.info('关注成功')
       return data
     })
   },
@@ -537,15 +533,15 @@ export const actions = {
     return dispatch('get', {url: '/api_old', body: parm, loading: false}).then(function (data) {
       if (data.messages.length === 0) { // 没有取到数
         if (god_name) {
-          toastr.info(god_name + '没有更多的历史消息可以看了')
+          // toastr.info(god_name + '没有更多的历史消息可以看了')
         } else if (search_key) {
-          toastr.info('没有更多的历史了')
+          // toastr.info('没有更多的历史了')
         } else {
           if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
-            toastr.info('请先关注你感兴趣的人')
+            // toastr.info('请先关注你感兴趣的人')
             window.router.go({name: 'Recommand', params: {cat: 'recommand'}})
           } else {
-            toastr.info('没有更多的历史了')
+            // toastr.info('没有更多的历史了')
           }
         }
       } else {
@@ -566,13 +562,13 @@ export const actions = {
       message_id: message_id
     }
     return dispatch('post', {url: '/api_collect', body: parm}).then(function (data) {
-      toastr.info('收藏成功')
+      // toastr.info('收藏成功')
       return data
     })
   },
   uncollect ({ state, commit, dispatch }, id) {
     return dispatch('delete', '/api_collect/' + id).then(function (data) {
-      toastr.info('取消收藏')
+      // toastr.info('取消收藏')
       return data
     })
   }
