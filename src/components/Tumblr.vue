@@ -11,7 +11,7 @@
       </a>
       <br>
     </template>
-    <video v-if="video" :controls="true" type='video/mp4' class="padding-top-bz">
+    <video v-if="video" :controls="true" type='video/mp4'>
       <source :src="video">
     </video>
   </div>
@@ -66,3 +66,13 @@
     }
   }
 </script>
+
+<style scoped>
+  video, img.responsive {
+    padding-top: 1rem
+  }
+  video {
+    max-width: 100%;
+    max-height: 40rem;
+  }
+</style>
