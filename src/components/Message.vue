@@ -163,11 +163,11 @@
     methods: {
       anki: function () {
         if (this.message.anki) return
-        let self = this
+        this.message.anki = 1
         // let front = $(this.$el).find('.content-bz').html()
         let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
         this.$store.dispatch('postAnki', {front: front, message_id: this.message.id}).then(function () {
-          self.message.anki = 1
+          // self.message.anki = 1
         })
       },
       toggleCollect: function (message) {
