@@ -105,9 +105,8 @@
         }
       },
       loadMore: function (index, done) {
-        // 解救强迫症，记录最后一条的time
-        // let created_at = this.messages[this.messages.length - 1].created_at
-        // this.$store.dispatch('recordLastMessage', created_at)
+        let created_at = this.messages[this.messages.length - 1].created_at
+        this.$store.dispatch('recordLastMessage', created_at)
         this.newMessage(get_count).then(function (data) {
           if (data.messages.length === 0) { // 无数据时避免抖动
             setTimeout(done, 3000)
