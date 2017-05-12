@@ -492,6 +492,7 @@ export const actions = {
       commit('SET_LAST_TIME', parseInt(time, 10))
       commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
       // 如果<20了，就预加载一些
+      /*
       if (state.local_unread_message_count <= 20) {
         let after = null
         if (state.messages.length > 0) {
@@ -499,6 +500,7 @@ export const actions = {
         }
         dispatch('getNew', {after: after, limit: 50})
       }
+      */
       return data
     })
   },

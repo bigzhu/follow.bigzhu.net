@@ -105,8 +105,10 @@
         }
       },
       loadMore: function (index, done) {
-        let created_at = this.messages[this.messages.length - 1].created_at
-        this.$store.dispatch('recordLastMessage', created_at)
+        if (this.messages.length) {
+          let created_at = this.messages[this.messages.length - 1].created_at
+          this.$store.dispatch('recordLastMessage', created_at)
+        }
         this.newMessage(get_count).then(function (data) {
           if (data.messages.length === 0) { // 无数据时避免抖动
             setTimeout(done, 3000)
