@@ -1,5 +1,5 @@
 <template>
-  <div v-show="cats.length!==0" class="list">
+  <div class="list">
     <router-link 
       v-for="cat in cats"
       :key="cat.id"

@@ -2,7 +2,7 @@
   <div class="layout-padding">
     <NotYetFollow v-show="ordered_my_gods.length===0 && get_done"></NotYetFollow>
     <div class="row sm-column">
-      <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
+      <cat v-show="ordered_my_gods.length!==0" route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
         <!--
