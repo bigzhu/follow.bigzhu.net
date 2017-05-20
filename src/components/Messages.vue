@@ -1,11 +1,7 @@
 <template>
   <div>
     <Old :show="!(followed_god_count===0 || new_loading)"></Old>
-    <div v-show="followed_god_count===0 && is_login" class="center-container-bz">
-      <img src="../assets/no-message.svg">
-      <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
-    </div>
-
+    <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
     <q-transition v-show="!is_login" name="slide">
       <div v-show="show_no_login" class="no-login">
         <img src="../assets/no-message.svg">
@@ -29,6 +25,7 @@
 </template>
 
 <script>
+  import NotYetFollow from './NotYetFollow'
   import SpinnerBz from './SpinnerBz'
   var get_count = 50
   import Old from './Old.vue'
@@ -37,6 +34,7 @@
 
   export default {
     components: {
+      NotYetFollow,
       SpinnerBz,
       Old,
       Message

@@ -1,11 +1,14 @@
 <template>
   <div class="layout-padding">
+    <NotYetFollow v-show="ordered_my_gods.length===0 && get_done"></NotYetFollow>
     <div class="row sm-column">
       <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
+        <!--
         <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
         </AddingGodItem>
+        -->
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
@@ -17,6 +20,7 @@
 </template>
 
 <script>
+  import NotYetFollow from './NotYetFollow'
   import BottomLoader from 'bz-bottom-loader'
   import SpinnerBz from './SpinnerBz'
   import AddingGodItem from './AddingGodItem'
@@ -44,6 +48,7 @@
     },
     props: [],
     components: {
+      NotYetFollow,
       BottomLoader,
       SpinnerBz,
       AddingGodItem,
@@ -72,13 +77,17 @@
     },
     data: function () {
       return {
+        get_done: false,
         god_name: '',
         loading: false,
         key: ''
       }
     },
     mounted () {
-      this.$store.dispatch('getMyGods', {cat: this.$route.params.cat})
+      let self = this
+      this.$store.dispatch('getMyGods', {cat: this.$route.params.cat}).then(function () {
+        self.get_done = true
+      })
     },
     methods: {
       bottomCall: function () {
