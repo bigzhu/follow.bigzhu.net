@@ -17,11 +17,11 @@
           </div>
 
           <div class="item-secondary stamp">
-            <social-badge v-show="god.twitter_user" @show_this="setGodInfo" :info="god.twitter_user"></social-badge>
-            <social-badge v-show="god.github_user" @show_this="setGodInfo" :info="god.github_user"></social-badge>
-            <social-badge v-show="god.tumblr_user" @show_this="setGodInfo" :info="god.tumblr_user"></social-badge>
-            <social-badge v-show="god.instagram_user" @show_this="setGodInfo" :info="god.instagram_user" ></social-badge>
-            <social-badge v-show="god.facebook_user" @show_this="setGodInfo" :info="god.facebook_user"></social-badge>
+            <social-badge @click.native="setNow(god.twitter)" v-show="god.twitter.count" type="twitter" :info="god.twitter"></social-badge>
+            <social-badge @click.native="setNow(god.github)" v-show="god.github.count" type="github" :info="god.github"></social-badge>
+            <social-badge @click.native="setNow(god.tumblr)" v-show="god.tumblr.count" type="tumblr" :info="god.tumblr"></social-badge>
+            <social-badge @click.native="setNow(god.instagram)" v-show="god.instagram.count" type="instagram" :info="god.instagram" ></social-badge>
+            <social-badge @click.native="setNow(god.facebook)" v-show="god.facebook.count" type="facebook" :info="god.facebook"></social-badge>
           </div>
         </div>
         <div v-html="description" class="card-content green-bz"></div> 
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import _ from 'lodash'
   import Follow from './Follow'
   import GodRemark from './GodRemark'
   import SocialBadge from './SocialBadge'
@@ -51,25 +52,22 @@
       GodRemark
     },
     watch: {
-      god_id: function () {
-        this.setGodInfo()
-      }
     },
     mounted () {
-      this.setGodInfo()
     },
     directives: {
     },
     data: function () {
       return {
         loading: false,
-        god_info: {
-          avatar: '',
-          description: ''
-        }
+        now_avatar: '',
+        now_description: ''
       }
     },
     computed: {
+      max_social: function () {
+        return _.maxBy([this.god.twitter, this.god.instagram], function (o) { return o.count || 0 })
+      },
       god_id: function () {
         return this.god.god_id
       },
@@ -80,14 +78,10 @@
         return this.god.admin_remark
       },
       description: function () {
-        if (!this.god_info || !this.god_info.description) { return '' }
-        return this.god_info.description
+        return this.now_description || myautolinker(this.max_social.description, this.max_social.type)
       },
       avatar: function () {
-        if (!this.god_info || !this.god_info.avatar) {
-          return ''
-        }
-        return '/api_sp/' + btoa(this.god_info.avatar)
+        return '/api_sp/' + btoa(this.now_avatar || this.max_social.avatar)
       }
     },
     methods: {
@@ -100,23 +94,9 @@
         })
         if (god.followed === 1) { self.$store.dispatch('unfollow', god.god_id) }
       },
-      setGodInfo: function (type) {
-        if (type) {
-          this.god_info.avatar = this.god[type + '_user'].avatar
-          this.god_info.description = myautolinker(this.god[type + '_user'].description, type)
-        } else {
-          if (this.god.twitter_user) {
-            this.setGodInfo('twitter')
-          } else if (this.god.github_user) {
-            this.setGodInfo('github')
-          } else if (this.god.tumblr_user) {
-            this.setGodInfo('tumblr')
-          } else if (this.god.instagram_user) {
-            this.setGodInfo('instagram')
-          } else if (this.god.facebook_user) {
-            this.setGodInfo('facebook')
-          }
-        }
+      setNow: function (social) {
+        this.now_avatar = social.avatar
+        this.now_description = myautolinker(social.description, social.type)
       }
     }
   }

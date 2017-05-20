@@ -1,5 +1,5 @@
 <template>
-  <a @click='click' href='javascript:void(0)'> <i :class="the_class"></i>
+  <a href='javascript:;'> <i :class="the_class"></i>
     <count-up v-show="count!=-4" :end="count" :duration="2.5" :options="{useEasing : true,
       useGrouping : true,
       separator : ',',
@@ -14,6 +14,9 @@
   import CountUp from 'bz-count-up'
   export default {
     props: {
+      type: {
+        type: String
+      },
       info: {
         required: true
       },
@@ -27,16 +30,10 @@
     },
     computed: {
       count: function () {
-        if (this.info) {
+        if (this.info.count) {
           return this.info.count
         }
-        return -4
-      },
-      type: function () {
-        if (this.info) {
-          return this.info.type
-        }
-        return ''
+        return 0
       },
       href: function () {
         if (this.type === 'twitter') {
@@ -50,9 +47,6 @@
         }
       },
       the_class: function () {
-        if (this.loading) {
-          return `light-bz loading icon ${this.type} icon-hover-${this.type}`
-        }
         return `icon ${this.type} icon-hover-${this.type}`
       }
     },
@@ -63,9 +57,6 @@
     mounted () {
     },
     methods: {
-      click: function () {
-        this.$emit('show_this', this.type)
-      }
     }
   }
 </script>
