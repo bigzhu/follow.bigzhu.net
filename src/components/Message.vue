@@ -3,7 +3,7 @@
     <div class="item two-lines bz">
       <img :src="avatar" class="item-primary avatar bz">
       <div class="item-content has-secondary bz">
-        <router-link :to="{ name: 'God', params: { god_name: message.user_name }}">
+        <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
           {{message.name}}
         </router-link>
         <br>

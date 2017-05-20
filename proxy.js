@@ -1,6 +1,6 @@
 module.exports = {
   '/api_': {
-    target: 'https://follow.center',
+    target: 'http://follow.center',
     changeOrigin: true
   },
   '/web_socket': {
@@ -9,7 +9,7 @@ module.exports = {
     changeOrigin: true
   },
   '/static/uploaded_files/': {
-    target: 'https://follow.center',
+    target: 'http://follow.center',
     changeOrigin: true
   }
 }

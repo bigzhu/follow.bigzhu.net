@@ -1,5 +1,4 @@
 <template>
-  <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <q-layout>
       <q-drawer left-side swipe-only ref="header_drawer">
@@ -14,10 +13,10 @@
             {{ $t("App.whattofollow") }}
           </q-drawer-link>
           <hr>
-          <q-drawer-link v-show="user_info.user_name" :to="{ name:'Following'}" icon="" exact>
+          <q-drawer-link v-show="oauth_info.name" :to="{ name:'Following'}" icon="" exact>
             {{ $t("App.following") }}
           </q-drawer-link>
-          <hr v-show="user_info.user_name">
+          <hr v-show="oauth_info.name">
           <q-drawer-link icon="" to="/Bio">
             传记
           </q-drawer-link>
@@ -26,7 +25,7 @@
       <q-drawer right-side swipe-only ref="user_info_drawer">
         <div class="toolbar light">
           <q-toolbar-title :padding="1">
-            <img :src="user_info.picture" class="avatar"></img> {{user_info.user_name}}
+            <img :src="oauth_info.avatar" class="avatar"></img> {{oauth_info.name}}
           </q-toolbar-title>
         </div>
 
@@ -62,18 +61,18 @@
             </q-toolbar-title>
             <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
 
-            <a v-show="!user_info.user_name" class="menu-item login-bz" href="/login.html">
+            <a v-show="!oauth_info.name" class="menu-item login-bz" href="/login.html">
               登录
             </a>
-            <a v-show="user_info.user_name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
-              <img :src="user_info.picture" class="avatar small"></img>
+            <a v-show="oauth_info.name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
+              <img :src="oauth_info.avatar" class="avatar small"></img>
             </a>
           </div>
 
           <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
             <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
-            <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
-            <router-link v-show="user_info.user_name" :to="{ name:'Collect'}" :class="{'active': this.$route.name==='Collect'}" class="menu-item">{{ $t("App.collect") }}</router-link>
+            <router-link v-show="oauth_info.name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
+            <router-link v-show="oauth_info.name" :to="{ name:'Collect'}" :class="{'active': this.$route.name==='Collect'}" class="menu-item">{{ $t("App.collect") }}</router-link>
             <router-link :to="{ name:'Bio'}" :class="{'active': this.$route.name==='Bio'}" class="menu-item">{{ $t("App.biography") }}</router-link>
           </div>
         </div>
@@ -96,17 +95,17 @@
           </q-toolbar-title>
           <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
 
-          <a v-show="!user_info.user_name" class="menu-item login-bz" href="javascript:;">
+          <a v-show="!oauth_info.name" class="menu-item login-bz" href="javascript:;">
             登录
           </a>
-          <a v-show="user_info.user_name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
-            <img :src="user_info.picture" class="avatar small"></img>
+          <a v-show="oauth_info.name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
+            <img :src="oauth_info.avatar" class="avatar small"></img>
           </a>
         </div>
 
         <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
           <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
-          <router-link v-show="user_info.user_name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
+          <router-link v-show="oauth_info.name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
 
           <a class="menu-item" href="javascript:;">
             传记
@@ -128,8 +127,8 @@
   export default {
     store,
     computed: {
-      user_info () {
-        return store.state.p.user_info
+      oauth_info () {
+        return store.state.p.oauth_info
       },
       show_bar () {
         return store.state.show_bar
@@ -138,8 +137,7 @@
     components: {
     },
     mounted () {
-      if (checkLogin()) { this.$store.dispatch('getUserInfo') }
-
+      if (checkLogin()) { this.$store.dispatch('getOauthInfo') }
       this.$nextTick(function () {
         this.bindScroll()
       })
