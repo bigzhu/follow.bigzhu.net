@@ -15,12 +15,14 @@
 </template>
 
 <script>
+  import Top from './Top'
   import '../assets/mobile.css'
   import Messages from './CollectMessages.vue'
   import RightInfo from './RightInfo'
   import UnRead from './UnRead'
   export default {
     components: {
+      Top,
       UnRead,
       RightInfo,
       Messages
