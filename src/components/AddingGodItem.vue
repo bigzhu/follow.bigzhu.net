@@ -25,11 +25,11 @@
           </div>
 
           <div class="item-secondary stamp">
-            <social-badge v-show="god.twitter_user" @show_this="setGodInfo" :info="god.twitter_user"></social-badge>
-            <social-badge v-show="god.github_user" @show_this="setGodInfo" :info="god.github_user"></social-badge>
-            <social-badge v-show="god.tumblr_user" @show_this="setGodInfo" :info="god.tumblr_user"></social-badge>
-            <social-badge v-show="god.instagram_user" @show_this="setGodInfo" :info="god.instagram_user" ></social-badge>
-            <social-badge v-show="god.facebook_user" @show_this="setGodInfo" :info="god.facebook_user"></social-badge>
+            <social-badge @click.native="setNow(god.twitter)" v-show="god.twitter.count" type="twitter" :info="god.twitter"></social-badge>
+            <social-badge @click.native="setNow(god.github)" v-show="god.github.count" type="github" :info="god.github"></social-badge>
+            <social-badge @click.native="setNow(god.tumblr)" v-show="god.tumblr.count" type="tumblr" :info="god.tumblr"></social-badge>
+            <social-badge @click.native="setNow(god.instagram)" v-show="god.instagram.count" type="instagram" :info="god.instagram" ></social-badge>
+            <social-badge @click.native="setNow(god.facebook)" v-show="god.facebook.count" type="facebook" :info="god.facebook"></social-badge>
           </div>
           <div v-html="description" class="card-content green-bz">
           </div> 
@@ -63,7 +63,12 @@
     data: function () {
       return {
         god: {
-          name: ''
+          name: '',
+          twitter: '',
+          instagram: '',
+          github: '',
+          facebook: '',
+          tumblr: ''
         },
         avatar: '',
         description: '',

@@ -46,7 +46,7 @@
     },
     computed: {
       god_info () {
-        let god_info = this.$store.state.god_infos[this.god_name.toLowerCase()]
+        let god_info = this.$store.state.god_infos[this.god_name]
         if (god_info) {
           return god_info
         }
@@ -54,7 +54,7 @@
       },
       bio () {
         let self = this
-        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key.toLowerCase() === self.god_name.toLowerCase() })
+        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.god_name })
         if (bio) return bio
         else return {title_img: ''}
       }

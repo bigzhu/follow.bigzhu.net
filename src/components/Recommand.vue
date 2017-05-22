@@ -82,7 +82,7 @@
         return this.message.href
       },
       god_info: function () {
-        let god_info = this.$store.state.god_infos[this.message.user_name.toLowerCase()]
+        let god_info = this.$store.state.god_infos[this.message.user_name]
         if (god_info) {
           return god_info
         }

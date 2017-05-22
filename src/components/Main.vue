@@ -40,7 +40,7 @@
         }
       },
       god_name () {
-        if (this.$route.params.god_name) return this.$route.params.god_name.toLowerCase()
+        if (this.$route.params.god_name) return this.$route.params.god_name
       }
     },
     mounted () {

@@ -1,14 +1,12 @@
 <template>
   <div class="layout-padding">
-    <NotYetFollow v-show="ordered_my_gods.length===0 && get_done"></NotYetFollow>
     <div class="row sm-column">
-      <cat v-show="ordered_my_gods.length!==0" route_name="Following" :just_my="true" class="width-1of5 desktop-only">
+      <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
-        <!--
+        <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
         <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
         </AddingGodItem>
-        -->
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
@@ -58,6 +56,9 @@
       GodItem
     },
     computed: {
+      cat: function () {
+        return this.$route.params.cat
+      },
       filtered_my_gods: function () {
         var self = this
         return self.my_gods.filter(function (my_god) {
@@ -68,8 +69,8 @@
         return _.orderBy(this.filtered_my_gods, 'followed_at', 'desc')
       },
       my_gods () {
-        if (this.$store.state.cat_my_gods[this.$route.params.cat]) {
-          return this.$store.state.cat_my_gods[this.$route.params.cat]
+        if (this.$store.state.cat_my_gods[this.cat]) {
+          return this.$store.state.cat_my_gods[this.cat]
         } else {
           return []
         }

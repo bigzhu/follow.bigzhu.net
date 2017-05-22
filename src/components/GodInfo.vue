@@ -1,50 +1,50 @@
 <template>
   <div class="card">
     <div class="card-title">
-      {{god_info.name}}
+      {{god.name}}
     </div>
 
     <img :src="avatar" class="">
     <div class="card-content">
-      <p v-html="desc"></p>
-      <GodRemark v-model="remark" :god_id="god_info.id"></GodRemark>
+      <p v-html="description"></p>
+      <GodRemark v-model="remark" :god_id="god.id"></GodRemark>
     </div>
 
     <div class="list">
       <div class="item two-lines">
         <i class="item-primary github icon"></i>
         <div class="item-content">
-          <input v-model="god_info.github" :disabled="disable_edit" class="full-width">
+          <input v-model="god.github.name" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary twitter icon"></i>
         <div class="item-content">
-          <input v-model="god_info.twitter" :disabled="disable_edit" class="full-width">
+          <input v-model="god.twitter.name" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary instagram icon"></i>
         <div class="item-content">
-          <input v-model="god_info.instagram" :disabled="disable_edit" class="full-width">
+          <input v-model="god.instagram.name" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary tumblr icon"></i>
         <div class="item-content">
-          <input v-model="god_info.tumblr" :disabled="disable_edit" class="full-width">
+          <input v-model="god.tumblr.name" :disabled="disable_edit" class="full-width">
         </div>
       </div>
       <div class="item two-lines">
         <i class="item-primary facebook icon"></i>
         <div class="item-content">
-          <input v-model="god_info.facebook" :disabled="disable_edit" class="full-width">
+          <input v-model="god.facebook.name" :disabled="disable_edit" class="full-width">
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <Follow v-model="god_info.followed" :god_id="god_info.id"></Follow>
+      <Follow v-model="god.followed" :god_id="god.id"></Follow>
       <button v-show="disable_edit" @click="save" class="light">
         <i class="icon file text"></i>
         {{ $t("GodInfo.edit") }}
@@ -58,11 +58,12 @@
 </template>
 
 <script>
-  import myautolinker from '../functions/myautolinker'
   import GodRemark from './GodRemark'
   import Follow from './Follow'
-  import default_avatar from '../assets/avatar.svg'
+  // import default_avatar from '../assets/avatar.svg'
+  import GodItemBase from './GodItemBase'
   export default {
+    mixins: [GodItemBase],
     components: {
       GodRemark,
       Follow
@@ -70,7 +71,7 @@
     directives: {
     },
     props: {
-      god_info: {
+      god: {
         type: Object,
         default: function () {
           return {
@@ -81,7 +82,8 @@
             github: '',
             twitter: '',
             instagram: '',
-            tumblr: ''
+            tumblr: '',
+            facebook: ''
           }
         },
         required: true
@@ -89,26 +91,13 @@
     },
     computed: {
       remark: function () {
-        if (this.god_info.remark) {
-          return this.god_info.remark
+        if (this.god.remark) {
+          return this.god.remark
         }
-        return this.god_info.admin_remark
-      },
-      avatar: function () {
-        if (this.god_info.avatar === '') {
-          return default_avatar
-        }
-        return (window.bz_url || '') + '/api_sp/' + window.btoa(window.btoa(this.av))
+        return this.god.admin_remark
       }
     },
     mounted () {
-      this.setGodInfo()
-    },
-    watch: {
-      'god_info': {
-        handler: function (val, oldVal) { this.setGodInfo() },
-        deep: true
-      }
     },
     data: function () {
       return {
@@ -120,34 +109,12 @@
       }
     },
     methods: {
-      setGodInfo: function (type) {
-        if (type) {
-          this.av = this.god_info[type + '_user'].avatar
-          // this.desc = this.god_info[type + '_user'].description
-          this.desc = myautolinker(this.god_info[type + '_user'].description, type)
-        } else {
-          if (this.god_info.twitter_user) {
-            this.setGodInfo('twitter')
-          } else if (this.god_info.github_user) {
-            this.setGodInfo('github')
-          } else if (this.god_info.tumblr_user) {
-            this.setGodInfo('tumblr')
-          } else if (this.god_info.instagram_user) {
-            this.setGodInfo('instagram')
-          } else if (this.god_info.facebook_user) {
-            this.setGodInfo('facebook')
-          } else {
-            this.av = ''
-            this.desc = ''
-          }
-        }
-      },
       autoInsert: function (key, scheme) {
         if (key === 'blog') {
           scheme = 'http://'
         }
-        if (!this.god_info[key]) {
-          this.god_info[key] = scheme
+        if (!this.god[key]) {
+          this.god[key] = scheme
         }
       },
       save: function () {
@@ -156,14 +123,14 @@
         } else {
           this.disable_edit = true
           var god = {
-            name: this.god_info.name,
-            twitter: this.god_info.twitter,
-            github: this.god_info.github,
-            instagram: this.god_info.instagram,
-            tumblr: this.god_info.tumblr,
-            facebook: this.god_info.facebook
-            // bio: this.god_info.bio
-            // avatar: this.god_info.avatar
+            name: this.god.name,
+            twitter: this.god.twitter,
+            github: this.god.github,
+            instagram: this.god.instagram,
+            tumblr: this.god.tumblr,
+            facebook: this.god.facebook
+            // bio: this.god.bio
+            // avatar: this.god.avatar
           }
           this.$store.dispatch('putGod', god)
         }

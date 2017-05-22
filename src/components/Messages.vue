@@ -63,7 +63,7 @@
         return this.$store.state.followed_god_count
       },
       god_name () {
-        if (this.$route.params.god_name) return this.$route.params.god_name.toLowerCase()
+        if (this.$route.params.god_name) return this.$route.params.god_name
       },
       new_loading () {
         return this.$store.state.new_loading

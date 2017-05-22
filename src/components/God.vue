@@ -4,7 +4,7 @@
       <messages :god_name="god_name" class="width-5of5 no-top-padding-bz"></messages>
       <div class="width-2of5 no-top-padding-bz bg">
           <div class="blank-padding"></div>
-          <GodInfo v-show="god_name" :god_info="god_info"></GodInfo>
+          <GodInfo v-show="god_name" :god="god_info"></GodInfo>
       </div>
     </div>
     <Top></Top>
@@ -35,7 +35,7 @@
         }
       },
       god_name () {
-        return this.$route.params.god_name.toLowerCase()
+        return this.$route.params.god_name
       }
     },
     mounted () {

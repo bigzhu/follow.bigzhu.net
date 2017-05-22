@@ -33,13 +33,12 @@
 </template>
 
 <script>
-  import _ from 'lodash'
   import Follow from './Follow'
   import GodRemark from './GodRemark'
   import SocialBadge from './SocialBadge'
-  import btoa from '../functions/encode_url'
-  import myautolinker from '../functions/myautolinker'
+  import GodItemBase from './GodItemBase'
   export default {
+    mixins: [GodItemBase],
     props: {
       god: {
       },
@@ -59,15 +58,10 @@
     },
     data: function () {
       return {
-        loading: false,
-        now_avatar: '',
-        now_description: ''
+        loading: false
       }
     },
     computed: {
-      max_social: function () {
-        return _.maxBy([this.god.twitter, this.god.instagram], function (o) { return o.count || 0 })
-      },
       god_id: function () {
         return this.god.god_id
       },
@@ -76,12 +70,6 @@
           return this.god.remark
         }
         return this.god.admin_remark
-      },
-      description: function () {
-        return this.now_description || myautolinker(this.max_social.description, this.max_social.type)
-      },
-      avatar: function () {
-        return '/api_sp/' + btoa(this.now_avatar || this.max_social.avatar)
       }
     },
     methods: {
@@ -93,10 +81,6 @@
           self.loading = false
         })
         if (god.followed === 1) { self.$store.dispatch('unfollow', god.god_id) }
-      },
-      setNow: function (social) {
-        this.now_avatar = social.avatar
-        this.now_description = myautolinker(social.description, social.type)
       }
     }
   }

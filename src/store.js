@@ -149,7 +149,7 @@ export const mutations = {
     state.my_gods = _.without(state.my_gods, _.findWhere(state.my_gods, {id: god_id}))
   },
   SET_GOD_INFOS (state, god_info) {
-    Vue.set(state.god_infos, god_info.name.toLowerCase(), god_info)
+    Vue.set(state.god_infos, god_info.name, god_info)
   },
   SET_BIG_GODS (state, gods) {
     state.big_gods = gods
@@ -161,7 +161,7 @@ export const mutations = {
   FILTER_GOD_MESSAGES (state, god_name) { // 从主线messages中把god message 过滤出来，避免页面空白
     initGodMessage(state, god_name)
     if (state.messages.length !== 0 && state.gods_messages[god_name].length === 0) {
-      let god_messages = _.filter(state.messages, (d) => { return d.user_name.toLowerCase() === god_name })
+      let god_messages = _.filter(state.messages, (d) => { return d.user_name === god_name })
       state.gods_messages[god_name] = god_messages
     }
   },
@@ -468,10 +468,10 @@ export const actions = {
     let loading = true
     let parm = {}
     if (typeof val === 'string') {
-      god_name = val.toLowerCase()
+      god_name = val
       parm = {god_name: god_name}
     } else {
-      god_name = val.god_name.toLowerCase()
+      god_name = val.god_name
       loading = val.loading
     }
     if (state.god_infos[god_name]) {
