@@ -6,24 +6,24 @@
   import btoa from '../functions/encode_url'
   import myautolinker from '../functions/myautolinker'
   export default {
-    props: [],
-    components: {
-    },
     computed: {
       max_social: function () {
         return _.maxBy([this.god.twitter, this.god.instagram, this.god.github, this.god.tumblr, this.god.facebook], function (o) { return o.count || 0 })
       },
       description: function () {
-        return this.now_description || myautolinker(this.max_social.description, this.max_social.type)
+        return myautolinker(this.now_description, this.now_type) || myautolinker(this.max_social.description, this.max_social.type)
       },
       avatar: function () {
-        return '/api_sp/' + btoa(this.now_avatar || this.max_social.avatar)
+        if (this.now_avatar || this.max_social.avatar) {
+          return '/api_sp/' + btoa(this.now_avatar || this.max_social.avatar)
+        }
       }
     },
     data: function () {
       return {
         now_avatar: '',
-        now_description: ''
+        now_description: '',
+        now_type: 'twitter'
       }
     },
     mounted: function () {

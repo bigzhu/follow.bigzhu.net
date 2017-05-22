@@ -40,9 +40,14 @@
     data: function () {
       return {
         icon_map: [
+          {name: '有趣', icon: 'thumb_up'},
+          {name: 'IT', icon: 'important_devices'},
+          {name: '大杂烩', icon: 'view_module'},
+          {name: '18+', icon: 'flight_takeoff'},
+          {name: '官方', icon: 'copyright'},
           {name: '科技', icon: 'laptop_mac'},
           {name: '美女', icon: 'favorite_border'},
-          {name: '前端开发', icon: 'web'},
+          {name: '前端', icon: 'web'},
           {name: '自然界', icon: 'crop_original'},
           {name: '艺术', icon: 'art_track'},
           {name: '新闻', icon: 'fiber_new'},

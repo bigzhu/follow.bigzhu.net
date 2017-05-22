@@ -37,10 +37,15 @@
   import GodRemark from './GodRemark'
   import SocialBadge from './SocialBadge'
   import GodItemBase from './GodItemBase'
+  import god_data from '../datas/god'
   export default {
     mixins: [GodItemBase],
     props: {
       god: {
+        type: Object,
+        default: function () {
+          return god_data
+        }
       },
       is_my: {
       }

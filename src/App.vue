@@ -30,7 +30,7 @@
         </div>
 
         <div class="list no-border platform-delimiter">
-          <q-drawer-link icon="" to="/showcase/layout" exact>
+          <q-drawer-link icon="" to="/UserSet" exact>
             设置
           </q-drawer-link>
           <hr>

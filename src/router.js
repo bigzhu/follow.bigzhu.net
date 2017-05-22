@@ -22,6 +22,8 @@ let router = new VueRouter({
   //   } else return savedPosition
   // },
   routes: [
+    assembly('GodBlocked'),
+    assembly('UserSet'),
     assembly('Collect'),
     { path: '/BioDetail/:god_name', name: 'BioDetail', component: load('BioDetail') },
     assembly('Bio'),

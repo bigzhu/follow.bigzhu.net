@@ -4,7 +4,7 @@
       {{god.name}}
     </div>
 
-    <img :src="avatar" class="">
+    <img :src="avatar||'/statics/assets/avatar.svg'" class="">
     <div class="card-content">
       <p v-html="description"></p>
       <GodRemark v-model="remark" :god_id="god.id"></GodRemark>
@@ -60,6 +60,7 @@
 <script>
   import GodRemark from './GodRemark'
   import Follow from './Follow'
+  import god_data from '../datas/god'
   // import default_avatar from '../assets/avatar.svg'
   import GodItemBase from './GodItemBase'
   export default {
@@ -74,17 +75,7 @@
       god: {
         type: Object,
         default: function () {
-          return {
-            id: 1,
-            name: 'loading',
-            avatar: '',
-            bio: '',
-            github: '',
-            twitter: '',
-            instagram: '',
-            tumblr: '',
-            facebook: ''
-          }
+          return god_data
         },
         required: true
       }

@@ -1,20 +1,26 @@
 <template>
-  <div class="ui container">
-    <div class="ui segment userset-bz">
-      <h4 class="title">{{ $t("UserSet.id") }}</h4>
-      <div class="userimfor-bz">
-        <div class="username-bz">
-          <i :class="user_info.user_type + ' icon'"></i> 
-          <span>{{user_info.user_name}}</span>
-        </div>
+  <div class="layout-padding">
+    <div class="card userset-bz">
+      <div class="card-title">
+        {{ $t("UserSet.id") }}
+      </div>
+      <div class="card-content">
+        <div class="userimfor-bz">
+          <div class="username-bz">
+            <i :class="oauth_info.type + ' icon'"></i> 
+            <span>{{oauth_info.name}}</span>
+          </div>
           <a href="/login.html" class="ui button user-set-button-bz change-id-bz">{{ $t("UserSet.change_id") }}</a>
           <a href="/api_logout" class="ui button user-set-button-bz ">{{ $t("UserSet.logout") }}</a>
+        </div>
       </div>
-      <h4 class="title">{{ $t("UserSet.anki_id") }}<div class="ui icon button help-btn-bz" data-tooltip="https://ankiweb.net" data-position="top center">
+      <div class="card-title">
+        {{ $t("UserSet.anki_id") }}
+        <div class="ui icon button help-btn-bz" data-tooltip="https://ankiweb.net" data-position="top center">
           ?
         </div>
-      </h4>
-      <div class="username-bz" >
+      </div>
+      <div class="card-content" >
         <div v-show="!show_anki_input" class="ui form user-bz">
           <img class="anki-img-bz" src="../assets/anki-colorful.svg">
           <span class="anki-name-bz">{{anki.user_name}}</span>
@@ -33,26 +39,29 @@
               <input v-model="anki.password" type="password" placeholder="">
             </div>
           </div>
-            <button @click="ankiLogin" class="ui button user-set-button-bz ankiset-button-bz">{{ $t("UserSet.set") }}</button>
+          <button @click="ankiLogin" class="ui button user-set-button-bz ankiset-button-bz">{{ $t("UserSet.set") }}</button>
         </div>
       </div>
-      <h4 class="title">{{ $t("UserSet.block_sns") }}
+      <div class="card-title">{{ $t("UserSet.block_sns") }}
         <div class="ui icon button help-btn-bz" :data-tooltip="$t('UserSet.blockreminder')" data-position="top center">
-            ?
+          ?
         </div>
-      </h4>
-      <div>
+      </div>
+      <div class="card-content" >
         <button class="ui button user-set-button-bz twitter"><i class="twitter icon"></i>Twitter</button>
         <button class="ui button user-set-button-bz tumblr"><i class="tumblr icon"></i>Tumblr</button>
         <button class="ui button user-set-button-bz facebook"><i class="facebook icon"></i>Facebook</button>
         <button class="ui button user-set-button-bz instagram"><i class="instagram icon"></i>Instagram</button>
         <button class="ui button user-set-button-bz github"><i class="github icon"></i>Github</button>
-        
       </div>
-      <h4 class="title">{{ $t("UserSet.block_id") }}</h4>
-      <div class="username-bz">
+      <div class="card-title">
+        {{ $t("UserSet.block_id") }}
+      </div>
+      <div class="card-content">
         <span>{{ $t("UserSet.number") }}</span>&nbsp;&nbsp;&nbsp;<span>{{block_count}}</span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><router-link :to="{name:'GodBlocked'}"><i class="low vision icon"></i>{{ $t("UserSet.block_manage") }}</router-link></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+          <router-link :to="{name:'GodBlocked'}"><i class="low vision icon"></i>{{ $t("UserSet.block_manage") }}</router-link>
+        </span>
       </div>
     </div>
     <footer>
@@ -78,8 +87,8 @@
     components: {
     },
     computed: {
-      user_info: function () {
-        return this.$store.state.p.user_info
+      oauth_info: function () {
+        return this.$store.state.p.oauth_info
       },
       anki: function () {
         return this.$store.state.anki
@@ -130,7 +139,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .ui.segment.userset-bz {
     border-radius: 0.06em;
     box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);
