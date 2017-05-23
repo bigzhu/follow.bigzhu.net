@@ -17,11 +17,11 @@
           </div>
 
           <div class="item-secondary stamp">
-            <social-badge @click.native="setNow(god.twitter)" v-show="god.twitter.count" type="twitter" :info="god.twitter"></social-badge>
-            <social-badge @click.native="setNow(god.github)" v-show="god.github.count" type="github" :info="god.github"></social-badge>
-            <social-badge @click.native="setNow(god.tumblr)" v-show="god.tumblr.count" type="tumblr" :info="god.tumblr"></social-badge>
-            <social-badge @click.native="setNow(god.instagram)" v-show="god.instagram.count" type="instagram" :info="god.instagram" ></social-badge>
-            <social-badge @click.native="setNow(god.facebook)" v-show="god.facebook.count" type="facebook" :info="god.facebook"></social-badge>
+            <social-badge @click.native="setNow(god.twitter)" v-show="showBadge(god.twitter)" type="twitter" :info="god.twitter"></social-badge>
+            <social-badge @click.native="setNow(god.github)" v-show="showBadge(god.github)" type="github" :info="god.github"></social-badge>
+            <social-badge @click.native="setNow(god.tumblr)" v-show="showBadge(god.tumblr)" type="tumblr" :info="god.tumblr"></social-badge>
+            <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram" ></social-badge>
+            <social-badge @click.native="setNow(god.facebook)" v-show="showBadge(god.facebook)" type="facebook" :info="god.facebook"></social-badge>
           </div>
         </div>
         <div v-html="description" class="card-content green-bz"></div> 
@@ -78,6 +78,9 @@
       }
     },
     methods: {
+      showBadge: function (social) {
+        return social.name && social.count
+      },
       block: function (god) {
         this.loading = true
         let self = this
