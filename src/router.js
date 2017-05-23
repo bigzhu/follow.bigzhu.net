@@ -15,13 +15,16 @@ import Main from './components/Main.vue'
 let router = new VueRouter({
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
-    console.log(to)
-    console.log(from)
     console.log(savedPosition)
-    // const layout = document.getElementsByClassName('layout-view')
-    // if (layout.length && to.name === 'God') {
-    //   layout[0].scrollTop = 0
-    // } else return savedPosition
+    const layout = document.getElementsByClassName('layout-view')
+    if (layout.length && to.name === 'God') {
+      layout[0].scrollTop = 0
+    } else {
+      if (savedPosition) {
+        layout[0].scrollLeft = savedPosition.x
+        layout[0].scrollTop = savedPosition.y
+      }
+    }
   },
   routes: [
     assembly('GodBlocked'),

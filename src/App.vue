@@ -127,6 +127,9 @@
   export default {
     store,
     computed: {
+      route_name () {
+        return this.$route.name
+      },
       oauth_info () {
         return store.state.p.oauth_info
       },
@@ -152,6 +155,11 @@
         let self = this
         let scroll_target = document.getElementsByClassName('layout-view')[0]
         scroll_target.addEventListener('scroll', Utils.throttle(function () {
+          if (self.route_name === 'Main') {
+            window.pageXOffset = scroll_target.scrollLeft
+            window.pageYOffset = scroll_target.scrollTop
+          }
+          console.log(window.pageYOffset)
           self.$store.commit('CHECK_BAR', scroll_target)
         }, 100)
         )
