@@ -1,6 +1,6 @@
 module.exports = {
   '/api_': {
-    target: 'http://follow.center',
+    target: 'http://47.88.137.77:9444',
     changeOrigin: true
   },
   '/web_socket': {
