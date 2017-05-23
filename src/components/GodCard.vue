@@ -28,7 +28,6 @@
 </template>
 
 <script>
-  import '../assets/mobile.css'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
   export default {

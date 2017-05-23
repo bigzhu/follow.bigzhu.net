@@ -4,7 +4,7 @@
       <div class="row">
         <div class="sixteen wide column ui card message-bz nobody-bz">
           <div class="nobody-image-bz">
-            <img src="../assets/nobody.svg">
+            <img src="../statics/assets/nobody.svg">
             <p>{{ $t("GodBlocked.tips") }}</p>
           </div> 
         </div>

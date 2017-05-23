@@ -4,7 +4,7 @@
     <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
     <q-transition v-show="!is_login" name="slide">
       <div v-show="show_no_login" class="no-login">
-        <img src="../assets/no-message.svg">
+        <img src="../statics/assets/no-message.svg">
         <p>
           <a href="/login.html">{{ $t("Messages.login") }}</a>{{ $t("Messages.description") }}
         </p>

@@ -22,7 +22,7 @@
       </div>
       <div class="card-content" >
         <div v-show="!show_anki_input" class="ui form user-bz">
-          <img class="anki-img-bz" src="../assets/anki-colorful.svg">
+          <img class="anki-img-bz" src="../statics/assets/anki-colorful.svg">
           <span class="anki-name-bz">{{anki.user_name}}</span>
           <a @click="show_anki_input=true" href="javascript:;">{{ $t("UserSet.reset") }}&nbsp;&gt;</a>
         </div>

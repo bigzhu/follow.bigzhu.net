@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  import '../assets/mobile.css'
   import Messages from './Messages'
   import Top from './Top'
   import UnRead from './UnRead'

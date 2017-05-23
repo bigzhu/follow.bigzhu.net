@@ -1,6 +1,6 @@
 <template>
   <div class="center-container-bz">
-    <img src="../assets/no-message.svg">
+    <img src="../statics/assets/no-message.svg">
     <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
   </div>
 </template>

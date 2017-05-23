@@ -53,7 +53,7 @@
             </button>
             <q-toolbar-title>
               <router-link :to="{name: 'Main'}">
-                <img class="logo-img" src="./assets/logo.svg">
+                <img class="logo-img" src="./statics/assets/logo.svg">
                 <span class="desktop-only">
                   Follow Center
                 </span>
@@ -87,7 +87,7 @@
           </button>
           <q-toolbar-title>
             <router-link :to="{name: 'Main'}">
-              <img class="logo-img" src="./assets/logo.svg">
+              <img class="logo-img" src="./statics/assets/logo.svg">
               <span class="desktop-only">
                 Follow Center
               </span>

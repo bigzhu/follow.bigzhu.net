@@ -2,7 +2,7 @@
   <div class="layout-padding">
     <div class="row gutter">
       <div class="width-5of5 no-top-padding-bz">
-        <img v-show="show_how_to_use_collect" class="width-5of5 responsive" src="../assets/how_to_use_collection.jpg">
+        <img v-show="show_how_to_use_collect" class="width-5of5 responsive" src="../statics/assets/how_to_use_collection.jpg">
         <messages></messages>
       </div>
       <div class="width-2of5 no-top-padding-bz bg">
@@ -16,7 +16,7 @@
 
 <script>
   import Top from './Top'
-  import '../assets/mobile.css'
+  // import '../assets/mobile.css'
   import Messages from './CollectMessages.vue'
   import RightInfo from './RightInfo'
   import UnRead from './UnRead'

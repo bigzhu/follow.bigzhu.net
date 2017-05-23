@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import '../assets/public.css'
+  // import '../assets/public.css'
   import myautolinker from '../functions/myautolinker'
 
   export default {

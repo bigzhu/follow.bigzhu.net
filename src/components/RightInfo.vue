@@ -4,7 +4,7 @@
       <div class="info">
         <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
       </div>
-      <img src="../assets/by_me.png" class="qr-bz">
+      <img src="../statics/assets/by_me.png" class="qr-bz">
       <div class="info">
         <i class="qq icon"></i>{{ $t("RightInfo.qq") }}
       </div>
