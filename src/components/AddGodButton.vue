@@ -45,7 +45,7 @@
     methods: {
       add: function () {
         this.$refs.confirm_refalsh_message.close()
-        this.$emit('add', this.god_name)
+        this.$emit('add', this.god_name.trim())
       }
     }
   }
