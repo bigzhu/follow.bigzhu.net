@@ -41,9 +41,8 @@
           </div>
         </div>
       </q-drawer>
-
-      <q-transition name="slide">
-        <div v-show="show_bar" class='header-bz'>
+      <div class="layout-view">
+        <div :class="{'header-relative': true}" :style="'top: '+scroll_top+'px;'" class="header-bz" >
           <div class="toolbar dark inverted menu-bz header-one-bz">
             <button
               class="hide-on-drawer-visible"
@@ -76,41 +75,6 @@
             <router-link :to="{ name:'Bio'}" :class="{'active': this.$route.name==='Bio'}" class="menu-item">{{ $t("App.biography") }}</router-link>
           </div>
         </div>
-      </q-transition>
-      <div class="layout-view">
-        <div class="toolbar dark inverted menu-bz header-one-bz">
-          <button
-            class="hide-on-drawer-visible"
-            @click="$refs.header_drawer.open()"
-            >
-            <i>menu</i>
-          </button>
-          <q-toolbar-title>
-            <router-link :to="{name: 'Main'}">
-              <img class="logo-img" src="./statics/assets/logo.svg">
-              <span class="desktop-only">
-                Follow Center
-              </span>
-            </router-link>
-          </q-toolbar-title>
-          <q-search v-model="search_value" :debounce="600" placeholder="搜索" class="white toolbar-search"></q-search>
-
-          <a v-show="!oauth_info.name" class="menu-item login-bz" href="javascript:;">
-            登录
-          </a>
-          <a v-show="oauth_info.name" @click="$refs.user_info_drawer.open()" href="javascript:;" class="menu-item login-bz">
-            <img :src="oauth_info.avatar" class="avatar small"></img>
-          </a>
-        </div>
-
-        <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
-          <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}" class="menu-item">{{ $t("App.whattofollow") }}</router-link>
-          <router-link v-show="oauth_info.name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}" class="menu-item">{{ $t("App.following") }}</router-link>
-
-          <a class="menu-item" href="javascript:;">
-            传记
-          </a>
-        </div>
         <router-view></router-view>
       </div>
     </q-layout>
@@ -118,7 +82,7 @@
 </template>
 
 <script>
-  import {Utils} from 'quasar'
+  // import {Utils} from 'quasar'
   /*
   * Root component
   */
@@ -142,27 +106,57 @@
     mounted () {
       if (checkLogin()) { this.$store.dispatch('getOauthInfo') }
       this.$nextTick(function () {
+        this.nav_bar_height = document.getElementsByClassName('header-bz')[0].offsetHeight
         this.bindScroll()
       })
     },
     data () {
       return {
-        search_value: ''
+        search_value: '',
+        last_scroll_top: 0, // 上次滚动的位置
+        nav_bar_height: 0, // header 高度
+        show_bar: true,
+        scroll_top: 0
       }
     },
     methods: {
       bindScroll: function () {
         let self = this
         let scroll_target = document.getElementsByClassName('layout-view')[0]
+        /*
         scroll_target.addEventListener('scroll', Utils.throttle(function () {
-          if (self.route_name === 'Main') {
-            window.pageXOffset = scroll_target.scrollLeft
-            window.pageYOffset = scroll_target.scrollTop
-          }
-          console.log(window.pageYOffset)
-          self.$store.commit('CHECK_BAR', scroll_target)
+        if (self.route_name === 'Main') {
+        window.pageXOffset = scroll_target.scrollLeft
+        window.pageYOffset = scroll_target.scrollTop
+        }
+        self.check_bar(scroll_target)
         }, 100)
         )
+        */
+        scroll_target.addEventListener('scroll',
+          function () {
+            if (self.route_name === 'Main') {
+              window.pageXOffset = scroll_target.scrollLeft
+              window.pageYOffset = scroll_target.scrollTop
+            }
+            self.check_bar(scroll_target)
+          }
+        )
+      },
+      check_bar: function (scroll_target) {
+        var st = scroll_target.scrollTop
+        if (Math.abs(this.last_scroll_top - st) <= 5) return
+        if (st > this.last_scroll_top && st > this.nav_bar_height) {
+          this.show_bar = false
+        } else {
+          if (!this.show_bar) { // 之前是隐藏时再设定高度
+            this.scroll_top = st - this.nav_bar_height - 50
+          } else if (this.scroll_top >= st) { // 已经滚动到顶部, 改为header-sticky
+            this.scroll_top = st
+          }
+          this.show_bar = true
+        }
+        this.last_scroll_top = st
       }
     }
   }
@@ -190,8 +184,16 @@
 </style>
 
 <style scoped>
+  .header-bz.header-relative {
+    position: relative;
+  }
+  .header-bz.header-sticky {
+    position: sticky;
+    top:  0px;
+  }
   .header-bz {
-    position: fixed;
+    position: sticky;
+    top:  0px;
     width: 100%;
     z-index: 10;
   }
