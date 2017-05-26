@@ -42,7 +42,7 @@
         </div>
       </q-drawer>
       <div class="layout-view">
-        <div :class="{'header-relative': true}" :style="'top: '+scroll_top+'px;'" class="header-bz" >
+        <div :class="{'header-sticky': sticky}" :style="'top: '+scroll_top+'px;'" class="header-bz" >
           <div class="toolbar dark inverted menu-bz header-one-bz">
             <button
               class="hide-on-drawer-visible"
@@ -116,6 +116,7 @@
         last_scroll_top: 0, // 上次滚动的位置
         nav_bar_height: 0, // header 高度
         show_bar: true,
+        sticky: false,
         scroll_top: 0
       }
     },
@@ -146,13 +147,16 @@
       check_bar: function (scroll_target) {
         var st = scroll_target.scrollTop
         if (Math.abs(this.last_scroll_top - st) <= 5) return
-        if (st > this.last_scroll_top && st > this.nav_bar_height) {
+        if (st > this.last_scroll_top && st > this.nav_bar_height) { // 向下滚动
           this.show_bar = false
+          this.sticky = false
         } else {
-          if (!this.show_bar) { // 之前是隐藏时再设定高度
+          if (!this.show_bar) { // 之前是隐藏时, 设定 top, 使其能滚动出来
+            this.sticky = false
             this.scroll_top = st - this.nav_bar_height - 50
-          } else if (this.scroll_top >= st) { // 已经滚动到顶部, 改为header-sticky
-            this.scroll_top = st
+          } else if (this.scroll_top + 10 >= st) { // 已经滚动到顶部, 改为header-sticky
+            this.sticky = true
+            this.scroll_top = 0
           }
           this.show_bar = true
         }
@@ -184,16 +188,11 @@
 </style>
 
 <style scoped>
-  .header-bz.header-relative {
-    position: relative;
-  }
   .header-bz.header-sticky {
     position: sticky;
-    top:  0px;
   }
   .header-bz {
-    position: sticky;
-    top:  0px;
+    position: relative;
     width: 100%;
     z-index: 10;
   }
@@ -254,4 +253,3 @@
     }
   }
 </style>
-
