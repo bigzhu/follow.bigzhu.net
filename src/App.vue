@@ -148,13 +148,16 @@
         var st = scroll_target.scrollTop
         if (Math.abs(this.last_scroll_top - st) <= 5) return
         if (st > this.last_scroll_top && st > this.nav_bar_height) { // 向下滚动
+          if (this.sticky) { // sticky 是浮动
+            this.sticky = false
+            this.scroll_top = st
+          }
           this.show_bar = false
-          this.sticky = false
         } else {
           if (!this.show_bar) { // 之前是隐藏时, 设定 top, 使其能滚动出来
             this.sticky = false
             this.scroll_top = st - this.nav_bar_height - 50
-          } else if (this.scroll_top + 10 >= st) { // 已经滚动到顶部, 改为header-sticky
+          } else if (this.scroll_top + 10 >= st) { // 已经滚动到顶部, 改为 header-sticky
             this.sticky = true
             this.scroll_top = 0
           }
