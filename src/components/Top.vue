@@ -35,11 +35,11 @@
 <style scoped>
   button.fixed-bottom-right:hover {
     background: #FFF;
-    color: rgba(0,0,0,.8);
+    color: #26A69A;
+    border: 1px solid #26A69A;
   }
   button.fixed-bottom-right {
     color: #DADADA;
-
     border: 1px solid #DADADA;
     right: 1rem;
     margin: 1rem;
