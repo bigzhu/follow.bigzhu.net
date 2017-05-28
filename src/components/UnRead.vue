@@ -68,6 +68,7 @@
     color: rgba(0,0,0,.8);
   }
   button.fixed-bottom-right {
+    color: #DADADA;
     right: 1rem;
     border: 1px solid #DADADA;
     margin: 1rem;

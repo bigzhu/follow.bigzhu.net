@@ -38,6 +38,8 @@
     color: rgba(0,0,0,.8);
   }
   button.fixed-bottom-right {
+    color: #DADADA;
+
     border: 1px solid #DADADA;
     right: 1rem;
     margin: 1rem;
@@ -50,4 +52,3 @@
     }
   } 
 </style>
-
