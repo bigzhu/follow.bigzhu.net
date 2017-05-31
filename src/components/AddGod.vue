@@ -227,6 +227,7 @@
         // this.$store.dispatch('queryCat')
         this.stat = 'button'
         this.$emit('add_done', this.god_info)
+        this.god_info = {}
       },
       setGodSocial: function (type) {
         if (this[type + '_info'].count !== -4) {
