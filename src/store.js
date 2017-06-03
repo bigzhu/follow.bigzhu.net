@@ -10,9 +10,9 @@ function initGodMessage (state, god_name) {
     Vue.set(state.gods_messages, god_name, [])
   }
 }
-function initCatGod (state, cat) {
-  if (state.cat_gods[cat] === undefined) {
-    Vue.set(state.cat_gods, cat, [])
+function initCatGod (state, type, cat) {
+  if (state[type][cat] === undefined) {
+    Vue.set(state[type], cat, [])
   }
 }
 // state
@@ -100,10 +100,16 @@ export const mutations = {
     state.registered_count = registered_count
   },
   SET_CAT_MY_GODS (state, {cat, gods}) {
-    Vue.set(state.cat_my_gods, cat, gods)
+    initCatGod(state, 'cat_my_gods', cat)
+    let merge_gods = state.cat_my_gods[cat].concat(gods)
+    let uniq_gods = _.uniqBy(merge_gods, function (d) {
+      return d.id
+    }
+    )
+    state.cat_my_gods[cat] = uniq_gods
   },
   SET_CAT_GODS (state, {cat, gods}) {
-    initCatGod(state, cat)
+    initCatGod(state, 'cat_gods', cat)
     let merge_gods = state.cat_gods[cat].concat(gods)
     let uniq_gods = _.uniqBy(merge_gods, function (d) {
       return d.id
@@ -455,7 +461,15 @@ export const actions = {
       return data
     })
   },
-  getMyGods ({ state, commit, dispatch }, parm) {
+  getMyGods ({ state, commit, dispatch }, cat) {
+    let parm = {
+      cat: cat,
+      limit: 10
+    }
+    let gods = state.cat_my_gods[cat]
+    if (gods) {
+      parm.before = gods[gods.length - 1].created_date
+    }
     return dispatch('get', {url: '/api_my_gods', body: parm}).then(function (data) {
       commit('SET_CAT_MY_GODS', {cat: parm.cat, gods: data.gods})
     })

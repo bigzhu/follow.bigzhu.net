@@ -10,7 +10,7 @@
         <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
         </GodItem>
         <SpinnerBz :show="loading"></SpinnerBz>
-        <BottomLoader :el="$el" element_class=".god-item" @:bottom="bottomCall"></BottomLoader>
+        <BottomLoader :el="$el" element_class=".god-item" @bottom="bottomCall"></BottomLoader>
         <AddGodButton v-on:add="add"></AddGodButton>
       </div>
     </div>
@@ -36,10 +36,7 @@
     watch: {
       '$route.params': {
         handler: function () {
-          if (this.my_gods.length === 0) {
-            this.loading = true
-          }
-          this.$store.dispatch('getMyGods', {cat: this.$route.params.cat})
+          this.$store.dispatch('getMyGods', this.cat)
         },
         deep: true
       }
@@ -56,6 +53,9 @@
       GodItem
     },
     computed: {
+      loading () {
+        return this.$store.state.p.loading
+      },
       cat: function () {
         return this.$route.params.cat
       },
@@ -80,24 +80,22 @@
       return {
         get_done: false,
         god_name: '',
-        loading: false,
         key: ''
       }
     },
     mounted () {
       let self = this
-      this.$store.dispatch('getMyGods', {cat: this.$route.params.cat}).then(function () {
+      this.$store.dispatch('getMyGods', this.cat).then(function () {
         self.get_done = true
       })
     },
     methods: {
       bottomCall: function () {
+        console.log('getMyGods')
+        this.$store.dispatch('getMyGods', this.cat)
       },
       add: function (god_name) {
         this.god_name = god_name
-      },
-      disableLoading: function () {
-        this.loading = false
       }
     }
   }
