@@ -1,10 +1,13 @@
 <template>
   <div>
     <div class="description word-wrap-bz" v-html="description"></div>
-    <a v-if="!video" @click="openImg(img_url)">
-      <img :src="img_url" class="responsive">
+    <a v-for="image in message.extended_entities" v-if="type==='images'" @click="openImg(proxy(image.url))">
+      <img :src="proxy(image.url)" class="responsive">
     </a>
-    <video v-if="video" :controls="true" type='video/mp4'>
+    <a v-if="type==='image'" @click="openImg(proxy(message.extended_entities.url))">
+      <img :src="proxy(message.extended_entities.url)" class="responsive">
+    </a>
+    <video v-if="type==='video'" :controls="true" type='video/mp4'>
       <source :src="video">
     </video>
   </div>
@@ -16,17 +19,13 @@
   export default {
     props: ['message'],
     computed: {
+      type: function () {
+        return this.message.type
+      },
       video: function () {
         if (this.message.extended_entities && this.message.type === 'video') {
           return this.message.extended_entities.video_url
         }
-      },
-      img_url: function () {
-        let img_url = this.message.extended_entities.url
-        // img_url = img_url.replace('s640x640', 's1080x1080').replace('s750x750', 's1080x1080') // .replace('/e35/', '/').replace('/e15/', '/')
-        // console.log(img_url)
-        img_url = window.btoa(window.btoa(img_url))
-        return '/api_sp/' + img_url
       },
       // height: function () {
       //   var img_height, img_width, real_height
@@ -40,6 +39,10 @@
       }
     },
     methods: {
+      proxy: function (url) {
+        let p_url = window.btoa(window.btoa(url))
+        return '/api_sp/' + p_url
+      },
       openImg: function (img_url) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
           window.open(img_url, '_blank')
