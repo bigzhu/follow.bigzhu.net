@@ -11,7 +11,7 @@
       </div>
     </q-transition>
 
-    <q-infinite-scroll :handler="loadMore">
+    <q-infinite-scroll :offset="1000" :handler="loadMore">
       <message v-for='message in messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0" class="center-container-bz">
@@ -87,7 +87,6 @@
           setTimeout(function () { self.show_no_login = false }, 5000)
         }
       },
-      checkLogin: checkLogin,
       fetchData: function () {
         if (!this.god_name) {
           if (this.messages.length === 0) {
