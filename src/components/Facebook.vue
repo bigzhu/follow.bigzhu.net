@@ -63,7 +63,11 @@
 </script>
 
 <style scoped>
-  img.responsive {
-    padding-top: 1rem;
+  video, img.responsive {
+    padding-top: 1rem
+  }
+  video {
+    max-width: 100%;
+    max-height: 40rem;
   }
 </style>

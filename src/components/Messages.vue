@@ -27,7 +27,7 @@
 <script>
   import NotYetFollow from './NotYetFollow'
   import SpinnerBz from './SpinnerBz'
-  var get_count = 50
+  var get_count = 10
   import Old from './Old.vue'
   import Message from './Message.vue'
   import checkLogin from 'bz-lib/functions/checkLogin'
