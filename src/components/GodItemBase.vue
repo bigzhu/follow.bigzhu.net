@@ -3,7 +3,6 @@
 
 <script>
   import _ from 'lodash'
-  import btoa from '../functions/encode_url'
   import myautolinker from '../functions/myautolinker'
   export default {
     computed: {
@@ -15,7 +14,7 @@
       },
       avatar: function () {
         if (this.now_avatar || this.max_social.avatar) {
-          return '/api_sp/' + btoa(this.now_avatar || this.max_social.avatar)
+          return this.now_avatar || this.max_social.avatar
         }
       }
     },

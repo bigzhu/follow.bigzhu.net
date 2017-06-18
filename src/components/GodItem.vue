@@ -2,12 +2,12 @@
   <div class="card">
     <div class="row">
       <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5 desktop-only">
-        <img :src="avatar" class="responsive">
+        <img :src="proxy(avatar)" class="responsive">
       </router-link>
 
       <div class="width-5of5">
         <div class="item two-lines">
-          <img :src="avatar" class="item-primary mobile-only">
+          <img :src="proxy(avatar)" class="item-primary mobile-only">
           <div class="item-content has-secondary">
             <router-link :to="{ name: 'God', params: { god_name: god.name }}">
               <span class="title">{{god.name}}</span>
@@ -38,8 +38,9 @@
   import SocialBadge from './SocialBadge'
   import GodItemBase from './GodItemBase'
   import god_data from '../datas/god'
+  import Proxy from './Proxy'
   export default {
-    mixins: [GodItemBase],
+    mixins: [GodItemBase, Proxy],
     props: {
       god: {
         type: Object,

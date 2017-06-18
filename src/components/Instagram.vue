@@ -8,15 +8,16 @@
       <img :src="proxy(message.extended_entities.url)" class="responsive">
     </a>
     <video v-if="type==='video'" :controls="true" type='video/mp4'>
-      <source :src="video">
+      <source :src="proxy(video)">
     </video>
   </div>
 </template>
 
 <script>
   import myautolinker from '../functions/myautolinker'
-
+  import Proxy from './Proxy'
   export default {
+    mixins: [Proxy],
     props: ['message'],
     computed: {
       type: function () {
@@ -39,10 +40,6 @@
       }
     },
     methods: {
-      proxy: function (url) {
-        let p_url = window.btoa(window.btoa(url))
-        return '/api_sp/' + p_url
-      },
       openImg: function (img_url) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
           window.open(img_url, '_blank')

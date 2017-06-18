@@ -8,7 +8,7 @@
     </div>
 
     <a @click="go(god.name)" :class="{'ui': popup, 'small': popup, 'centered': popup}" class="image">
-      <img :src="avatar" class="ui centered image avatar-bz">
+      <img :src="proxy(avatar)" class="ui centered image avatar-bz">
     </a>
     <div class="content delete-border">
       <a @click="go(god.name)" class="user-name-a">
@@ -30,7 +30,9 @@
 <script>
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
+  import Proxy from './Proxy'
   export default {
+    mixins: [Proxy],
     props: ['god', 'popup'],
     watch: {
       'god': {
@@ -46,7 +48,7 @@
         if (!this.av) {
           return ''
         }
-        return (window.bz_url || '') + '/api_sp/' + window.btoa(window.btoa(this.av))
+        return this.av
       }
     },
     components: {

@@ -6,13 +6,13 @@
     <div class="description" v-html="text"></div>
     <template v-for="media in medias" :media="media">
       <p class="description" v-html="media.caption"></p>
-      <a @click="openImg(media.img_url)">
-        <img :src="media.img_url" class="responsive" >
+      <a @click="openImg(proxy(media.img_url))">
+        <img :src="proxy(media.img_url)" class="responsive" >
       </a>
       <br>
     </template>
     <video v-if="video" :controls="true" type='video/mp4'>
-      <source :src="video">
+      <source :src="proxy(video)">
     </video>
   </div>
 </template>
@@ -29,7 +29,7 @@
           return _.map(
             this.message.extended_entities, function (d) {
               // var caption, height, img_height, img_url, img_width, t
-              var img_url = '/api_sp/' + window.btoa(window.btoa(d.original_size.url))
+              var img_url = d.original_size.url
               // img_url = d.original_size.url
               // img_height = d.original_size.height
               // img_width = d.original_size.width

@@ -3,10 +3,10 @@
     <div class="description word-wrap-bz" v-html="the_text"></div>
     <div class="description word-wrap-bz" v-html="description"></div>
     <a v-show="img_url && type!=='video'" @click="openImg(img_url)">
-      <img :src="img_url" class="responsive">
+      <img :src="proxy(img_url)" class="responsive">
     </a>
     <video v-if="type==='video'" :controls="true" type='video/mp4'>
-      <source :src="video">
+      <source :src="proxy(video)">
     </video>
   </div>
 </template>
@@ -14,8 +14,10 @@
 <script>
   // import '../assets/public.css'
   import myautolinker from '../functions/myautolinker'
+  import Proxy from './Proxy'
 
   export default {
+    mixins: [Proxy],
     props: ['message'],
     computed: {
       video: function () {
@@ -26,9 +28,7 @@
       },
       img_url: function () {
         if (this.message.extended_entities.pictrue) {
-          let img_url = this.message.extended_entities.pictrue
-          img_url = window.btoa(window.btoa(img_url))
-          return '/api_sp/' + img_url
+          return this.message.extended_entities.pictrue
         } else {
           return ''
         }

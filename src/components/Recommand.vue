@@ -87,15 +87,6 @@
           return god_info
         }
         return {god_id: 0}
-      },
-      avatar: function () {
-        var avatar, url
-        if (this.message.m_type === 'tumblr') {
-          url = 'https://api.tumblr.com/v2/blog/' + this.message.name + '.tumblr.com/avatar/512'
-          return url
-        }
-        avatar = window.btoa(window.btoa(this.message.avatar))
-        return (window.bz_url || '') + '/api_sp/' + avatar
       }
     },
     methods: {

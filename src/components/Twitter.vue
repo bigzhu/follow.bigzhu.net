@@ -4,10 +4,10 @@
     </div>
     <div v-for="media in medias">
       <a @click="openImg(media.img_url)" href='javascript:void(0)'>
-        <img v-show="media.videos.length===0" :src="media.img_url" class="responsive" >
+        <img v-show="media.videos.length===0" :src="proxy(media.img_url)" class="responsive" >
       </a>
       <video v-for="video in media.videos" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4'>
-        <source :src="video.url">
+        <source :src="proxy(video.url)">
       </video>
     </div>
   </div>
@@ -16,7 +16,9 @@
 <script>
   import _ from 'lodash'
   import myautolinker from '../functions/myautolinker'
+  import Proxy from './Proxy'
   export default {
+    mixins: [Proxy],
     props: ['message'],
     data: function () {
       return {
@@ -28,7 +30,7 @@
           return _.map(this.message.extended_entities.media,
             function (d) {
               // var height, img_height, img_url, img_width, t
-              var img_url = (window.bz_url || '') + '/api_sp/' + window.btoa(window.btoa(d.media_url_https + ':orig'))
+              var img_url = d.media_url_https + ':orig'
               var videos = []
               var type = ''
               if (d.video_info) {
@@ -44,18 +46,10 @@
                   type = 'gif'
                 }
               }
-
-              // img_height = d.sizes.medium.h
-              // img_width = d.sizes.medium.w
-              // height = getFitHeightForSemantic(img_height, img_width)
-              // if (height > img_height) {
-              //   height = img_height
-              // }
               var t = {
                 img_url: img_url,
                 videos: videos,
                 type: type
-                // height: height
               }
               return t
             }

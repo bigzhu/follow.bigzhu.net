@@ -18,7 +18,7 @@
         <div class="six wide column">
           <div class="god-avatar-bz">
             <router-link :to="{ name: 'God', params: { god_name: god_name }}" class="header god-name-bz user-name-a">
-              <img :src="avatar" class="avatar-img-bz">
+              <img :src="proxy(avatar)" class="avatar-img-bz">
             </router-link>
           </div>
         </div>
@@ -50,8 +50,10 @@
   import CountUp from 'bz-count-up'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
+  import Proxy from './Proxy'
 
   export default {
+    mixins: [Proxy],
     components: {
       SocialBadge,
       CountUp,
@@ -248,7 +250,7 @@
       },
       setInfo: function (info) {
         if (info.avatar) {
-          this.avatar = '/api_sp/' + window.btoa(window.btoa(info.avatar))
+          this.avatar = info.avatar
         }
         if (info.description) {
           this.description = info.description

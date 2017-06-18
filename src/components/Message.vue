@@ -1,7 +1,7 @@
 <template>
   <div class="card bz">
     <div class="item two-lines bz">
-      <img :src="avatar" class="item-primary avatar bz">
+      <img :src="proxy(avatar)" class="item-primary avatar bz">
       <div class="item-content has-secondary bz">
         <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
           {{message.name}}
@@ -80,8 +80,10 @@
   import Facebook from './Facebook'
   import TimeLen from 'bz-time-len'
   import Vue from 'vue'
+  import Proxy from './Proxy'
 
   export default {
+    mixins: [Proxy],
     props: {
       message: {
         type: Object,
@@ -156,8 +158,7 @@
         return {god_id: 0}
       },
       avatar: function () {
-        var avatar = window.btoa(window.btoa(this.message.avatar))
-        return (window.bz_url || '') + '/api_sp/' + avatar
+        return this.message.avatar
       }
     },
     methods: {
