@@ -1,6 +1,3 @@
-<style >
-</style>
-
 <template>
   <div>
     <div class="description">
@@ -14,17 +11,23 @@
       </li>
       <p v-html="issue_comment_link">
       </p>
-      <p v-show="issue_comment_body" v-html="issue_comment_body" class="word-wrap-bz"></p>
+      <p v-show="issue_comment_body" v-html="marked_issue_comment_body" class="word-wrap-bz"></p>
     </div>
   </div>
 </template>
 
 <script>
   // import store from '../store'
+  import marked from 'marked'
   import _ from 'lodash'
   export default {
     props: ['message'],
     computed: {
+      marked_issue_comment_body: function () {
+        if (this.issue_comment_body) {
+          return marked(this.issue_comment_body, { sanitize: true })
+        }
+      },
       repo_url: function () {
         return this.message.content.repo.url.replace('api.github.com/repos', 'github.com')
       },
