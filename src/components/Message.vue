@@ -90,7 +90,7 @@
         default: function () {
           return {
             avatar: '',
-            user_name: 'bigzhu',
+            user_name: '',
             id: 0
           }
         }
@@ -176,6 +176,9 @@
 </script>
 
 <style>
+  .card img {
+    max-width: 100%;
+  }
   .card-content.green-bz a {
     color: #2ea974;
   }
@@ -215,6 +218,7 @@
 </style>
 
 <style scoped>
+
   .more-infor-bz:hover {
     color: #54B98F;
   }
