@@ -19,6 +19,9 @@
     },
     methods: {
       proxy: function (url) {
+        if (!url) {
+          return ''
+        }
         // let p_url = window.btoa(window.btoa(url))
         // return '/api_sp/' + p_url
         // return '/p?url=' + encodeURIComponent(url)

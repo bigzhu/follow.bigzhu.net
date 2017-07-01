@@ -37,6 +37,7 @@ export const state = {
   god_is_exists: true, // 标记god是否存在
   god_infos: {}, // 查询的每个god信息存放在这里
   the_message: {
+    avatar: '',
     user_name: '',
     id: 0
   }, // 显示某个message

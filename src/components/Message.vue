@@ -89,7 +89,8 @@
         type: Object,
         default: function () {
           return {
-            user_name: '',
+            avatar: '',
+            user_name: 'bigzhu',
             id: 0
           }
         }
@@ -114,27 +115,6 @@
     },
     mounted () {
       this.$nextTick(function () {
-        // let self = this
-        // if (this.is_login) {
-        //   this.$store.dispatch('getIntersectionObserver').then(function (io) {
-        //     io.observe(self.$el)
-        //   })
-        // }
-        // var tool_tips_target = $(this.$el).find('.show-god-info')
-        // var popup_content = $(this.$el).find('.ui.card')
-        // $(tool_tips_target).popup(
-          //   {
-            //     popup: $(popup_content),
-            //     lastResort: true,
-            //     position: 'bottom left',
-            //     hoverable: true,
-            //     delay: {
-              //       show: 100,
-              //       hide: 500
-              //     },
-              //     onShow: self.getGodInfo
-              //   }
-      // )
       })
     },
     computed: {

@@ -34,6 +34,7 @@
     }
   }
 </script>
+
 <style scoped>
   .blank-padding {
     padding: 18px;
