@@ -176,6 +176,10 @@
 </script>
 
 <style>
+  .card pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
   .card img {
     max-width: 100%;
   }
@@ -194,47 +198,47 @@
     padding-top: 0;
     padding-bottom: .5rem;
     font-size: 1rem;
-  }
-  .item.two-lines.bz {
+    }
+    .item.two-lines.bz {
     height: 3rem;
-  }
-  .item.two-lines > .item-content.bz > .stamp{
+    }
+    .item.two-lines > .item-content.bz > .stamp{
     font-size: 12px;
-  }
-  .item.two-lines > .item-content.bz {
+    }
+    .item.two-lines > .item-content.bz {
     margin-left: 3.5rem;
     padding-top: .84rem;
     font-size: 1rem;
-  }
-  .item.two-lines > img.item-primary.bz {
+    }
+    .item.two-lines > img.item-primary.bz {
     top: 1rem;
     left: 1rem;
     width: 2rem;
     height: 2rem;
-  }
-  .item > .item-secondary.stamp.long-bz {
+    }
+    .item > .item-secondary.stamp.long-bz {
     width: 6rem;
-  }
-</style>
+    }
+  </style>
 
-<style scoped>
+  <style scoped>
 
-  .more-infor-bz:hover {
-    color: #54B98F;
-  }
-  .bookmark:hover {
-    color: #FBBD08;
-  }
-  .bookmark-light {
-    color: #FBBD08;
-  }
-  .anki-bz {
-    vertical-align: middle;
-    width: 1rem;
-    height: 21px;
-  }
-  i.icon {
-    font-size: 1rem;
-    vertical-align: baseline;
-  }
-</style>
+    .more-infor-bz:hover {
+      color: #54B98F;
+    }
+    .bookmark:hover {
+      color: #FBBD08;
+    }
+    .bookmark-light {
+      color: #FBBD08;
+    }
+    .anki-bz {
+      vertical-align: middle;
+      width: 1rem;
+      height: 21px;
+    }
+    i.icon {
+      font-size: 1rem;
+      vertical-align: baseline;
+    }
+  </style>
