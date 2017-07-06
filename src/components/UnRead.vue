@@ -3,7 +3,7 @@
     <button 
       @click="$refs['confirm_refalsh_message'].open()"
       :data-content="$t('UnRead.unread')"
-      class="circular fixed-bottom-right animate-pop"
+      class="circular absolute-bottom-right animate-pop"
       >
       <div data-content="Add users to your feed">
         {{unread_message_count}}
@@ -63,12 +63,12 @@
   .card {
     margin-bottom: 0;
   }
-  button.fixed-bottom-right:hover {
+  button.absolute-bottom-right:hover {
     background: #FFF;
     color: #26A69A;
     border: 1px solid #26A69A;
   }
-  button.fixed-bottom-right {
+  button.absolute-bottom-right {
     color: #DADADA;
     right: 1rem;
     border: 1px solid #DADADA;

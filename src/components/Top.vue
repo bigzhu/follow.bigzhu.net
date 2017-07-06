@@ -1,7 +1,7 @@
 <template>
   <button
     v-back-to-top.animate="{offset: 500, duration: 200}"
-    class="circular fixed-bottom-right animate-pop"
+    class="circular absolute-bottom-right animate-pop"
     >
     <i>keyboard_arrow_up</i>
   </button>
@@ -33,12 +33,12 @@
 </script>
 
 <style scoped>
-  button.fixed-bottom-right:hover {
+  button.absolute-bottom-right:hover {
     background: #FFF;
     color: #26A69A;
     border: 1px solid #26A69A;
   }
-  button.fixed-bottom-right {
+  button.absolute-bottom-right {
     color: #DADADA;
     border: 1px solid #DADADA;
     right: 1rem;

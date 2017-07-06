@@ -11,7 +11,7 @@
       </li>
       <p v-html="issue_comment_link">
       </p>
-      <p v-show="issue_comment_body" v-html="marked_issue_comment_body" class="word-wrap-bz"></p>
+      <p v-show="issue_comment_body" v-html="marked_issue_comment_body"></p>
     </div>
   </div>
 </template>

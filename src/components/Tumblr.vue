@@ -20,8 +20,10 @@
 <script>
   import _ from 'lodash'
   import myautolinker from '../functions/myautolinker'
+  import Proxy from './Proxy'
 
   export default {
+    mixins: [Proxy],
     props: ['message'],
     computed: {
       medias: function () {

@@ -180,6 +180,10 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+  .card code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
   .card img {
     max-width: 100%;
   }

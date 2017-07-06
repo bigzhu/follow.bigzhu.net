@@ -23,6 +23,8 @@ Object.keys(locales).forEach(function (lang) {
   Vue.locale(lang, locales[lang])
 })
 
+// Quasar.AddressbarColor.set('#fafafa')
+
 Vue.use(Quasar) // Install Quasar Framework
 Vue.use(Vuex)
 
