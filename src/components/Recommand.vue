@@ -4,10 +4,11 @@
       <cat route_name="Recommand" class="width-1of5 desktop-only">
       </cat>
       <div class="width-3of4">
-        <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
-        </GodItem>
-        <SpinnerBz :show="loading"></SpinnerBz>
-        <bottom-loader :el="$el" element_class=".god-item" v-on:bottom="bottomCall"></bottom-loader>
+        <q-infinite-scroll :offset="1000" :handler="bottomCall">
+          <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
+          </GodItem>
+          <SpinnerBz :show="loading"></SpinnerBz>
+        </q-infinite-scroll>
       </div>
     </div>
   </div>
@@ -17,7 +18,6 @@
   import SpinnerBz from './SpinnerBz'
   import GodItem from './GodItem'
   import Cat from './Cat'
-  import BottomLoader from 'bz-bottom-loader'
 
   export default {
     props: {
@@ -34,8 +34,7 @@
     components: {
       SpinnerBz,
       Cat,
-      GodItem,
-      BottomLoader
+      GodItem
     },
     directives: {
     },

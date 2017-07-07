@@ -1,38 +1,28 @@
-<style >
-  /*隐藏占位*/
-.invisible_bz {
-  visibility:hidden;
-};
-mark{
-  background: #FDFD95;
-  color: black;
-}
-</style>
 <template>
   <div>
     <div class='ui center aligned basic segment'>
       <old :god_name="god_name" :search_key="search_key"></old>
     </div>
-    <message v-for="message in messages" :message='message' :key="message.id">
-    </message>
+    <q-infinite-scroll :offset="1000" :handler="call_back">
+      <message v-for="message in messages" :message='message' :key="message.id">
+      </message>
+      <SpinnerBz :show="loading"></SpinnerBz>
+    </q-infinite-scroll>
 
     <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !new_loading}"></div>
-    <bottom-loader :el="$el" element_class=".ui.fluid.card" @bottom="call_back"></bottom-loader>
   </div>
 </template>
 
 <script>
-  // import {filterSearchMessages, newMessage} from '../store/actions'
+  import SpinnerBz from './SpinnerBz'
   import Old from './Old.vue'
   import Message from './Message.vue'
-  import BottomLoader from 'bz-bottom-loader'
-  // import Mark from 'mark.js'
 
   export default {
     components: {
+      SpinnerBz,
       Old,
-      Message,
-      BottomLoader
+      Message
     },
     watch: {
       'search_key': function (val, oldVal) {
@@ -99,3 +89,14 @@ mark{
     }
   }
 </script>
+
+<style >
+  /*隐藏占位*/
+.invisible_bz {
+  visibility:hidden;
+};
+mark{
+  background: #FDFD95;
+  color: black;
+}
+</style>

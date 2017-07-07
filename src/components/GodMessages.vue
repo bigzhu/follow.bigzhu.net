@@ -1,9 +1,10 @@
 <template>
   <div>
     <old :show="show_old" :god_name="god_name"></old>
+    <q-infinite-scroll :offset="1000" :handler="call_back">
     <message v-for="message in messages" :message='message' :key="message.id"></message>
     <SpinnerBz :show="new_loading"></SpinnerBz>
-    <bottom-loader :el="$el" element_class=".ui.fluid.card" v-on:bottom="call_back"></bottom-loader>
+    </q-infinite-scroll>
   </div>
 </template>
 
@@ -11,14 +12,12 @@
   import SpinnerBz from './SpinnerBz'
   import Old from './Old'
   import Message from './Message'
-  import BottomLoader from 'bz-bottom-loader'
 
   export default {
     components: {
       SpinnerBz,
       Old,
-      Message,
-      BottomLoader
+      Message
     },
     props: {
       god_name: {

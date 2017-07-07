@@ -3,23 +3,11 @@
 </template>
 
 <script>
-  export default {
-    props: [],
-    components: {
-    },
-    computed: {
-    },
-    data: function () {
-      return {
-      }
-    },
-    mounted: function () {
-      this.$nextTick(function () {
-      })
-    },
-    methods: {
-    }
+export default {
+  data () {
+    return {}
   }
+}
 </script>
 
 <style>

@@ -7,10 +7,12 @@
         <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
         <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
         </AddingGodItem>
-        <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
-        </GodItem>
-        <SpinnerBz :show="loading"></SpinnerBz>
-        <BottomLoader :el="$el" element_class=".god-item" @bottom="bottomCall"></BottomLoader>
+
+        <q-infinite-scroll :offset="1000" :handler="bottomCall">
+          <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
+          </GodItem>
+          <SpinnerBz :show="loading"></SpinnerBz>
+        </q-infinite-scroll>
         <AddGodButton v-on:add="add"></AddGodButton>
       </div>
     </div>
@@ -19,7 +21,6 @@
 
 <script>
   import NotYetFollow from './NotYetFollow'
-  import BottomLoader from 'bz-bottom-loader'
   import SpinnerBz from './SpinnerBz'
   import AddingGodItem from './AddingGodItem'
   import AddGodButton from './AddGodButton'
@@ -44,7 +45,6 @@
     props: [],
     components: {
       NotYetFollow,
-      BottomLoader,
       SpinnerBz,
       AddingGodItem,
       AddGodButton,

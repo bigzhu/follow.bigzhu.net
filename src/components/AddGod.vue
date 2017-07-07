@@ -59,13 +59,12 @@
       CountUp,
       Follow
     },
-    data: function () {
+    data: function() {
       return {
         god_name: '',
         input_name: '',
         stat: 'button',
-        god_info: {
-        },
+        god_info: {},
         twitter_info: {
           type: 'twitter',
           count: -4
@@ -99,23 +98,21 @@
       }
     },
     computed: {
-      cat: function () {
+      cat: function() {
         return this.$route.params.cat
       }
     },
-    mounted () {
-    },
+    mounted() {},
     methods: {
-      showAddGodInput: function () {
+      showAddGodInput: function() {
         this.input_name = '' // 清空上次的输入
         this.stat = 'input'
-        this.$nextTick(
-        )
+        this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
         // this.queryNotMyGods(this.$route.params.cat)
       },
-      init: function () {
+      init: function() {
         this.twitter_info = {
           type: 'twitter',
           count: -4
@@ -146,75 +143,93 @@
         this.tumblr_loading = false
         this.facebook_loading = false
       },
-      add: function () {
+      add: function() {
         this.init()
         this.god_name = this.input_name.trim()
         this.stat = 'adding'
         let self = this
         this.adding = true
         // this.addGod(this.god_name, this.$route.params.cat, this.startCheck)
-        this.$store.dispatch('postGod', {name: this.god_name, cat: this.$route.params.cat}).then(function (data) {
+        this.$store.dispatch('postGod', {
+          name: this.god_name,
+          cat: this.$route.params.cat
+        }).then(function(data) {
           self.startCheck(data.god_info)
         })
       },
-      startCheck: function (god_info) {
+      startCheck: function(god_info) {
         this.setGodInfo(god_info)
         this.adding = false
         this.twitter_loading = true
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'twitter' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'twitter'
+        }).then(function(data) {
           self.twitterDone(data.info)
         })
       },
-      twitterDone: function (info) {
+      twitterDone: function(info) {
         this.twitter_loading = false
         if (info) {
           this.twitter_info = info
           this.setInfo(info)
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'github' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'github'
+        }).then(function(data) {
           self.githubDone(data.info)
         })
         this.github_loading = true
       },
-      githubDone: function (info) {
+      githubDone: function(info) {
         this.github_loading = false
         if (info) {
           this.github_info = info
           this.setInfo(info)
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'instagram' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'instagram'
+        }).then(function(data) {
           self.instagramDone(data.info)
         })
         this.instagram_loading = true
       },
-      instagramDone: function (info) {
+      instagramDone: function(info) {
         this.instagram_loading = false
         if (info) {
           this.instagram_info = info
           this.setInfo(info)
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'tumblr' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'tumblr'
+        }).then(function(data) {
           self.tumblrDone(data.info)
         })
         this.tumblr_loading = true
       },
-      tumblrDone: function (info) {
+      tumblrDone: function(info) {
         this.tumblr_loading = false
         if (info) {
           this.tumblr_info = info
           this.setInfo(info)
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'facebook' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'facebook'
+        }).then(function(data) {
           self.facebookDone(data.info)
         })
         this.facebook_loading = true
       },
-      facebookDone: function (info) {
+      facebookDone: function(info) {
         this.facebook_loading = false
         if (info) {
           this.facebook_info = info
@@ -222,22 +237,25 @@
         }
         this.allDone()
       },
-      allDone: function (info) {
+      allDone: function(info) {
         this.disabled = false
         this.createGod()
-        this.$store.commit('UNSHIFT_MY_GOD', {cat: this.cat, god: this.god_info})
+        this.$store.commit('UNSHIFT_MY_GOD', {
+          cat: this.cat,
+          god: this.god_info
+        })
         // this.$store.dispatch('queryCat')
         this.stat = 'button'
         this.$emit('add_done', this.god_info)
         this.god_info = {}
       },
-      setGodSocial: function (type) {
+      setGodSocial: function(type) {
         if (this[type + '_info'].count !== -4) {
           this.god_info[type] = this.god_name
           this.god_info[type + '_user'] = this[type + '_info']
         }
       },
-      createGod: function () {
+      createGod: function() {
         this.setGodSocial('twitter')
         this.setGodSocial('github')
         this.setGodSocial('tumblr')
@@ -245,10 +263,10 @@
         this.setGodSocial('facebook')
         this.god_info.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
-      setGodInfo: function (god_info) {
+      setGodInfo: function(god_info) {
         this.god_info = god_info
       },
-      setInfo: function (info) {
+      setInfo: function(info) {
         if (info.avatar) {
           this.avatar = info.avatar
         }
