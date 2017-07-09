@@ -28,9 +28,38 @@
 </template>
 
 <script>
+  import {
+    QLayout,
+    QToolbar,
+    QToolbarTitle,
+    QSearch,
+    QTabs,
+    QRouteTab,
+    QBtn,
+    QIcon,
+    QItemSide,
+    QItemMain,
+    QSideLink,
+    QListHeader,
+    QScrollArea
+  } from 'quasar'
   export default {
     props: [],
-    components: {},
+    components: {
+      QLayout,
+      QToolbar,
+      QToolbarTitle,
+      QSearch,
+      QTabs,
+      QRouteTab,
+      QBtn,
+      QIcon,
+      QItemSide,
+      QItemMain,
+      QSideLink,
+      QListHeader,
+      QScrollArea
+    },
     computed: {},
     data: function() {
       return {}

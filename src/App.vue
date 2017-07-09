@@ -7,17 +7,17 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <div :class="{'header-sticky': sticky}" :style="'top: '+scroll_top+'px;'" class="header-bz" >
-        <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
-          <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}"
-            class="menu-item">{{ $t("App.whattofollow") }}</router-link>
-          <router-link v-show="oauth_info.name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}"
-            class="menu-item">{{ $t("App.following") }}</router-link>
-          <router-link v-show="oauth_info.name" :to="{ name:'Collect'}" :class="{'active': this.$route.name==='Collect'}"
-            class="menu-item">{{ $t("App.collect") }}</router-link>
-          <router-link :to="{ name:'Bio'}" :class="{'active': this.$route.name==='Bio'}"
-            class="menu-item">{{ $t("App.biography") }}</router-link>
-        </div>
+        <div :class="{'header-sticky': sticky}" :style="'top: '+scroll_top+'px;'" class="header-bz">
+          <div class="toolbar dark inverted desktop-only menu-bz toolbar-item">
+            <router-link :to="{'name': 'Recommand'}" :class="{'active': this.$route.name==='Recommand'}"
+              class="menu-item">{{ $t("App.whattofollow") }}</router-link>
+            <router-link v-show="oauth_info.name" :to="{ name:'Following'}" :class="{'active': this.$route.name==='Following'}"
+              class="menu-item">{{ $t("App.following") }}</router-link>
+            <router-link v-show="oauth_info.name" :to="{ name:'Collect'}" :class="{'active': this.$route.name==='Collect'}"
+              class="menu-item">{{ $t("App.collect") }}</router-link>
+            <router-link :to="{ name:'Bio'}" :class="{'active': this.$route.name==='Bio'}"
+              class="menu-item">{{ $t("App.biography") }}</router-link>
+          </div>
         </div>
         <q-btn flat @click="$refs.layout.toggleRight()">
           <q-icon name="menu" />
@@ -34,8 +34,8 @@
 <script>
   // import {Utils} from 'quasar'
   /*
-  * Root component
-  */
+   * Root component
+   */
   import {
     QLayout,
     QToolbar,
@@ -57,13 +57,13 @@
   export default {
     store,
     computed: {
-      route_name () {
+      route_name() {
         return this.$route.name
       },
-      oauth_info () {
+      oauth_info() {
         return store.state.p.oauth_info
       },
-      show_bar () {
+      show_bar() {
         return store.state.show_bar
       }
     },
@@ -83,14 +83,16 @@
       QListHeader,
       QScrollArea
     },
-    mounted () {
-      if (checkLogin()) { this.$store.dispatch('getOauthInfo') }
-      this.$nextTick(function () {
+    mounted() {
+      if (checkLogin()) {
+        this.$store.dispatch('getOauthInfo')
+      }
+      this.$nextTick(function() {
         this.nav_bar_height = document.getElementsByClassName('header-bz')[0].offsetHeight
         this.bindScroll()
       })
     },
-    data () {
+    data() {
       return {
         layoutStore: {
           view: 'lhh Lpr lfr',
@@ -109,21 +111,12 @@
       }
     },
     methods: {
-      bindScroll: function () {
+      bindScroll: function() {
+        /*
         let self = this
         let scroll_target = document.getElementsByClassName('layout-view')[0]
-        /*
-        scroll_target.addEventListener('scroll', Utils.throttle(function () {
-        if (self.route_name === 'Main') {
-        window.pageXOffset = scroll_target.scrollLeft
-        window.pageYOffset = scroll_target.scrollTop
-        }
-        self.check_bar(scroll_target)
-        }, 100)
-        )
-        */
         scroll_target.addEventListener('scroll',
-          function () {
+          function() {
             if (self.route_name === 'Main') {
               window.pageXOffset = scroll_target.scrollLeft
               window.pageYOffset = scroll_target.scrollTop
@@ -131,8 +124,9 @@
             self.check_bar(scroll_target)
           }
         )
+        */
       },
-      check_bar: function (scroll_target) {
+      check_bar: function(scroll_target) {
         var st = scroll_target.scrollTop
         if (Math.abs(this.last_scroll_top - st) <= 5) return
         if (st > this.last_scroll_top && st > this.nav_bar_height) { // 向下滚动

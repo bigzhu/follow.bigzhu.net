@@ -25,8 +25,9 @@ import locales from './locales'
 
 const i18n = new VueI18n({
   locale: lang, // set locale
-  locales // set locale messages
+  messages: locales // set locale messages
 })
+console.log(i18n)
 
 Vue.use(Quasar) // Install Quasar Framework
 Vue.use(Vuex)
