@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'invisible_bz': !show}" class="old-bz">
+  <div :class="{ 'invisible': !show}" class="old-bz">
     <q-spinner v-show="old_loading" :size="14" name="tail"></q-spinner>
     <a @click='old' href='javascript:void(0)'>
       <q-icon name="history" v-show="!old_loading"></q-icon>
@@ -32,17 +32,11 @@
 </script>
 
 <style scoped>
-  .invisible_bz { /*占位隐藏*/
-    visibility:hidden;
-  };
   .q-spinner {
     height: 21px;
   }
   .old-bz {
     display:  flex;
     justify-content: center;
-  }
-  a {
-    color: #515151;
   }
 </style>
