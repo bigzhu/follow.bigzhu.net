@@ -7,6 +7,9 @@ function load (component) {
   // '@' is aliased to src/components
   return () => System.import(`@/${component}.vue`)
 }
+function assembly (name) {
+  return { path: '/' + name, name: name, component: load(name) }
+}
 
 export default new VueRouter({
   /*
@@ -22,9 +25,18 @@ export default new VueRouter({
    */
 
   routes: [
-    { path: '/', component: load('Hello') },
-
-    // Always leave this last one
+    assembly('GodBlocked'),
+    assembly('UserSet'),
+    assembly('Collect'),
+    { path: '/BioDetail/:god_name', name: 'BioDetail', component: load('BioDetail') },
+    assembly('Bio'),
+    { path: '/Following/:cat*', name: 'Following', component: load('Following') },
+    assembly('UserNameLogin'),
+    { path: '/', name: 'Main', component: load('Main') }, // Default
+    { path: '/Recommand/:cat*', name: 'Recommand', component: load('Recommand') },
+    { path: '/ChangeLog', name: 'ChangeLog', component: load('ChangeLog') },
+    { path: '/TheMessage/:id', name: 'TheMessage', component: load('TheMessage') },
+    { path: '/God/:god_name', name: 'God', component: load('God') },
     { path: '*', component: load('Error404') } // Not found
   ]
 })
