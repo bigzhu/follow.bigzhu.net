@@ -1,7 +1,7 @@
 <template>
   <div id="q-app">
     <q-layout ref="layout" :view="layoutStore.view" :left-breakpoint="layoutStore.leftBreakpoint" :right-breakpoint="layoutStore.rightBreakpoint" :reveal="layoutStore.reveal">
-      <q-toolbar slot="header" color="black" inverted>
+      <q-toolbar slot="header" color="primary" inverted>
         <q-btn flat @click="$refs.layout.toggleLeft()">
           <q-icon name="menu" />
         </q-btn>
@@ -132,3 +132,9 @@
     }
   }
 </script>
+<style scoped>
+  /* q-toolbar-inverted 的没法用 variables 来改*/
+  .q-toolbar-inverted {
+    background-color: white;
+  }
+</style>
