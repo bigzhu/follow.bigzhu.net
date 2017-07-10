@@ -5,8 +5,13 @@
         <q-btn flat @click="$refs.layout.toggleLeft()">
           <q-icon name="menu" />
         </q-btn>
+        <router-link :to="{name: 'Main'}">
+          <img class="logo-img" src="./statics/assets/logo.svg">
+        </router-link>
         <q-toolbar-title>
-          Follow Center
+          <router-link :to="{name: 'Main'}">
+            Follow Center
+          </router-link>
           <span slot="subtitle">Follow your dream</span>
         </q-toolbar-title>
         <q-btn flat @click="$refs.layout.toggleRight()">
@@ -17,8 +22,8 @@
         <!-- Navigation -->
         <q-tabs slot="navigation" color="black" inverted>
           <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('App.whattofollow')" />
-          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('App.following')" v-show="oauth_info.name"/>
-          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('App.collect')" v-show="oauth_info.name"/>
+          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('App.following')" v-show="oauth_info.name" />
+          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('App.collect')" v-show="oauth_info.name" />
           <q-route-tab slot="title" :to="{ name:'Bio'}" replace :label="$t('App.biography')" />
         </q-tabs>
       </q-toolbar>
@@ -139,5 +144,9 @@
    */
   .q-toolbar-inverted {
     background-color: white;
+  }
+  .logo-img {
+    vertical-align: middle;
+    width: 2.5rem;
   }
 </style>

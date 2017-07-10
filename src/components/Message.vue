@@ -251,10 +251,6 @@
     padding-top: .84rem;
     font-size: 1rem;
   }
-
-  .item>.item-secondary.stamp.long-bz {
-    width: 6rem;
-  }
 </style>
 
 <style scoped>
