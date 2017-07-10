@@ -284,7 +284,8 @@
 
   /* message margin 要拉开*/
   .q-card {
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   /* avatar 大小*/
   .q-item-avatar {
