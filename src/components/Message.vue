@@ -1,5 +1,5 @@
 <template>
-  <q-card inline class="card bz">
+  <q-card class="card bz">
     <q-item>
       <q-item-side :avatar="proxy(avatar)" />
       <q-item-main>

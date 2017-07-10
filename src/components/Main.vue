@@ -59,10 +59,6 @@
 </script>
 
 <style scoped>
-  .blank-padding {
-    padding: 18px;
-  }
-
   .row.gutter>.no-top-padding-bz {
     padding-top: 0;
   }

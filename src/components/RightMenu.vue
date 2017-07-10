@@ -25,6 +25,8 @@
   }
 </script>
 
-<style>
-
+<style scoped>
+  .blank-padding {
+    padding: 18px;
+  }
 </style>
