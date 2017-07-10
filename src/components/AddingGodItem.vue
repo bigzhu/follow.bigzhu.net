@@ -1,14 +1,8 @@
 <template>
   <div class="card">
     <!-- loading -->
-    <spinner
-      v-show="loading"
-      name="puff"
-      color="#000000"
-      size="17rem"
-      class="spinner"
-      >
-    </spinner>
+    <q-spinner v-show="loading" name="puff" color="#000000" size="17rem" class="spinner">
+    </q-spinner>
     <i :class="{'twitter': twitter_loading, 'github': github_loading, 'instagram': instagram_loading, 'tumblr': tumblr_loading, 'facebook': facebook_loading}" class="icon social-icon"></i>
 
     <div class="row sm-column">
@@ -28,11 +22,11 @@
             <social-badge @click.native="setNow(god.twitter)" v-show="god.twitter.count" type="twitter" :info="god.twitter"></social-badge>
             <social-badge @click.native="setNow(god.github)" v-show="god.github.count" type="github" :info="god.github"></social-badge>
             <social-badge @click.native="setNow(god.tumblr)" v-show="god.tumblr.count" type="tumblr" :info="god.tumblr"></social-badge>
-            <social-badge @click.native="setNow(god.instagram)" v-show="god.instagram.count" type="instagram" :info="god.instagram" ></social-badge>
+            <social-badge @click.native="setNow(god.instagram)" v-show="god.instagram.count" type="instagram" :info="god.instagram"></social-badge>
             <social-badge @click.native="setNow(god.facebook)" v-show="god.facebook.count" type="facebook" :info="god.facebook"></social-badge>
           </div>
           <div v-html="description" class="card-content green-bz">
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +34,9 @@
 </template>
 
 <script>
+  import {
+    QSpinner
+  } from 'quasar'
   import CountUp from 'bz-count-up'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
@@ -50,7 +47,7 @@
     mixins: [GodItemBase],
     props: ['god_name'],
     watch: {
-      'god_name': function () {
+      'god_name': function() {
         if (this.god_name === '') {
           return
         }
@@ -59,11 +56,12 @@
       }
     },
     components: {
+      QSpinner,
       SocialBadge,
       CountUp,
       Follow
     },
-    data: function () {
+    data: function() {
       return {
         god: god_data,
         loading: false,
@@ -75,90 +73,106 @@
       }
     },
     computed: {
-      cat: function () {
+      cat: function() {
         return this.$route.params.cat
       }
     },
-    mounted () {
-    },
+    mounted() {},
     methods: {
-      init: function () {
+      init: function() {
         this.god = god_data
         this.god.name = this.god_name
       },
-      showAddGodInput: function () {
+      showAddGodInput: function() {
         this.input_name = '' // 清空上次的输入
-        this.$nextTick(
-        )
+        this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
         // this.queryNotMyGods(this.$route.params.cat)
       },
-      getGodInfo: function () {
+      getGodInfo: function() {
         let self = this
         this.loading = true
-        this.$store.dispatch('postGod', {name: this.god_name, cat: this.cat}).then(function (data) {
+        this.$store.dispatch('postGod', {
+          name: this.god_name,
+          cat: this.cat
+        }).then(function(data) {
           self.startCheck(data.god_info)
         })
       },
-      startCheck: function (god_info) {
+      startCheck: function(god_info) {
         this.setGodInfo(god_info)
         this.adding = false
         this.twitter_loading = true
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'twitter' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'twitter'
+        }).then(function(data) {
           self.twitterDone(data.info)
         })
       },
-      twitterDone: function (info) {
+      twitterDone: function(info) {
         this.twitter_loading = false
         if (info) {
           this.god.twitter = info
           this.setInfo(info, 'twitter')
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'github' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'github'
+        }).then(function(data) {
           self.githubDone(data.info)
         })
         this.github_loading = true
       },
-      githubDone: function (info) {
+      githubDone: function(info) {
         this.github_loading = false
         if (info) {
           this.god.github = info
           this.setInfo(info, 'github')
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'instagram' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'instagram'
+        }).then(function(data) {
           self.instagramDone(data.info)
         })
         this.instagram_loading = true
       },
-      instagramDone: function (info) {
+      instagramDone: function(info) {
         this.instagram_loading = false
         if (info) {
           this.god.instagram = info
           this.setInfo(info, 'instagram')
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'tumblr' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'tumblr'
+        }).then(function(data) {
           self.tumblrDone(data.info)
         })
         this.tumblr_loading = true
       },
-      tumblrDone: function (info) {
+      tumblrDone: function(info) {
         this.tumblr_loading = false
         if (info) {
           this.god.tumblr = info
           this.setInfo(info, 'tumblr')
         }
         let self = this
-        this.$store.dispatch('checkSocial', { name: this.god_name, type: 'facebook' }).then(function (data) {
+        this.$store.dispatch('checkSocial', {
+          name: this.god_name,
+          type: 'facebook'
+        }).then(function(data) {
           self.facebookDone(data.info)
         })
         this.facebook_loading = true
       },
-      facebookDone: function (info) {
+      facebookDone: function(info) {
         this.facebook_loading = false
         if (info) {
           this.god.facebook = info
@@ -166,19 +180,22 @@
         }
         this.allDone()
       },
-      allDone: function (info) {
+      allDone: function(info) {
         this.loading = false
         // Object.assign(this.god_info, this.god)
         this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.followed = 1
-        this.$store.commit('UNSHIFT_MY_GOD', {cat: this.cat, god: this.god})
+        this.$store.commit('UNSHIFT_MY_GOD', {
+          cat: this.cat,
+          god: this.god
+        })
         this.$emit('add_done', this.god)
         this.init()
       },
-      setGodInfo: function (god) {
+      setGodInfo: function(god) {
         this.god = god
       },
-      setInfo: function (info, type) {
+      setInfo: function(info, type) {
         if (info.avatar) {
           this.now_avatar = info.avatar
         }
@@ -195,17 +212,18 @@
   .icon.social-icon {
     font-size: 2rem;
     position: absolute;
-    left:50%;
-    top:50%;
-    margin-left:-1.2rem;
-    margin-top:-1.2rem;
+    left: 50%;
+    top: 50%;
+    margin-left: -1.2rem;
+    margin-top: -1.2rem;
   }
+
   .spinner {
     position: absolute;
-    left:50%;
-    top:50%;
-    margin-left:-8.5rem;
-    margin-top:-8.5rem;
+    left: 50%;
+    top: 50%;
+    margin-left: -8.5rem;
+    margin-top: -8.5rem;
   }
 
   .title {
@@ -213,13 +231,15 @@
     font-weight: 500;
   }
 
-  .width-2of5 {/* 居中头像 */
+  .width-2of5 {
+    /* 居中头像 */
     height: 17rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .item > .item-secondary.stamp {
+
+  .item>.item-secondary.stamp {
     width: auto;
   }
 </style>

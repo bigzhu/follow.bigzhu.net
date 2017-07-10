@@ -28,9 +28,11 @@
 </template>
 
 <script>
+  import {QModal} from 'quasar'
   export default {
     props: [],
     components: {
+      QModal
     },
     computed: {
     },

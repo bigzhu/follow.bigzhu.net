@@ -2,16 +2,17 @@
   <div :class="{ 'invisible_bz': !show}" class="old-bz">
     <q-spinner v-show="old_loading" :size="14" name="tail"></q-spinner>
     <a @click='old' href='javascript:void(0)'>
-      <i v-show="!old_loading">history</i>
+      <q-icon name="history" v-show="!old_loading"></q-icon>
       {{ $t("Old.search") }}
     </a>
   </div>
 </template>
 
 <script>
-  import {QSpinner} from 'quasar'
+  import {QSpinner, QIcon} from 'quasar'
   export default {
     components: {
+      QIcon,
       QSpinner
     },
     computed: {

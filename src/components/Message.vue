@@ -3,9 +3,24 @@
     <q-item>
       <q-item-side :avatar="proxy(avatar)" />
       <q-item-main>
-        <q-item-tile label>{{message.name}}</q-item-tile>
-        <q-item-tile sublabel>{{message.cat}}</q-item-tile>
+        <q-item-tile label>
+          <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
+            {{message.name}}
+          </router-link>
+        </q-item-tile>
+        <q-item-tile sublabel>
+          <router-link :to="{ name: 'Recommand', params: { cat: message.cat }}" class="stamp">
+            {{message.cat}}
+          </router-link>
+        </q-item-tile>
       </q-item-main>
+      <q-item-side>
+        <a target="_blank" :href="href">
+          <time-len :the_time="message.created_at" :lang="lang"></time-len>
+          <i :class="message.m_type" class="icon"></i>
+        </a>
+
+      </q-item-side>
     </q-item>
 
     <q-card-main class="card-content green-bz">

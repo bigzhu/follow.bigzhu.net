@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card">
+    <q-card class="card">
       <div class="info">
         <i class="wechat icon"></i>{{ $t("RightInfo.wechat") }}
       </div>
@@ -8,7 +8,7 @@
       <div class="info">
         <i class="qq icon"></i>{{ $t("RightInfo.qq") }}
       </div>
-    </div>
+    </q-card>
 
     <div class="about">
       <a class="footer-element" href="/about.html">{{ $t("RightInfo.about") }}</a>
@@ -26,13 +26,16 @@
 </template>
 
 <script>
+
   import {
+    QCard,
     QSelect
   } from 'quasar'
   import Vue from 'vue'
   export default {
     props: [],
     components: {
+      QCard,
       QSelect
     },
     computed: {
