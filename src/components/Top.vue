@@ -1,34 +1,31 @@
 <template>
-  <button
-    v-back-to-top.animate="{offset: 500, duration: 200}"
-    class="circular absolute-bottom-right animate-pop"
-    >
+  <button v-back-to-top.animate="{offset: 500, duration: 200}" class="circular absolute-bottom-right animate-pop">
     <i>keyboard_arrow_up</i>
   </button>
 </template>
 
 <script>
+  import {
+    BackToTop
+  } from 'quasar'
   export default {
+    directives: {
+      BackToTop
+    },
     vuex: {
-      getters: {
-      },
-      actions: {
-      }
+      getters: {},
+      actions: {}
     },
     props: [],
-    components: {
+    components: {},
+    computed: {},
+    data: function() {
+      return {}
     },
-    computed: {
-    },
-    data: function () {
-      return {
-      }
-    },
-    mounted () {
+    mounted() {
       // $(this.$el).popup()
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
@@ -38,6 +35,7 @@
     color: #26A69A;
     border: 1px solid #26A69A;
   }
+
   button.absolute-bottom-right {
     color: #DADADA;
     border: 1px solid #DADADA;
@@ -50,5 +48,5 @@
     .top-bz {
       right: .5em;
     }
-  } 
+  }
 </style>

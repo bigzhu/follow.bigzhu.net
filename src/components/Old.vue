@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'invisible_bz': !show}" class="old-bz">
-    <spinner v-show="old_loading" :size="14" name="tail"></spinner>
+    <q-spinner v-show="old_loading" :size="14" name="tail"></q-spinner>
     <a @click='old' href='javascript:void(0)'>
       <i v-show="!old_loading">history</i>
       {{ $t("Old.search") }}
@@ -9,7 +9,11 @@
 </template>
 
 <script>
+  import {QSpinner} from 'quasar'
   export default {
+    components: {
+      QSpinner
+    },
     computed: {
       old_loading () {
         return this.$store.state.old_loading

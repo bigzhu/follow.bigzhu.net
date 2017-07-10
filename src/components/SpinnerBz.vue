@@ -1,29 +1,31 @@
 <template>
   <div :class="{ 'hidden_bz': !show}" class="row justify-center" style="margin-bottom: 50px;">
-    <spinner name="dots" slot="message" :size="30"></spinner>
+    <q-spinner name="dots" slot="message" :size="30"></q-spinner>
   </div>
 </template>
 
 <script>
+  import {
+    QSpinner
+  } from 'quasar'
   export default {
     props: ['show'],
     components: {
+      QSpinner
     },
-    computed: {
+    computed: {},
+    data: function() {
+      return {}
     },
-    data: function () {
-      return {
-      }
-    },
-    mounted: function () {
-      this.$nextTick(function () {
+    mounted: function() {
+      this.$nextTick(function() {
         // code that assumes this.$el is in-document
       })
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style scoped>
+
 </style>

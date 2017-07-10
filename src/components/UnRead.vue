@@ -1,10 +1,6 @@
 <template>
   <div>
-    <button 
-      @click="$refs['confirm_refalsh_message'].open()"
-      :data-content="$t('UnRead.unread')"
-      class="circular absolute-bottom-right animate-pop"
-      >
+    <button @click="$refs['confirm_refalsh_message'].open()" :data-content="$t('UnRead.unread')" class="circular absolute-bottom-right animate-pop">
       <div data-content="Add users to your feed">
         {{unread_message_count}}
       </div>
@@ -25,26 +21,29 @@
 </template>
 
 <script>
+  import {
+    QModal
+  } from 'quasar'
   export default {
     props: [],
     components: {
+      QModal
     },
     computed: {
-      unread_message_count () {
+      unread_message_count() {
         return this.$store.state.unread_message_count
       }
     },
-    data: function () {
-      return {
-      }
+    data: function() {
+      return {}
     },
-    mounted () {
+    mounted() {
       // $(this.$el).popup()
     },
     methods: {
-      updateLast: function () {
+      updateLast: function() {
         let now = (new Date()).setHours(0, 0, 0, 0)
-        this.$store.dispatch('recordLastMessage', now).then(function (data) {
+        this.$store.dispatch('recordLastMessage', now).then(function(data) {
           window.location.reload()
         })
       }
@@ -53,9 +52,10 @@
 </script>
 
 <style scoped>
-  .card-actions > .primary {
+  .card-actions>.primary {
     padding-right: 1rem;
   }
+
   .light {
     margin-left: 10%;
   }
@@ -63,17 +63,20 @@
   .card {
     margin-bottom: 0;
   }
+
   button.absolute-bottom-right:hover {
     background: #FFF;
     color: #26A69A;
     border: 1px solid #26A69A;
   }
+
   button.absolute-bottom-right {
     color: #DADADA;
     right: 1rem;
     border: 1px solid #DADADA;
     margin: 1rem;
   }
+
   @media (min-width: 1100px) and (max-width: 1300px) {
     .un-read-bz {
       right: .5em;

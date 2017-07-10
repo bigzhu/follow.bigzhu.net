@@ -20,38 +20,38 @@
       <span class="footer-element">{{ $t("RightInfo.register") }}: {{registered_count}}</span>
       <span>© 2017 Follow Center</span>
     </div>
-    <q-select
-      type="list"
-      v-model="lang"
-      :options="lang_options">
+    <q-select type="list" v-model="lang" :options="lang_options">
     </q-select>
   </div>
 </template>
 
 <script>
+  import {
+    QSelect
+  } from 'quasar'
   import Vue from 'vue'
   export default {
     props: [],
     components: {
+      QSelect
     },
     computed: {
       lang: {
-        get: function () {
+        get: function() {
           return Vue.config.lang
         },
-        set: function (v) {
+        set: function(v) {
           Vue.config.lang = v
           window.localStorage.setItem('lang', v)
         }
       },
-      registered_count () {
+      registered_count() {
         return this.$store.state.registered_count
       }
     },
-    data: function () {
+    data: function() {
       return {
-        lang_options: [
-          {
+        lang_options: [{
             label: 'English',
             value: 'en'
           },
@@ -62,19 +62,19 @@
         ]
       }
     },
-    mounted: function () {
+    mounted: function() {
       this.$store.dispatch('getRegisteredCount')
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         // $(this.$el).find('.ui.dropdown').dropdown()
         // code that assumes this.$el is in-document
       })
     },
     methods: {
-      whichLang: function () {
+      whichLang: function() {
         if (this.lang === 'cn') return '中文'
         if (this.lang === 'en') return 'English'
       },
-      setLang: function (lang) {
+      setLang: function(lang) {
         window.localStorage.setItem('lang', lang)
       }
     }
@@ -87,43 +87,54 @@
     border-top: 1px solid #eee;
     display: flex;
   }
-  .footer > * {
+
+  .footer>* {
     flex: 1;
   }
+
   .q-picker-textfield.textfield:focus {
-    border-bottom: none; 
+    border-bottom: none;
   }
+
   .q-picker-textfield.textfield:hover {
-    border-bottom: none; 
+    border-bottom: none;
   }
+
   .q-picker-textfield.textfield {
-    border-bottom: none; 
+    border-bottom: none;
   }
+
   .q-popover list[style] {
     min-width: initial;
   }
+
   .about {
     margin-top: 3rem;
     padding: 1rem 0;
     border-top: 1px solid #eee;
     display: flex;
   }
-  .about > * {
+
+  .about>* {
     flex: 1;
   }
+
   i {
-    vertical-align:top;
+    vertical-align: top;
   }
+
   .info {
     margin: 1rem;
   }
+
   .card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
-  .card  img {
+
+  .card img {
     width: 10rem;
   }
 </style>

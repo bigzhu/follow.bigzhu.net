@@ -21,6 +21,7 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
+    "indent": 0,
     "space-before-function-paren": [2, { "anonymous": "ignore", "named": "ignore", "asyncArrow": "ignore" }],
     "camelcase": 0,
     // allow paren-less arrow functions
