@@ -93,7 +93,7 @@
           reveal: false,
           leftScroll: true,
           rightScroll: true,
-          leftBreakpoint: 996,
+          leftBreakpoint: 3996, // 定义多宽时, 自动展开 left
           rightBreakpoint: 1200,
           hideTabs: false
         },
