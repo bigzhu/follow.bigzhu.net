@@ -17,7 +17,7 @@
       <q-item-side>
         <a target="_blank" :href="href">
           <time-len :the_time="message.created_at" :lang="lang"></time-len>
-          <i :class="message.m_type" class="icon"></i>
+          <q-icon :name="'fa-'+message.m_type" />
         </a>
 
       </q-item-side>
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+  import 'quasar-extras/fontawesome'
   import {
     QIcon,
     QItemTile,
