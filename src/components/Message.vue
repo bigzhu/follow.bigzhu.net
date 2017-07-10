@@ -1,5 +1,5 @@
 <template>
-  <q-card class="card bz">
+  <q-card>
     <q-item>
       <q-item-side :avatar="proxy(avatar)" />
       <q-item-main>
@@ -72,6 +72,7 @@
 <script>
   import 'quasar-extras/fontawesome'
   import {
+    QBtn,
     QIcon,
     QItemTile,
     QItemSide,
@@ -108,6 +109,7 @@
       }
     },
     components: {
+      QBtn,
       QIcon,
       QItemTile,
       QItemMain,
@@ -212,6 +214,7 @@
     word-wrap: break-word;
   }
 
+  /* 图片最多也就 100% */
   .card img {
     max-width: 100%;
   }
@@ -249,13 +252,6 @@
     font-size: 1rem;
   }
 
-  .item.two-lines>img.item-primary.bz {
-    top: 1rem;
-    left: 1rem;
-    width: 2rem;
-    height: 2rem;
-  }
-
   .item>.item-secondary.stamp.long-bz {
     width: 6rem;
   }
@@ -283,5 +279,31 @@
   i.icon {
     font-size: 1rem;
     vertical-align: baseline;
+  }
+
+
+  /* message margin 要拉开*/
+  .q-card {
+    margin: 1rem;
+  }
+  /* avatar 大小*/
+  .q-item-avatar {
+    top: 1rem;
+    left: 1rem;
+    width: 2rem;
+    height: 2rem;
+  }
+  /* 图标和名字拉近一点 */
+  .q-item-side {
+    min-width: 2rem;
+  }
+  /* 为了对齐 */
+  .q-item {
+    font-size: 0.7rem;
+    padding: 8px;
+  }
+  /* actions 要有间距 */
+  .q-card-actions a {
+    padding-left: 0.5rem;
   }
 </style>

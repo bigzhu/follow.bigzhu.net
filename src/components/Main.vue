@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <messages class="no-top-padding-bz"></messages>
+    <messages></messages>
     <Top></Top>
     <UnRead></UnRead>
   </div>
@@ -59,7 +59,4 @@
 </script>
 
 <style scoped>
-  .row.gutter>.no-top-padding-bz {
-    padding-top: 0;
-  }
 </style>
