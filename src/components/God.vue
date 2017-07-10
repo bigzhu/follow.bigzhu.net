@@ -1,12 +1,6 @@
 <template>
   <div class="layout-padding">
-    <div class="row gutter">
-      <messages :god_name="god_name" class="width-5of5 no-top-padding-bz"></messages>
-      <div class="width-2of5 no-top-padding-bz bg">
-          <div class="blank-padding"></div>
-          <GodInfo v-show="god_name" :god="god_info"></GodInfo>
-      </div>
-    </div>
+    <messages :god_name="god_name" class="no-top-padding-bz"></messages>
     <Top></Top>
   </div>
 </template>
@@ -21,30 +15,26 @@
       Messages,
       GodInfo
     },
-    watch: {
-    },
-    data () {
-      return {
-      }
+    watch: {},
+    data() {
+      return {}
     },
     computed: {
-      god_info () {
+      god_info() {
         let god_info = this.$store.state.god_infos[this.god_name]
         if (god_info) {
           return god_info
         }
       },
-      god_name () {
+      god_name() {
         return this.$route.params.god_name
       }
     },
-    mounted () {
+    mounted() {
       this.$store.dispatch('getGod', this.god_name)
-      this.$nextTick(function () {
-      })
+      this.$nextTick(function() {})
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
@@ -52,7 +42,8 @@
   .blank-padding {
     padding: 18px;
   }
-  .row.gutter> .no-top-padding-bz {
+
+  .row.gutter>.no-top-padding-bz {
     padding-top: 0;
   }
 </style>

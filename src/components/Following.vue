@@ -1,20 +1,16 @@
 <template>
   <div class="layout-padding">
-    <div class="row sm-column">
-      <cat route_name="Following" :just_my="true" class="width-1of5 desktop-only">
-      </cat>
-      <div class="width-3of4">
-        <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
-        <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
-        </AddingGodItem>
+    <div class="width-3of4">
+      <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
+      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
+      </AddingGodItem>
 
-        <q-infinite-scroll :offset="1000" :handler="bottomCall">
-          <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
-          </GodItem>
-          <SpinnerBz :show="loading"></SpinnerBz>
-        </q-infinite-scroll>
-        <AddGodButton v-on:add="add"></AddGodButton>
-      </div>
+      <q-infinite-scroll :offset="1000" :handler="bottomCall">
+        <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
+        </GodItem>
+        <SpinnerBz :show="loading"></SpinnerBz>
+      </q-infinite-scroll>
+      <AddGodButton v-on:add="add"></AddGodButton>
     </div>
   </div>
 </template>
@@ -27,16 +23,15 @@
   import _ from 'lodash'
   import GodItem from './GodItem'
   import AddGod from './AddGod'
-  import Cat from './Cat'
   export default {
     events: {
-      'unfollow': function (god_id) { // 监听unfollow事件，移除已经unfollow的god
+      'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god
         this.$store.commit('DELETE_MY_GOD', god_id)
       }
     },
     watch: {
       '$route.params': {
-        handler: function () {
+        handler: function() {
           this.$store.dispatch('getMyGods', this.cat)
         },
         deep: true
@@ -49,26 +44,25 @@
       AddingGodItem,
       AddGodButton,
       AddGod,
-      Cat,
       GodItem
     },
     computed: {
-      loading () {
+      loading() {
         return this.$store.state.p.loading
       },
-      cat: function () {
+      cat: function() {
         return this.$route.params.cat
       },
-      filtered_my_gods: function () {
+      filtered_my_gods: function() {
         var self = this
-        return self.my_gods.filter(function (my_god) {
+        return self.my_gods.filter(function(my_god) {
           return my_god.name.indexOf(self.key) !== -1
         })
       },
-      ordered_my_gods: function () {
+      ordered_my_gods: function() {
         return _.orderBy(this.filtered_my_gods, 'followed_at', 'desc')
       },
-      my_gods () {
+      my_gods() {
         if (this.$store.state.cat_my_gods[this.cat]) {
           return this.$store.state.cat_my_gods[this.cat]
         } else {
@@ -76,25 +70,25 @@
         }
       }
     },
-    data: function () {
+    data: function() {
       return {
         get_done: false,
         god_name: '',
         key: ''
       }
     },
-    mounted () {
+    mounted() {
       let self = this
-      this.$store.dispatch('getMyGods', this.cat).then(function () {
+      this.$store.dispatch('getMyGods', this.cat).then(function() {
         self.get_done = true
       })
     },
     methods: {
-      bottomCall: function () {
+      bottomCall: function() {
         console.log('getMyGods')
         this.$store.dispatch('getMyGods', this.cat)
       },
-      add: function (god_name) {
+      add: function(god_name) {
         this.god_name = god_name
       }
     }

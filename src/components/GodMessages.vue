@@ -9,12 +9,14 @@
 </template>
 
 <script>
+  import {QInfiniteScroll} from 'quasar'
   import SpinnerBz from './SpinnerBz'
   import Old from './Old'
   import Message from './Message'
 
   export default {
     components: {
+      QInfiniteScroll,
       SpinnerBz,
       Old,
       Message

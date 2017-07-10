@@ -1,29 +1,23 @@
 <template>
   <div class="layout-padding">
-    <div class="row sm-column">
-      <cat route_name="Recommand" class="width-1of5 desktop-only">
-      </cat>
-      <div class="width-3of4">
-        <q-infinite-scroll :offset="1000" :handler="bottomCall">
-          <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
-          </GodItem>
-          <SpinnerBz :show="loading"></SpinnerBz>
-        </q-infinite-scroll>
-      </div>
-    </div>
+    <q-infinite-scroll :offset="1000" :handler="bottomCall">
+      <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
+      </GodItem>
+      <SpinnerBz :show="loading"></SpinnerBz>
+    </q-infinite-scroll>
   </div>
 </template>
 
 <script>
+  import {QInfiniteScroll} from 'quasar'
   import SpinnerBz from './SpinnerBz'
   import GodItem from './GodItem'
-  import Cat from './Cat'
 
   export default {
     props: {
       message: {
         type: Object,
-        default: function () {
+        default: function() {
           return {
             user_name: '',
             id: 0
@@ -32,22 +26,21 @@
       }
     },
     components: {
+      QInfiniteScroll,
       SpinnerBz,
-      Cat,
       GodItem
     },
-    directives: {
-    },
-    data: function () {
+    directives: {},
+    data: function() {
       return {
         no_more: false
       }
     },
     watch: {
       '$route.params': {
-        handler: function () {
+        handler: function() {
           let _this = this
-          this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function (data) {
+          this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
             _this.disableGodLoading()
           })
           this.stat = 'button'
@@ -55,44 +48,45 @@
         deep: true
       }
     },
-    mounted () {
+    mounted() {
       let self = this
-      this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function (data) {
+      this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
         self.disableGodLoading()
       })
     },
-    attached: function () {
-    },
+    attached: function() {},
     computed: {
-      loading () {
+      loading() {
         return this.$store.state.p.loading
       },
-      not_my_gods () {
+      not_my_gods() {
         if (this.$store.state.cat_gods[this.$route.params.cat]) {
           return this.$store.state.cat_gods[this.$route.params.cat]
         } else {
           return []
         }
       },
-      href: function () {
+      href: function() {
         if (this.message.m_type === 'github') {
           return `https://github.com/${this.message.name}`
         }
         return this.message.href
       },
-      god_info: function () {
+      god_info: function() {
         let god_info = this.$store.state.god_infos[this.message.user_name]
         if (god_info) {
           return god_info
         }
-        return {god_id: 0}
+        return {
+          god_id: 0
+        }
       }
     },
     methods: {
-      bottomCall: function () {
+      bottomCall: function() {
         this.$store.dispatch('getPublicGods', this.$route.params.cat)
       },
-      disableGodLoading: function () {
+      disableGodLoading: function() {
         this.loading = false
         if (this.not_my_gods.length === 0) {
           this.no_more = true
@@ -100,24 +94,24 @@
           this.no_more = false
         }
       },
-      toggleCollect: function (message) {
+      toggleCollect: function(message) {
         if (message.collect) {
-          this.$store.dispatch('uncollect', message.id).then(function (data) {
+          this.$store.dispatch('uncollect', message.id).then(function(data) {
             this.uncollectDone(data.message)
           })
         } else {
-          this.$store.dispatch('collect', message.id).then(function (data) {
+          this.$store.dispatch('collect', message.id).then(function(data) {
             this.collectDone(data.message)
           })
         }
       },
-      getGodInfo: function () {
+      getGodInfo: function() {
         this.queryGod(this.message.user_name)
       },
-      collectDone: function (message) {
+      collectDone: function(message) {
         message.collect = 1
       },
-      uncollectDone: function (message) {
+      uncollectDone: function(message) {
         message.collect = null
       }
     }
@@ -130,41 +124,51 @@
     background-color: inherit!important;
     box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
   }
+
   .ui.basic.negative.button.clear {
     color: inherit!important;
     background-color: inherit!important;
     box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
   }
+
   .ui.basic.positive.button.clear {
     color: inherit!important;
     background-color: inherit!important;
     box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
   }
-  .ui.grid > .row > .column.top-margin {
+
+  .ui.grid>.row>.column.top-margin {
     margin-top: 1em;
   }
+
   .ui.segment.add-newgod-bz {
     padding: 0;
   }
+
   .ui.segment.add-newgod:first-child {
     margin-top: 1em;
   }
+
   .newgod-style {
     width: 100%;
     color: #515151;
   }
+
   .ui.inverted.dimmer.transparent-bz {
     background-color: inherit;
   }
+
   .ui.add-newgod-style {
     width: 100%;
     color: #515151;
   }
+
   .ui.add-newgod-style:hover {
     width: 100%;
     color: #515151;
     color: #494949;
   }
+
   .ui.add-newgod-style:focus {
     width: 100%;
     color: #515151;
