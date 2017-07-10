@@ -1,39 +1,22 @@
 <template>
-  <div class="card bz">
-    <div class="item two-lines bz">
-      <img :src="proxy(avatar)" class="item-primary avatar bz">
-      <div class="item-content has-secondary bz">
-        <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
-          {{message.name}}
-        </router-link>
-        <br>
-        <router-link :to="{ name: 'Recommand', params: { cat: message.cat }}" class="stamp">
-          {{message.cat}}
-        </router-link>
-      </div>
-      <div class="item-secondary stamp long-bz">
-        <a target="_blank" :href="href">
-          <time-len :the_time="message.created_at" :lang="lang"></time-len>
-          <i  :class="message.m_type" class="icon"></i>
-        </a>
-      </div>
-    </div>
-    <div class="card-content green-bz">
-      <component class="content-bz" :is="message.m_type" :message="message"></component>
-    </div> 
-    <div class="card-actions bz">
-      <!--
-      <div class="text-primary hover-show"><i>thumb_up</i> 11k likes </div> 
-      <div class="text-primary hover-show"><i>mode_comment</i> 8 comments </div> 
-      -->
-      <div class="auto">
-      </div> 
+  <q-card inline class="card bz">
+    <q-item>
+      <q-item-side :avatar="proxy(avatar)" />
+      <q-item-main>
+        <q-item-tile label>{{message.name}}</q-item-tile>
+        <q-item-tile sublabel>{{message.cat}}</q-item-tile>
+      </q-item-main>
+    </q-item>
 
+    <q-card-main class="card-content green-bz">
+      <component class="content-bz" :is="message.m_type" :message="message"></component>
+    </q-card-main>
+    <q-card-actions align="end" class="card-actions bz">
       <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show">
-        <i>more_horiz</i>
+        <q-icon name="more_horiz"></q-icon>
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hover-show':!message.collect}" class="bookmark">
-        <i :class="{'bookmark-light': message.collect}">bookmark_border</i>
+        <q-icon :class="{'bookmark-light': message.collect}" name="bookmark_border"></q-icon>
       </a>
       <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hover-show':!message.anki}">
         <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -66,11 +49,22 @@
           </g>
         </svg>
       </a>
-    </div>
-  </div>
+    </q-card-actions>
+  </q-card>
 </template>
 
 <script>
+  import {
+    QIcon,
+    QItemTile,
+    QItemSide,
+    QItemMain,
+    QItem,
+    QCard,
+    QCardMain,
+    QCardActions,
+    QCardTitle
+  } from 'quasar'
   import checkLogin from 'bz-lib/functions/checkLogin'
   import GodCard from './GodCard'
   import Twitter from './Twitter'
@@ -87,7 +81,7 @@
     props: {
       message: {
         type: Object,
-        default: function () {
+        default: function() {
           return {
             avatar: '',
             user_name: '',
@@ -97,6 +91,15 @@
       }
     },
     components: {
+      QIcon,
+      QItemTile,
+      QItemMain,
+      QItemSide,
+      QItem,
+      QCardTitle,
+      QCardActions,
+      QCardMain,
+      QCard,
       TimeLen,
       Facebook,
       GodCard,
@@ -105,70 +108,76 @@
       Instagram,
       Tumblr
     },
-    directives: {
-    },
-    data: function () {
+    directives: {},
+    data: function() {
       return {
         collected: false,
         anki_color: '#B3B3B3' // #57ADE3
       }
     },
-    mounted () {
-      this.$nextTick(function () {
-      })
+    mounted() {
+      this.$nextTick(function() {})
     },
     computed: {
-      lang () {
+      lang() {
         return Vue.config.lang
       },
-      is_login () {
+      is_login() {
         return checkLogin()
       },
-      href: function () {
+      href: function() {
         if (this.message.m_type === 'github') {
           return `https://github.com/${this.message.name}`
         }
         return this.message.href
       },
-      god_info: function () {
+      god_info: function() {
         let god_info = this.$store.state.god_infos[this.message.user_name]
         if (god_info) {
           return god_info
         }
-        return {god_id: 0}
+        return {
+          god_id: 0
+        }
       },
-      avatar: function () {
+      avatar: function() {
         return this.message.avatar
       }
     },
     methods: {
-      anki: function () {
+      anki: function() {
         if (this.message.anki) return
         this.message.anki = 1
         // let front = $(this.$el).find('.content-bz').html()
         let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
-        this.$store.dispatch('postAnki', {front: front, message_id: this.message.id}).then(function () {
+        this.$store.dispatch('postAnki', {
+          front: front,
+          message_id: this.message.id
+        }).then(function() {
           // self.message.anki = 1
         })
       },
-      toggleCollect: function (message) {
+      toggleCollect: function(message) {
         if (message.collect) {
-          this.$store.dispatch('uncollect', message.id).then(function (data) {
+          this.$store.dispatch('uncollect', message.id).then(function(data) {
             message.collect = null
           })
         } else {
-          this.$store.dispatch('collect', message.id).then(function (data) {
+          this.$store.dispatch('collect', message.id).then(function(data) {
             message.collect = 1
           })
         }
       },
-      getGodInfo: function () {
-        this.$store.dispatch('getGod', {god_name: this.message.user_name, loading: false})
+      getGodInfo: function() {
+        this.$store.dispatch('getGod', {
+          god_name: this.message.user_name,
+          loading: false
+        })
       },
-      collectDone: function (message) {
+      collectDone: function(message) {
         message.collect = 1
       },
-      uncollectDone: function (message) {
+      uncollectDone: function(message) {
         message.collect = null
       }
     }
@@ -180,69 +189,82 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
   .card code {
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
   .card img {
     max-width: 100%;
   }
+
   .card-content.green-bz a {
     color: #2ea974;
   }
+
   @media (max-width: 767px) {
     .message-bz {
       box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 1px 3px 0px !important;
     }
-    .anki-bz svg{
+    .anki-bz svg {
       margin-top: 0.11rem;
     }
   }
+
   .card-actions.bz {
     padding-top: 0;
     padding-bottom: .5rem;
     font-size: 1rem;
-    }
-    .item.two-lines.bz {
+  }
+
+  .item.two-lines.bz {
     height: 3rem;
-    }
-    .item.two-lines > .item-content.bz > .stamp{
+  }
+
+  .item.two-lines>.item-content.bz>.stamp {
     font-size: 12px;
-    }
-    .item.two-lines > .item-content.bz {
+  }
+
+  .item.two-lines>.item-content.bz {
     margin-left: 3.5rem;
     padding-top: .84rem;
     font-size: 1rem;
-    }
-    .item.two-lines > img.item-primary.bz {
+  }
+
+  .item.two-lines>img.item-primary.bz {
     top: 1rem;
     left: 1rem;
     width: 2rem;
     height: 2rem;
-    }
-    .item > .item-secondary.stamp.long-bz {
+  }
+
+  .item>.item-secondary.stamp.long-bz {
     width: 6rem;
-    }
-  </style>
+  }
+</style>
 
-  <style scoped>
+<style scoped>
+  .more-infor-bz:hover {
+    color: #54B98F;
+  }
 
-    .more-infor-bz:hover {
-      color: #54B98F;
-    }
-    .bookmark:hover {
-      color: #FBBD08;
-    }
-    .bookmark-light {
-      color: #FBBD08;
-    }
-    .anki-bz {
-      vertical-align: middle;
-      width: 1rem;
-      height: 21px;
-    }
-    i.icon {
-      font-size: 1rem;
-      vertical-align: baseline;
-    }
-  </style>
+  .bookmark:hover {
+    color: #FBBD08;
+  }
+
+  .bookmark-light {
+    color: #FBBD08;
+  }
+
+  .anki-bz {
+    vertical-align: middle;
+    width: 1rem;
+    height: 21px;
+  }
+
+  i.icon {
+    font-size: 1rem;
+    vertical-align: baseline;
+  }
+</style>
