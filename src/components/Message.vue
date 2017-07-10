@@ -11,6 +11,7 @@
     <q-card-main class="card-content green-bz">
       <component class="content-bz" :is="message.m_type" :message="message"></component>
     </q-card-main>
+
     <q-card-actions align="end" class="card-actions bz">
       <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show">
         <q-icon name="more_horiz"></q-icon>

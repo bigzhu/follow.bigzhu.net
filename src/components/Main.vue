@@ -1,12 +1,6 @@
 <template>
   <div class="layout-padding">
-    <div class="row gutter">
-      <messages class="width-5of5 no-top-padding-bz"></messages>
-      <div class="width-2of5 no-top-padding-bz mobile-hide">
-          <div class="blank-padding"></div>
-          <RightInfo></RightInfo>
-      </div>
-    </div>
+    <messages class="no-top-padding-bz"></messages>
     <Top></Top>
     <UnRead></UnRead>
   </div>
@@ -26,35 +20,38 @@
       GodInfo,
       RightInfo
     },
-    data () {
-      return {
-      }
+    data() {
+      return {}
     },
     computed: {
-      god_info () {
+      god_info() {
         if (!this.god_name) return
         let god_info = this.$store.state.god_infos[this.god_name]
         if (god_info) {
           return god_info
         }
       },
-      god_name () {
+      god_name() {
         if (this.$route.params.god_name) return this.$route.params.god_name
       }
     },
-    mounted () {
-      if (this.god_name) { this.$store.dispatch('getGod', this.god_name) }
+    mounted() {
+      if (this.god_name) {
+        this.$store.dispatch('getGod', this.god_name)
+      }
       // $('body').visibility()
     },
     watch: {
       '$route': 'getGodInfo'
     },
     methods: {
-      getGodInfo: function () {
-        if (this.god_name) { this.$store.dispatch('getGod', this.god_name) }
+      getGodInfo: function() {
+        if (this.god_name) {
+          this.$store.dispatch('getGod', this.god_name)
+        }
       }
     },
-    beforeRouteLeave (to, from, next) {
+    beforeRouteLeave(to, from, next) {
       this.$store.commit('SET_SHOW_BAR', true) // 离开时，确保Bar显示出来
       next()
     }
@@ -65,7 +62,8 @@
   .blank-padding {
     padding: 18px;
   }
-  .row.gutter> .no-top-padding-bz {
+
+  .row.gutter>.no-top-padding-bz {
     padding-top: 0;
   }
 </style>

@@ -24,6 +24,7 @@
       </q-toolbar>
       <LeftMenu slot="left"></LeftMenu>
       <router-view />
+      <RightMenu slot="right"></RightMenu>
     </q-layout>
   </div>
 </template>
@@ -51,6 +52,7 @@
   import checkLogin from 'bz-lib/functions/checkLogin'
   import store from './store'
   import LeftMenu from './components/LeftMenu'
+  import RightMenu from './components/RightMenu'
   export default {
     store,
     computed: {
@@ -65,6 +67,7 @@
       }
     },
     components: {
+      RightMenu,
       LeftMenu,
       QLayout,
       QToolbar,
