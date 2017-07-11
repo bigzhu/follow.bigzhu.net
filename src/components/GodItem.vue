@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <q-card class="card">
     <div class="row">
       <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5 desktop-only">
         <img :src="proxy(avatar)" class="responsive">
@@ -12,27 +12,29 @@
             <router-link :to="{ name: 'God', params: { god_name: god.name }}">
               <span class="title">{{god.name}}</span>
             </router-link>
-            <br>
-            {{god.followed_count}} {{ $t("GodItem.follownumber") }}
+            <br> {{god.followed_count}} {{ $t("GodItem.follownumber") }}
           </div>
 
           <div class="item-secondary stamp">
             <social-badge @click.native="setNow(god.twitter)" v-show="showBadge(god.twitter)" type="twitter" :info="god.twitter"></social-badge>
             <social-badge @click.native="setNow(god.github)" v-show="showBadge(god.github)" type="github" :info="god.github"></social-badge>
             <social-badge @click.native="setNow(god.tumblr)" v-show="showBadge(god.tumblr)" type="tumblr" :info="god.tumblr"></social-badge>
-            <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram" ></social-badge>
+            <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram"></social-badge>
             <social-badge @click.native="setNow(god.facebook)" v-show="showBadge(god.facebook)" type="facebook" :info="god.facebook"></social-badge>
           </div>
         </div>
-        <div v-html="description" class="card-content green-bz"></div> 
+        <div v-html="description" class="card-content green-bz"></div>
         <god-remark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></god-remark>
       </div>
       <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script>
+  import {
+    QCard
+  } from 'quasar'
   import Follow from './Follow'
   import GodRemark from './GodRemark'
   import SocialBadge from './SocialBadge'
@@ -44,34 +46,31 @@
     props: {
       god: {
         type: Object,
-        default: function () {
+        default: function() {
           return god_data
         }
       },
-      is_my: {
-      }
+      is_my: {}
     },
     components: {
+      QCard,
       SocialBadge,
       Follow,
       GodRemark
     },
-    watch: {
-    },
-    mounted () {
-    },
-    directives: {
-    },
-    data: function () {
+    watch: {},
+    mounted() {},
+    directives: {},
+    data: function() {
       return {
         loading: false
       }
     },
     computed: {
-      god_id: function () {
+      god_id: function() {
         return this.god.god_id
       },
-      remark: function () {
+      remark: function() {
         if (this.god.remark) {
           return this.god.remark
         }
@@ -79,17 +78,19 @@
       }
     },
     methods: {
-      showBadge: function (social) {
+      showBadge: function(social) {
         return social.name && social.count
       },
-      block: function (god) {
+      block: function(god) {
         this.loading = true
         let self = this
-        this.$store.dispatch('postBlock', god.god_id).then(function (data) {
+        this.$store.dispatch('postBlock', god.god_id).then(function(data) {
           self.$store.commit('REMOVE_THIS_GOD_CAT_MY_GODS', god.god_id)
           self.loading = false
         })
-        if (god.followed === 1) { self.$store.dispatch('unfollow', god.god_id) }
+        if (god.followed === 1) {
+          self.$store.dispatch('unfollow', god.god_id)
+        }
       }
     }
   }
@@ -102,22 +103,24 @@
 </style>
 
 <style scoped>
-  @media (max-width : 920px) { 
-    .remark { /* 避免关注按钮遮住remark */
+  @media (max-width: 920px) {
+    .remark {
+      /* 避免关注按钮遮住remark */
       margin-bottom: 1.5rem;
     }
-    .item.two-lines > .item-secondary.stamp {/* 社交信息移到下部分 */
+    .item.two-lines>.item-secondary.stamp {
+      /* 社交信息移到下部分 */
       top: 3.5rem;
       left: 1rem;
       right: initial;
     }
   }
-  @media (min-width : 921px) { 
 
-    .item > .item-primary ~ .item-content { /* 桌面上不要空头像的位置 */
+  @media (min-width: 921px) {
+    .item>.item-primary~.item-content {
+      /* 桌面上不要空头像的位置 */
       margin-left: 16px;
     }
-
   }
 
   .follow {
@@ -125,18 +128,21 @@
     right: 0;
     bottom: 0;
   }
+
   .title {
     font-size: 1.1rem;
     font-weight: 500;
   }
 
-  .width-2of5 {/* 居中头像 */
+  .width-2of5 {
+    /* 居中头像 */
     min-height: 17rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .item > .item-secondary.stamp {
+
+  .item>.item-secondary.stamp {
     width: auto;
   }
 </style>
