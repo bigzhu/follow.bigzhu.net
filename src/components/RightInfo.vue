@@ -20,7 +20,7 @@
       <span class="footer-element">{{ $t("RightInfo.register") }}: {{registered_count}}</span>
       <span>© 2017 Follow Center</span>
     </div>
-    <q-select type="list" v-model="lang" :options="lang_options">
+    <q-select type="list" v-model="lang" :options="lang_options" class="select">
     </q-select>
   </div>
 </template>
@@ -39,12 +39,10 @@
     computed: {
       lang: {
         get: function() {
-          // return Vue.config.lang
           return this.$i18n.locale
         },
         set: function(v) {
           this.$i18n.locale = v
-          // Vue.config.lang = v
           window.localStorage.setItem('lang', v)
         }
       },
@@ -85,6 +83,10 @@
 </script>
 
 <style scoped>
+  .select {
+    margin-right: 1rem;
+  }
+
   .footer {
     padding: 1rem 0;
     border-top: 1px solid #eee;
