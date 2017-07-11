@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="blank-padding desktop-only"></div>
+    <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}"class="blank-padding desktop-only"></div>
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
     <Cat v-if="name==='Recommand'"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="true"></Cat>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import isInList from 'bz-lib/functions/isInList'
   import GodInfo from './GodInfo'
   import Cat from './Cat'
   import RightInfo from './RightInfo'
@@ -41,12 +42,17 @@
         // code that assumes this.$el is in-document
       })
     },
-    methods: {}
+    methods: {
+      isInList: isInList
+    }
   }
 </script>
 
 <style scoped>
-  .blank-padding {
+  .blank-padding-20 {
     padding: 20px;
+  }
+  .blank-padding-11 {
+    padding: 11px;
   }
 </style>
