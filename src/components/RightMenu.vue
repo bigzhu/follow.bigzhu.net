@@ -47,6 +47,6 @@
 
 <style scoped>
   .blank-padding {
-    padding: 18px;
+    padding: 20px;
   }
 </style>
