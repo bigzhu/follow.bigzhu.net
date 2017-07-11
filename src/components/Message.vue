@@ -19,7 +19,6 @@
           <time-len :the_time="message.created_at" :lang="lang"></time-len>
           <q-icon :name="'fa-'+message.m_type" />
         </a>
-
       </q-item-side>
     </q-item>
 
