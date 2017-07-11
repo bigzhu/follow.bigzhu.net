@@ -1,5 +1,6 @@
 <template>
-  <a href='javascript:;'> <i :class="the_class"></i>
+  <a href='javascript:;'> 
+    <q-icon :name="the_class" />
     <count-up v-show="count!=-4" :end="count" :duration="2.5" :options="{useEasing : true,
       useGrouping : true,
       separator : ',',
@@ -11,6 +12,8 @@
 </template>
 
 <script>
+  import 'quasar-extras/fontawesome'
+  import {QIcon} from 'quasar'
   import CountUp from 'bz-count-up'
   export default {
     props: {
@@ -26,6 +29,7 @@
       }
     },
     components: {
+      QIcon,
       CountUp
     },
     computed: {
@@ -47,7 +51,7 @@
         }
       },
       the_class: function () {
-        return `icon ${this.type} icon-hover-${this.type}`
+        return `fa-${this.type}`
       }
     },
     data: function () {
@@ -61,12 +65,13 @@
   }
 </script>
 
-<style scoped>
-  a {
-    margin-left: .5rem;
-  }
-  i {
-    margin-right: 0;
-    vertical-align:top;
-  }
+<style lang="stylus" scoped>
+  .q-card-subtitle .q-icon
+    font-size 1rem
+  a
+    margin-right: 1rem;
+  //i {
+  //  margin-right: 0;
+  //  vertical-align:top;
+  //}
 </style>

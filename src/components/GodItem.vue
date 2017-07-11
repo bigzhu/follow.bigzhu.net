@@ -1,5 +1,5 @@
 <template>
-  <q-card inline style="max-width: 15rem">
+  <q-card inline style="max-width: 21rem">
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="proxy(avatar)" />
@@ -118,8 +118,8 @@
 
 <style lang="stylus" scoped>
   .q-item-side img // 改大小
-    width 4rem
-    height 4rem
+    width 5rem
+    height 5rem
     margin-right 1rem
     margin-top 1rem
 
