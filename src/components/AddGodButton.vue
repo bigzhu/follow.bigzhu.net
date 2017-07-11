@@ -1,19 +1,13 @@
 <template>
   <div>
-    <button 
-      @click="$refs['confirm_refalsh_message'].open(), god_name=''"
-      :data-content="$t('UnRead.unread')"
-      class="circular fixed-bottom-right animate-pop"
-      >
-      <div data-content="Add users to your feed">
-        <i>add</i>
-      </div>
-    </button>
+    <q-fixed-position corner="bottom-right" :offset="[-286, 0]" class="bz">
+      <q-btn @click="$refs['confirm_refalsh_message'].open(), god_name=''" round color="" icon="add"></q-btn>
+    </q-fixed-position>
 
     <q-modal ref="confirm_refalsh_message">
       <div class="card">
         <div class="card-content card-force-top-padding">
-          <div class="floating-label" >
+          <div class="floating-label">
             <input @keyup.13="add" v-model="god_name" required class="full-width">
             <label>{{$t('AddGod.example')}}</label>
           </div>
@@ -28,24 +22,29 @@
 </template>
 
 <script>
-  import {QModal} from 'quasar'
+  import {
+    QBtn,
+    QFixedPosition,
+    QModal
+  } from 'quasar'
   export default {
     props: [],
     components: {
+      QBtn,
+      QFixedPosition,
       QModal
     },
-    computed: {
-    },
-    data: function () {
+    computed: {},
+    data: function() {
       return {
         god_name: ''
       }
     },
-    mounted () {
+    mounted() {
       // $(this.$el).popup()
     },
     methods: {
-      add: function () {
+      add: function() {
         this.$refs.confirm_refalsh_message.close()
         this.$emit('add', this.god_name.trim())
       }
@@ -54,13 +53,15 @@
 </script>
 
 <style scoped>
-  .card-actions > button {
+  .card-actions>button {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-  .card-actions > .primary {
+
+  .card-actions>.primary {
     padding-right: 1rem;
   }
+
   .light {
     margin-left: 10%;
   }
@@ -68,18 +69,8 @@
   .card {
     margin-bottom: 0;
   }
-  button.fixed-bottom-right:hover {
-    background: #FFF;
-    color: rgba(0,0,0,.8);
-  }
-  button.fixed-bottom-right {
-    right: 1rem;
-    border: 1px solid #DADADA;
-    margin: 1rem;
-  }
-  @media (min-width: 1100px) and (max-width: 1300px) {
-    .un-read-bz {
-      right: .5em;
-    }
+
+  .fixed-bottom-right {
+    bottom: 1rem;
   }
 </style>

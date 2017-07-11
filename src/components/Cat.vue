@@ -4,7 +4,7 @@
       <q-item-side :icon="getIcon(cat.cat)" />
       <q-item-main>
         <q-item-tile label>{{cat.cat}}</q-item-tile>
-        <q-item-tile sublabel></q-item-tile>
+        <q-item-tile sublabel>fuck</q-item-tile>
       </q-item-main>
     </q-item>
   </q-list>
@@ -12,12 +12,16 @@
 
 <script>
   import {
+    QItemTile,
+    QItemMain,
     QItemSide,
     QItem,
     QList
   } from 'quasar'
   export default {
     components: {
+      QItemTile,
+      QItemMain,
       QItemSide,
       QItem,
       QList
