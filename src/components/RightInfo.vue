@@ -10,6 +10,7 @@
       </div>
     </q-card>
 
+    <div class="info">
     <div class="about">
       <a class="footer-element" href="/about.html">{{ $t("RightInfo.about") }}</a>
       <a class="footer-element" href="http://bigzhu.lorstone.com">{{ $t("RightInfo.blog") }}</a>
@@ -22,6 +23,7 @@
     </div>
     <q-select type="list" v-model="lang" :options="lang_options" class="select">
     </q-select>
+    </div>
   </div>
 </template>
 
@@ -83,8 +85,8 @@
 </script>
 
 <style scoped>
-  .select {
-    margin-right: 1rem;
+  .info {
+    margin: 1rem;
   }
 
   .footer {
