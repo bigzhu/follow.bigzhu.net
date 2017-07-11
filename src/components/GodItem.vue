@@ -1,44 +1,44 @@
 <template>
-  <q-card>
-    <q-card-media class="mobile-only">
-      <img :src="proxy(avatar)">
-    </q-card-media>
-    <div class="row">
-      <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="col-4 desktop-only">
-        <img :src="proxy(avatar)" class="responsive">
+  <q-card inline style="max-width: 15rem">
+    <q-item>
+      <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+        <q-item-side :avatar="proxy(avatar)" />
       </router-link>
-      <div class="col-8">
-        <q-item>
-          <q-item-main>
-            <q-item-tile label>
-              <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-                {{god.name}}
-              </router-link>
-            </q-item-tile>
-            <q-item-tile sublabel>
-              {{god.followed_count}} {{ $t("GodItem.follownumber") }}
-            </q-item-tile>
-          </q-item-main>
-          <q-item-side>
-            <social-badge @click.native="setNow(god.twitter)" v-show="showBadge(god.twitter)" type="twitter" :info="god.twitter"></social-badge>
-            <social-badge @click.native="setNow(god.github)" v-show="showBadge(god.github)" type="github" :info="god.github"></social-badge>
-            <social-badge @click.native="setNow(god.tumblr)" v-show="showBadge(god.tumblr)" type="tumblr" :info="god.tumblr"></social-badge>
-            <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram"></social-badge>
-            <social-badge @click.native="setNow(god.facebook)" v-show="showBadge(god.facebook)" type="facebook" :info="god.facebook"></social-badge>
-          </q-item-side>
-        </q-item>
-        <q-card-main  class="card-content green-bz">
-          <p v-html="description"></p>
-          <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
-        </q-card-main>
+      <q-item-main>
+        <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+          <q-item-tile label>{{god.name}}</q-item-tile>
+        </router-link>
+        <q-item-tile sublabel>
+          {{god.followed_count}} {{ $t("GodItem.follownumber") }}
+        </q-item-tile>
+      </q-item-main>
+    </q-item>
+
+    <q-card-title>
+      <div slot="subtitle">
+        <social-badge @click.native="setNow(god.twitter)" v-show="showBadge(god.twitter)" type="twitter" :info="god.twitter"></social-badge>
+        <social-badge @click.native="setNow(god.github)" v-show="showBadge(god.github)" type="github" :info="god.github"></social-badge>
+        <social-badge @click.native="setNow(god.tumblr)" v-show="showBadge(god.tumblr)" type="tumblr" :info="god.tumblr"></social-badge>
+        <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram"></social-badge>
+        <social-badge @click.native="setNow(god.facebook)" v-show="showBadge(god.facebook)" type="facebook" :info="god.facebook"></social-badge>
       </div>
+    </q-card-title>
+
+    <q-card-main class="card-content green-bz">
+      <p v-html="description"></p>
+      <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
+    </q-card-main>
+    <q-card-actions align="end">
       <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
-    </div>
+    </q-card-actions>
+
   </q-card>
 </template>
 
 <script>
   import {
+    QCardTitle,
+    QCardActions,
     QCardMain,
     QItem,
     QCardMedia,
@@ -65,6 +65,8 @@
       is_my: {}
     },
     components: {
+      QCardTitle,
+      QCardActions,
       QCardMain,
       QItem,
       QCardMedia,
@@ -115,7 +117,11 @@
 </script>
 
 <style lang="stylus" scoped>
-
+  .q-item-side img // 改大小
+    width 4rem
+    height 4rem
+    margin-right 1rem
+    margin-top 1rem
 
 //  .q-card:hover .hover-show {
 //   opacity: 1;
