@@ -26,12 +26,10 @@
 </template>
 
 <script>
-
   import {
     QCard,
     QSelect
   } from 'quasar'
-  import Vue from 'vue'
   export default {
     props: [],
     components: {
@@ -41,10 +39,12 @@
     computed: {
       lang: {
         get: function() {
-          return Vue.config.lang
+          // return Vue.config.lang
+          return this.$i18n.locale
         },
         set: function(v) {
-          Vue.config.lang = v
+          this.$i18n.locale = v
+          // Vue.config.lang = v
           window.localStorage.setItem('lang', v)
         }
       },
