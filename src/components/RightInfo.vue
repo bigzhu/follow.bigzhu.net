@@ -21,7 +21,7 @@
       <span class="footer-element">{{ $t("RightInfo.register") }}: {{registered_count}}</span>
       <span>© 2017 Follow Center</span>
     </div>
-    <q-select type="list" v-model="lang" :options="lang_options" class="select">
+    <q-select type="list" v-model="lang" :options="lang_options">
     </q-select>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="blank-padding"></div>
+    <div class="blank-padding desktop-only"></div>
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
     <Cat v-if="name==='Recommand'"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="true"></Cat>
