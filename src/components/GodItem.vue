@@ -118,8 +118,8 @@
 
 <style lang="stylus" scoped>
   .q-item-side img // 改大小
-    width 5rem
-    height 5rem
+    width 6rem
+    height 6rem
     margin-right 1rem
     margin-top 1rem
 

@@ -66,12 +66,8 @@
 </script>
 
 <style lang="stylus" scoped>
-  .q-card-subtitle .q-icon
+  .q-card-subtitle .q-icon // icon 不能太大, 默认是 20px
     font-size 1rem
-  a
+  a // icon 间要有间隔
     margin-right: 1rem;
-  //i {
-  //  margin-right: 0;
-  //  vertical-align:top;
-  //}
 </style>
