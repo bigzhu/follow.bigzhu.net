@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <q-infinite-scroll :offset="10" :handler="loadMore" inline>
+    <q-infinite-scroll :handler="loadMore">
       <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
@@ -49,10 +49,7 @@
       }
     },
     mounted() {
-      let self = this
-      this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
-        self.disableGodLoading()
-      })
+      // this.loadMore()
     },
     attached: function() {},
     computed: {
@@ -85,7 +82,10 @@
     methods: {
       loadMore: function() {
         console.log('loadMore')
-        this.$store.dispatch('getPublicGods', this.$route.params.cat)
+        let self = this
+        this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
+        self.disableGodLoading()
+      })
       },
       disableGodLoading: function() {
         this.loading = false

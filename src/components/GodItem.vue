@@ -1,5 +1,5 @@
 <template>
-  <q-card inline style="max-width: 21rem">
+  <q-card style="max-width: 21rem">
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="proxy(avatar)" />
