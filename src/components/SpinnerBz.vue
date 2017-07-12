@@ -1,17 +1,17 @@
 <template>
   <div :class="{ 'hidden_bz': !show}" class="row justify-center" style="margin-bottom: 50px;">
-    <q-spinner name="dots" slot="message" :size="30"></q-spinner>
+    <QSpinnerDots slot="message" :size="30"></QSpinnerDots>
   </div>
 </template>
 
 <script>
   import {
-    QSpinner
+    QSpinnerDots
   } from 'quasar'
   export default {
     props: ['show'],
     components: {
-      QSpinner
+      QSpinnerDots
     },
     computed: {},
     data: function() {

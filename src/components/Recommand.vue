@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <q-infinite-scroll :offset="1000" :handler="bottomCall">
+    <q-infinite-scroll :offset="10" :handler="loadMore" inline>
       <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
@@ -83,7 +83,8 @@
       }
     },
     methods: {
-      bottomCall: function() {
+      loadMore: function() {
+        console.log('loadMore')
         this.$store.dispatch('getPublicGods', this.$route.params.cat)
       },
       disableGodLoading: function() {
@@ -118,59 +119,59 @@
   }
 </script>
 
-<style>
-  .clear-button-bz {
-    color: inherit!important;
-    background-color: inherit!important;
-    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
-  }
-
-  .ui.basic.negative.button.clear {
-    color: inherit!important;
-    background-color: inherit!important;
-    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
-  }
-
-  .ui.basic.positive.button.clear {
-    color: inherit!important;
-    background-color: inherit!important;
-    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
-  }
-
-  .ui.grid>.row>.column.top-margin {
-    margin-top: 1em;
-  }
-
-  .ui.segment.add-newgod-bz {
-    padding: 0;
-  }
-
-  .ui.segment.add-newgod:first-child {
-    margin-top: 1em;
-  }
-
-  .newgod-style {
-    width: 100%;
-    color: #515151;
-  }
-
-  .ui.inverted.dimmer.transparent-bz {
-    background-color: inherit;
-  }
-
-  .ui.add-newgod-style {
-    width: 100%;
-    color: #515151;
-  }
-
-  .ui.add-newgod-style:hover {
-    width: 100%;
-    color: #515151;
-    color: #494949;
-  }
-
-  .ui.add-newgod-style:focus {
-    width: 100%;
-    color: #515151;
-  }
+<style lang="stylus" scoped>
+//  .clear-button-bz {
+//    color: inherit!important;
+//    background-color: inherit!important;
+//    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
+//  }
+//
+//  .ui.basic.negative.button.clear {
+//    color: inherit!important;
+//    background-color: inherit!important;
+//    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
+//  }
+//
+//  .ui.basic.positive.button.clear {
+//    color: inherit!important;
+//    background-color: inherit!important;
+//    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset !important;
+//  }
+//
+//  .ui.grid>.row>.column.top-margin {
+//    margin-top: 1em;
+//  }
+//
+//  .ui.segment.add-newgod-bz {
+//    padding: 0;
+//  }
+//
+//  .ui.segment.add-newgod:first-child {
+//    margin-top: 1em;
+//  }
+//
+//  .newgod-style {
+//    width: 100%;
+//    color: #515151;
+//  }
+//
+//  .ui.inverted.dimmer.transparent-bz {
+//    background-color: inherit;
+//  }
+//
+//  .ui.add-newgod-style {
+//    width: 100%;
+//    color: #515151;
+//  }
+//
+//  .ui.add-newgod-style:hover {
+//    width: 100%;
+//    color: #515151;
+//    color: #494949;
+//  }
+//
+//  .ui.add-newgod-style:focus {
+//    width: 100%;
+//    color: #515151;
+//  }
 </style>
