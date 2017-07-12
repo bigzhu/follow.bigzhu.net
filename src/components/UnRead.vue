@@ -54,7 +54,6 @@
 </script>
 
 <style scoped>
-
   .card-actions>.primary {
     padding-right: 1rem;
   }

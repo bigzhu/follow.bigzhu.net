@@ -97,7 +97,7 @@
     data() {
       return {
         layoutStore: {
-          view: 'lhh Lpr lfr',
+          view: 'lhh LpR lfr',
           reveal: false,
           leftScroll: true,
           rightScroll: true,
@@ -138,7 +138,13 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus">
+  .layout-aside.fixed.on-layout.layout-aside-right.scroll 
+    box-shadow none
+</style>
+
+<style lang="stylus" scoped>
+
   /* q-toolbar-inverted 的没法用 variables 来改
     改为白色
    */
