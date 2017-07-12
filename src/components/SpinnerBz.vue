@@ -8,6 +8,7 @@
   import {
     QSpinnerDots
   } from 'quasar'
+
   export default {
     props: ['show'],
     components: {

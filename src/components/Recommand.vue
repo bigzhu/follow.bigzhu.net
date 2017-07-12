@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <q-infinite-scroll :handler="loadMore">
+    <q-infinite-scroll :handler="loadMore" inline>
       <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
@@ -80,11 +80,12 @@
       }
     },
     methods: {
-      loadMore: function() {
+      loadMore: function(index, done) {
         console.log('loadMore')
         let self = this
         this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
         self.disableGodLoading()
+        setTimeout(done, 3000)
       })
       },
       disableGodLoading: function() {
