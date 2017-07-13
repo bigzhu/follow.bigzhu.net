@@ -15,9 +15,24 @@
           <span slot="subtitle">Follow your dream</span>
         </q-toolbar-title>
 
-        <q-btn @click="login" flat small icon="fa-sign-in">
+        <q-btn v-show="!oauth_info.name" @click="login" flat small icon="fa-sign-in">
           登录
         </q-btn>
+        <q-btn v-show="oauth_info.name" flat ref="target">
+          <img :src="oauth_info.avatar" class="avatar" />
+          <!-- Direct child of target -->
+          <q-popover ref="popover">
+            <q-list item-separator link>
+              <q-item @click="$router.push('/UserSet'), $refs.popover.close()">
+                设置
+              </q-item>
+              <q-item @click="logout(), $refs.popover.close()">
+                退出
+              </q-item>
+            </q-list>
+          </q-popover>
+        </q-btn>
+
 
         <q-btn flat @click="$refs.layout.toggleRight()">
           <q-icon name="menu" />
@@ -46,6 +61,9 @@
    * Root component
    */
   import {
+    QList,
+    QItem,
+    QPopover,
     Toast,
     QLayout,
     QToolbar,
@@ -79,6 +97,9 @@
       }
     },
     components: {
+      QList,
+      QItem,
+      QPopover,
       Toast,
       RightMenu,
       LeftMenu,
@@ -121,7 +142,10 @@
       }
     },
     methods: {
-      login: function () {
+      logout: function () {
+        window.location = '/api_logout'
+      },
+      login: function() {
         window.location = '/login.html'
       },
       check_bar: function(scroll_target) {
@@ -155,10 +179,10 @@
 </style>
 
 <style lang="stylus" scoped>
-
-  /* q-toolbar-inverted 的没法用 variables 来改
-    改为白色
-   */
+  .avatar
+    width 3rem
+    height 3rem
+  //q-toolbar-inverted 的没法用 variables 来改 改为白色
   .q-toolbar-inverted {
     background-color: white;
   }
