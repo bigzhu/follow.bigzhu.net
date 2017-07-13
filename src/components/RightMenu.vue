@@ -2,8 +2,8 @@
   <q-scroll-area style="width: 100%; height: 100%">
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
-    <Cat v-if="name==='Recommand'"></Cat>
-    <Cat v-if="name==='Following'" route_name="Following" :just_my="true"></Cat>
+    <Cat v-show="name==='Recommand'"></Cat>
+    <Cat v-show="name==='Following'" route_name="Following" :just_my="true"></Cat>
     <GodInfo v-show="god_name" :god="god_info"></GodInfo>
   </q-scroll-area>
 </template>
@@ -52,7 +52,9 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+  .q-list + .q-list
+    margin-top 0
   .blank-padding-20 {
     padding: 20px;
   }

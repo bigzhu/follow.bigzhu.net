@@ -48,6 +48,10 @@
     props: {
       god_name: {
         type: String
+      },
+      type: {
+        type: String, // main god collect search
+        default: 'main'
       }
     },
     watch: {
@@ -80,8 +84,9 @@
         return this.$store.state.new_loading
       },
       messages() {
-        if (!this.god_name) return this.$store.state.messages
-        return this.$store.state.gods_messages[this.god_name]
+        if (this.is_collect) return this.$store.state.collect_messages
+        if (this.god_name) return this.$store.state.gods_messages[this.god_name]
+        return this.$store.state.messages
       }
     },
     mounted() {

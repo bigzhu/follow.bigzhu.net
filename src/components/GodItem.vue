@@ -119,7 +119,7 @@
   .bz
     max-width 20.9rem
     @media (max-width: 920px)
-      max-width 100%
+      min-width 100%
   .q-item-side img // 改大小
     width 6rem
     height 6rem
