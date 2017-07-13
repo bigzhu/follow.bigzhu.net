@@ -41,6 +41,7 @@
    * Root component
    */
   import {
+    Toast,
     QLayout,
     QToolbar,
     QToolbarTitle,
@@ -73,6 +74,7 @@
       }
     },
     components: {
+      Toast,
       RightMenu,
       LeftMenu,
       QLayout,

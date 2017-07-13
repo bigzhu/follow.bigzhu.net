@@ -14,7 +14,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Quasar from 'quasar'
 import router from './router'
-
+import errorToast from './functions/errorToast'
+errorToast()
 Vue.config.productionTip = false
 // set lang
 import VueI18n from 'vue-i18n'
