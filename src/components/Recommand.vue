@@ -5,11 +5,15 @@
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
     </q-infinite-scroll>
+    <Top></Top>
   </div>
 </template>
 
 <script>
-  import {QInfiniteScroll} from 'quasar'
+  import {
+    QInfiniteScroll
+  } from 'quasar'
+  import Top from './Top'
   import SpinnerBz from './SpinnerBz'
   import GodItem from './GodItem'
 
@@ -26,6 +30,7 @@
       }
     },
     components: {
+      Top,
       QInfiniteScroll,
       SpinnerBz,
       GodItem
@@ -84,9 +89,9 @@
         console.log('loadMore')
         let self = this
         this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
-        self.disableGodLoading()
-        setTimeout(done, 3000)
-      })
+          self.disableGodLoading()
+          setTimeout(done, 3000)
+        })
       },
       disableGodLoading: function() {
         this.loading = false

@@ -51,7 +51,9 @@
       <LeftMenu slot="left"></LeftMenu>
       <router-view />
       <RightMenu slot="right"></RightMenu>
+
     </q-layout>
+
   </div>
 </template>
 
@@ -61,6 +63,7 @@
    * Root component
    */
   import {
+    QFixedPosition,
     QList,
     QItem,
     QPopover,
@@ -97,6 +100,7 @@
       }
     },
     components: {
+      QFixedPosition,
       QList,
       QItem,
       QPopover,
@@ -127,7 +131,7 @@
       return {
         layoutStore: {
           view: 'lhh LpR lfr',
-          reveal: false,
+          reveal: true,
           leftScroll: true,
           rightScroll: true,
           leftBreakpoint: 3996, // 定义多宽时, 自动展开 left
@@ -142,7 +146,7 @@
       }
     },
     methods: {
-      logout: function () {
+      logout: function() {
         window.location = '/api_logout'
       },
       login: function() {

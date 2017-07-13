@@ -255,9 +255,10 @@
 <style lang="stylus" scoped>
   // 为了对齐
   .q-item
-    font-size 0.7rem
+    // font-size 0.7rem
     padding 16px
     padding-bottom 0
+    padding-top 8px
   .more-infor-bz:hover {
     color: #54B98F;
   }
@@ -296,7 +297,9 @@
   }
   /* 图标和名字拉近一点 */
   .q-item-side {
-    min-width: 2rem;
+    width: 2rem;
+    height: 2rem;
+    min-width inherit
   }
 
   /* actions 要有间距 */

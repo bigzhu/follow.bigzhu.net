@@ -46,17 +46,14 @@
       Message
     },
     props: {
-      god_name: {
-        type: String
-      },
       type: {
         type: String, // main god collect search
         default: 'main'
       }
     },
-    watch: {
-      '$route': 'fetchData'
-    },
+    // watch: {
+    //   '$route': 'fetchData'
+    // },
     events: {
       'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god的message
         this.$store.dispatch('removeFromMessages', god_id)
@@ -77,20 +74,31 @@
       followed_god_count() {
         return this.$store.state.followed_god_count
       },
-      // god_name() {
-      //   if (this.$route.params.god_name) return this.$route.params.god_name
-      // },
+      god_name() {
+        if (this.$route.params.god_name) return this.$route.params.god_name
+      },
       new_loading() {
         return this.$store.state.new_loading
       },
       messages() {
-        if (this.is_collect) return this.$store.state.collect_messages
-        if (this.god_name) return this.$store.state.gods_messages[this.god_name]
-        return this.$store.state.messages
+        switch (this.type) {
+          case 'god':
+            {
+              return this.$store.state.gods_messages[this.god_name]
+            }
+          case 'collect':
+            {
+              return this.$store.state.collect_messages
+            }
+          default:
+            {
+              return this.$store.state.messages
+            }
+        }
       }
     },
     mounted() {
-      this.fetchData()
+      this.loadMessages()
       this.$nextTick(function() {
         this.showNoLogin()
       })
@@ -107,52 +115,45 @@
           }, 5000)
         }
       },
-      fetchData: function() {
-        if (!this.god_name) {
-          if (this.messages.length === 0) {
-            // this.newMessage(5)
-            this.newMessage(get_count)
-          }
-        } else {
-          this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
-          if (this.messages.length === 0) { // 现成没有，要自已取了
-            this.$store.dispatch('getNew', {
-              god_name: this.god_name,
-              limit: 5
-            })
-            this.$store.dispatch('getNew', {
-              god_name: this.god_name,
-              limit: get_count
-            })
-          }
+      loadMore: function(index, done) {
+        this.loadMessages().then(function() {
+          setTimeout(done, 3000)
+        })
+      },
+      loadMessages: function() { // 根据类型, 加载 Message
+        switch (this.type) {
+          case 'god':
+            {
+              return this.newGodMessage()
+            }
+          case 'collect':
+            {
+              return this.newCollectMessage()
+            }
+          default:
+            {
+              return this.newMessage(get_count)
+            }
         }
       },
-      loadMore: function(index, done) {
-        // 查 god_name 时
-        if (this.god_name) {
-          this.$store.dispatch('newMessage', {
-            god_name: this.god_name
-          }).then(function(data) {
-            setTimeout(done, 3000)
-          })
-        } else {
-          if (this.messages.length) {
-            let created_at = this.messages[this.messages.length - 1].created_at
-            this.$store.dispatch('recordLastMessage', created_at)
-          }
-          this.newMessage(get_count).then(function(data) {
-            if (data.messages.length === 0) { // 无数据时避免抖动
-              setTimeout(done, 3000)
-            } else {
-              done()
-            }
-          })
+      newCollectMessage: function() {
+        return this.$store.dispatch('getCollect')
+      },
+      newGodMessage: function() {
+        if (!this.messages || this.messages.length === 0) {
+          console.log('FILTER_GOD_MESSAGES')
+          this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
         }
+        return this.$store.dispatch('newMessage', {
+          god_name: this.god_name,
+          limit: get_count
+        })
       },
       newMessage: function(limit = null) {
         let after = null
         if (this.messages.length > 0) {
           after = this.messages[this.messages.length - 1].created_at
+          this.$store.dispatch('recordLastMessage', after)
         }
         return this.$store.dispatch('getNew', {
           after: after,

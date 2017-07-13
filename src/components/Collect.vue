@@ -1,7 +1,7 @@
 <template>
   <div class="layout-padding">
     <img v-show="show_how_to_use_collect" class="width-5of5 responsive" src="../statics/assets/how_to_use_collection.jpg">
-    <messages></messages>
+    <messages type="collect"></messages>
     <Top></Top>
   </div>
 </template>

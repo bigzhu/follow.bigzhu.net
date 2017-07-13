@@ -1,6 +1,6 @@
 <template>
   <div class="layout-padding">
-    <messages :god_name="god_name"></messages>
+    <messages type="god"></messages>
     <Top></Top>
   </div>
 </template>

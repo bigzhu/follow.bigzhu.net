@@ -53,7 +53,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
   .card-actions>.primary {
     padding-right: 1rem;
   }
@@ -66,7 +66,7 @@
     margin-bottom: 0;
   }
 
-  .fixed-bottom-right {
-    bottom: 1rem;
-  }
+  .fixed-bottom-right
+    bottom 1rem
+    z-index 9999
 </style>

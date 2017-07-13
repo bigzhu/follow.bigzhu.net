@@ -35,8 +35,8 @@
   }
 </script>
 
-<style scoped>
-  .fixed-bottom-right {
-    bottom: 6rem;
-  }
+<style lang="stylus" scoped>
+  .fixed-bottom-right
+    z-index 9999
+    bottom 6rem
 </style>

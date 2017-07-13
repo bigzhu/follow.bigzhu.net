@@ -1,22 +1,22 @@
 <template>
   <div class="layout-padding">
-    <div class="width-3of4">
-      <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
-      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
-      </AddingGodItem>
+    <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
+    <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
+    </AddingGodItem>
 
-      <q-infinite-scroll :offset="1000" :handler="bottomCall">
-        <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
-        </GodItem>
-        <SpinnerBz :show="loading"></SpinnerBz>
-      </q-infinite-scroll>
-      <AddGodButton v-on:add="add"></AddGodButton>
-    </div>
+    <q-infinite-scroll :offset="1000" :handler="bottomCall">
+      <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
+      </GodItem>
+      <SpinnerBz :show="loading"></SpinnerBz>
+    </q-infinite-scroll>
+    <AddGodButton v-on:add="add"></AddGodButton>
+    <Top></Top>
   </div>
 </template>
 
 <script>
   import {QInfiniteScroll} from 'quasar'
+  import Top from './Top'
   import NotYetFollow from './NotYetFollow'
   import SpinnerBz from './SpinnerBz'
   import AddingGodItem from './AddingGodItem'
@@ -40,6 +40,7 @@
     },
     props: [],
     components: {
+      Top,
       QInfiniteScroll,
       NotYetFollow,
       SpinnerBz,
