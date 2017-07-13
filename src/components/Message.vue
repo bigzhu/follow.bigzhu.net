@@ -1,7 +1,7 @@
 <template>
   <q-card>
     <q-item>
-      <q-item-side :avatar="proxy(avatar)" />
+      <q-item-side :avatar="proxy(avatar)" class="bz_avatar" />
       <q-item-main>
         <q-item-tile label>
           <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
@@ -296,7 +296,7 @@
     height: 2rem;
   }
   /* 图标和名字拉近一点 */
-  .q-item-side {
+  .q-item-side.bz_avatar {
     width: 2rem;
     height: 2rem;
     min-width inherit
