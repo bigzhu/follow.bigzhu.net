@@ -2,14 +2,14 @@
   <div>
     <Old :show="!(followed_god_count===0 || new_loading)"></Old>
     <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
-    <q-transition v-show="!is_login" name="slide">
+    <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
         <img src="../statics/assets/no-message.svg">
         <p>
           <a href="/login.html">{{ $t("Messages.login") }}</a>{{ $t("Messages.description") }}
         </p>
       </div>
-    </q-transition>
+    </q-slide-transition>
 
     <q-infinite-scroll :offset="1000" :handler="loadMore">
       <message v-for='message in messages' :message='message' :key="message.id">
@@ -26,7 +26,7 @@
 
 <script>
   import {
-    QTransition,
+    QSlideTransition,
     QInfiniteScroll
   } from 'quasar'
   import NotYetFollow from './NotYetFollow'
@@ -38,7 +38,7 @@
 
   export default {
     components: {
-      QTransition,
+      QSlideTransition,
       QInfiniteScroll,
       NotYetFollow,
       SpinnerBz,
