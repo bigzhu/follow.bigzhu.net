@@ -1,5 +1,5 @@
 <template>
-  <q-card style="max-width: 21rem" inline>
+  <q-card class="bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="proxy(avatar)" />
@@ -31,7 +31,6 @@
     <q-card-actions align="end">
       <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
     </q-card-actions>
-
   </q-card>
 </template>
 
@@ -117,6 +116,10 @@
 </script>
 
 <style lang="stylus" scoped>
+  .bz
+    max-width 21rem
+    @media (max-width: 920px)
+      max-width 100%
   .q-item-side img // 改大小
     width 6rem
     height 6rem

@@ -76,6 +76,7 @@ let cn = {
     tofollow: '关注'
   },
   App: {
+    main: '首页',
     settings: '设置',
     search: '搜索资讯',
     mine: '我发布的',

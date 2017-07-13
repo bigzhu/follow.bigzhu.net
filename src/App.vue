@@ -21,6 +21,7 @@
       <q-toolbar slot="header" color="black" inverted>
         <!-- Navigation -->
         <q-tabs slot="navigation" color="black" inverted>
+          <q-route-tab slot="title" :to="{'name': 'Main'}" replace :label="$t('App.main')" />
           <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('App.whattofollow')" />
           <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('App.following')" v-show="oauth_info.name" />
           <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('App.collect')" v-show="oauth_info.name" />
