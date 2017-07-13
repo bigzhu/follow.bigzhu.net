@@ -117,7 +117,7 @@
 
 <style lang="stylus" scoped>
   .bz
-    max-width 21rem
+    max-width 20.9rem
     @media (max-width: 920px)
       max-width 100%
   .q-item-side img // 改大小
