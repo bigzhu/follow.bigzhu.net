@@ -1,63 +1,57 @@
 <template>
-  <div class="card">
-    <div class="card-title">
-      {{god.name}}
-    </div>
+  <q-card>
+    <q-card-media overlay-position="top">
+      <img :src="avatar||'/statics/assets/avatar.svg'">
+      <q-card-title slot="overlay">
+        {{god.name}}
+        <span slot="subtitle">{{god.cat}}</span>
+      </q-card-title>
+    </q-card-media>
 
-    <img :src="avatar||'/statics/assets/avatar.svg'" class="">
-    <div class="card-content">
+    <q-card-main>
       <p v-html="description"></p>
       <GodRemark v-model="remark" :god_id="god.id"></GodRemark>
-    </div>
+      <q-field icon="fa-instagram" helper="" error-label="We got an error">
+        <q-input v-model="god.instagram.name" :disable="disable_edit" float-label="Instagram" />
+      </q-field>
+      <q-field icon="fa-twitter" helper="" error-label="We got an error">
+        <q-input v-model="god.twitter.name" :disable="disable_edit" float-label="Twitter" />
+      </q-field>
+      <q-field icon="fa-github" helper="" error-label="We got an error">
+        <q-input v-model="god.github.name" :disable="disable_edit" float-label="Github" />
+      </q-field>
+      <q-field icon="fa-tumblr" helper="" error-label="We got an error">
+        <q-input v-model="god.tumblr.name" :disable="disable_edit" float-label="Tumblr" />
+      </q-field>
+      <q-field icon="fa-facebook" helper="" error-label="We got an error">
+        <q-input v-model="god.facebook.name" :disable="disable_edit" float-label="Facebook(不再同步了)" />
+      </q-field>
+    </q-card-main>
 
-    <div class="list">
-      <div class="item two-lines">
-        <i class="item-primary github icon"></i>
-        <div class="item-content">
-          <input v-model="god.github.name" :disabled="disable_edit" class="full-width">
-        </div>
-      </div>
-      <div class="item two-lines">
-        <i class="item-primary twitter icon"></i>
-        <div class="item-content">
-          <input v-model="god.twitter.name" :disabled="disable_edit" class="full-width">
-        </div>
-      </div>
-      <div class="item two-lines">
-        <i class="item-primary instagram icon"></i>
-        <div class="item-content">
-          <input v-model="god.instagram.name" :disabled="disable_edit" class="full-width">
-        </div>
-      </div>
-      <div class="item two-lines">
-        <i class="item-primary tumblr icon"></i>
-        <div class="item-content">
-          <input v-model="god.tumblr.name" :disabled="disable_edit" class="full-width">
-        </div>
-      </div>
-      <div class="item two-lines">
-        <i class="item-primary facebook icon"></i>
-        <div class="item-content">
-          <input v-model="god.facebook.name" :disabled="disable_edit" class="full-width">
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <Follow v-model="god.followed" :god_id="god.id"></Follow>
-      <button v-show="disable_edit" @click="save" class="light">
-        <i class="icon file text"></i>
+    <q-card-actions align="around">
+      <q-btn v-show="disable_edit" @click="save" class="light">
         {{ $t("GodInfo.edit") }}
-      </button>
-      <button v-show="!disable_edit" @click="save" class="light">
-        <i class="icon save"></i>
+      </q-btn>
+      <q-btn color="secondary" v-show="!disable_edit" @click="save">
         {{ $t("GodInfo.save") }}
-      </button>
-    </div>
-  </div>
+      </q-btn>
+      <Follow v-model="god.followed" :god_id="god.id"></Follow>
+    </q-card-actions>
+  </q-card>
 </template>
 
 <script>
+  import {
+    QCardActions,
+    QBtn,
+    QField,
+    QInput,
+    QList,
+    QCardMain,
+    QCard,
+    QCardMedia,
+    QCardTitle
+  } from 'quasar'
   import GodRemark from './GodRemark'
   import Follow from './Follow'
   import god_data from '../datas/god'
@@ -66,31 +60,38 @@
   export default {
     mixins: [GodItemBase],
     components: {
+      QCardActions,
+      QBtn,
+      QField,
+      QInput,
+      QList,
+      QCardMain,
+      QCardTitle,
+      QCardMedia,
+      QCard,
       GodRemark,
       Follow
     },
-    directives: {
-    },
+    directives: {},
     props: {
       god: {
         type: Object,
-        default: function () {
+        default: function() {
           return god_data
         },
         required: true
       }
     },
     computed: {
-      remark: function () {
+      remark: function() {
         if (this.god.remark) {
           return this.god.remark
         }
         return this.god.admin_remark
       }
     },
-    mounted () {
-    },
-    data: function () {
+    mounted() {},
+    data: function() {
       return {
         av: '',
         desc: '',
@@ -100,7 +101,7 @@
       }
     },
     methods: {
-      autoInsert: function (key, scheme) {
+      autoInsert: function(key, scheme) {
         if (key === 'blog') {
           scheme = 'http://'
         }
@@ -108,7 +109,7 @@
           this.god[key] = scheme
         }
       },
-      save: function () {
+      save: function() {
         if (this.disable_edit) {
           this.disable_edit = false
         } else {
@@ -130,7 +131,14 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus">
+  .q-field i
+    font-size 1.5rem
+</style>
+<style lang="stylus" scoped>
+  .q-btn
+    margin .5rem
+  /*
   .card {
     display: flex;
     flex-direction: column;
@@ -166,4 +174,5 @@
   .button {
     margin: 1rem;
   }
+  */
 </style>
