@@ -252,7 +252,12 @@
   }
 </style>
 
-<style scoped>
+<style lang="stylus" scoped>
+  // 为了对齐
+  .q-item
+    font-size 0.7rem
+    padding 16px
+    padding-bottom 0
   .more-infor-bz:hover {
     color: #54B98F;
   }
@@ -293,11 +298,7 @@
   .q-item-side {
     min-width: 2rem;
   }
-  /* 为了对齐 */
-  .q-item {
-    font-size: 0.7rem;
-    padding: 8px;
-  }
+
   /* actions 要有间距 */
   .q-card-actions a {
     padding-left: 0.5rem;
