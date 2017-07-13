@@ -1,13 +1,13 @@
 <template>
   <div class="layout-padding">
-    <messages :god_name="god_name" class="no-top-padding-bz"></messages>
+    <messages :god_name="god_name"></messages>
     <Top></Top>
   </div>
 </template>
 
 <script>
   import GodInfo from './GodInfo'
-  import Messages from './GodMessages'
+  import Messages from './Messages'
   import Top from './Top'
   export default {
     components: {

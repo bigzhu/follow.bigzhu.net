@@ -180,8 +180,8 @@
 
 <style lang="stylus" scoped>
   .avatar
-    width 3rem
-    height 3rem
+    width 2.4rem
+    height 2.4rem
   //q-toolbar-inverted 的没法用 variables 来改 改为白色
   .q-toolbar-inverted {
     background-color: white;

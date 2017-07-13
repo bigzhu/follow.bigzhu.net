@@ -45,6 +45,11 @@
       Old,
       Message
     },
+    props: {
+      god_name: {
+        type: String
+      }
+    },
     watch: {
       '$route': 'fetchData'
     },
@@ -68,9 +73,9 @@
       followed_god_count() {
         return this.$store.state.followed_god_count
       },
-      god_name() {
-        if (this.$route.params.god_name) return this.$route.params.god_name
-      },
+      // god_name() {
+      //   if (this.$route.params.god_name) return this.$route.params.god_name
+      // },
       new_loading() {
         return this.$store.state.new_loading
       },
@@ -118,17 +123,26 @@
         }
       },
       loadMore: function(index, done) {
-        if (this.messages.length) {
-          let created_at = this.messages[this.messages.length - 1].created_at
-          this.$store.dispatch('recordLastMessage', created_at)
-        }
-        this.newMessage(get_count).then(function(data) {
-          if (data.messages.length === 0) { // 无数据时避免抖动
+        // 查 god_name 时
+        if (this.god_name) {
+          this.$store.dispatch('newMessage', {
+            god_name: this.god_name
+          }).then(function(data) {
             setTimeout(done, 3000)
-          } else {
-            done()
+          })
+        } else {
+          if (this.messages.length) {
+            let created_at = this.messages[this.messages.length - 1].created_at
+            this.$store.dispatch('recordLastMessage', created_at)
           }
-        })
+          this.newMessage(get_count).then(function(data) {
+            if (data.messages.length === 0) { // 无数据时避免抖动
+              setTimeout(done, 3000)
+            } else {
+              done()
+            }
+          })
+        }
       },
       newMessage: function(limit = null) {
         let after = null
