@@ -14,6 +14,11 @@
           </router-link>
           <span slot="subtitle">Follow your dream</span>
         </q-toolbar-title>
+
+        <q-btn @click="login" flat small icon="fa-sign-in">
+          登录
+        </q-btn>
+
         <q-btn flat @click="$refs.layout.toggleRight()">
           <q-icon name="menu" />
         </q-btn>
@@ -116,6 +121,9 @@
       }
     },
     methods: {
+      login: function () {
+        window.location = '/login.html'
+      },
       check_bar: function(scroll_target) {
         var st = scroll_target.scrollTop
         if (Math.abs(this.last_scroll_top - st) <= 5) return
