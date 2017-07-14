@@ -4,7 +4,7 @@
       <q-item-side :icon="getIcon(cat.cat)" />
       <q-item-main>
         <q-item-tile label>{{cat.cat}}</q-item-tile>
-        <q-item-tile sublabel>fuck</q-item-tile>
+        <q-item-tile sublabel>收录{{cat.count}}人</q-item-tile>
       </q-item-main>
     </q-item>
   </q-list>
@@ -49,6 +49,22 @@
         icon_map: [{
             name: '有趣',
             icon: 'thumb_up'
+          },
+          {
+            name: '动漫',
+            icon: 'palette'
+          },
+          {
+            name: '投资',
+            icon: 'attach_money'
+          },
+          {
+            name: '旅游',
+            icon: 'card_travel'
+          },
+          {
+            name: '游戏',
+            icon: 'games'
           },
           {
             name: 'IT',
@@ -167,7 +183,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
   .item.active {
     background: rgba(0, 0, 0, .03);
   }
