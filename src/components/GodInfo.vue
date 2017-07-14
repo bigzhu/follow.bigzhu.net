@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="the-hover-bz">
     <q-card-media overlay-position="top">
       <img :src="avatar||'/statics/assets/avatar.svg'">
       <q-card-title slot="overlay">
