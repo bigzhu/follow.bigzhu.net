@@ -1,32 +1,35 @@
 <template>
   <div>
     <q-fixed-position corner="bottom-right" :offset="[-286, 0]" class="bz">
-      <q-btn @click="$refs['confirm_refalsh_message'].open()" round color="" icon="">{{unread_message_count}}</q-btn>
+      <bz-fab :content="unread_message_count" color="" icon="" activeIcon="" direction="left">
+        <q-fab-action color="" @click="updateLast" icon="whatshot">
+          <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">清空未读!</q-tooltip>
+        </q-fab-action>
+      </bz-fab>
     </q-fixed-position>
-
-    <q-modal ref="confirm_refalsh_message">
-      <div class="card">
-        <div class="card-content card-force-top-padding">
-          今天以前的资讯不看了?
-        </div>
-        <div class="card-actions card-no-top-padding">
-          <button class="primary" @click="updateLast">确定</button>
-          <button class="light" @click="$refs.confirm_refalsh_message.close()">取消</button>
-        </div>
-      </div>
-    </q-modal>
   </div>
 </template>
 
 <script>
   import {
+    QTooltip,
+    QFab,
+    QFabAction,
+    QCard,
     QBtn,
     QFixedPosition,
     QModal
   } from 'quasar'
+  import BzFab from './BzFab'
+  import toast from '../functions/toast'
   export default {
     props: [],
     components: {
+      BzFab,
+      QTooltip,
+      QFab,
+      QFabAction,
+      QCard,
       QBtn,
       QFixedPosition,
       QModal
@@ -46,7 +49,8 @@
       updateLast: function() {
         let now = (new Date()).setHours(0, 0, 0, 0)
         this.$store.dispatch('recordLastMessage', now).then(function(data) {
-          window.location.reload()
+          toast('已清空, 只保留今天的未读')
+          setTimeout(() => window.location.reload(), 3000)
         })
       }
     }

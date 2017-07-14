@@ -136,7 +136,6 @@
       },
       newGodMessage: function() {
         if (!this.messages || this.messages.length === 0) {
-          console.log('FILTER_GOD_MESSAGES')
           this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
         }
         return this.$store.dispatch('newMessage', {
