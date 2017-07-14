@@ -1,5 +1,5 @@
 <template>
-  <q-card class="bz" inline>
+  <q-card class="bz the-hover-bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="proxy(avatar)" />
@@ -126,9 +126,6 @@
     margin-right 1rem
     margin-top 1rem
 
-//  .q-card:hover .hover-show {
-//   opacity: 1;
-// } 
 //   @media (max-width: 920px) {
 //     .remark {
 //       /* 避免关注按钮遮住remark */

@@ -23,9 +23,7 @@ html
   background #FFF // card 背景要白色
   &:hover
     box-shadow .5px 1px 1px 1px rgba(0,0,0,0.15)
-// card hover 时就显示
-.q-card:hover .hover-show
-  opacity: 1
+
 
 .layout-padding
   padding: 1rem
@@ -50,14 +48,20 @@ html
   align-items center
 // 小屏幕一律显示
 @media (max-width: 767px)
-  .hover-show
+  .hover-show-bz
     opacity: 1;
 
 // hover 时才显示
-.hover-show
+.hover-show-bz
   transition: color 0.3s ease
   transition: visibility 0s, opacity 0.3s linear
   opacity: 0
+
+// 哪个被 hover
+.the-hover-bz:hover .hover-show-bz
+  opacity: 1
+
+
 // 居中
 .justify-content-bz
   display flex

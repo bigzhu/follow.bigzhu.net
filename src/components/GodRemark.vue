@@ -3,13 +3,14 @@
     <div v-html="value" v-show="!is_edit && value" class="remark-bz"></div>
     <p v-show="is_edit" v-html="value" @blur="save" contenteditable="true" class="remark-edit-content"></p>
     <button v-show="is_edit" @click="save" class="light">{{ $t("GodRemark.save") }}</button>
-    <a v-show="!is_edit" @click="edit" href="javascript:void(0)" class="hover-show">
-      <i class="edit icon"></i>
+    <a v-show="!is_edit" @click="edit" href="javascript:void(0)" class="hover-show-bz">
+      <q-icon name="edit"/>
     </a>
   </div>
 </template>
 
 <script>
+  import {QIcon} from 'quasar'
   import Vue from 'vue'
   export default {
     props: {
@@ -22,6 +23,7 @@
       }
     },
     components: {
+      QIcon
     },
     data: function () {
       return {
@@ -52,13 +54,8 @@
   }
 </script>
 
-<style>
+<style lang="stylus" scoped>
   .remark-bz {
     color: rgba(0, 0, 0, 0.5)
-  }
-  @media (max-width : 767px) {
-    .hover-show {
-      opacity: 1;
-    }
   }
 </style>

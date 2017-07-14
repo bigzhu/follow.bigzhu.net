@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="the-hover-bz">
     <q-item>
       <q-item-side :avatar="proxy(avatar)" class="bz_avatar" />
       <q-item-main>
@@ -27,13 +27,13 @@
     </q-card-main>
 
     <q-card-actions align="end" class="card-actions bz">
-      <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show">
+      <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show-bz">
         <q-icon name="more_horiz"></q-icon>
       </router-link>
-      <a @click="toggleCollect(message)" :class="{'hover-show':!message.collect}" class="bookmark">
+      <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.collect}" class="bookmark">
         <q-icon :class="{'bookmark-light': message.collect}" name="bookmark_border"></q-icon>
       </a>
-      <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hover-show':!message.anki}">
+      <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hover-show-bz':!message.anki}">
         <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
           <desc>Created with Sketch.</desc>
@@ -255,7 +255,6 @@
 <style lang="stylus" scoped>
   // 为了对齐
   .q-item
-    // font-size 0.7rem
     padding 16px
     padding-bottom 0
     padding-top 8px
