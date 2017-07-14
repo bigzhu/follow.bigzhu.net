@@ -46,7 +46,7 @@ let cn = {
     interesting: '里面寻找您感兴趣的人吧!',
     login: '登录',
     description: '后能看到更广阔的世界哟!',
-    nomessage: '好厉害，你已经把所有消息看完啦。再关注点人吧？',
+    // nomessage: '好厉害，你已经把所有消息看完啦。再关注点人吧？',
     wanttofollow: '寻他',
     newmessage: '新的消息'
   },
@@ -157,7 +157,7 @@ let en = {
     interesting: 'to find what you like!',
     login: 'Login',
     description: 'You will find a colorful and wide world!',
-    nomessage: 'Great! you have already read all the message.Finding more?',
+    // nomessage: 'Great! you have already read all the message.Finding more?',
     wanttofollow: 'What to follow',
     newmessage: 'New message'
   },
