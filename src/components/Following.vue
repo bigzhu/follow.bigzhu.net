@@ -4,7 +4,7 @@
     <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
     </AddingGodItem>
 
-    <q-infinite-scroll :offset="1000" :handler="bottomCall">
+    <q-infinite-scroll :offset="1000" :handler="loadMore">
       <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
@@ -87,9 +87,10 @@
       })
     },
     methods: {
-      bottomCall: function() {
-        console.log('getMyGods')
-        this.$store.dispatch('getMyGods', this.cat)
+      loadMore: function(index, done) {
+        this.$store.dispatch('getMyGods', this.cat).then(function () {
+          setTimeout(done, 3000)
+        })
       },
       add: function(god_name) {
         this.god_name = god_name
