@@ -253,6 +253,11 @@
 </style>
 
 <style lang="stylus" scoped>
+  .anki-bz // anki button 对齐
+    vertical-align: middle
+    width: 1rem
+    height: 1rem
+
   // 为了对齐
   .q-item
     padding 16px
@@ -270,11 +275,7 @@
     color: #FBBD08;
   }
 
-  .anki-bz {
-    vertical-align: middle;
-    width: 1rem;
-    height: 21px;
-  }
+
 
   i.icon {
     font-size: 1rem;

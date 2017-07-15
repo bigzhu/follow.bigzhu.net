@@ -19,7 +19,7 @@
     mixins: [QFab],
     props: {
       content: {
-        type: String,
+        type: Number,
         default: ''
       }
     }
