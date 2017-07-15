@@ -86,7 +86,6 @@
     },
     methods: {
       loadMore: function(index, done) {
-        console.log('loadMore')
         let self = this
         this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
           self.disableGodLoading()

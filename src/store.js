@@ -343,6 +343,9 @@ export const actions = {
       let dt = new Date()
       dt.setDate(dt.getDate() - 2)
       after = dt.getTime()
+      if (god_name) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
+        after = null
+      }
     }
     if (!limit) {
       limit = 10
