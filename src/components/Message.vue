@@ -203,18 +203,18 @@
 </script>
 
 <style>
-  .card pre {
+  .q-card pre {
     white-space: pre-wrap;
     word-wrap: break-word;
   }
 
-  .card code {
+  .q-card code {
     white-space: pre-wrap;
     word-wrap: break-word;
   }
 
   /* 图片最多也就 100% */
-  .card img {
+  .q-card img {
     max-width: 100%;
   }
 
@@ -254,7 +254,8 @@
 
 <style lang="stylus" scoped>
   .q-card
-    overflow-wrap: break-word
+    overflow-wrap: break-word // 让 a 换行
+
   .anki-bz // anki button 对齐
     vertical-align: middle
     width: 1rem
