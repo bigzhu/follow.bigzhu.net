@@ -89,7 +89,7 @@
         let self = this
         this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
           self.disableGodLoading()
-          setTimeout(done, 3000)
+          setTimeout(done, 1000)
         })
       },
       disableGodLoading: function() {

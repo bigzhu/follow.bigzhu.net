@@ -253,6 +253,8 @@
 </style>
 
 <style lang="stylus" scoped>
+  .q-card
+    overflow-wrap: break-word
   .anki-bz // anki button 对齐
     vertical-align: middle
     width: 1rem

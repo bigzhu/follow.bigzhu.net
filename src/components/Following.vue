@@ -81,15 +81,12 @@
       }
     },
     mounted() {
-      let self = this
-      this.$store.dispatch('getMyGods', this.cat).then(function() {
-        self.get_done = true
-      })
     },
     methods: {
       loadMore: function(index, done) {
+        console.log('loadMore')
         this.$store.dispatch('getMyGods', this.cat).then(function () {
-          setTimeout(done, 3000)
+          setTimeout(done, 1000)
         })
       },
       add: function(god_name) {
