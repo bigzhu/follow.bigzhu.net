@@ -30,7 +30,7 @@
   import Old from './Old.vue'
   import Message from './Message.vue'
   import checkLogin from 'bz-lib/functions/checkLogin'
-  import toast from '../functions/toast'
+  // import toast from '../functions/toast'
 
   export default {
     components: {
@@ -151,7 +151,7 @@
         let after = null
         if (this.messages.length > 0) {
           after = this.messages[this.messages.length - 1].created_at
-          toast('recordLastMessage')
+          // toast('recordLastMessage')
           this.$store.dispatch('recordLastMessage', after)
         }
         return this.$store.dispatch('getNew', {
