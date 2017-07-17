@@ -50,7 +50,9 @@
         let now = (new Date()).setHours(0, 0, 0, 0)
         this.$store.dispatch('recordLastMessage', now).then(function(data) {
           toast('已清空, 只保留今天的未读')
-          setTimeout(() => window.location.reload(), 3000)
+          setTimeout(function() {
+            window.location.reload()
+          }, 3000)
         })
       }
     }

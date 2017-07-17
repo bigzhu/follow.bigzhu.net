@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :show="!(followed_god_count===0 || new_loading)"></Old>
+    <Old :god_name="god_name" :show="!(followed_god_count===0 || new_loading)"></Old>
     <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
@@ -30,6 +30,7 @@
   import Old from './Old.vue'
   import Message from './Message.vue'
   import checkLogin from 'bz-lib/functions/checkLogin'
+  import toast from '../functions/toast'
 
   export default {
     components: {
@@ -93,7 +94,13 @@
       }
     },
     mounted() {
-      this.loadMessages()
+      if (!this.messages || this.messages.length === 0) {
+        if (this.type === 'god') {
+          this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
+        } else {
+          this.loadMessages()
+        }
+      }
       this.$nextTick(function() {
         this.showNoLogin()
       })
@@ -135,9 +142,6 @@
         return this.$store.dispatch('getCollect')
       },
       newGodMessage: function() {
-        if (!this.messages || this.messages.length === 0) {
-          this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
-        }
         return this.$store.dispatch('newMessage', {
           god_name: this.god_name,
           limit: get_count
@@ -147,6 +151,7 @@
         let after = null
         if (this.messages.length > 0) {
           after = this.messages[this.messages.length - 1].created_at
+          toast('recordLastMessage')
           this.$store.dispatch('recordLastMessage', after)
         }
         return this.$store.dispatch('getNew', {

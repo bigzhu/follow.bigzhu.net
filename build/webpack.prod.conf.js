@@ -10,6 +10,9 @@ var
   OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
+  output: {
+    filename: 'js/[name].[chunkhash].js'
+  },
   module: {
     rules: cssUtils.styleRules({
       sourceMap: config.build.productionSourceMap,

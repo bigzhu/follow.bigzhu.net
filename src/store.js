@@ -168,7 +168,7 @@ export const mutations = {
   FILTER_GOD_MESSAGES (state, god_name) { // 从主线messages中把god message 过滤出来，避免页面空白
     initGodMessage(state, god_name)
     if (state.messages.length !== 0 && state.gods_messages[god_name].length === 0) {
-      let god_messages = _.filter(state.messages, (d) => { return d.user_name === god_name })
+      let god_messages = _.filter(state.messages, (d) => { return d.god_name === god_name })
       state.gods_messages[god_name] = god_messages
     }
   },
