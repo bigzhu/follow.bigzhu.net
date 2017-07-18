@@ -444,7 +444,7 @@ export const actions = {
   getPublicGods ({ state, commit, dispatch }, cat) {
     let parm = {
       cat: cat,
-      limit: 10
+      limit: 6
     }
     let gods = state.cat_gods[cat]
     if (gods) {
@@ -470,7 +470,7 @@ export const actions = {
   getMyGods ({ state, commit, dispatch }, cat) {
     let parm = {
       cat: cat,
-      limit: 10
+      limit: 6
     }
     let gods = state.cat_my_gods[cat]
     if (gods) {
