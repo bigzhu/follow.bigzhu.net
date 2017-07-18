@@ -455,6 +455,7 @@ export const actions = {
     })
   },
   getCollect ({ state, commit, dispatch }) {
+    commit('SET_NEW_LOADING', true)
     return dispatch('get', '/api_collect').then(function (data) {
       state.collect_messages = data.messages
       if (state.collect_messages.length === 0) {
@@ -462,6 +463,7 @@ export const actions = {
       } else {
         state.show_how_to_use_collect = false
       }
+      commit('SET_NEW_LOADING', false)
       return data
     })
   },
