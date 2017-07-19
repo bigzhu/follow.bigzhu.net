@@ -101,7 +101,7 @@
         default: function() {
           return {
             avatar: '',
-            user_name: '',
+            god_name: '',
             id: 0
           }
         }

@@ -50,6 +50,9 @@
         if (this.message.text !== null) {
           return myautolinker(this.message.text, 'tumblr')
         }
+        if (this.message.type === 'link') {
+          return myautolinker(this.message.href, 'tumblr')
+        }
       },
       video: function () {
         if (this.message.extended_entities && this.message.type === 'video') {

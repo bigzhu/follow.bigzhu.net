@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Message from './Message.vue'
+  import Message from './Message'
 
   export default {
     components: {

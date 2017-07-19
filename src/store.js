@@ -38,7 +38,7 @@ export const state = {
   god_infos: {}, // 查询的每个god信息存放在这里
   the_message: {
     avatar: '',
-    user_name: '',
+    god_name: 'bigzhu',
     id: 0
   }, // 显示某个message
   big_gods: [],
