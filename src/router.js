@@ -30,7 +30,6 @@ export default new VueRouter({
    */
   mode: 'history',
   scrollBehavior(to, from, savedPosition) {
-    console.log(savedPosition)
     if (savedPosition) {
       return savedPosition
     } else {

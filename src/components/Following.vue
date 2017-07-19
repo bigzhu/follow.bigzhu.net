@@ -84,7 +84,6 @@
     },
     methods: {
       loadMore: function(index, done) {
-        console.log('loadMore')
         this.$store.dispatch('getMyGods', this.cat).then(function () {
           setTimeout(done, 1000)
         })
