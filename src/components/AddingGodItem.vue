@@ -1,37 +1,49 @@
 <template>
   <q-card class="bz the-hover-bz">
     <q-spinner-puff v-show="loading" name="puff" color="#000000" size="17rem" class="spinner" />
-    <q-icon :name="getIcon()" class="icon social-icon"></q-icon>
-      <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5">
-        <img v-show="now_avatar||max_social.avatar" :src="avatar" class="responsive">
-      </router-link>
-        <div class="item two-lines">
-          <div class="item-content has-secondary">
-            <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-              <span class="title">{{god.name}}</span>
-            </router-link>
-          </div>
+    <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
-          <div class="item-secondary stamp">
-            <social-badge @click.native="setNow(god.twitter)" v-show="god.twitter.count" type="twitter" :info="god.twitter"></social-badge>
-            <social-badge @click.native="setNow(god.github)" v-show="god.github.count" type="github" :info="god.github"></social-badge>
-            <social-badge @click.native="setNow(god.tumblr)" v-show="god.tumblr.count" type="tumblr" :info="god.tumblr"></social-badge>
-            <social-badge @click.native="setNow(god.instagram)" v-show="god.instagram.count" type="instagram" :info="god.instagram"></social-badge>
-            <social-badge @click.native="setNow(god.facebook)" v-show="god.facebook.count" type="facebook" :info="god.facebook"></social-badge>
-          </div>
-          <div v-html="description" class="card-content green-bz">
-          </div>
-        </div>
+    <q-item>
+      <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+        <q-item-side :avatar="now_avatar||max_social.avatar" />
+      </router-link>
+      <q-item-main>
+        <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+          <q-item-tile label>{{god.name}}</q-item-tile>
+        </router-link>
+        <q-item-tile sublabel>
+          {{god.followed_count}} {{ $t("GodItem.follownumber") }}
+        </q-item-tile>
+      </q-item-main>
+    </q-item>
+
+    <q-card-title>
+      <div slot="subtitle">
+        <social-badge @click.native="setNow(god.twitter)" v-show="showBadge(god.twitter)" type="twitter" :info="god.twitter"></social-badge>
+        <social-badge @click.native="setNow(god.github)" v-show="showBadge(god.github)" type="github" :info="god.github"></social-badge>
+        <social-badge @click.native="setNow(god.tumblr)" v-show="showBadge(god.tumblr)" type="tumblr" :info="god.tumblr"></social-badge>
+        <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram"></social-badge>
+        <social-badge @click.native="setNow(god.facebook)" v-show="showBadge(god.facebook)" type="facebook" :info="god.facebook"></social-badge>
+      </div>
+    </q-card-title>
+
+    <q-card-main class="card-content green-bz">
+      <p v-html="description"></p>
+      <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
+    </q-card-main>
+    <q-card-actions align="end">
+      <!--
+      <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
+      -->
+    </q-card-actions>
   </q-card>
 </template>
 
 <script>
   import {
     QIcon,
-    QCard,
     QSpinnerPuff
   } from 'quasar'
-  import CountUp from 'bz-count-up'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
   import GodItemBase from './GodItemBase'
@@ -51,16 +63,14 @@
     },
     components: {
       QIcon,
-      QCard,
       QSpinnerPuff,
       SocialBadge,
-      CountUp,
       Follow
     },
     data: function() {
       return {
         god: god_data,
-        loading: true,
+        loading: false,
         twitter_loading: false,
         github_loading: false,
         instagram_loading: false,
@@ -76,11 +86,11 @@
     mounted() {},
     methods: {
       getIcon: function() {
-        if (this.twitter_loading) return 'fa_twitter'
-        if (this.github_loading) return 'fa_github'
-        if (this.instagram_loading) return 'fa_instagram'
-        if (this.tumblr_loading) return 'fa_tumblr'
-        if (this.facebook_loading) return 'fa_facebook'
+        if (this.twitter_loading) return 'fa-twitter'
+        if (this.github_loading) return 'fa-github'
+        if (this.instagram_loading) return 'fa-instagram'
+        if (this.tumblr_loading) return 'fa-tumblr'
+        if (this.facebook_loading) return 'fa-facebook'
         return ''
       },
       init: function() {
@@ -217,6 +227,7 @@
     position: relative // 让spinner absolute 定位时能在 card 里
     display: inline-block
     width: 20.9rem 
+    min-height: 20.9rem 
   .spinner
     position: absolute
     // 居中方法1
@@ -225,14 +236,11 @@
     left: 0; top: 0; right: 0; bottom: 0;
     margin: auto;    /* 有了这个就自动居中了 */
 
-  .icon.social-icon {
-    font-size: 2rem;
+  .q-icon.social-icon
+    font-size: 3rem;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -1.2rem;
-    margin-top: -1.2rem;
-  }
+    left: 0; top: 0; right: 0; bottom: 0;
+    margin: auto;    /* 有了这个就自动居中了 */
 
   .title {
     font-size: 1.1rem;

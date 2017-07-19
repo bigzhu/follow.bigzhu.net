@@ -2,10 +2,44 @@
 </template>
 
 <script>
+  import {
+    QCardTitle,
+    QCardActions,
+    QCardMain,
+    QItem,
+    QCardMedia,
+    QItemSide,
+    QItemTile,
+    QItemMain,
+    QCard
+  } from 'quasar'
+  import Follow from './Follow'
   import _ from 'lodash'
   import myautolinker from '../functions/myautolinker'
+  import GodRemark from './GodRemark'
+  import SocialBadge from './SocialBadge'
   export default {
+    components: {
+      QCardTitle,
+      QCardActions,
+      QCardMain,
+      QItem,
+      QCardMedia,
+      QItemSide,
+      QItemTile,
+      QItemMain,
+      QCard,
+      SocialBadge,
+      Follow,
+      GodRemark
+    },
     computed: {
+      remark: function() {
+        if (this.god.remark) {
+          return this.god.remark
+        }
+        return this.god.admin_remark
+      },
       max_social: function () {
         return _.maxBy([this.god.twitter, this.god.instagram, this.god.github, this.god.tumblr, this.god.facebook], function (o) { return o.count || 0 })
       },
@@ -31,6 +65,9 @@
       })
     },
     methods: {
+      showBadge: function(social) {
+        return social.name && social.count
+      },
       setNow: function (social) {
         this.now_avatar = social.avatar
         this.now_description = myautolinker(social.description, social.type)

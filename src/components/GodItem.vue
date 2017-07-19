@@ -88,18 +88,9 @@
     computed: {
       god_id: function() {
         return this.god.god_id
-      },
-      remark: function() {
-        if (this.god.remark) {
-          return this.god.remark
-        }
-        return this.god.admin_remark
       }
     },
     methods: {
-      showBadge: function(social) {
-        return social.name && social.count
-      },
       block: function(god) {
         this.loading = true
         let self = this
