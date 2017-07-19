@@ -1,16 +1,10 @@
 <template>
-  <div class="card">
-    <!-- loading -->
-    <q-spinner v-show="loading" name="puff" color="#000000" size="17rem" class="spinner">
-    </q-spinner>
-    <i :class="{'twitter': twitter_loading, 'github': github_loading, 'instagram': instagram_loading, 'tumblr': tumblr_loading, 'facebook': facebook_loading}" class="icon social-icon"></i>
-
-    <div class="row sm-column">
+  <q-card class="bz the-hover-bz">
+    <q-spinner-puff v-show="loading" name="puff" color="#000000" size="17rem" class="spinner" />
+    <q-icon :name="getIcon()" class="icon social-icon"></q-icon>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}" class="width-2of5">
         <img v-show="now_avatar||max_social.avatar" :src="avatar" class="responsive">
       </router-link>
-
-      <div class="width-5of5">
         <div class="item two-lines">
           <div class="item-content has-secondary">
             <router-link :to="{ name: 'God', params: { god_name: god.name }}">
@@ -28,14 +22,14 @@
           <div v-html="description" class="card-content green-bz">
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+  </q-card>
 </template>
 
 <script>
   import {
-    QSpinner
+    QIcon,
+    QCard,
+    QSpinnerPuff
   } from 'quasar'
   import CountUp from 'bz-count-up'
   import Follow from './Follow'
@@ -56,7 +50,9 @@
       }
     },
     components: {
-      QSpinner,
+      QIcon,
+      QCard,
+      QSpinnerPuff,
       SocialBadge,
       CountUp,
       Follow
@@ -64,7 +60,7 @@
     data: function() {
       return {
         god: god_data,
-        loading: false,
+        loading: true,
         twitter_loading: false,
         github_loading: false,
         instagram_loading: false,
@@ -79,6 +75,14 @@
     },
     mounted() {},
     methods: {
+      getIcon: function() {
+        if (this.twitter_loading) return 'fa_twitter'
+        if (this.github_loading) return 'fa_github'
+        if (this.instagram_loading) return 'fa_instagram'
+        if (this.tumblr_loading) return 'fa_tumblr'
+        if (this.facebook_loading) return 'fa_facebook'
+        return ''
+      },
       init: function() {
         this.god = god_data
         this.god.name = this.god_name
@@ -208,7 +212,19 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+  .bz 
+    position: relative // 让spinner absolute 定位时能在 card 里
+    display: inline-block
+    width: 20.9rem 
+  .spinner
+    position: absolute
+    // 居中方法1
+    // left: 50%; top: 50%;
+    // transform: translate(-50%, -50%);
+    left: 0; top: 0; right: 0; bottom: 0;
+    margin: auto;    /* 有了这个就自动居中了 */
+
   .icon.social-icon {
     font-size: 2rem;
     position: absolute;
@@ -216,14 +232,6 @@
     top: 50%;
     margin-left: -1.2rem;
     margin-top: -1.2rem;
-  }
-
-  .spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -8.5rem;
-    margin-top: -8.5rem;
   }
 
   .title {

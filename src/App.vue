@@ -2,9 +2,11 @@
   <div id="q-app">
     <q-layout ref="layout" :view="layoutStore.view" :left-breakpoint="layoutStore.leftBreakpoint" :right-breakpoint="layoutStore.rightBreakpoint" :reveal="layoutStore.reveal">
       <q-toolbar slot="header" color="primary" inverted>
+        <!--
         <q-btn flat @click="$refs.layout.toggleLeft()">
           <q-icon name="menu" />
         </q-btn>
+        -->
         <router-link :to="{name: 'Main'}">
           <img class="logo-img" src="./statics/assets/logo.svg">
         </router-link>
