@@ -5,7 +5,7 @@
 
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-        <q-item-side :avatar="now_avatar||max_social.avatar" />
+        <q-item-side :avatar="now_avatar||max_social.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
         <router-link :to="{ name: 'God', params: { god_name: god.name }}">
@@ -228,6 +228,14 @@
     display: inline-block
     width: 20.9rem 
     min-height: 20.9rem 
+    @media (max-width: 920px)
+      min-width 100%
+  .q-item-side img // 改大小
+    width 6rem
+    height 6rem
+    margin-right 1rem
+    margin-top 1rem
+
   .spinner
     position: absolute
     // 居中方法1

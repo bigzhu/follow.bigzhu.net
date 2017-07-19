@@ -1,5 +1,5 @@
 <template>
-  <q-card class="bz the-hover-bz" inline>
+  <q-card class="the-hover-bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="proxy(avatar)" />
@@ -107,10 +107,11 @@
 </script>
 
 <style lang="stylus" scoped>
-  .bz
+  .q-card
     max-width 20.9rem
     @media (max-width: 920px)
       min-width 100%
+    overflow-wrap: break-word // 让 a 换行
   .q-item-side img // 改大小
     width 6rem
     height 6rem
