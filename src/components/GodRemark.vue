@@ -14,7 +14,7 @@
     QIcon,
     QBtn
   } from 'quasar'
-  import Vue from 'vue'
+  import myautolinker from '../functions/myautolinker'
   export default {
     props: {
       value: {
@@ -34,7 +34,7 @@
     data: function() {
       return {
         is_edit: false,
-        remark: this.value
+        remark: myautolinker(this.value, 'twitter')
       }
     },
     mounted() {},
@@ -42,7 +42,7 @@
       edit: function() {
         this.is_edit = true
         let self = this
-        Vue.nextTick(
+        this.$nextTick(
           function() {
             // $(_this.$el).find('.remark-edit-content').focus()
             self.$el.getElementsByClassName('remark-edit-content')[0].focus()
