@@ -70,7 +70,7 @@
     data: function() {
       return {
         god: god_data,
-        loading: false,
+        loading: true,
         twitter_loading: false,
         github_loading: false,
         instagram_loading: false,
@@ -223,7 +223,9 @@
 </script>
 
 <style lang="stylus" scoped>
-  .bz 
+  .q-card 
+    .q-spinner
+      z-index 99 // 让 spinner 不要被遮住
     position: relative // 让spinner absolute 定位时能在 card 里
     display: inline-block
     width: 20.9rem 
