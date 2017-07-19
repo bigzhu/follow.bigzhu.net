@@ -3,7 +3,7 @@
     <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
 
     <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <AddingGodItem v-show="god_name==''" :god_name="god_name" @add_done="god_name=''">
+      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
       </AddingGodItem>
       <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
       </GodItem>

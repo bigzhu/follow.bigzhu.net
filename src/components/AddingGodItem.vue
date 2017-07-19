@@ -70,7 +70,7 @@
     data: function() {
       return {
         god: god_data,
-        loading: true,
+        loading: false,
         twitter_loading: false,
         github_loading: false,
         instagram_loading: false,
