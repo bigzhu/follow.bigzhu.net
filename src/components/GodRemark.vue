@@ -25,6 +25,11 @@
         type: Number
       }
     },
+    watch: {
+      'value': function (val) {
+        this.remark = myautolinker(this.value, 'twitter')
+      }
+    },
     components: {
       QBtn,
       QIcon

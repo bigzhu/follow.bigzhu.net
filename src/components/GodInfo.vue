@@ -10,7 +10,7 @@
 
     <q-card-main>
       <p v-html="description"></p>
-      <GodRemark v-model="remark" :god_id="god.id"></GodRemark>
+      <GodRemark v-model="remark" :god_id="god.id" class="green-bz remark"></GodRemark>
       <q-field icon="fa-instagram" helper="" error-label="We got an error">
         <q-input v-model="god.instagram.name" :disable="disable_edit" float-label="Instagram" />
       </q-field>
