@@ -4,7 +4,7 @@
       <q-item-side :icon="getIcon(cat.cat)" />
       <q-item-main>
         <q-item-tile label>{{cat.cat}}</q-item-tile>
-        <q-item-tile sublabel>收录{{cat.count}}人</q-item-tile>
+        <q-item-tile sublabel>{{getSublabel(cat)}}</q-item-tile>
       </q-item-main>
     </q-item>
   </q-list>
@@ -143,6 +143,13 @@
       this.$store.dispatch('getCat', this.just_my)
     },
     methods: {
+      getSublabel: function (cat) {
+        if (this.just_my) {
+          return `关注${cat.count}人`
+        } else {
+          return `收录${cat.count}人`
+        }
+      },
       getIcon: function(cat) {
         let icon_obj = this.icon_map.filter(function(d) {
           return d.name === cat
