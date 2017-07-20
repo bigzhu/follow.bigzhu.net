@@ -22,7 +22,7 @@
       </q-item-side>
     </q-item>
 
-    <q-card-main class="card-content green-bz">
+    <q-card-main class="green-bz">
       <component class="content-bz" :is="message.m_type" :message="message"></component>
     </q-card-main>
 
@@ -216,10 +216,6 @@
   /* 图片最多也就 100% */
   .q-card img {
     max-width: 100%;
-  }
-
-  .card-content.green-bz a {
-    color: #2ea974;
   }
 
   @media (max-width: 767px) {

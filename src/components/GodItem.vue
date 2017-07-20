@@ -24,7 +24,7 @@
       </div>
     </q-card-title>
 
-    <q-card-main class="card-content green-bz">
+    <q-card-main class="green-bz">
       <p v-html="description"></p>
       <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
     </q-card-main>
