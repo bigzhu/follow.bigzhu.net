@@ -41,6 +41,7 @@
         return this.god.admin_remark
       },
       max_social: function () {
+        if (this.god.id === 0) return {}
         return _.maxBy([this.god.twitter, this.god.instagram, this.god.github, this.god.tumblr, this.god.facebook], function (o) { return o.count || 0 })
       },
       description: function () {
@@ -66,6 +67,7 @@
     },
     methods: {
       showBadge: function(social) {
+        if (!social) return ''
         return social.name && social.count
       },
       setNow: function (social) {

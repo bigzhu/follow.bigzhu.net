@@ -11,7 +11,7 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll :offset="1000" :handler="loadMore">
+    <q-infinite-scroll :offset="2000" :handler="loadMore">
       <message v-for='message in messages' :message='message' :key="message.id">
       </message>
       <SpinnerBz :show="new_loading"></SpinnerBz>

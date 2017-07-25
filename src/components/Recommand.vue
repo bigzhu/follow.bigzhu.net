@@ -1,7 +1,7 @@
 <template>
   <div class="layout-padding">
     <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <GodItem v-for="god in not_my_gods" :god="god" :key="god.id" class="god-item">
+      <GodItem v-for="god in not_my_gods" :god="god" :key="god.id">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
     </q-infinite-scroll>

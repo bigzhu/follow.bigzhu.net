@@ -1,7 +1,15 @@
 <template>
-  <q-card class="the-hover-bz">
+  <q-card :class="{'invisible': invisible}" class="the-hover-bz">
+    <q-modal @open="getGodInfo" position="left" ref="basicModal" :content-css="{padding: '0px'}">
+      <q-inner-loading :dark="false" :visible="loading">
+        <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
+      </q-inner-loading>
+      <GodItem :god="god_info" :key="god_info.id" style="width: 100%" />
+    </q-modal>
     <q-item>
-      <q-item-side :avatar="proxy(avatar)" class="bz_avatar" />
+      <q-item-side @mouseover="$refs.basicModal.toggle()" :avatar="proxy(avatar)" class="bz_avatar" />
+
+
       <q-item-main>
         <q-item-tile label>
           <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
@@ -71,6 +79,9 @@
 <script>
   import 'quasar-extras/fontawesome'
   import {
+    QSpinnerGears,
+    QInnerLoading,
+    QModal,
     QBtn,
     QIcon,
     QItemTile,
@@ -83,7 +94,6 @@
     QCardTitle
   } from 'quasar'
   import checkLogin from 'bz-lib/functions/checkLogin'
-  import GodCard from './GodCard'
   import Twitter from './Twitter'
   import Github from './Github'
   import Instagram from './Instagram'
@@ -92,6 +102,7 @@
   import TimeLen from 'bz-time-len'
   import Vue from 'vue'
   import Proxy from './Proxy'
+  import GodItem from './GodItem'
 
   export default {
     mixins: [Proxy],
@@ -101,13 +112,17 @@
         default: function() {
           return {
             avatar: '',
-            god_name: '',
+            name: 'loading',
             id: 0
           }
         }
       }
     },
     components: {
+      QSpinnerGears,
+      QInnerLoading,
+      QModal,
+      GodItem,
       QBtn,
       QIcon,
       QItemTile,
@@ -120,7 +135,6 @@
       QCard,
       TimeLen,
       Facebook,
-      GodCard,
       Twitter,
       Github,
       Instagram,
@@ -129,14 +143,20 @@
     directives: {},
     data: function() {
       return {
+        invisible: false, // 是否可见
         collected: false,
         anki_color: '#B3B3B3' // #57ADE3
       }
     },
     mounted() {
-      this.$nextTick(function() {})
+      this.$nextTick(function() {
+        this.autoInvisible()
+      })
     },
     computed: {
+      loading() {
+        return this.$store.state.p.loading
+      },
       lang() {
         return Vue.config.lang
       },
@@ -150,12 +170,13 @@
         return this.message.href
       },
       god_info: function() {
-        let god_info = this.$store.state.god_infos[this.message.user_name]
+        let god_info = this.$store.state.god_infos[this.message.god_name]
         if (god_info) {
           return god_info
         }
         return {
-          god_id: 0
+          id: 0,
+          name: 'bigzhu'
         }
       },
       avatar: function() {
@@ -163,6 +184,20 @@
       }
     },
     methods: {
+      autoInvisible: function() {
+        let self = this
+        var io = new IntersectionObserver(
+          entries => {
+            if (entries[0].intersectionRatio <= 0) {
+              self.invisible = true
+            } else {
+              self.invisible = false
+            }
+            console.log(entries[0].intersectionRatio)
+          }
+        )
+        io.observe(this.$el)
+      },
       anki: function() {
         if (this.message.anki) return
         this.message.anki = 1
@@ -187,10 +222,12 @@
         }
       },
       getGodInfo: function() {
-        this.$store.dispatch('getGod', {
-          god_name: this.message.user_name,
-          loading: false
-        })
+        if (this.god_info.id === 0) {
+          this.$store.dispatch('getGod', {
+            god_name: this.message.god_name,
+            loading: true
+          })
+        }
       },
       collectDone: function(message) {
         message.collect = 1
@@ -249,6 +286,8 @@
 </style>
 
 <style lang="stylus" scoped>
+  .modal .q-card
+    margin 0
   .q-card
     overflow-wrap: break-word // 让 a 换行
 

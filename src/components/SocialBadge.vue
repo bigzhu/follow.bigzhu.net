@@ -34,6 +34,7 @@
     },
     computed: {
       count: function () {
+        if (!this.info) return 0
         if (this.info.count) {
           return this.info.count
         }

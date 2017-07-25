@@ -2,7 +2,7 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-        <q-item-side :avatar="proxy(avatar)" />
+        <q-item-side :avatar="proxy(avatar)||'/statics/assets/avatar.svg'"/>
       </router-link>
       <q-item-main>
         <router-link :to="{ name: 'God', params: { god_name: god.name }}">
@@ -86,6 +86,9 @@
       }
     },
     computed: {
+      show: function() {
+        return this.god.id !== 0
+      },
       god_id: function() {
         return this.god.god_id
       }
