@@ -149,7 +149,7 @@
     },
     mounted() {
       this.$nextTick(function() {
-        this.autoInvisible()
+        this.message.el = this.$el
       })
     },
     computed: {
@@ -183,9 +183,6 @@
       }
     },
     methods: {
-      autoInvisible: function() {
-        this.$store.state.io.observe(this.$el)
-      },
       anki: function() {
         if (this.message.anki) return
         this.message.anki = 1

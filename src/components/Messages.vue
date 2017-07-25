@@ -11,8 +11,9 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll :offset="2000" :handler="loadMore">
-      <message v-for='message in messages' :message='message' :key="message.id">
+    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;padding-bottom:${padding_bottom}px;`">
+
+      <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
       </message>
       <SpinnerBz :show="new_loading"></SpinnerBz>
     </q-infinite-scroll>
@@ -21,6 +22,7 @@
 
 <script>
   import {
+    Scroll,
     QSlideTransition,
     QInfiniteScroll
   } from 'quasar'
@@ -33,6 +35,9 @@
   // import toast from '../functions/toast'
 
   export default {
+    directives: {
+      Scroll
+    },
     components: {
       QSlideTransition,
       QInfiniteScroll,
@@ -57,6 +62,9 @@
     },
     data: function() {
       return {
+        position: 0, // 用来判断是往上滚动还是往下滚
+        padding_top: 0,
+        padding_bottom: 100,
         show_no_login: false
       }
     },
@@ -75,6 +83,16 @@
       },
       new_loading() {
         return this.$store.state.new_loading
+      },
+      hide_messages() {
+        return this.messages.filter(function(d) {
+          return d.top_hide
+        })
+      },
+      show_messages() {
+        return this.messages.filter(function(d) {
+          return !d.top_hide
+        })
       },
       messages() {
         switch (this.type) {
@@ -106,6 +124,41 @@
       })
     },
     methods: {
+      onScroll: function(position) {
+        let over_top = position - 500
+        if (over_top > this.padding_top) {
+          let message = this.show_messages[0]
+          if (!message) return
+
+          let message_height = message.el.offsetHeight
+
+          if (over_top - this.padding_top < message_height) return
+
+          this.$set(message, 'top_hide', true)
+          this.$set(message, 'height', message_height)
+          this.padding_top += message_height
+          console.log('hide message')
+        } else {
+          if (this.padding_top === 0) return
+          if (this.hide_messages.length === 0) return
+
+          let message = this.hide_messages[this.hide_messages.length - 1]
+
+          // console.log('over_top:' + over_top)
+          // console.log('this.padding_top:' + this.padding_top)
+          // console.log('message.height:' + message.height)
+
+          if (this.padding_top - over_top > message.height) return
+
+          // this.padding_bottom += message.height
+          this.padding_top -= message.height
+          message.top_hide = false
+          // this.$set(message, 'top_hide', false)
+          console.log('show message')
+          // console.log('position:' + position)
+          // console.log('this.padding_top:' + this.padding_top)
+        }
+      },
       showNoLogin: function() {
         if (!this.is_login) {
           let self = this

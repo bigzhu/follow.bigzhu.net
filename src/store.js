@@ -21,18 +21,6 @@ export const state = {
     user_name: null,
     password: null
   },
-  io: new IntersectionObserver(
-          entries => {
-            entries.forEach(function(entry) {
-              console.log(entry.boundingClientRect)
-              if (entry.intersectionRatio <= 0 && entry.boundingClientRect.top <= 0) {
-                entry.target.classList.add('invisible')
-              } else {
-                entry.target.classList.remove('invisible')
-              }
-            })
-          }
-        ), // IntersectionObserver
   show_how_to_use_collect: false, // 是否显示收藏引导
   local_unread_message_count: 0, // 取过来还未读的信息
   followed_god_count: -1, // 关注的god数
@@ -284,24 +272,6 @@ export const actions = {
   },
   postAnki ({ state, commit, dispatch }, parm) {
     return dispatch('post', {url: '/api_anki', body: parm, loading: true})
-  },
-  getIntersectionObserver ({ dispatch, state, actions }) {
-    if (state.io === null) {
-      state.io = new window.IntersectionObserver(
-        entries => {
-          for (let entry of entries) {
-            if (entry.target.__vue__ === null) continue // bigzhu need check this, why __vue__ can be null
-            let message = entry.target.__vue__.message
-            if (entry.target.__vue__.$route.path !== '/') {
-              continue
-            }
-            dispatch('recordLastMessage', message.created_at)
-            state.io.unobserve(entry.target)
-          }
-        }
-      )
-    }
-    return state.io
   },
   putGod ({ dispatch, state, actions }, god) {
     var parm = god
