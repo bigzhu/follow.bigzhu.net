@@ -21,7 +21,17 @@ export const state = {
     user_name: null,
     password: null
   },
-  io: null, // IntersectionObserver
+  io: new IntersectionObserver(
+          entries => {
+            entries.forEach(function(entry) {
+              if (entry.intersectionRatio <= 0) {
+                entry.target.classList.add('invisible')
+              } else {
+                entry.target.classList.remove('invisible')
+              }
+            })
+          }
+        ), // IntersectionObserver
   show_how_to_use_collect: false, // 是否显示收藏引导
   local_unread_message_count: 0, // 取过来还未读的信息
   followed_god_count: -1, // 关注的god数

@@ -1,5 +1,5 @@
 <template>
-  <q-card :class="{'invisible': invisible}" class="the-hover-bz">
+  <q-card class="the-hover-bz">
     <q-modal @open="getGodInfo" position="left" ref="basicModal" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
@@ -143,7 +143,6 @@
     directives: {},
     data: function() {
       return {
-        invisible: false, // 是否可见
         collected: false,
         anki_color: '#B3B3B3' // #57ADE3
       }
@@ -185,18 +184,7 @@
     },
     methods: {
       autoInvisible: function() {
-        let self = this
-        var io = new IntersectionObserver(
-          entries => {
-            if (entries[0].intersectionRatio <= 0) {
-              self.invisible = true
-            } else {
-              self.invisible = false
-            }
-            console.log(entries[0].intersectionRatio)
-          }
-        )
-        io.observe(this.$el)
+        this.$store.state.io.observe(this.$el)
       },
       anki: function() {
         if (this.message.anki) return
