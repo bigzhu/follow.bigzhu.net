@@ -24,7 +24,8 @@ export const state = {
   io: new IntersectionObserver(
           entries => {
             entries.forEach(function(entry) {
-              if (entry.intersectionRatio <= 0) {
+              console.log(entry.boundingClientRect)
+              if (entry.intersectionRatio <= 0 && entry.boundingClientRect.top <= 0) {
                 entry.target.classList.add('invisible')
               } else {
                 entry.target.classList.remove('invisible')
