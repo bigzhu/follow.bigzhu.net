@@ -98,7 +98,7 @@
         switch (this.type) {
           case 'god':
             {
-              return this.$store.state.gods_messages[this.god_name]
+              return this.$store.state.gods_messages[this.god_name] || []
             }
           case 'collect':
             {
@@ -139,24 +139,18 @@
           this.padding_top += message_height
           console.log('hide message')
         } else {
-          if (this.padding_top === 0) return
-          if (this.hide_messages.length === 0) return
+          while (over_top < this.padding_top) {
+            if (this.padding_top === 0) return
+            if (this.hide_messages.length === 0) return
 
-          let message = this.hide_messages[this.hide_messages.length - 1]
+            let message = this.hide_messages[this.hide_messages.length - 1]
 
-          // console.log('over_top:' + over_top)
-          // console.log('this.padding_top:' + this.padding_top)
-          // console.log('message.height:' + message.height)
+            if (this.padding_top - over_top < message.height) return
 
-          if (this.padding_top - over_top > message.height) return
-
-          // this.padding_bottom += message.height
-          this.padding_top -= message.height
-          message.top_hide = false
-          // this.$set(message, 'top_hide', false)
-          console.log('show message')
-          // console.log('position:' + position)
-          // console.log('this.padding_top:' + this.padding_top)
+            this.padding_top -= message.height
+            message.top_hide = false
+            console.log('show message')
+          }
         }
       },
       showNoLogin: function() {
