@@ -11,7 +11,7 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;padding-bottom:${padding_bottom}px;`">
+    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
 
       <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
       </message>
@@ -63,12 +63,13 @@
     data: function() {
       return {
         position: 0, // 用来判断是往上滚动还是往下滚
-        padding_top: 0,
-        padding_bottom: 100,
         show_no_login: false
       }
     },
     computed: {
+      padding_top() {
+        return this.$store.state.hide_params.padding_top
+      },
       is_login() {
         return checkLogin()
       },
@@ -125,29 +126,30 @@
     },
     methods: {
       onScroll: function(position) {
+        let hide_p = this.$store.state.hide_params
         let over_top = position - 500
-        if (over_top > this.padding_top) {
+        if (over_top > hide_p.padding_top) {
           let message = this.show_messages[0]
           if (!message) return
 
           let message_height = message.el.offsetHeight
 
-          if (over_top - this.padding_top < message_height) return
+          if (over_top - hide_p.padding_top < message_height) return
 
           this.$set(message, 'top_hide', true)
           this.$set(message, 'height', message_height)
-          this.padding_top += message_height
+          hide_p.padding_top += message_height
           console.log('hide message')
         } else {
-          while (over_top < this.padding_top) {
-            if (this.padding_top === 0) return
+          while (over_top < hide_p.padding_top) {
+            if (hide_p.padding_top === 0) return
             if (this.hide_messages.length === 0) return
 
             let message = this.hide_messages[this.hide_messages.length - 1]
 
-            if (this.padding_top - over_top < message.height) return
+            if (hide_p.padding_top - over_top < message.height) return
 
-            this.padding_top -= message.height
+            hide_p.padding_top -= message.height
             message.top_hide = false
             console.log('show message')
           }
