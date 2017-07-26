@@ -7,9 +7,8 @@
       <GodItem :god="god_info" :key="god_info.id" style="width: 100%" />
     </q-modal>
     <q-item>
-      <q-item-side @mouseover="$refs.basicModal.toggle()" :avatar="proxy(avatar)" class="bz_avatar" />
-
-
+      <q-item-side @click="$refs.basicModal.toggle()" :avatar="proxy(avatar)" class="bz_avatar">
+      </q-item-side>
       <q-item-main>
         <q-item-tile label>
           <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
@@ -286,6 +285,13 @@
     padding 16px
     padding-bottom 0
     padding-top 8px
+
+  .q-item-side.bz_avatar // 图标和名字拉近一点
+    cursor pointer // 变可手, 可点击
+    width 2rem
+    height 2rem
+    min-width inherit
+
   .more-infor-bz:hover {
     color: #54B98F;
   }
@@ -318,12 +324,7 @@
     width: 2rem;
     height: 2rem;
   }
-  /* 图标和名字拉近一点 */
-  .q-item-side.bz_avatar {
-    width: 2rem;
-    height: 2rem;
-    min-width inherit
-  }
+
 
   /* actions 要有间距 */
   .q-card-actions a {
