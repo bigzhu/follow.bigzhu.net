@@ -56,7 +56,7 @@ export default new VueRouter({
     },
     assembly('UserNameLogin'),
     {
-      path: '/Main',
+      path: '/',
       name: 'Main',
       component: load('Main')
     }, // Default
@@ -81,9 +81,6 @@ export default new VueRouter({
       component: load('God')
     },
     {
-      path: '/',
-      redirect: '/Main'
-    }, {
       path: '*',
       component: load('Error404')
     } // Not found

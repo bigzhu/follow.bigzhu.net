@@ -9,7 +9,7 @@
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
-          {{god.followed_count}} {{ $t("GodItem.follownumber") }}
+          {{god.followed_count||1}} {{ $t("GodItem.follownumber") }}
         </q-item-tile>
       </q-item-main>
     </q-item>
