@@ -12,9 +12,13 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
-
       <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
       </message>
+      <div v-show="followed_god_count>0 && unread_message_count===0" class="center-container-bz">
+        <p>{{ $t("Messages.nomessage") }}
+          <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
+        </p> 
+      </div>
       <SpinnerBz :show="new_loading"></SpinnerBz>
     </q-infinite-scroll>
   </div>
