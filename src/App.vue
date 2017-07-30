@@ -21,7 +21,7 @@
           登录
         </q-btn>
         <q-btn v-show="oauth_info.name" flat ref="target">
-          <img :src="oauth_info.avatar" class="avatar" />
+          <img :src="proxy(oauth_info.avatar)" class="avatar" />
           <!-- Direct child of target -->
           <q-popover ref="popover">
             <q-list item-separator link>
@@ -84,12 +84,14 @@
     QListHeader,
     QScrollArea
   } from 'quasar'
+  import Proxy from './components/Proxy'
   import checkLogin from 'bz-lib/functions/checkLogin'
   import store from './store'
   import LeftMenu from './components/LeftMenu'
   import RightMenu from './components/RightMenu'
   export default {
     store,
+    mixins: [Proxy],
     computed: {
       route_name() {
         return this.$route.name

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :god_name="god_name" :show="!(followed_god_count===0 || new_loading)"></Old>
+    <Old :god_name="god_name" :show="!(followed_god_count===0)"></Old>
     <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
@@ -14,7 +14,7 @@
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
       <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
       </message>
-      <div v-show="followed_god_count>0 && unread_message_count===0" class="center-container-bz">
+      <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("Messages.nomessage") }}
           <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
         </p> 
