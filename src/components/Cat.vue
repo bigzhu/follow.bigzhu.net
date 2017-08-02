@@ -1,17 +1,18 @@
 <template>
   <q-list class="list">
-    <q-item v-for="cat in cats" :key="cat.id" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat.cat}" :to="{'name': route_name, params: {'cat': cat.cat}}">
+    <q-side-link item v-for="cat in cats" :key="cat.id" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat.cat}" :to="{'name': route_name, params: {'cat': cat.cat}}">
       <q-item-side :icon="getIcon(cat.cat)" />
       <q-item-main>
         <q-item-tile label>{{cat.cat}}</q-item-tile>
         <q-item-tile sublabel>{{getSublabel(cat)}}</q-item-tile>
       </q-item-main>
-    </q-item>
+    </q-side-link>
   </q-list>
 </template>
 
 <script>
   import {
+    QSideLink,
     QItemTile,
     QItemMain,
     QItemSide,
@@ -20,6 +21,7 @@
   } from 'quasar'
   export default {
     components: {
+      QSideLink,
       QItemTile,
       QItemMain,
       QItemSide,
