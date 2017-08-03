@@ -1,6 +1,6 @@
 <template>
   <div id="q-app">
-    <q-layout ref="layout" :view="layoutStore.view" :left-breakpoint="layoutStore.leftBreakpoint" :right-breakpoint="layoutStore.rightBreakpoint" :reveal="layoutStore.reveal">
+    <q-layout @scroll="scroll" ref="layout" :view="layoutStore.view" :left-breakpoint="layoutStore.leftBreakpoint" :right-breakpoint="layoutStore.rightBreakpoint" :reveal="layoutStore.reveal">
       <q-toolbar slot="header" color="primary" inverted>
         <!--
         <q-btn flat @click="$refs.layout.toggleLeft()">
@@ -55,7 +55,6 @@
       <RightMenu slot="right"></RightMenu>
 
     </q-layout>
-
   </div>
 </template>
 
@@ -133,6 +132,8 @@
     },
     data() {
       return {
+        timeout_id: 0,
+        will_hide_header: false,
         layoutStore: {
           view: 'lhh LpR lfr',
           reveal: true,
@@ -150,6 +151,23 @@
       }
     },
     methods: {
+      scroll: function(data) {
+        let self = this
+        if (data.direction === 'up') {
+          if (!this.will_hide_header) {
+            this.will_hide_header = true
+            this.timeout_id = setTimeout(function() {
+              self.$refs.layout.headerOnScreen = false
+              self.will_hide_header = false
+            }, 2000)
+          }
+        }
+        if (data.position === 0) {
+          clearTimeout(this.timeout_id)
+          this.$refs.layout.headerOnScreen = true
+          self.will_hide_header = false
+        }
+      },
       logout: function() {
         window.location = '/api_logout'
       },
