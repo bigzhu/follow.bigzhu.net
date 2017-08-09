@@ -11,13 +11,13 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
+    <q-infinite-scroll v-scroll="onScroll" :offset="1000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
       <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("Messages.nomessage") }}
           <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.wanttofollow") }}&gt;</router-link>
-        </p> 
+        </p>
       </div>
       <SpinnerBz :show="new_loading"></SpinnerBz>
     </q-infinite-scroll>
@@ -89,6 +89,9 @@
       new_loading() {
         return this.$store.state.new_loading
       },
+      old_loading() {
+        return this.$store.state.old_loading
+      },
       hide_messages() {
         return this.messages.filter(function(d) {
           return d.top_hide
@@ -120,6 +123,12 @@
       if (!this.messages || this.messages.length === 0) {
         if (this.type === 'god') {
           this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
+          if (this.messages.length === 0) { // 没有过滤值时
+            this.$store.dispatch('oldMessage', {
+              god_name: this.god_name,
+              limit: 10
+            })
+          }
         } else {
           this.loadMessages()
         }
@@ -173,6 +182,10 @@
         }
       },
       loadMore: function(index, done) {
+        if (this.old_loading) {
+          done()
+          return
+        }
         this.loadMessages().then(function() {
           setTimeout(done, 3000)
         })
