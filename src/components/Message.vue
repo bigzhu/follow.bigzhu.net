@@ -246,12 +246,25 @@
     .anki-bz svg {
       margin-top: 0.11rem;
     }
+    .q-card-actions.bz {
+      font-size: 1.5rem;
+    }
+    .hover-show-bz {
+      opacity: 1;
+    }
+    .anki-bz {
+      vertical-align: middle;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
-  .card-actions.bz {
-    padding-top: 0;
-    padding-bottom: .5rem;
-    font-size: 1rem;
+  @media (min-width: 767px) {
+    .q-card-actions.bz {
+      padding-top: 0;
+      padding-bottom: .5rem;
+      font-size: 1rem;
+    }
   }
 
   .item.two-lines.bz {
@@ -275,10 +288,11 @@
   .q-card
     overflow-wrap: break-word // 让 a 换行
 
-  .anki-bz // anki button 对齐
-    vertical-align: middle
-    width: 1rem
-    height: 1rem
+  @media (min-width: 767px)
+    .anki-bz // anki button 对齐
+      vertical-align: middle
+      width: 1rem
+      height: 1rem
 
   // 为了对齐
   .q-item
