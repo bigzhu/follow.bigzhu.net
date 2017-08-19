@@ -197,7 +197,7 @@
       toggleCollect: function(message) {
         if (message.collect) {
           this.$store.dispatch('uncollect', message.id).then(function(data) {
-            message.collect = null
+            message.collect = 0
           })
         } else {
           this.$store.dispatch('collect', message.id).then(function(data) {
@@ -247,15 +247,15 @@
       margin-top: 0.11rem;
     }
     .q-card-actions.bz {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
     .hover-show-bz {
       opacity: 1;
     }
     .anki-bz {
       vertical-align: middle;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.3rem;
+      height: 1.3rem;
     }
   }
 
@@ -293,6 +293,8 @@
       vertical-align: middle
       width: 1rem
       height: 1rem
+    .bookmark:hover
+      color #FBBD08
 
   // 为了对齐
   .q-item
@@ -310,9 +312,7 @@
     color: #54B98F;
   }
 
-  .bookmark:hover {
-    color: #FBBD08;
-  }
+
 
   .bookmark-light {
     color: #FBBD08;
