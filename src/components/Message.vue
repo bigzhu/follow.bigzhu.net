@@ -283,6 +283,9 @@
 </style>
 
 <style lang="stylus" scoped>
+  .q-card-container
+    padding-bottom 0
+
   .modal .q-card
     margin 0
   .q-card

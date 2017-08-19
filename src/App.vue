@@ -159,7 +159,7 @@
             this.timeout_id = setTimeout(function() {
               self.$refs.layout.headerOnScreen = false
               self.will_hide_header = false
-            }, 2000)
+            }, 1000)
           }
         }
         if (data.position === 0) {
