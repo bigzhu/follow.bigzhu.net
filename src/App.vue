@@ -53,7 +53,6 @@
       <LeftMenu slot="left"></LeftMenu>
       <router-view />
       <RightMenu slot="right"></RightMenu>
-
     </q-layout>
   </div>
 </template>

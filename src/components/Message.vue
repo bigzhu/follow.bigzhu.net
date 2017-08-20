@@ -196,13 +196,11 @@
       },
       toggleCollect: function(message) {
         if (message.collect) {
-          this.$store.dispatch('uncollect', message.id).then(function(data) {
-            message.collect = 0
-          })
+          message.collect = 0
+          this.$store.dispatch('uncollect', message.id)
         } else {
-          this.$store.dispatch('collect', message.id).then(function(data) {
-            message.collect = 1
-          })
+          message.collect = 1
+          this.$store.dispatch('collect', message.id)
         }
       },
       getGodInfo: function() {
