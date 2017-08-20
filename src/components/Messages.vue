@@ -139,7 +139,7 @@
     },
     methods: {
       onScroll: function(position) {
-        if (this.$q.platform.is.desktop) return // 桌面不用考虑性能
+        if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
 
         let hide_p = this.$store.state.hide_params
         let over_top = position - 500

@@ -5,7 +5,7 @@
     </h3>
     <div class="description" v-html="text"></div>
     <template v-for="media in medias" :media="media">
-      <p class="description" v-html="media.caption"></p>
+      <div class="description" v-html="media.caption"></div>
       <a @click="openImg(proxy(media.img_url))">
         <img :src="proxy(media.img_url)" class="responsive" >
       </a>
