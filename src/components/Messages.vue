@@ -72,7 +72,8 @@
     },
     computed: {
       padding_top() {
-        return this.$store.state.hide_params.padding_top
+        if (this.type === 'main') return this.$store.state.hide_params.padding_top
+        else return 0
       },
       is_login() {
         return checkLogin()
@@ -166,7 +167,7 @@
 
             hide_p.padding_top -= message.height
             message.top_hide = false
-            console.log('show message')
+            // console.log('show message')
           }
         }
       },
