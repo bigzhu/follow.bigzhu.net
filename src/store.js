@@ -1,22 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-if (!global.window) { Vue.use(Vuex) }
+if (!global.window) {
+  Vue.use(Vuex)
+}
 import p from 'bz-lib/module'
 import 'whatwg-fetch'
 import _ from 'lodash'
 // import toastr from 'toastr'
-function initGodMessage (state, god_name) {
+function initGodMessage(state, god_name) {
   if (state.gods_messages[god_name] === undefined) {
     Vue.set(state.gods_messages, god_name, [])
   }
 }
-function initCatGod (state, type, cat) {
+
+function initCatGod(state, type, cat) {
   if (state[type][cat] === undefined) {
     Vue.set(state[type], cat, [])
   }
 }
 // state
 export const state = {
+  layout: null,
   hide_params: { // 为了 scroll 效率, 只部分显示 messages
     padding_top: 0 // 记录隐藏了 message 以后, 要加对应多少的 padding-top
   },
@@ -62,27 +66,31 @@ export const state = {
 }
 // mutations
 export const mutations = {
-  REMOVE_THIS_GOD_CAT_MY_GODS (state, god_id) {
+  REMOVE_THIS_GOD_CAT_MY_GODS(state, god_id) {
     for (var property in state.cat_my_gods) {
       if (state.cat_my_gods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.cat_my_gods[property], function (d) { return d.god_id === god_id })
+        let index = _.findIndex(state.cat_my_gods[property], function(d) {
+          return d.god_id === god_id
+        })
         state.cat_my_gods[property].splice(index, 1)
       }
     }
 
     for (property in state.cat_gods) {
       if (state.cat_gods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.cat_gods[property], function (d) { return d.god_id === god_id })
+        let index = _.findIndex(state.cat_gods[property], function(d) {
+          return d.god_id === god_id
+        })
         state.cat_gods[property].splice(index, 1)
       }
     }
   },
-  REMOVE_THIS_GOD_MESSAGE (state, god_id) {
-    state.messages = _.filter(state.messages, function (d) {
+  REMOVE_THIS_GOD_MESSAGE(state, god_id) {
+    state.messages = _.filter(state.messages, function(d) {
       return d.god_id !== god_id
     })
   },
-  CHECK_BAR (state, scroll_target) {
+  CHECK_BAR(state, scroll_target) {
     var st = scroll_target.scrollTop
     state.nav_bar_height = document.getElementsByClassName('header-bz')[0].offsetHeight
 
@@ -96,37 +104,44 @@ export const mutations = {
 
     state.last_scroll_top = st
   },
-  SET_SHOW_BAR (state, show_bar) {
+  SET_SHOW_BAR(state, show_bar) {
     state.show_bar = show_bar
   },
-  SET_REGISTERED_COUNT (state, registered_count) {
+  SET_REGISTERED_COUNT(state, registered_count) {
     state.registered_count = registered_count
   },
-  SET_CAT_MY_GODS (state, {cat, gods}) {
+  SET_CAT_MY_GODS(state, {
+    cat,
+    gods
+  }) {
     initCatGod(state, 'cat_my_gods', cat)
     let merge_gods = state.cat_my_gods[cat].concat(gods)
-    let uniq_gods = _.uniqBy(merge_gods, function (d) {
+    let uniq_gods = _.uniqBy(merge_gods, function(d) {
       return d.id
-    }
-    )
+    })
     state.cat_my_gods[cat] = uniq_gods
   },
-  SET_CAT_GODS (state, {cat, gods}) {
+  SET_CAT_GODS(state, {
+    cat,
+    gods
+  }) {
     initCatGod(state, 'cat_gods', cat)
     let merge_gods = state.cat_gods[cat].concat(gods)
-    let uniq_gods = _.uniqBy(merge_gods, function (d) {
+    let uniq_gods = _.uniqBy(merge_gods, function(d) {
       return d.id
-    }
-    )
+    })
     state.cat_gods[cat] = uniq_gods
   },
-  UNSHIFT_MY_GOD (state, {cat, god}) {
+  UNSHIFT_MY_GOD(state, {
+    cat,
+    god
+  }) {
     state.cat_my_gods[cat].unshift(god)
   },
-  SET_MY_CATS (state, cats) {
+  SET_MY_CATS(state, cats) {
     state.my_cats = cats
   },
-  REFLASH_TIME_LEN (state) { // 更新时间隔
+  REFLASH_TIME_LEN(state) { // 更新时间隔
     if (state.last_reflash_oper) {
       _.map(state.messages,
         (d) => {
@@ -145,38 +160,46 @@ export const mutations = {
       state.last_reflash_oper = 1
     }
   },
-  SET_THE_MESSAGE (state, message) {
+  SET_THE_MESSAGE(state, message) {
     state.the_message = message
   },
-  SET_GOD_IS_EXISTS (state, is_exists) {
+  SET_GOD_IS_EXISTS(state, is_exists) {
     state.god_is_exists = is_exists
   },
-  REMOVE_FROM_MY_MESSAGES (state, god_id) { // 移除这个god
-    state.messages = _.without(state.messages, _.findWhere(state.messages, {god_id: god_id}))
+  REMOVE_FROM_MY_MESSAGES(state, god_id) { // 移除这个god
+    state.messages = _.without(state.messages, _.findWhere(state.messages, {
+      god_id: god_id
+    }))
   },
-  DELETE_MY_GOD (state, god_id) { // 移除这个god
-    state.my_gods = _.without(state.my_gods, _.findWhere(state.my_gods, {id: god_id}))
+  DELETE_MY_GOD(state, god_id) { // 移除这个god
+    state.my_gods = _.without(state.my_gods, _.findWhere(state.my_gods, {
+      id: god_id
+    }))
   },
-  SET_GOD_INFOS (state, god_info) {
+  SET_GOD_INFOS(state, god_info) {
     Vue.set(state.god_infos, god_info.name, god_info)
   },
-  SET_BIG_GODS (state, gods) {
+  SET_BIG_GODS(state, gods) {
     state.big_gods = gods
   },
-  REFRESH_LOCAL_UNREAD_MESSAGE_COUNT (state) {
-    let unread_messages = _.partition(state.messages, (d) => { return d.created_at > state.last_time })[0]
+  REFRESH_LOCAL_UNREAD_MESSAGE_COUNT(state) {
+    let unread_messages = _.partition(state.messages, (d) => {
+      return d.created_at > state.last_time
+    })[0]
     state.local_unread_message_count = unread_messages.length
   },
-  FILTER_GOD_MESSAGES (state, god_name) { // 从主线messages中把god message 过滤出来，避免页面空白
+  FILTER_GOD_MESSAGES(state, god_name) { // 从主线messages中把god message 过滤出来，避免页面空白
     initGodMessage(state, god_name)
     if (state.messages.length !== 0 && state.gods_messages[god_name].length === 0) {
-      let god_messages = _.filter(state.messages, (d) => { return d.god_name === god_name })
+      let god_messages = _.filter(state.messages, (d) => {
+        return d.god_name === god_name
+      })
       state.gods_messages[god_name] = god_messages
     }
   },
-  FILTER_SEARCH_MESSAGES (state, search_key) { // 从主线messages中把查找的信息过滤出来，避免页面空白
+  FILTER_SEARCH_MESSAGES(state, search_key) { // 从主线messages中把查找的信息过滤出来，避免页面空白
     if (state.messages.length !== 0) {
-      state.search_messages = state.messages.filter(function (d) {
+      state.search_messages = state.messages.filter(function(d) {
         if (d.text && d.content) {
           return (d.text.indexOf(search_key) !== -1 || String(d.content).indexOf(search_key) !== -1)
         }
@@ -190,126 +213,220 @@ export const mutations = {
       })
     }
   },
-  SET_GODS_OLD_MESSAGES (state, {god_name, messages}) {
+  SET_GODS_OLD_MESSAGES(state, {
+    god_name,
+    messages
+  }) {
     initGodMessage(state, god_name)
     state.gods_messages[god_name] = _.uniq(
-      messages.reverse().concat(state.gods_messages[god_name]), false, function (item, key, a) {
+      messages.reverse().concat(state.gods_messages[god_name]), false,
+      function(item, key, a) {
         return item.id
       }
     )
   },
-  SET_EXPLORE_NEW_MESSAGES (state, god_name, messages) {
+  SET_EXPLORE_NEW_MESSAGES(state, god_name, messages) {
     state.explore_messages = _.uniq(
-      state.explore_messages.concat(messages), false, function (item, key, a) {
+      state.explore_messages.concat(messages), false,
+      function(item, key, a) {
         return item.id
       }
     )
   },
-  SET_GODS_NEW_MESSAGES (state, {god_name, messages}) {
+  SET_GODS_NEW_MESSAGES(state, {
+    god_name,
+    messages
+  }) {
     initGodMessage(state, god_name)
     let merge_messages = state.gods_messages[god_name].concat(messages)
-    let uniq_messages = _.uniqBy(merge_messages, function (d) {
+    let uniq_messages = _.uniqBy(merge_messages, function(d) {
       return d.id
-    }
-    )
+    })
     state.gods_messages[god_name] = uniq_messages
   },
-  SET_GOD_INFO (state, god_info) {
+  SET_GOD_INFO(state, god_info) {
     state.god_info = god_info
   },
-  SET_LAST_TIME (state, time) {
+  SET_LAST_TIME(state, time) {
     state.last_time = time
   },
-  SET_OLD_LOADING (state, loading) {
+  SET_OLD_LOADING(state, loading) {
     state.old_loading = loading
   },
-  SET_NEW_LOADING (state, loading) {
+  SET_NEW_LOADING(state, loading) {
     state.new_loading = loading
   },
-  SET_OLD_MESSAGES (state, messages) {
+  SET_OLD_MESSAGES(state, messages) {
     state.messages = _.uniq(
-      messages.reverse().concat(state.messages), false, function (item, key, a) {
+      messages.reverse().concat(state.messages), false,
+      function(item, key, a) {
         return item.id
       }
     )
   },
-  SET_OLD_SEARCH_MESSAGES (state, messages) {
+  SET_OLD_SEARCH_MESSAGES(state, messages) {
     state.search_messages = _.uniq(
-      messages.reverse().concat(state.search_messages), false, function (item, key, a) {
+      messages.reverse().concat(state.search_messages), false,
+      function(item, key, a) {
         return item.id
       }
     )
   },
-  SET_INFO (state, header, info) {
+  SET_INFO(state, header, info) {
     state.info.header = header
     state.info.info = info
   },
-  SET_NEW_SEARCH_MESSAGES (state, messages) {
+  SET_NEW_SEARCH_MESSAGES(state, messages) {
     let merge_messages = state.search_messages.concat(messages)
-    let uniq_messages = _.uniqBy(merge_messages, function (d) {
+    let uniq_messages = _.uniqBy(merge_messages, function(d) {
       return d.id
-    }
-    )
+    })
     state.search_messages = uniq_messages
   },
-  SET_NEW_MESSAGES (state, messages) {
+  SET_NEW_MESSAGES(state, messages) {
     let merge_messages = state.messages.concat(messages)
-    let uniq_messages = _.uniqBy(merge_messages, function (d) {
+    let uniq_messages = _.uniqBy(merge_messages, function(d) {
       return d.id
-    }
-    )
+    })
     state.messages = uniq_messages
   }
 }
 // actions
 export const actions = {
-  getAnki ({ state, commit, dispatch }) {
-    return dispatch('get', {url: '/api_anki', loading: true}).then(function (data) {
+  getAnki({
+    state,
+    commit,
+    dispatch
+  }) {
+    return dispatch('get', {
+      url: '/api_anki',
+      loading: true
+    }).then(function(data) {
       if (data.anki !== null) {
         state.anki = data.anki
       }
     })
   },
-  loginAnki ({ state, commit, dispatch }, anki) {
-    return dispatch('post', {url: '/api_login_anki', body: anki, loading: true})
+  loginAnki({
+    state,
+    commit,
+    dispatch
+  }, anki) {
+    return dispatch('post', {
+      url: '/api_login_anki',
+      body: anki,
+      loading: true
+    })
   },
-  postAnki ({ state, commit, dispatch }, parm) {
-    return dispatch('post', {url: '/api_anki', body: parm, loading: true})
+  postAnki({
+    state,
+    commit,
+    dispatch
+  }, parm) {
+    return dispatch('post', {
+      url: '/api_anki',
+      body: parm,
+      loading: true
+    })
   },
-  putGod ({ dispatch, state, actions }, god) {
+  putGod({
+    dispatch,
+    state,
+    actions
+  }, god) {
     var parm = god
-    return dispatch('put', {url: '/api_god', body: parm, loading: false}).then(function (data) {
+    return dispatch('put', {
+      url: '/api_god',
+      body: parm,
+      loading: false
+    }).then(function(data) {
       // toastr.info('成功')
     })
   },
-  addRemark ({ dispatch, state }, parm) {
-    return dispatch('post', {url: '/api_remark', body: parm, loading: false})
+  addRemark({
+    dispatch,
+    state
+  }, parm) {
+    return dispatch('post', {
+      url: '/api_remark',
+      body: parm,
+      loading: false
+    })
   },
-  checkSocial ({ state, commit, dispatch }, {name, type}) {
+  checkSocial({
+    state,
+    commit,
+    dispatch
+  }, {
+    name,
+    type
+  }) {
     var parm = {
       name: name,
       type: type
     }
-    return dispatch('get', {url: '/api_social', body: parm, loading: false})
+    return dispatch('get', {
+      url: '/api_social',
+      body: parm,
+      loading: false
+    })
   },
-  postGod ({ state, commit, dispatch }, {name, cat}) {
+  postGod({
+    state,
+    commit,
+    dispatch
+  }, {
+    name,
+    cat
+  }) {
     var parm = {
       name: name,
       cat: cat
     }
-    return dispatch('post', {url: '/api_god', body: parm, loading: false})
+    return dispatch('post', {
+      url: '/api_god',
+      body: parm,
+      loading: false
+    })
   },
-  getBlock ({ state, commit, dispatch }, parm) {
-    return dispatch('get', {url: '/api_block', body: parm, loading: true})
+  getBlock({
+    state,
+    commit,
+    dispatch
+  }, parm) {
+    return dispatch('get', {
+      url: '/api_block',
+      body: parm,
+      loading: true
+    })
   },
-  postBlock ({ state, commit, dispatch }, god_id) {
-    let parm = {god_id: god_id}
-    return dispatch('post', {url: '/api_block', body: parm, loading: false}).then(function (data) {
+  postBlock({
+    state,
+    commit,
+    dispatch
+  }, god_id) {
+    let parm = {
+      god_id: god_id
+    }
+    return dispatch('post', {
+      url: '/api_block',
+      body: parm,
+      loading: false
+    }).then(function(data) {
       // toastr.info('已屏蔽此人')
       return data
     })
   },
-  newMessage ({ state, commit, dispatch }, {god_name, search_key, limit, explore}) {
+  newMessage({
+    state,
+    commit,
+    dispatch
+  }, {
+    god_name,
+    search_key,
+    limit,
+    explore
+  }) {
     let messages = null
     let after = null
     if (god_name) {
@@ -334,45 +451,92 @@ export const actions = {
     if (!limit) {
       limit = 10
     }
-    return dispatch('getNew', {god_name: god_name, search_key: search_key, after: after, limit: limit, explore: explore})
+    return dispatch('getNew', {
+      god_name: god_name,
+      search_key: search_key,
+      after: after,
+      limit: limit,
+      explore: explore
+    })
   },
-  unfollow ({ state, commit, dispatch }, god_id) {
-    return dispatch('delete', '/api_follow/' + god_id).then(function (data) {
+  unfollow({
+    state,
+    commit,
+    dispatch
+  }, god_id) {
+    return dispatch('delete', '/api_follow/' + god_id).then(function(data) {
       // toastr.info('取消关注')
       commit('REMOVE_THIS_GOD_MESSAGE', god_id)
       return data
     })
   },
-  follow ({ state, commit, dispatch }, god_id) {
-    let parm = {god_id: god_id}
-    return dispatch('post', {url: '/api_follow', body: parm, loading: false}).then(function (data) {
+  follow({
+    state,
+    commit,
+    dispatch
+  }, god_id) {
+    let parm = {
+      god_id: god_id
+    }
+    return dispatch('post', {
+      url: '/api_follow',
+      body: parm,
+      loading: false
+    }).then(function(data) {
       // toastr.info('关注成功')
       return data
     })
   },
-  getTheMessage ({ state, commit, dispatch }, id) {
-    let message = _.find(state.messages, function (d) { return d.id === parseInt(id, 10) })
+  getTheMessage({
+    state,
+    commit,
+    dispatch
+  }, id) {
+    let message = _.find(state.messages, function(d) {
+      return d.id === parseInt(id, 10)
+    })
     // 在god message里再找找
     if (!message) {
       for (var god_name in state.gods_messages) {
-        message = _.find(state.gods_messages[god_name], function (d) { return d.id === parseInt(id, 10) })
+        message = _.find(state.gods_messages[god_name], function(d) {
+          return d.id === parseInt(id, 10)
+        })
       }
     }
     if (message) {
       commit('SET_THE_MESSAGE', message)
       return
     }
-    let parm = { id: id }
-    return dispatch('get', {url: '/api_message', body: parm}).then(function (data) {
+    let parm = {
+      id: id
+    }
+    return dispatch('get', {
+      url: '/api_message',
+      body: parm
+    }).then(function(data) {
       commit('SET_THE_MESSAGE', data.message)
     })
   },
-  getRegisteredCount ({ state, commit, dispatch }, status) {
-    return dispatch('get', '/api_registered').then(function (data) {
+  getRegisteredCount({
+    state,
+    commit,
+    dispatch
+  }, status) {
+    return dispatch('get', '/api_registered').then(function(data) {
       commit('SET_REGISTERED_COUNT', data.registered_count)
     })
   },
-  getNew ({ state, commit, dispatch }, {god_name, search_key, after, limit, explore}) {
+  getNew({
+    state,
+    commit,
+    dispatch
+  }, {
+    god_name,
+    search_key,
+    after,
+    limit,
+    explore
+  }) {
     commit('SET_NEW_LOADING', true)
     var parm = {
       limit: limit,
@@ -382,7 +546,11 @@ export const actions = {
       explore: explore,
       loading: false
     }
-    return dispatch('get', {url: '/api_new', body: parm, loading: true}).then(function (data) {
+    return dispatch('get', {
+      url: '/api_new',
+      body: parm,
+      loading: true
+    }).then(function(data) {
       state.unread_message_count = data.unread_message_count
       if (data.messages.length === 0) { // 没有取到数
         state.followed_god_count = data.followed_god_count
@@ -396,7 +564,10 @@ export const actions = {
       } else {
         // state.followed_god_count = -1
         if (god_name) { // 查god的new
-          commit('SET_GODS_NEW_MESSAGES', {god_name: god_name, messages: data.messages})
+          commit('SET_GODS_NEW_MESSAGES', {
+            god_name: god_name,
+            messages: data.messages
+          })
         } else if (explore) { // explore
           commit('SET_EXPLORE_NEW_MESSAGES', data.messages)
         } else if (search_key) { // search
@@ -411,12 +582,19 @@ export const actions = {
       return data
     })
   },
-  getCat ({ state, commit, dispatch }, is_my = null) {
+  getCat({
+    state,
+    commit,
+    dispatch
+  }, is_my = null) {
     let parm = {
       is_my: is_my,
       is_public: 1
     }
-    return dispatch('get', {url: '/api_cat', body: parm}).then(function (data) {
+    return dispatch('get', {
+      url: '/api_cat',
+      body: parm
+    }).then(function(data) {
       if (is_my) {
         state.my_cats = data.cats
       } else {
@@ -425,7 +603,11 @@ export const actions = {
       return data
     })
   },
-  getPublicGods ({ state, commit, dispatch }, cat) {
+  getPublicGods({
+    state,
+    commit,
+    dispatch
+  }, cat) {
     let parm = {
       cat: cat,
       limit: 6
@@ -434,13 +616,23 @@ export const actions = {
     if (gods) {
       parm.before = gods[gods.length - 1].created_date
     }
-    return dispatch('get', {url: '/api_public_gods', body: parm}).then(function (data) {
-      commit('SET_CAT_GODS', {cat: cat, gods: data.gods})
+    return dispatch('get', {
+      url: '/api_public_gods',
+      body: parm
+    }).then(function(data) {
+      commit('SET_CAT_GODS', {
+        cat: cat,
+        gods: data.gods
+      })
     })
   },
-  getCollect ({ state, commit, dispatch }) {
+  getCollect({
+    state,
+    commit,
+    dispatch
+  }) {
     commit('SET_NEW_LOADING', true)
-    return dispatch('get', '/api_collect').then(function (data) {
+    return dispatch('get', '/api_collect').then(function(data) {
       state.collect_messages = data.messages
       if (state.collect_messages.length === 0) {
         state.show_how_to_use_collect = true
@@ -451,7 +643,11 @@ export const actions = {
       return data
     })
   },
-  getMyGods ({ state, commit, dispatch }, cat) {
+  getMyGods({
+    state,
+    commit,
+    dispatch
+  }, cat) {
     let parm = {
       cat: cat,
       limit: 6
@@ -460,20 +656,39 @@ export const actions = {
     if (gods) {
       parm.before = gods[gods.length - 1].created_date
     }
-    return dispatch('get', {url: '/api_my_gods', body: parm}).then(function (data) {
-      commit('SET_CAT_MY_GODS', {cat: parm.cat, gods: data.gods})
+    return dispatch('get', {
+      url: '/api_my_gods',
+      body: parm
+    }).then(function(data) {
+      commit('SET_CAT_MY_GODS', {
+        cat: parm.cat,
+        gods: data.gods
+      })
     })
   },
-  getGods ({ state, commit, dispatch }, parm) {
-    return dispatch('get', {url: '/api_gods', body: parm})
+  getGods({
+    state,
+    commit,
+    dispatch
+  }, parm) {
+    return dispatch('get', {
+      url: '/api_gods',
+      body: parm
+    })
   },
-  getGod ({ state, commit, dispatch }, val) {
+  getGod({
+    state,
+    commit,
+    dispatch
+  }, val) {
     let god_name
     let loading = true
     let parm = {}
     if (typeof val === 'string') {
       god_name = val
-      parm = {god_name: god_name}
+      parm = {
+        god_name: god_name
+      }
     } else {
       god_name = val.god_name
       loading = val.loading
@@ -481,17 +696,33 @@ export const actions = {
     if (state.god_infos[god_name]) {
       return
     }
-    parm = {god_name: god_name}
-    return dispatch('get', {url: '/api_god', body: parm, loading: loading}).then(function (data) {
+    parm = {
+      god_name: god_name
+    }
+    return dispatch('get', {
+      url: '/api_god',
+      body: parm,
+      loading: loading
+    }).then(function(data) {
       commit('SET_GOD_INFOS', data.god_info)
     })
   },
-  recordLastMessage ({ state, commit, dispatch }, time) {
+  recordLastMessage({
+    state,
+    commit,
+    dispatch
+  }, time) {
     if (state.last_time > parseInt(time, 10)) {
       return
     }
-    var parm = { last_time: time }
-    return dispatch('put', {url: '/api_last', body: parm, loading: false}).then(function (data) {
+    var parm = {
+      last_time: time
+    }
+    return dispatch('put', {
+      url: '/api_last',
+      body: parm,
+      loading: false
+    }).then(function(data) {
       state.unread_message_count = data.unread_message_count
       commit('SET_LAST_TIME', parseInt(time, 10))
       commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
@@ -508,7 +739,15 @@ export const actions = {
       return data
     })
   },
-  oldMessage ({ state, commit, dispatch }, {god_name, search_key, limit}) {
+  oldMessage({
+    state,
+    commit,
+    dispatch
+  }, {
+    god_name,
+    search_key,
+    limit
+  }) {
     let messages = null
     let before = null
     if (god_name) {
@@ -526,9 +765,23 @@ export const actions = {
     if (!limit) {
       limit = 10
     }
-    return dispatch('getOld', {god_name: god_name, search_key: search_key, before: before, limit: limit})
+    return dispatch('getOld', {
+      god_name: god_name,
+      search_key: search_key,
+      before: before,
+      limit: limit
+    })
   },
-  getOld ({ state, commit, dispatch }, {god_name, search_key, before, limit}) {
+  getOld({
+    state,
+    commit,
+    dispatch
+  }, {
+    god_name,
+    search_key,
+    before,
+    limit
+  }) {
     commit('SET_OLD_LOADING', true)
     var parm = {
       god_name: god_name,
@@ -536,7 +789,11 @@ export const actions = {
       limit: limit,
       before: before
     }
-    return dispatch('get', {url: '/api_old', body: parm, loading: false}).then(function (data) {
+    return dispatch('get', {
+      url: '/api_old',
+      body: parm,
+      loading: false
+    }).then(function(data) {
       if (data.messages.length === 0) { // 没有取到数
         if (god_name) {
           // toastr.info(god_name + '没有更多的历史消息可以看了')
@@ -545,14 +802,22 @@ export const actions = {
         } else {
           if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
             // toastr.info('请先关注你感兴趣的人')
-            window.router.go({name: 'Recommand', params: {cat: 'recommand'}})
+            window.router.go({
+              name: 'Recommand',
+              params: {
+                cat: 'recommand'
+              }
+            })
           } else {
             // toastr.info('没有更多的历史了')
           }
         }
       } else {
         if (god_name) {
-          commit('SET_GODS_OLD_MESSAGES', {god_name: god_name, messages: data.messages})
+          commit('SET_GODS_OLD_MESSAGES', {
+            god_name: god_name,
+            messages: data.messages
+          })
         } else if (search_key) { // search
           commit('SET_OLD_SEARCH_MESSAGES', data.messages)
         } else { // main
@@ -563,17 +828,28 @@ export const actions = {
       commit('REFLASH_TIME_LEN')
     })
   },
-  collect ({ state, commit, dispatch }, message_id) {
+  collect({
+    state,
+    commit,
+    dispatch
+  }, message_id) {
     var parm = {
       message_id: message_id
     }
-    return dispatch('post', {url: '/api_collect', body: parm}).then(function (data) {
+    return dispatch('post', {
+      url: '/api_collect',
+      body: parm
+    }).then(function(data) {
       // toastr.info('收藏成功')
       return data
     })
   },
-  uncollect ({ state, commit, dispatch }, id) {
-    return dispatch('delete', '/api_collect/' + id).then(function (data) {
+  uncollect({
+    state,
+    commit,
+    dispatch
+  }, id) {
+    return dispatch('delete', '/api_collect/' + id).then(function(data) {
       // toastr.info('取消收藏')
       return data
     })
@@ -581,8 +857,7 @@ export const actions = {
 }
 
 // getters
-export const getters = {
-}
+export const getters = {}
 export default new Vuex.Store({
   state,
   mutations,

@@ -13,25 +13,32 @@
     components: {
       Message
     },
-    data: function () {
-      return {
-      }
+    data: function() {
+      return {}
     },
     computed: {
-      the_message () {
+      the_message() {
         return this.$store.state.the_message
       },
-      id () {
+      id() {
         return this.$route.params.id
       }
     },
-    mounted () {
+    mounted() {
       this.$store.dispatch('getTheMessage', this.id)
-      this.$nextTick(function () {
+      this.$nextTick(function() {})
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        // 通过 `vm` 访问组件实例
+        vm.$store.state.layout.hideRight()
       })
     },
-    methods: {
-    }
+    beforeRouteLeave(to, from, next) {
+      this.$store.state.layout.showRight()
+      next()
+    },
+    methods: {}
   }
 </script>
 

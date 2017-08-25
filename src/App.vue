@@ -127,7 +127,9 @@
       if (checkLogin()) {
         this.$store.dispatch('getOauthInfo')
       }
-      this.$nextTick(function() {})
+      this.$nextTick(function() {
+        this.$store.state.layout = this.$refs.layout
+      })
     },
     data() {
       return {
