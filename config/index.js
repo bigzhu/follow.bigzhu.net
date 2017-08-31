@@ -3,6 +3,7 @@ var path = require('path')
 module.exports = {
   // Webpack aliases
   aliases: {
+    'bz-q-lib': path.resolve(__dirname, '../../bz-q-lib'),
     'bz-lib': path.resolve(__dirname, '../../bz-lib'),
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
     src: path.resolve(__dirname, '../src'),

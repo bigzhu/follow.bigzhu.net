@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <!--
-    <login :loading="loading" v-on:check_done="login"></login>
-    -->
+  <div class="layout-padding">
+    <Login @login='login'/>
   </div>
 </template>
 
 <script>
-  // import Login from 'bz-login'
+  import Login from 'bz-q-lib/components/Login'
   export default {
     props: [],
     components: {
-      // Login
+      Login
     },
     data: function () {
       return {
@@ -26,9 +24,10 @@
     methods: {
       login: function (user_name, password) {
         this.loading = true
-        let _this = this
+        let self = this
         this.$store.dispatch('login', {user_name: user_name, password: password}).then(function (data) {
-          _this.loading = false
+          self.loading = false
+          self.$router.push('/')
           // toastr.info('登录成功')
         })
       }
