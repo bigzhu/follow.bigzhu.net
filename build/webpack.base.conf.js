@@ -5,7 +5,8 @@ var
   cssUtils = require('./css-utils'),
   env = require('./env-utils'),
   merge = require('webpack-merge'),
-  projectRoot = path.resolve(__dirname, '../'),
+  // projectRoot = path.resolve(__dirname, '../'),
+  projectRoot = [path.resolve(__dirname, '../'), path.resolve(__dirname, '../../bz-lib'), path.resolve(__dirname, '../../bz-q-lib')],
   ProgressBarPlugin = require('progress-bar-webpack-plugin'),
   useCssSourceMap =
     (env.dev && config.dev.cssSourceMap) ||
