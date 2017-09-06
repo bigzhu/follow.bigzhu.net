@@ -1,11 +1,11 @@
 <template>
   <div>
     <q-fixed-position corner="bottom-right" :offset="[-286, 0]" class="bz">
-      <bz-fab :content="unread_message_count" color="" icon="" activeIcon="" direction="left">
+      <BzFab :content="unread_message_count" color="" icon="" activeIcon="" direction="left">
         <q-fab-action color="" @click="updateLast" icon="whatshot">
           <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">清空未读!</q-tooltip>
         </q-fab-action>
-      </bz-fab>
+      </BzFab>
     </q-fixed-position>
   </div>
 </template>
@@ -20,7 +20,7 @@
     QFixedPosition,
     QModal
   } from 'quasar'
-  import BzFab from './BzFab'
+  import BzFab from 'bz-q-lib/components/BzFab'
   import toast from '../functions/toast'
   export default {
     props: [],
