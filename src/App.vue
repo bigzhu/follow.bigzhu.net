@@ -83,7 +83,7 @@
     QScrollArea
   } from 'quasar'
   import Proxy from './components/Proxy'
-  import checkLogin from 'bz-lib/functions/checkLogin'
+  import checkLogin from 'bz-q-lib/functions/checkLogin'
   import store from './store'
   import LeftMenu from './components/LeftMenu'
   import RightMenu from './components/RightMenu'
@@ -160,7 +160,7 @@
             this.timeout_id = setTimeout(function() {
               self.$refs.layout.headerOnScreen = false
               self.will_hide_header = false
-            }, 1200)
+            }, 1400)
           }
         }
         if (data.position === 0) {

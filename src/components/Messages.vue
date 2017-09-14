@@ -35,7 +35,7 @@
   var get_count = 10
   import Old from './Old.vue'
   import Message from './Message.vue'
-  import checkLogin from 'bz-lib/functions/checkLogin'
+  import checkLogin from 'bz-q-lib/functions/checkLogin'
   // import toast from '../functions/toast'
 
   export default {

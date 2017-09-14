@@ -23,7 +23,7 @@
       </q-item-main>
       <q-item-side>
         <a target="_blank" :href="href">
-          <time-len :the_time="message.created_at" :lang="lang"></time-len>
+          <TimeLen :date_time="message.created_at" :lang="lang"></TimeLen>
           <q-icon :name="'fa-'+message.m_type" />
         </a>
       </q-item-side>
@@ -92,13 +92,13 @@
     QCardActions,
     QCardTitle
   } from 'quasar'
-  import checkLogin from 'bz-lib/functions/checkLogin'
+  import checkLogin from 'bz-q-lib/functions/checkLogin'
   import Twitter from './Twitter'
   import Github from './Github'
   import Instagram from './Instagram'
   import Tumblr from './Tumblr'
   import Facebook from './Facebook'
-  import TimeLen from 'bz-time-len'
+  import TimeLen from 'bz-q-lib/components/TimeLen'
   import Vue from 'vue'
   import Proxy from './Proxy'
   import GodItem from './GodItem'

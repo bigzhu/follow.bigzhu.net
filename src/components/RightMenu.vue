@@ -12,7 +12,7 @@
   import {
     QScrollArea
   } from 'quasar'
-  import isInList from 'bz-lib/functions/isInList'
+  import isInList from 'bz-q-lib/functions/isInList'
   import GodInfo from './GodInfo'
   import Cat from './Cat'
   import RightInfo from './RightInfo'
