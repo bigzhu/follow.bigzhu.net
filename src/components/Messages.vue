@@ -11,7 +11,7 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll v-scroll="onScroll" :offset="1000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
+    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
       <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">

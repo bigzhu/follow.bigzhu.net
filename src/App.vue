@@ -1,5 +1,6 @@
 <template>
   <div id="q-app">
+    <q-ajax-bar ref="bar" />
     <q-layout @scroll="scroll" ref="layout" :view="layoutStore.view" :left-breakpoint="layoutStore.leftBreakpoint" :right-breakpoint="layoutStore.rightBreakpoint" :reveal="layoutStore.reveal">
       <q-toolbar slot="header" color="primary" inverted>
         <!--
@@ -63,6 +64,7 @@
    * Root component
    */
   import {
+    QAjaxBar,
     QFixedPosition,
     QList,
     QItem,
@@ -90,18 +92,14 @@
   export default {
     store,
     mixins: [Proxy],
-    computed: {
-      route_name() {
-        return this.$route.name
-      },
-      oauth_info() {
-        return store.state.p.oauth_info
-      },
-      show_bar() {
-        return store.state.show_bar
+    watch: {
+      loading: function(val, old_val) {
+        if (val) this.$refs.bar.start()
+        else this.$refs.bar.stop()
       }
     },
     components: {
+      QAjaxBar,
       QFixedPosition,
       QList,
       QItem,
@@ -123,7 +121,23 @@
       QListHeader,
       QScrollArea
     },
+    computed: {
+      loading() {
+        return store.state.p.loading
+      },
+      route_name() {
+        return this.$route.name
+      },
+      oauth_info() {
+        return store.state.p.oauth_info
+      },
+      show_bar() {
+        return store.state.show_bar
+      }
+    },
+
     mounted() {
+      // this.$refs.bar.start()
       if (checkLogin()) {
         this.$store.dispatch('getOauthInfo')
       }
@@ -173,7 +187,10 @@
         window.location = '/api_logout'
       },
       login: function() {
-        window.location = '/login.html'
+        // window.location = '/login.html'
+        this.$router.push({
+          name: 'Oauth'
+        })
       },
       check_bar: function(scroll_target) {
         var st = scroll_target.scrollTop

@@ -14,8 +14,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Quasar from 'quasar'
 import router from './router'
-import errorToast from './functions/errorToast'
+import errorToast from 'bz-q-lib/functions/errorToast'
 errorToast()
+
 Vue.config.productionTip = false
 // set lang
 import VueI18n from 'vue-i18n'
@@ -39,7 +40,16 @@ import 'quasar-extras/material-icons'
 // import 'quasar-extras/ionicons'
 // import 'quasar-extras/fontawesome'
 // import 'quasar-extras/animate'
-
+//
+window.onunhandledrejection = function(e) {
+  window.alert('bigzhu')
+  console.log('bigzhu')
+  console.log(e.reason)
+}
+window.addEventListener('unhandledrejection', function(error, promise) {
+  window.alert('bigzhu')
+  console.log(error)
+})
 Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue({
