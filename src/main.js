@@ -41,15 +41,13 @@ import 'quasar-extras/material-icons'
 // import 'quasar-extras/fontawesome'
 // import 'quasar-extras/animate'
 //
-window.onunhandledrejection = function(e) {
-  window.alert('bigzhu')
-  console.log('bigzhu')
-  console.log(e.reason)
-}
-window.addEventListener('unhandledrejection', function(error, promise) {
-  window.alert('bigzhu')
-  console.log(error)
-})
+// window.onunhandledrejection = function(e) {
+//   console.log(e.reason)
+// }
+// window.addEventListener('unhandledrejection', function(error, promise) {
+//   window.alert('bigzhu')
+//   console.log(error)
+// })
 Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue({
