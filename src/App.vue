@@ -48,7 +48,7 @@
           <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('App.whattofollow')" />
           <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('App.following')" v-show="oauth_info.name" />
           <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('App.collect')" v-show="oauth_info.name" />
-          <q-route-tab slot="title" :to="{ name:'Bio'}" replace :label="$t('App.biography')" />
+          <q-tab slot="title" @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('App.biography')" />
         </q-tabs>
       </q-toolbar>
       <LeftMenu slot="left"></LeftMenu>
@@ -75,6 +75,7 @@
     QToolbarTitle,
     QSearch,
     QTabs,
+    QTab,
     QRouteTab,
     QBtn,
     QIcon,
@@ -99,6 +100,7 @@
       }
     },
     components: {
+      QTab,
       QAjaxBar,
       QFixedPosition,
       QList,
@@ -166,6 +168,10 @@
       }
     },
     methods: {
+      open(url) {
+        var win = window.open(url, '_blank')
+        win.focus()
+      },
       scroll: function(data) {
         let self = this
         if (data.direction === 'up') {
