@@ -75,6 +75,7 @@ let cn = {
     following: '关注中',
     tofollow: '关注'
   },
+  '首页': '首页',
   App: {
     main: '首页',
     settings: '设置',
@@ -186,6 +187,7 @@ let en = {
     following: 'Following',
     tofollow: 'Follow'
   },
+  '首页': 'main',
   App: {
     settings: 'Settings',
     search: 'Search',
