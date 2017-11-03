@@ -54,6 +54,6 @@ Quasar.start(() => {
     i18n,
     el: '#q-app',
     router,
-    render: h => h(require('./App'))
+    render: h => h(require('./App').default)
   })
 })
