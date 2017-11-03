@@ -28,7 +28,15 @@
       QItem,
       QList
     },
-    props: ['just_my', 'route_name'],
+    props: {
+      just_my: {
+        type: Boolean,
+        default: false
+      },
+      route_name: {
+        type: String
+      }
+    },
     computed: {
       cats: function() {
         if (this.just_my) {
@@ -145,7 +153,7 @@
       this.$store.dispatch('getCat', this.just_my)
     },
     methods: {
-      getSublabel: function (cat) {
+      getSublabel: function(cat) {
         if (this.just_my) {
           return `关注${cat.count}人`
         } else {

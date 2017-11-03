@@ -3,7 +3,7 @@
     <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
 
     <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="god_name=''">
+      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="addDone">
       </AddingGodItem>
       <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
       </GodItem>
@@ -15,7 +15,9 @@
 </template>
 
 <script>
-  import {QInfiniteScroll} from 'quasar'
+  import {
+    QInfiniteScroll
+  } from 'quasar'
   import Top from './Top'
   import NotYetFollow from './NotYetFollow'
   import SpinnerBz from './SpinnerBz'
@@ -82,11 +84,15 @@
         key: ''
       }
     },
-    mounted() {
-    },
+    mounted() {},
     methods: {
+      addDone() {
+        this.god_name = ''
+        this.$store.dispatch('getCat', true)
+        // 有可能引起关注数或类型增加, 取 cat
+      },
       loadMore: function(index, done) {
-        this.$store.dispatch('getMyGods', this.cat).then(function () {
+        this.$store.dispatch('getMyGods', this.cat).then(function() {
           setTimeout(done, 1000)
         })
       },
