@@ -63,7 +63,9 @@
         })
       },
       ordered_my_gods: function() {
-        return _.orderBy(this.filtered_my_gods, 'followed_at', 'desc')
+        return _.orderBy(this.filtered_my_gods, 'followed_at', 'desc').filter((o) => {
+          return o.name !== this.god_name
+        })
       },
       my_gods() {
         if (this.$store.state.cat_my_gods[this.cat]) {
