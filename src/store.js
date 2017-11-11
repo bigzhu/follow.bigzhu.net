@@ -5,6 +5,7 @@ if (!global.window) {
 }
 import p from 'bz-q-lib/module'
 import 'whatwg-fetch'
+import axios from 'axios'
 import _ from 'lodash'
 // import toastr from 'toastr'
 function initGodMessage(state, god_name) {
@@ -586,11 +587,29 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, is_my = null) {
-    let parm = {
-      is_my: is_my,
-      is_public: 1
-    }
+  }, is_my = 0) {
+    axios.get('/api_cat', {
+        params: {
+          is_my: is_my
+        }
+      })
+      .then(function(response) {
+        let data = response.data
+        if (data.error === '0') {
+          if (is_my) {
+            state.my_cats = data.cats
+          } else {
+            state.cats = data.cats
+          }
+          return data
+        } else {
+          console.log(response)
+        }
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+    /*
     return dispatch('get', {
       url: '/api_cat',
       body: parm
@@ -602,6 +621,7 @@ export const actions = {
       }
       return data
     })
+      */
   },
   getPublicGods({
     state,

@@ -88,7 +88,7 @@
     methods: {
       addDone() {
         this.god_name = ''
-        this.$store.dispatch('getCat', true)
+        this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
       loadMore: function(index, done) {

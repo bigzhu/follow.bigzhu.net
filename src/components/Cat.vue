@@ -30,8 +30,8 @@
     },
     props: {
       just_my: {
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 0
       },
       route_name: {
         type: String
