@@ -108,9 +108,6 @@ export const mutations = {
   SET_SHOW_BAR(state, show_bar) {
     state.show_bar = show_bar
   },
-  SET_REGISTERED_COUNT(state, registered_count) {
-    state.registered_count = registered_count
-  },
   SET_CAT_MY_GODS(state, {
     cat,
     gods
@@ -523,9 +520,13 @@ export const actions = {
     commit,
     dispatch
   }, status) {
-    return dispatch('get', '/api_registered').then(function(data) {
-      commit('SET_REGISTERED_COUNT', data.registered_count)
-    })
+    return axios.get('/api_registered')
+      .then(function(response) {
+        state.registered_count = response.data.registered_count
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getNew({
     state,
@@ -547,48 +548,51 @@ export const actions = {
       explore: explore,
       loading: false
     }
-    return dispatch('get', {
-      url: '/api_new',
-      body: parm,
-      loading: true
-    }).then(function(data) {
-      state.unread_message_count = data.unread_message_count
-      if (data.messages.length === 0) { // 没有取到数
-        state.followed_god_count = data.followed_god_count
-        if (search_key && state.search_messages.length === 0) {
-          // oldMessage({ dispatch, state }, {search_key: search_key})
-        } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
-          // oldMessage({ dispatch, state }, {god_name: god_name})
-        } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
-          // oldMessage({ dispatch, state }, {limit: 2})
+    return axios.get('/api_new', {
+        params: parm
+      })
+      .then(function(response) {
+        let data = response.data
+        state.unread_message_count = data.unread_message_count
+        if (data.messages.length === 0) { // 没有取到数
+          state.followed_god_count = data.followed_god_count
+          if (search_key && state.search_messages.length === 0) {
+            // oldMessage({ dispatch, state }, {search_key: search_key})
+          } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
+            // oldMessage({ dispatch, state }, {god_name: god_name})
+          } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
+            // oldMessage({ dispatch, state }, {limit: 2})
+          }
+        } else {
+          // state.followed_god_count = -1
+          if (god_name) { // 查god的new
+            commit('SET_GODS_NEW_MESSAGES', {
+              god_name: god_name,
+              messages: data.messages
+            })
+          } else if (explore) { // explore
+            commit('SET_EXPLORE_NEW_MESSAGES', data.messages)
+          } else if (search_key) { // search
+            commit('SET_NEW_SEARCH_MESSAGES', data.messages)
+          } else { // main
+            commit('SET_NEW_MESSAGES', data.messages)
+            // commit('REFRESH_UNREAD_MESSAGE_COUNT')
+          }
         }
-      } else {
-        // state.followed_god_count = -1
-        if (god_name) { // 查god的new
-          commit('SET_GODS_NEW_MESSAGES', {
-            god_name: god_name,
-            messages: data.messages
-          })
-        } else if (explore) { // explore
-          commit('SET_EXPLORE_NEW_MESSAGES', data.messages)
-        } else if (search_key) { // search
-          commit('SET_NEW_SEARCH_MESSAGES', data.messages)
-        } else { // main
-          commit('SET_NEW_MESSAGES', data.messages)
-          // commit('REFRESH_UNREAD_MESSAGE_COUNT')
-        }
-      }
-      commit('SET_NEW_LOADING', false)
-      commit('REFLASH_TIME_LEN')
-      return data
-    })
+        commit('SET_NEW_LOADING', false)
+        commit('REFLASH_TIME_LEN')
+        return data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getCat({
     state,
     commit,
     dispatch
   }, is_my = 0) {
-    axios.get('/api_cat', {
+    return axios.get('/api_cat', {
         params: {
           is_my: is_my
         }
@@ -609,19 +613,6 @@ export const actions = {
       .catch(function(error) {
         console.log(error)
       })
-    /*
-    return dispatch('get', {
-      url: '/api_cat',
-      body: parm
-    }).then(function(data) {
-      if (is_my) {
-        state.my_cats = data.cats
-      } else {
-        state.cats = data.cats
-      }
-      return data
-    })
-      */
   },
   getPublicGods({
     state,

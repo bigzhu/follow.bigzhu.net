@@ -51,7 +51,8 @@ module.exports = {
         changeOrigin: true
       },
       '/api_': {
-        target: 'https://follow.center',
+				//target: 'https://follow.center',
+				target: 'http://localhost:9444',
         changeOrigin: true
       }
     }
