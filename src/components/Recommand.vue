@@ -58,8 +58,13 @@
     },
     attached: function() {},
     computed: {
-      loading() {
-        return this.$store.state.p.loading
+      loading: {
+        set(loading) {
+          this.$store.state.p.loading = loading
+        },
+        get() {
+          return this.$store.state.p.loading
+        }
       },
       not_my_gods() {
         if (this.$store.state.cat_gods[this.$route.params.cat]) {

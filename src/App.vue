@@ -93,12 +93,6 @@
   export default {
     store,
     mixins: [Proxy],
-    watch: {
-      loading: function(val, old_val) {
-        if (val) this.$refs.bar.start()
-        else this.$refs.bar.stop()
-      }
-    },
     components: {
       QTab,
       QAjaxBar,
@@ -124,9 +118,6 @@
       QScrollArea
     },
     computed: {
-      loading() {
-        return store.state.p.loading
-      },
       route_name() {
         return this.$route.name
       },

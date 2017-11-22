@@ -599,16 +599,12 @@ export const actions = {
       })
       .then(function(response) {
         let data = response.data
-        if (data.error === '0') {
-          if (is_my) {
-            state.my_cats = data.cats
-          } else {
-            state.cats = data.cats
-          }
-          return data
+        if (is_my) {
+          state.my_cats = data
         } else {
-          console.log(response)
+          state.cats = data
         }
+        return data
       })
       .catch(function(error) {
         console.log(error)
@@ -620,6 +616,7 @@ export const actions = {
     dispatch
   }, cat) {
     let parm = {
+      is_public: 1,
       cat: cat,
       limit: 6
     }
@@ -627,15 +624,18 @@ export const actions = {
     if (gods) {
       parm.before = gods[gods.length - 1].created_date
     }
-    return dispatch('get', {
-      url: '/api_public_gods',
-      body: parm
-    }).then(function(data) {
-      commit('SET_CAT_GODS', {
-        cat: cat,
-        gods: data.gods
+    return axios.get('/api_gods', {
+        params: parm
       })
-    })
+      .then(function(response) {
+        commit('SET_CAT_GODS', {
+          cat: cat,
+          gods: response.data
+        })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getCollect({
     state,
@@ -643,16 +643,20 @@ export const actions = {
     dispatch
   }) {
     commit('SET_NEW_LOADING', true)
-    return dispatch('get', '/api_collect').then(function(data) {
-      state.collect_messages = data.messages
-      if (state.collect_messages.length === 0) {
-        state.show_how_to_use_collect = true
-      } else {
-        state.show_how_to_use_collect = false
-      }
-      commit('SET_NEW_LOADING', false)
-      return data
-    })
+    return axios.get('/api_collect')
+      .then(function(response) {
+        state.collect_messages = response.data
+        if (state.collect_messages.length === 0) {
+          state.show_how_to_use_collect = true
+        } else {
+          state.show_how_to_use_collect = false
+        }
+        commit('SET_NEW_LOADING', false)
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getMyGods({
     state,
@@ -667,15 +671,18 @@ export const actions = {
     if (gods && gods.length > 0) {
       parm.before = gods[gods.length - 1].created_date
     }
-    return dispatch('get', {
-      url: '/api_my_gods',
-      body: parm
-    }).then(function(data) {
-      commit('SET_CAT_MY_GODS', {
-        cat: parm.cat,
-        gods: data.gods
+    return axios.get('/api_gods', {
+        params: parm
       })
-    })
+      .then(function(response) {
+        commit('SET_CAT_MY_GODS', {
+          cat: cat,
+          gods: response.data
+        })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getGods({
     state,
