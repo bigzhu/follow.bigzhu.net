@@ -615,17 +615,15 @@ export const actions = {
     commit,
     dispatch
   }, cat) {
-    let parm = {
-      is_public: 1,
-      cat: cat,
-      limit: 6
+    let params = {
+      cat: cat
     }
     let gods = state.cat_gods[cat]
     if (gods) {
-      parm.before = gods[gods.length - 1].created_date
+      params.before = gods[gods.length - 1].created_at
     }
     return axios.get('/api_gods', {
-        params: parm
+        params: params
       })
       .then(function(response) {
         commit('SET_CAT_GODS', {
@@ -663,16 +661,16 @@ export const actions = {
     commit,
     dispatch
   }, cat) {
-    let parm = {
+    let params = {
       cat: cat,
-      limit: 6
+      followed: true
     }
     let gods = state.cat_my_gods[cat]
     if (gods && gods.length > 0) {
-      parm.before = gods[gods.length - 1].created_date
+      params.before = gods[gods.length - 1].created_at
     }
     return axios.get('/api_gods', {
-        params: parm
+        params: params
       })
       .then(function(response) {
         commit('SET_CAT_MY_GODS', {
@@ -730,32 +728,29 @@ export const actions = {
     commit,
     dispatch
   }, time) {
-    if (state.last_time > parseInt(time, 10)) {
-      return
-    }
-    var parm = {
-      last_time: time
-    }
-    return dispatch('put', {
-      url: '/api_last',
-      body: parm,
-      loading: false
-    }).then(function(data) {
-      state.unread_message_count = data.unread_message_count
-      commit('SET_LAST_TIME', parseInt(time, 10))
-      commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
-      // 如果<20了，就预加载一些
-      /*
-      if (state.local_unread_message_count <= 20) {
-        let after = null
-        if (state.messages.length > 0) {
-          after = state.messages[state.messages.length - 1].created_at
+    // if (state.last_time > parseInt(time, 10)) {
+    //   return
+    // }
+    return axios.put('/api_last', {last: time})
+      .then(function(response) {
+        state.unread_message_count = response.data
+        commit('SET_LAST_TIME', parseInt(time, 10))
+        commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
+        // 如果<20了，就预加载一些
+        /*
+        if (state.local_unread_message_count <= 20) {
+          let after = null
+          if (state.messages.length > 0) {
+            after = state.messages[state.messages.length - 1].created_at
+          }
+          dispatch('getNew', {after: after, limit: 50})
         }
-        dispatch('getNew', {after: after, limit: 50})
-      }
-      */
-      return data
-    })
+        */
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   oldMessage({
     state,

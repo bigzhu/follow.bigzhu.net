@@ -219,7 +219,7 @@
       newMessage: function(limit = null) {
         let after = null
         if (this.messages.length > 0) {
-          after = this.messages[this.messages.length - 1].created_at
+          after = this.messages[this.messages.length - 1].out_created_at
           // toast('recordLastMessage')
           this.$store.dispatch('recordLastMessage', after)
         }
