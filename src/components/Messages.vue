@@ -35,6 +35,7 @@
   var get_count = 10
   import Old from './Old.vue'
   import Message from './Message.vue'
+  import checkLogin from 'bz-q-lib/functions/checkLogin'
   // import toast from '../functions/toast'
 
   export default {
@@ -75,7 +76,8 @@
         else return 0
       },
       is_login() {
-        return this.$store.state.p.oauth_info.name
+        return checkLogin()
+        // return this.$store.state.p.oauth_info.name
       },
       unread_message_count() {
         return this.$store.state.unread_message_count

@@ -1,6 +1,5 @@
 <template>
   <div id="q-app">
-    <q-ajax-bar ref="bar" />
     <q-layout @scroll="scroll" ref="layout" :view="layoutStore.view" :left-breakpoint="layoutStore.leftBreakpoint" :right-breakpoint="layoutStore.rightBreakpoint" :reveal="layoutStore.reveal">
       <q-toolbar slot="header" color="primary" inverted>
         <!--
@@ -55,6 +54,7 @@
       <router-view />
       <RightMenu slot="right"></RightMenu>
     </q-layout>
+    <q-ajax-bar />
   </div>
 </template>
 
@@ -119,22 +119,20 @@
     },
     computed: {
       is_login() {
-        return store.state.p.oauth_info.name
+        return this.$store.state.p.oauth_info.name
       },
       route_name() {
         return this.$route.name
       },
       oauth_info() {
-        return store.state.p.oauth_info
+        return this.$store.state.p.oauth_info
       },
       show_bar() {
-        return store.state.show_bar
+        return this.$store.state.show_bar
       }
     },
 
     mounted() {
-      // this.$refs.bar.start()
-      // if (checkLogin()) {
       if (this.oauth_info.name === '') {
         this.$store.dispatch('getOauthInfo')
       }
