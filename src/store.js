@@ -807,8 +807,8 @@ export const actions = {
         params: params
       })
       .then(function(response) {
-        let data = response.data
-        if (data.messages.length === 0) { // 没有取到数
+        let messages = response.data
+        if (messages.length === 0) { // 没有取到数
           if (god_name) {
             // toastr.info(god_name + '没有更多的历史消息可以看了')
           } else if (search_key) {
@@ -830,12 +830,12 @@ export const actions = {
           if (god_name) {
             commit('SET_GODS_OLD_MESSAGES', {
               god_name: god_name,
-              messages: data.messages
+              messages: messages
             })
           } else if (search_key) { // search
-            commit('SET_OLD_SEARCH_MESSAGES', data.messages)
+            commit('SET_OLD_SEARCH_MESSAGES', messages)
           } else { // main
-            commit('SET_OLD_MESSAGES', data.messages)
+            commit('SET_OLD_MESSAGES', messages)
           }
         }
         commit('SET_OLD_LOADING', false)
