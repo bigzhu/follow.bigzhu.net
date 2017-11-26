@@ -18,10 +18,10 @@
           <span slot="subtitle">Follow your dream</span>
         </q-toolbar-title>
 
-        <q-btn v-show="!oauth_info.name" @click="login" flat small icon="fa-sign-in">
+        <q-btn v-show="!is_login" @click="login" flat small icon="fa-sign-in">
           登录
         </q-btn>
-        <q-btn v-show="oauth_info.name" flat ref="target">
+        <q-btn v-show="is_login" flat ref="target">
           <img :src="proxy(oauth_info.avatar)" class="avatar" />
           <!-- Direct child of target -->
           <q-popover ref="popover">
@@ -46,8 +46,8 @@
         <q-tabs slot="navigation" color="black" inverted>
           <q-route-tab slot="title" :to="{'name': 'Main'}" replace :label="$t('App.main')" />
           <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('App.whattofollow')" />
-          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('App.following')" v-show="oauth_info.name" />
-          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('App.collect')" v-show="oauth_info.name" />
+          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('App.following')" v-show="is_login" />
+          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('App.collect')" v-show="is_login" />
           <q-tab slot="title" @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('App.biography')" />
         </q-tabs>
       </q-toolbar>
@@ -86,7 +86,7 @@
     QScrollArea
   } from 'quasar'
   import Proxy from './components/Proxy'
-  import checkLogin from 'bz-q-lib/functions/checkLogin'
+  // import checkLogin from 'bz-q-lib/functions/checkLogin'
   import store from './store'
   import LeftMenu from './components/LeftMenu'
   import RightMenu from './components/RightMenu'
@@ -118,6 +118,9 @@
       QScrollArea
     },
     computed: {
+      is_login() {
+        return store.state.p.oauth_info.name
+      },
       route_name() {
         return this.$route.name
       },
@@ -131,7 +134,8 @@
 
     mounted() {
       // this.$refs.bar.start()
-      if (checkLogin()) {
+      // if (checkLogin()) {
+      if (this.oauth_info.name === '') {
         this.$store.dispatch('getOauthInfo')
       }
       this.$nextTick(function() {

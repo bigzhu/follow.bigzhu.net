@@ -698,30 +698,27 @@ export const actions = {
     dispatch
   }, val) {
     let god_name
-    let loading = true
-    let parm = {}
     if (typeof val === 'string') {
       god_name = val
-      parm = {
-        god_name: god_name
-      }
     } else {
       god_name = val.god_name
-      loading = val.loading
+      // loading = val.loading
     }
     if (state.god_infos[god_name]) {
       return
     }
-    parm = {
-      god_name: god_name
-    }
-    return dispatch('get', {
-      url: '/api_god',
-      body: parm,
-      loading: loading
-    }).then(function(data) {
-      commit('SET_GOD_INFOS', data.god_info)
-    })
+    return axios.get('/api_god', {
+        params: {
+          god_name: god_name
+        }
+      })
+      .then(function(response) {
+        commit('SET_GOD_INFOS', response.data)
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   recordLastMessage({
     state,
@@ -731,7 +728,9 @@ export const actions = {
     // if (state.last_time > parseInt(time, 10)) {
     //   return
     // }
-    return axios.put('/api_last', {last: time})
+    return axios.put('/api_last', {
+        last: time
+      })
       .then(function(response) {
         state.unread_message_count = response.data
         commit('SET_LAST_TIME', parseInt(time, 10))
@@ -773,7 +772,9 @@ export const actions = {
     if (messages.length > 0) {
       before = messages[0].created_at
     } else { // 第一次, 找当前以前的
-      before = new Date().getTime()
+      // before = new Date().getTime()
+      // before = (new Date()).toISOString()
+      before = (new Date()).toJSON()
     }
     if (!limit) {
       limit = 10
@@ -796,50 +797,53 @@ export const actions = {
     limit
   }) {
     commit('SET_OLD_LOADING', true)
-    var parm = {
+    var params = {
       god_name: god_name,
       search_key: search_key,
       limit: limit,
       before: before
     }
-    return dispatch('get', {
-      url: '/api_old',
-      body: parm,
-      loading: false
-    }).then(function(data) {
-      if (data.messages.length === 0) { // 没有取到数
-        if (god_name) {
-          // toastr.info(god_name + '没有更多的历史消息可以看了')
-        } else if (search_key) {
-          // toastr.info('没有更多的历史了')
-        } else {
-          if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
-            // toastr.info('请先关注你感兴趣的人')
-            window.router.go({
-              name: 'Recommand',
-              params: {
-                cat: 'recommand'
-              }
-            })
-          } else {
+    return axios.get('/api_old', {
+        params: params
+      })
+      .then(function(response) {
+        let data = response.data
+        if (data.messages.length === 0) { // 没有取到数
+          if (god_name) {
+            // toastr.info(god_name + '没有更多的历史消息可以看了')
+          } else if (search_key) {
             // toastr.info('没有更多的历史了')
+          } else {
+            if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
+              // toastr.info('请先关注你感兴趣的人')
+              window.router.go({
+                name: 'Recommand',
+                params: {
+                  cat: 'recommand'
+                }
+              })
+            } else {
+              // toastr.info('没有更多的历史了')
+            }
+          }
+        } else {
+          if (god_name) {
+            commit('SET_GODS_OLD_MESSAGES', {
+              god_name: god_name,
+              messages: data.messages
+            })
+          } else if (search_key) { // search
+            commit('SET_OLD_SEARCH_MESSAGES', data.messages)
+          } else { // main
+            commit('SET_OLD_MESSAGES', data.messages)
           }
         }
-      } else {
-        if (god_name) {
-          commit('SET_GODS_OLD_MESSAGES', {
-            god_name: god_name,
-            messages: data.messages
-          })
-        } else if (search_key) { // search
-          commit('SET_OLD_SEARCH_MESSAGES', data.messages)
-        } else { // main
-          commit('SET_OLD_MESSAGES', data.messages)
-        }
-      }
-      commit('SET_OLD_LOADING', false)
-      commit('REFLASH_TIME_LEN')
-    })
+        commit('SET_OLD_LOADING', false)
+        commit('REFLASH_TIME_LEN')
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   collect({
     state,
