@@ -184,7 +184,7 @@ export const mutations = {
   },
   REFRESH_LOCAL_UNREAD_MESSAGE_COUNT(state) {
     let unread_messages = _.partition(state.messages, (d) => {
-      return d.created_at > state.last_time
+      return d.out_created_at > state.last_time
     })[0]
     state.local_unread_message_count = unread_messages.length
   },
@@ -582,6 +582,7 @@ export const actions = {
       })
       .then(function(response) {
         let data = response.data
+        console.log(data.messages[0])
         state.unread_message_count = data.unread_message_count
         if (data.messages.length === 0) { // 没有取到数
           state.followed_god_count = data.followed_god_count
@@ -609,7 +610,7 @@ export const actions = {
           }
         }
         commit('SET_NEW_LOADING', false)
-        commit('REFLASH_TIME_LEN')
+        // commit('REFLASH_TIME_LEN')
         return data
       })
       .catch(function(error) {
@@ -649,7 +650,7 @@ export const actions = {
     }
     let gods = state.cat_gods[cat]
     if (gods) {
-      params.before = gods[gods.length - 1].created_at
+      params.before = gods[gods.length - 1].out_created_at
     }
     return axios.get('/api_gods', {
         params: params
@@ -696,7 +697,7 @@ export const actions = {
     }
     let gods = state.cat_my_gods[cat]
     if (gods && gods.length > 0) {
-      params.before = gods[gods.length - 1].created_at
+      params.before = gods[gods.length - 1].out_created_at
     }
     return axios.get('/api_gods', {
         params: params
@@ -763,7 +764,7 @@ export const actions = {
       .then(function(response) {
         state.unread_message_count = response.data
         commit('SET_LAST_TIME', parseInt(time, 10))
-        commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
+        // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
         // 如果<20了，就预加载一些
         /*
         if (state.local_unread_message_count <= 20) {
@@ -799,7 +800,7 @@ export const actions = {
       messages = state.messages
     }
     if (messages.length > 0) {
-      before = messages[0].created_at
+      before = messages[0].out_created_at
     } else { // 第一次, 找当前以前的
       // before = new Date().getTime()
       // before = (new Date()).toISOString()
