@@ -135,6 +135,7 @@
     mounted() {
       if (this.oauth_info.name === '') {
         this.$store.dispatch('getOauthInfo')
+        this.$store.dispatch('getNoTypes')
       }
       this.$nextTick(function() {
         this.$store.state.layout = this.$refs.layout

@@ -23,6 +23,7 @@
     </div>
     <q-select type="list" v-model="lang" :options="lang_options">
     </q-select>
+    <MessageConf/>
     </div>
   </div>
 </template>
@@ -32,9 +33,11 @@
     QCard,
     QSelect
   } from 'quasar'
+  import MessageConf from './MessageConf'
   export default {
     props: [],
     components: {
+      MessageConf,
       QCard,
       QSelect
     },

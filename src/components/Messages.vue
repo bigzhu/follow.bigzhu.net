@@ -12,7 +12,7 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
-      <message ref="messages" v-for='message in show_messages' :message='message' :key="message.id">
+      <message ref="messages" v-for='message in no_types_messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("Messages.nomessage") }}
@@ -36,6 +36,7 @@
   import Old from './Old.vue'
   import Message from './Message.vue'
   import checkLogin from 'bz-q-lib/functions/checkLogin'
+  import isInList from 'bz-q-lib/functions/isInList'
   // import toast from '../functions/toast'
 
   export default {
@@ -104,6 +105,11 @@
           return !d.top_hide
         })
       },
+      no_types_messages() {
+        return this.show_messages.filter((d) => {
+          return !isInList(d.m_type, this.no_types)
+        })
+      },
       messages() {
         switch (this.type) {
           case 'god':
@@ -119,6 +125,9 @@
               return this.$store.state.messages
             }
         }
+      },
+      no_types() {
+        return this.$store.state.no_types
       }
     },
     mounted() {

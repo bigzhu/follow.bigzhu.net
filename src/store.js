@@ -21,6 +21,8 @@ function initCatGod(state, type, cat) {
 }
 // state
 export const state = {
+  no_types: [],
+  show_types: ['twitter', 'instagram', 'tumblr', 'github'],
   layout: null,
   hide_params: { // 为了 scroll 效率, 只部分显示 messages
     padding_top: 0 // 记录隐藏了 message 以后, 要加对应多少的 padding-top
@@ -291,6 +293,32 @@ export const mutations = {
 }
 // actions
 export const actions = {
+  getNoTypes({
+    state,
+    commit,
+    dispatch
+  }) {
+    return axios.get('/api_no_types')
+      .then((response) => {
+        state.no_types = response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  },
+  setNoTypes({
+    state,
+    commit,
+    dispatch
+  }, no_types) {
+    return axios.put('/api_no_types', no_types)
+      .then((response) => {
+        state.no_types = no_types
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  },
   getAnki({
     state,
     commit,
@@ -320,12 +348,12 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, parm) {
-    return dispatch('post', {
-      url: '/api_anki',
-      body: parm,
-      loading: true
-    })
+  }, params) {
+    return axios.post('/api_anki', params)
+      .then(function(response) {})
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   putGod({
     dispatch,
@@ -540,7 +568,8 @@ export const actions = {
     explore
   }) {
     commit('SET_NEW_LOADING', true)
-    var parm = {
+    var params = {
+      not: state.no_types,
       limit: limit,
       after: after,
       god_name: god_name,
@@ -549,7 +578,7 @@ export const actions = {
       loading: false
     }
     return axios.get('/api_new', {
-        params: parm
+        params: params
       })
       .then(function(response) {
         let data = response.data
