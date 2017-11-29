@@ -155,7 +155,7 @@
         let hide_p = this.$store.state.hide_params
         let over_top = position - 500
         if (over_top > hide_p.padding_top) {
-          let message = this.show_messages[0]
+          let message = this.no_types_messages[0]
           if (!message) return
 
           let message_height = message.el.offsetHeight

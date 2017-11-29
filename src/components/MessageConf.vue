@@ -45,7 +45,6 @@
     methods: {
       change() {
         let no_types = _.difference(this.types, this.show_types)
-        if (no_types.length === 0) return
         this.$store.dispatch('setNoTypes', no_types)
       }
     }

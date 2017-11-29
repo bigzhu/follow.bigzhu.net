@@ -311,9 +311,9 @@ export const actions = {
     commit,
     dispatch
   }, no_types) {
+    state.no_types = no_types
     return axios.put('/api_no_types', no_types)
       .then((response) => {
-        state.no_types = no_types
       })
       .catch(function(error) {
         console.log(error)
@@ -582,7 +582,6 @@ export const actions = {
       })
       .then(function(response) {
         let data = response.data
-        console.log(data.messages[0])
         state.unread_message_count = data.unread_message_count
         if (data.messages.length === 0) { // 没有取到数
           state.followed_god_count = data.followed_god_count
