@@ -573,9 +573,7 @@ export const actions = {
       limit: limit,
       after: after,
       god_name: god_name,
-      search_key: search_key,
-      explore: explore,
-      loading: false
+      search_key: search_key
     }
     return axios.get('/api_new', {
         params: params
