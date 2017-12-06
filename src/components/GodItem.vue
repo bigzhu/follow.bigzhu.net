@@ -77,7 +77,6 @@
       Follow,
       GodRemark
     },
-    watch: {},
     mounted() {},
     directives: {},
     data: function() {

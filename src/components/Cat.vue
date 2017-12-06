@@ -28,6 +28,11 @@
       QItem,
       QList
     },
+    watch: {
+      'route_name': function() {
+        this.$store.dispatch('getCat', this.just_my)
+      }
+    },
     props: {
       just_my: {
         type: Number,
@@ -38,6 +43,9 @@
       }
     },
     computed: {
+      route_name () {
+        return this.$route.name
+      },
       cats: function() {
         if (this.just_my) {
           return this.$store.state.my_cats
@@ -53,7 +61,6 @@
         }
       }
     },
-
     data: function() {
       return {
         icon_map: [{
@@ -196,7 +203,6 @@
         })
       }
     }
-
   }
 </script>
 
