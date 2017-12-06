@@ -29,7 +29,7 @@
       QList
     },
     watch: {
-      'route_name': function() {
+      'the_route': function() {
         this.$store.dispatch('getCat', this.just_my)
       }
     },
@@ -43,7 +43,7 @@
       }
     },
     computed: {
-      route_name () {
+      the_route () {
         return this.$route.name
       },
       cats: function() {

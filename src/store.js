@@ -405,15 +405,17 @@ export const actions = {
     name,
     cat
   }) {
-    var parm = {
+    var params = {
       name: name,
       cat: cat
     }
-    return dispatch('post', {
-      url: '/api_god',
-      body: parm,
-      loading: false
-    })
+    return axios.post('/api_god', params)
+      .then(function(response) {
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getBlock({
     state,

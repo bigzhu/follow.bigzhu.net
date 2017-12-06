@@ -110,8 +110,8 @@
         this.$store.dispatch('postGod', {
           name: this.god_name,
           cat: this.cat
-        }).then(function(data) {
-          self.startCheck(data.god_info)
+        }).then(function(god_info) {
+          self.startCheck(god_info)
         })
       },
       startCheck: function(god_info) {
