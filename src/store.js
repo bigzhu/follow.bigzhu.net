@@ -647,7 +647,7 @@ export const actions = {
     }
     let gods = state.cat_gods[cat]
     if (gods) {
-      params.before = gods[gods.length - 1].out_created_at
+      params.before = gods[gods.length - 1].created_at
     }
     return axios.get('/api_gods', {
         params: params
