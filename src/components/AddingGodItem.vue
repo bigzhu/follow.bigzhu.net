@@ -123,7 +123,7 @@
           name: this.god_name,
           type: 'twitter'
         }).then(function(data) {
-          self.twitterDone(data.info)
+          self.twitterDone(data)
         })
       },
       twitterDone: function(info) {
@@ -137,7 +137,7 @@
           name: this.god_name,
           type: 'github'
         }).then(function(data) {
-          self.githubDone(data.info)
+          self.githubDone(data)
         })
         this.github_loading = true
       },
@@ -152,7 +152,7 @@
           name: this.god_name,
           type: 'instagram'
         }).then(function(data) {
-          self.instagramDone(data.info)
+          self.instagramDone(data)
         })
         this.instagram_loading = true
       },
@@ -167,7 +167,7 @@
           name: this.god_name,
           type: 'tumblr'
         }).then(function(data) {
-          self.tumblrDone(data.info)
+          self.tumblrDone(data)
         })
         this.tumblr_loading = true
       },
@@ -177,14 +177,15 @@
           this.god.tumblr = info
           this.setInfo(info, 'tumblr')
         }
-        let self = this
-        this.$store.dispatch('checkSocial', {
-          name: this.god_name,
-          type: 'facebook'
-        }).then(function(data) {
-          self.facebookDone(data.info)
-        })
-        this.facebook_loading = true
+        this.allDone()
+        // let self = this
+        // this.$store.dispatch('checkSocial', {
+        //   name: this.god_name,
+        //   type: 'facebook'
+        // }).then(function(data) {
+        //   self.facebookDone(data)
+        // })
+        // this.facebook_loading = true
       },
       facebookDone: function(info) {
         this.facebook_loading = false

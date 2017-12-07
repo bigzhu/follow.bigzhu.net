@@ -387,15 +387,17 @@ export const actions = {
     name,
     type
   }) {
-    var parm = {
+    var params = {
       name: name,
       type: type
     }
-    return dispatch('get', {
-      url: '/api_social',
-      body: parm,
-      loading: false
-    })
+    return axios.get('/api_social', {params: params})
+      .then((response) => {
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   postGod({
     state,
