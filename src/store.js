@@ -313,8 +313,7 @@ export const actions = {
   }, no_types) {
     state.no_types = no_types
     return axios.put('/api_no_types', no_types)
-      .then((response) => {
-      })
+      .then((response) => {})
       .catch(function(error) {
         console.log(error)
       })
@@ -372,12 +371,14 @@ export const actions = {
   addRemark({
     dispatch,
     state
-  }, parm) {
-    return dispatch('post', {
-      url: '/api_remark',
-      body: parm,
-      loading: false
-    })
+  }, params) {
+    return axios.post('/api_remark', params)
+      .then(function(response) {
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   checkSocial({
     state,
@@ -391,7 +392,9 @@ export const actions = {
       name: name,
       type: type
     }
-    return axios.get('/api_social', {params: params})
+    return axios.get('/api_social', {
+        params: params
+      })
       .then((response) => {
         return response.data
       })
@@ -494,28 +497,29 @@ export const actions = {
     commit,
     dispatch
   }, god_id) {
-    return dispatch('delete', '/api_follow/' + god_id).then(function(data) {
-      // toastr.info('取消关注')
-      // commit('REMOVE_THIS_GOD_MESSAGE', god_id)
-      return data
-    })
+    return axios.delete('/api_follow', {
+        params: {
+          god_id: god_id
+        }
+      })
+      .then(function(response) {})
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   follow({
     state,
     commit,
     dispatch
   }, god_id) {
-    let parm = {
+    let params = {
       god_id: god_id
     }
-    return dispatch('post', {
-      url: '/api_follow',
-      body: parm,
-      loading: false
-    }).then(function(data) {
-      // toastr.info('关注成功')
-      return data
-    })
+    return axios.post('/api_follow', params)
+      .then(function(response) {})
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   getTheMessage({
     state,
@@ -698,7 +702,7 @@ export const actions = {
     }
     let gods = state.cat_my_gods[cat]
     if (gods && gods.length > 0) {
-      params.before = gods[gods.length - 1].out_created_at
+      params.before = gods[gods.length - 1].created_at
     }
     return axios.get('/api_gods', {
         params: params
@@ -829,6 +833,7 @@ export const actions = {
   }) {
     commit('SET_OLD_LOADING', true)
     var params = {
+      not: state.no_types,
       god_name: god_name,
       search_key: search_key,
       limit: limit,
@@ -881,26 +886,29 @@ export const actions = {
     commit,
     dispatch
   }, message_id) {
-    var parm = {
+    var params = {
       message_id: message_id
     }
-    return dispatch('post', {
-      url: '/api_collect',
-      body: parm
-    }).then(function(data) {
-      // toastr.info('收藏成功')
-      return data
-    })
+    return axios.post('/api_collect', params)
+      .then(function(response) {})
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   uncollect({
     state,
     commit,
     dispatch
-  }, id) {
-    return dispatch('delete', '/api_collect/' + id).then(function(data) {
-      // toastr.info('取消收藏')
-      return data
-    })
+  }, message_id) {
+    return axios.delete('/api_collect', {
+        params: {
+          message_id: message_id
+        }
+      })
+      .then(function(response) {})
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 }
 

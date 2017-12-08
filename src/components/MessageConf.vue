@@ -1,10 +1,10 @@
 <template>
   <div>
     <q-option-group @change="change" type="toggle" color="secondary" v-model="show_types" :options="[
-            { label: 'github', value: 'github' },
-            { label: 'tumblr', value: 'tumblr' },
-            { label: 'twitter', value: 'twitter', color: 'red' },
-            { label: 'instagram', value: 'instagram', color: 'red' }
+            { label: 'github', value: 'github'},
+            { label: 'tumblr', value: 'tumblr'},
+            { label: 'twitter', value: 'twitter'},
+            { label: 'instagram', value: 'instagram'}
           ]" />
   </div>
 </template>
@@ -52,4 +52,6 @@
 </script>
 
 <style lang="stylus" scoped>
+  div
+    margin: 1rem
 </style>

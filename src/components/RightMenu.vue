@@ -5,20 +5,25 @@
     <Cat v-if="name==='Recommand'"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
     <GodInfo v-show="god_name" :god="god_info"></GodInfo>
+    <MessageConf/>
   </q-scroll-area>
 </template>
 
 <script>
   import {
+    QCard,
     QScrollArea
   } from 'quasar'
   import isInList from 'bz-q-lib/functions/isInList'
   import GodInfo from './GodInfo'
   import Cat from './Cat'
   import RightInfo from './RightInfo'
+  import MessageConf from './MessageConf'
   export default {
     props: [],
     components: {
+      QCard,
+      MessageConf,
       QScrollArea,
       Cat,
       GodInfo,
