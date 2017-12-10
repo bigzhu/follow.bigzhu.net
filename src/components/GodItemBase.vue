@@ -40,28 +40,34 @@
         }
         return this.god.admin_remark
       },
-      max_social: function () {
+      max_social: function() {
         if (this.god.id === 0) return {}
-        return _.maxBy([this.god.twitter, this.god.instagram, this.god.github, this.god.tumblr, this.god.facebook], function (o) { return o.count || 0 })
+        let socials = _.filter([this.god.twitter, this.god.instagram, this.god.github, this.god.tumblr, this.god.facebook], function(o) {
+          return o.name !== ''
+        })
+
+        return _.maxBy(socials, function(o) {
+          return o.count || 0
+        })
       },
-      description: function () {
+      description: function() {
         return myautolinker(this.now_description, this.now_type) || myautolinker(this.max_social.description, this.max_social.type)
       },
-      avatar: function () {
+      avatar: function() {
         if (this.now_avatar || this.max_social.avatar) {
           return this.now_avatar || this.max_social.avatar
         }
       }
     },
-    data: function () {
+    data: function() {
       return {
         now_avatar: '',
         now_description: '',
         now_type: 'twitter'
       }
     },
-    mounted: function () {
-      this.$nextTick(function () {
+    mounted: function() {
+      this.$nextTick(function() {
         // code that assumes this.$el is in-document
       })
     },
@@ -70,7 +76,7 @@
         if (!social) return ''
         return social.name && social.count
       },
-      setNow: function (social) {
+      setNow: function(social) {
         this.now_avatar = social.avatar
         this.now_description = myautolinker(social.description, social.type)
       }
