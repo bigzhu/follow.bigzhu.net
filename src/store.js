@@ -359,14 +359,12 @@ export const actions = {
     state,
     actions
   }, god) {
-    var parm = god
-    return dispatch('put', {
-      url: '/api_god',
-      body: parm,
-      loading: false
-    }).then(function(data) {
-      // toastr.info('成功')
-    })
+    var params = god
+    return axios.put('/api_god', params)
+      .then(function(response) {})
+      .catch(function(error) {
+        console.log(error)
+      })
   },
   addRemark({
     dispatch,
@@ -626,11 +624,16 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, is_my = 0) {
+  }, is_my) {
+    let params = {}
+    if (is_my !== 0) {
+      params = {
+        is_my: is_my
+      }
+    }
+
     return axios.get('/api_cat', {
-        params: {
-          is_my: is_my
-        }
+        params: params
       })
       .then(function(response) {
         let data = response.data
