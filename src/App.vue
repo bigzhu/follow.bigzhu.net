@@ -147,7 +147,7 @@
         will_hide_header: false,
         layoutStore: {
           view: 'lhh LpR lfr',
-          reveal: true,
+          reveal: false,
           leftScroll: true,
           rightScroll: true,
           leftBreakpoint: 3996, // 定义多宽时, 自动展开 left
