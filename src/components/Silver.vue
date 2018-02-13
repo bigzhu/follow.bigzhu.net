@@ -35,73 +35,26 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import {
-    QBtn,
-    QInput,
-    QRadio
-  } from 'quasar'
+  
+  import Gold from './Gold'
   export default {
+    mixins: [Gold],
     props: [],
     components: {
-      QBtn,
-      QInput,
-      QRadio
     },
-    computed: {},
-    data: function() {
+    computed: {
+    },
+    data: function () {
       return {
-        type: 'gold',
-        gold_conf: {
-          type: 'gold'
-        },
-        trade: {}
+        type: 'silver'
       }
     },
-    mounted: function() {
-      this.getConf()
-      this.getTrade()
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
-
       })
     },
     methods: {
-      getConf() {
-        axios.get('/api_trade_conf', {
-            params: {
-              type: this.type
-            }
-          })
-          .then((response) => {
-            this.gold_conf = response.data || {}
-          })
-          .catch(function(error) {
-            console.log(error)
-          })
-      },
-      done() {
-        axios.post('/api_trade_conf', this.gold_conf)
-          .then((responsne) => {
-            this.getTrade()
-          })
-          .catch(function(error) {
-            console.log(error)
-          })
-      },
-      getTrade() {
-        axios.get('/api_trade', {
-            params: {
-              type: this.type
-            }
-          })
-          .then((response) => {
-            this.trade = response.data
-          })
-          .catch(function(error) {
-            console.log(error)
-          })
-      }
     }
   }
 </script>

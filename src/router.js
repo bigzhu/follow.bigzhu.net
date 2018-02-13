@@ -40,6 +40,7 @@ export default new VueRouter({
     }
   },
   routes: [
+    assembly('Silver'),
     assembly('Gold'),
     assembly('Oauth'),
     assembly('Login'),
