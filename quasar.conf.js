@@ -1,5 +1,6 @@
 // Configuration for your app
 
+let path = require('path')
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
@@ -36,6 +37,12 @@ module.exports = function (ctx) {
           loader: 'eslint-loader',
           exclude: /(node_modules|quasar)/
         })
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          'bz-q-lib': path.resolve(__dirname, '../bz-q-lib'),
+          '@components': path.resolve(__dirname, './src/components'),
+          '@helpers': path.resolve(__dirname, './src/helpers')
+        }
       }
     },
     devServer: {
