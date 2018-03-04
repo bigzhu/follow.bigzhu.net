@@ -64,11 +64,9 @@
    */
   import {
     QAjaxBar,
-    QFixedPosition,
     QList,
     QItem,
     QPopover,
-    Toast,
     QLayout,
     QToolbar,
     QToolbarTitle,
@@ -80,7 +78,6 @@
     QIcon,
     QItemSide,
     QItemMain,
-    QSideLink,
     QListHeader,
     QScrollArea
   } from 'quasar'
@@ -95,11 +92,9 @@
     components: {
       QTab,
       QAjaxBar,
-      QFixedPosition,
       QList,
       QItem,
       QPopover,
-      Toast,
       RightMenu,
       LeftMenu,
       QLayout,
@@ -112,7 +107,6 @@
       QIcon,
       QItemSide,
       QItemMain,
-      QSideLink,
       QListHeader,
       QScrollArea
     },
