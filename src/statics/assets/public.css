@@ -1,5 +1,0 @@
-/*text也能自动换行*/
-.word-wrap-bz {
-    white-space: pre-wrap;
-    word-wrap:break-word;
-}
