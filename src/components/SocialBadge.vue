@@ -1,5 +1,5 @@
 <template>
-  <a href='javascript:;'> 
+  <a href='javascript:;'>
     <q-icon :name="the_class" />
     <count-up v-show="count!=-4" :end="count" :duration="2.5" :options="{useEasing : true,
       useGrouping : true,

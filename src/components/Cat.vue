@@ -168,11 +168,11 @@
         }
       },
       getIcon: function(cat) {
-        let icon_obj = this.icon_map.filter(function(d) {
+        let iconObj = this.icon_map.filter(function(d) {
           return d.name === cat
         })
-        if (icon_obj.length) {
-          return icon_obj[0].icon
+        if (iconObj.length) {
+          return iconObj[0].icon
         }
         return 'label_outline'
       },

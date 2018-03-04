@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-option-group @change="change" type="toggle" color="secondary" v-model="show_types" :options="[
+    <q-option-group @change="change" type="toggle" color="secondary" v-model="showTypes" :options="[
             { label: 'github', value: 'github', checkedIcon: 'fa-github'},
             { label: 'tumblr', value: 'tumblr', checkedIcon: 'fa-tumblr'},
             { label: 'twitter', value: 'twitter', checkedIcon: 'fa-twitter'},
@@ -20,15 +20,15 @@
       QOptionGroup
     },
     computed: {
-      no_types() {
-        return this.$store.state.no_types
+      noTypes() {
+        return this.$store.state.noTypes
       },
-      show_types: {
+      showTypes: {
         get() {
-          return _.difference(this.types, this.no_types)
+          return _.difference(this.types, this.noTypes)
         },
-        set(show_types) {
-          this.$store.state.show_types = show_types
+        set(showTypes) {
+          this.$store.state.showTypes = showTypes
         }
       }
     },
@@ -44,8 +44,8 @@
     },
     methods: {
       change() {
-        let no_types = _.difference(this.types, this.show_types)
-        this.$store.dispatch('setNoTypes', no_types)
+        let noTypes = _.difference(this.types, this.showTypes)
+        this.$store.dispatch('setNoTypes', noTypes)
       }
     }
   }

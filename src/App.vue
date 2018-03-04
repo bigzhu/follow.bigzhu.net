@@ -35,7 +35,6 @@
           </q-popover>
         </q-btn>
 
-
         <q-btn flat @click="$refs.layout.toggleRight()">
           <q-icon name="menu" />
         </q-btn>
@@ -192,8 +191,8 @@
           name: 'Oauth'
         })
       },
-      check_bar: function(scroll_target) {
-        var st = scroll_target.scrollTop
+      check_bar: function(scrollTarget) {
+        var st = scrollTarget.scrollTop
         if (Math.abs(this.last_scroll_top - st) <= 5) return
         if (st > this.last_scroll_top && st > this.nav_bar_height) { // 向下滚动
           if (this.sticky) { // sticky 是浮动
@@ -218,7 +217,7 @@
 </script>
 
 <style lang="stylus">
-  .layout-aside.fixed.on-layout.layout-aside-right.scroll 
+  .layout-aside.fixed.on-layout.layout-aside-right.scroll
     box-shadow none
 </style>
 

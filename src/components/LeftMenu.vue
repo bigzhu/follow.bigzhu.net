@@ -19,11 +19,6 @@
       <q-item-main label="Floating Action Button" sublabel="For Page actions" />
     </q-side-link>
 
-    <div v-if="true" style="padding: 25px 16px 16px;">
-      <p class="caption" v-for="n in 50">
-        <em>Left Panel has intended scroll</em>
-      </p>
-    </div>
   </q-scroll-area>
 </template>
 

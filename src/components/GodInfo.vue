@@ -54,7 +54,7 @@
   } from 'quasar'
   import GodRemark from './GodRemark'
   import Follow from './Follow'
-  import god_data from '../datas/god'
+  import godData from '../datas/god'
   // import default_avatar from '../assets/avatar.svg'
   import GodItemBase from './GodItemBase'
   export default {
@@ -77,7 +77,7 @@
       god: {
         type: Object,
         default: function() {
-          return god_data
+          return godData
         },
         required: true
       }
