@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "ajv": "^6.2.1",
+    "autolinker": "^1.6.2",
     "axios": "^0.17.1",
     "bz-count-up": "^2.1.2",
     "vue-i18n": "^7.3.3"
