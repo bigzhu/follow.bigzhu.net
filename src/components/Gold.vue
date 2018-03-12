@@ -11,25 +11,42 @@
       <q-btn icon="done" @click="done">Submit</q-btn>
       <br>
       <br>
+
       <table class="q-table cell-separator bordered striped highlight">
         <thead>
           <tr>
-            <th class="text-left">may lose</th>
-            <th class="text-right">{{gold_conf.oper}} at</th>
-            <th class="text-right">stop at</th>
-            <th class="text-right">reverse</th>
+            <th class="text-left">amount</th>
+            <th class="text-right">{{gold_conf.oper}}</th>
+            <th class="text-left">lose</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="i in trade.intervals">
-            <td v-if="i.may_lose" class="text-left bg-red-11">-{{i.may_lose}}</td>
-            <td v-if="!i.may_lose" class="text-left">{{i.may_lose}}</td>
-            <td class="text-left">{{i.in_at}}</td>
-            <td class="text-right">{{trade.stop}}</td>
-            <td class="text-right">{{trade.reverse}}</td>
+            <td class="text-left">{{i.amount}}</td>
+            <td class="text-left">{{i.in}}</td>
+            <td v-if="i.lose" class="text-left bg-red-11">-{{i.lose}}</td>
+            <td v-if="!i.lose" class="text-left">{{i.lose}}</td>
           </tr>
         </tbody>
       </table>
+
+      <br>
+      <table class="q-table cell-separator bordered striped highlight">
+        <thead>
+          <tr v-if="trade.stop==trade.reverse">
+            <th class="text-right">stop is reverse</th>
+            <th class="text-left bg-red-11">{{trade.stop}}</th>
+          </tr>
+          <tr v-if="trade.stop!=trade.reverse">
+            <th class="text-right">stop</th>
+            <th class="text-left bg-red-11">{{trade.stop}}</th>
+            <th class="text-right">reverse</th>
+            <th class="text-left bg-red-11">{{trade.reverse}}</th>
+          </tr>
+        </thead>
+      </table>
+
+
     </div>
   </div>
 </template>
