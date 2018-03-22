@@ -20,7 +20,7 @@
       value: {
         // required: true
       },
-      god_id: {
+      godID: {
         required: true,
         type: Number
       }
@@ -57,7 +57,7 @@
       save: function() {
         this.remark = this.$el.getElementsByClassName('remark-edit-content')[0].innerHTML
         this.$store.dispatch('addRemark', {
-          god_id: this.god_id,
+          godID: this.godID,
           remark: this.remark
         })
         this.is_edit = false

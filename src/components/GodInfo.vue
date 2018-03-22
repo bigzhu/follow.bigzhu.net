@@ -10,7 +10,7 @@
 
     <q-card-main>
       <p v-html="description"></p>
-      <GodRemark v-model="remark" :god_id="god.id" class="green-bz remark"></GodRemark>
+      <GodRemark v-model="remark" :godID="god.id" class="green-bz remark"></GodRemark>
       <q-field icon="fa-instagram" helper="" error-label="We got an error">
         <q-input v-model="god.instagram.name" :disable="disable_edit" float-label="Instagram" />
       </q-field>
@@ -35,7 +35,7 @@
       <q-btn color="secondary" v-show="!disable_edit" @click="save">
         {{ $t("GodInfo.save") }}
       </q-btn>
-      <Follow v-model="god.followed" :god_id="god.id"></Follow>
+      <Follow v-model="god.followed" :godID="god.id"></Follow>
     </q-card-actions>
   </q-card>
 </template>

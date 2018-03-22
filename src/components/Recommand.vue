@@ -79,13 +79,13 @@
         }
         return this.message.href
       },
-      god_info: function() {
-        let god_info = this.$store.state.god_infos[this.message.user_name]
-        if (god_info) {
-          return god_info
+      godInfo: function() {
+        let godInfo = this.$store.state.godInfos[this.message.user_name]
+        if (godInfo) {
+          return godInfo
         }
         return {
-          god_id: 0
+          godID: 0
         }
       }
     },

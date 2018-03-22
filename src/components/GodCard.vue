@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'popup': popup, 'transition': popup, 'centered': !popup }" class="ui card column card-radius">
-    <div v-show="god.god_id === 0" class="ui active inverted dimmer">
+    <div v-show="god.godID === 0" class="ui active inverted dimmer">
       <div class="ui text loader">{{$t('Loading.loading')}}</div>
     </div>
     <div v-show="god.name==''" class="ui active inverted dimmer">
@@ -23,7 +23,7 @@
       <social-badge v-show="god.instagram_user" :call_back="setGodInfo" :info="god.instagram_user" ></social-badge>
       <social-badge v-show="god.facebook_user" :call_back="setGodInfo" :info="god.facebook_user"></social-badge>
     </div>
-    <follow class="attached" v-model="god.followed" :god_id="god.god_id"></follow>
+    <follow class="attached" v-model="god.followed" :godID="god.godID"></follow>
   </div>
 </template>
 

@@ -24,11 +24,11 @@
       return {}
     },
     computed: {
-      god_info() {
+      godInfo() {
         if (!this.god_name) return
-        let god_info = this.$store.state.god_infos[this.god_name]
-        if (god_info) {
-          return god_info
+        let godInfo = this.$store.state.godInfos[this.god_name]
+        if (godInfo) {
+          return godInfo
         }
       },
       god_name() {

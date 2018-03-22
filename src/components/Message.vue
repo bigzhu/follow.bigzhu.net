@@ -4,7 +4,7 @@
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
       </q-inner-loading>
-      <GodItem :god="god_info" :key="god_info.id" style="width: 100%" />
+      <GodItem :god="godInfo" :key="godInfo.id" style="width: 100%" />
     </q-modal>
     <q-item>
       <q-item-side @click="$refs.basicModal.toggle()" :avatar="proxy(avatar)" class="bz_avatar">
@@ -167,10 +167,10 @@
         }
         return this.message.href
       },
-      god_info: function() {
-        let god_info = this.$store.state.god_infos[this.message.god_name]
-        if (god_info) {
-          return god_info
+      godInfo: function() {
+        let godInfo = this.$store.state.godInfos[this.message.god_name]
+        if (godInfo) {
+          return godInfo
         }
         return {
           id: 0,
@@ -204,7 +204,7 @@
         }
       },
       getGodInfo: function() {
-        if (this.god_info.id === 0) {
+        if (this.godInfo.id === 0) {
           this.$store.dispatch('getGod', {
             god_name: this.message.god_name,
             loading: true

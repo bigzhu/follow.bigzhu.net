@@ -20,10 +20,10 @@
       return {}
     },
     computed: {
-      god_info() {
-        let god_info = this.$store.state.god_infos[this.god_name]
-        if (god_info) {
-          return god_info
+      godInfo() {
+        let godInfo = this.$store.state.godInfos[this.god_name]
+        if (godInfo) {
+          return godInfo
         }
       },
       god_name() {

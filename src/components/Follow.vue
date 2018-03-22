@@ -20,7 +20,7 @@
         // type: Number,
         default: 0
       },
-      god_id: {
+      godID: {
         required: true,
         type: Number
       }
@@ -67,11 +67,11 @@
         let self = this
         this.loading = true
         if (this.value === 1) {
-          this.$store.dispatch('unfollow', this.god_id).then(function(data) {
+          this.$store.dispatch('unfollow', this.godID).then(function(data) {
             self.showUnfollow()
           })
         } else {
-          this.$store.dispatch('follow', this.god_id).then(function(data) {
+          this.$store.dispatch('follow', this.godID).then(function(data) {
             self.showFollow()
           })
         }

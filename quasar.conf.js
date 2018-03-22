@@ -48,12 +48,9 @@ module.exports = function(ctx) {
     devServer: {
       proxy: {
         // proxy all requests starting with /api to jsonplaceholder
-        '/api': {
+        '/api_': {
           target: 'http://127.0.0.1:5000',
           changeOrigin: true,
-          pathRewrite: {
-            '^/api': ''
-          }
         }
       }
       // https: true,

@@ -38,7 +38,7 @@
               {{ $t("AddGod.follownumber") }}
             </a>
             <div class="god-discription-bz" v-html="description"></div>
-            <follow :class="{'disabled': disabled}" v-model="god_info.followed" :god_id="0" class="button-to-follow-bz"></follow>
+            <follow :class="{'disabled': disabled}" v-model="godInfo.followed" :godID="0" class="button-to-follow-bz"></follow>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
         god_name: '',
         input_name: '',
         stat: 'button',
-        god_info: {},
+        godInfo: {},
         twitter_info: {
           type: 'twitter',
           count: -4
@@ -154,11 +154,11 @@
           name: this.god_name,
           cat: this.$route.params.cat
         }).then(function(data) {
-          self.startCheck(data.god_info)
+          self.startCheck(data.godInfo)
         })
       },
-      startCheck: function(god_info) {
-        this.setGodInfo(god_info)
+      startCheck: function(godInfo) {
+        this.setGodInfo(godInfo)
         this.adding = false
         this.twitter_loading = true
         let self = this
@@ -242,17 +242,17 @@
         this.createGod()
         this.$store.commit('UNSHIFT_MY_GOD', {
           cat: this.cat,
-          god: this.god_info
+          god: this.godInfo
         })
         // this.$store.dispatch('queryCat')
         this.stat = 'button'
-        this.$emit('add_done', this.god_info)
-        this.god_info = {}
+        this.$emit('add_done', this.godInfo)
+        this.godInfo = {}
       },
       setGodSocial: function(type) {
         if (this[type + '_info'].count !== -4) {
-          this.god_info[type] = this.god_name
-          this.god_info[type + '_user'] = this[type + '_info']
+          this.godInfo[type] = this.god_name
+          this.godInfo[type + '_user'] = this[type + '_info']
         }
       },
       createGod: function() {
@@ -261,10 +261,10 @@
         this.setGodSocial('tumblr')
         this.setGodSocial('instagram')
         this.setGodSocial('facebook')
-        this.god_info.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.godInfo.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
-      setGodInfo: function(god_info) {
-        this.god_info = god_info
+      setGodInfo: function(godInfo) {
+        this.godInfo = godInfo
       },
       setInfo: function(info) {
         if (info.avatar) {

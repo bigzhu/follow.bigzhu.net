@@ -12,7 +12,7 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
-      <message ref="messages" v-for='message in no_types_messages' :message='message' :key="message.id">
+      <message ref="messages" v-for='message in noTypes_messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("Messages.nomessage") }}
@@ -61,8 +61,8 @@
     //   '$route': 'fetchData'
     // },
     events: {
-      'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god的message
-        this.$store.dispatch('removeFromMessages', god_id)
+      'unfollow': function(godID) { // 监听unfollow事件，移除已经unfollow的god的message
+        this.$store.dispatch('removeFromMessages', godID)
       }
     },
     data: function() {
@@ -105,9 +105,9 @@
           return !d.top_hide
         })
       },
-      no_types_messages() {
+      noTypes_messages() {
         return this.show_messages.filter((d) => {
-          return !isInList(d.m_type, this.no_types)
+          return !isInList(d.m_type, this.noTypes)
         })
       },
       messages() {
@@ -126,8 +126,8 @@
             }
         }
       },
-      no_types() {
-        return this.$store.state.no_types
+      noTypes() {
+        return this.$store.state.noTypes
       }
     },
     mounted() {
@@ -155,7 +155,7 @@
         let hide_p = this.$store.state.hide_params
         let over_top = position - 500
         if (over_top > hide_p.padding_top) {
-          let message = this.no_types_messages[0]
+          let message = this.noTypes_messages[0]
           if (!message) return
 
           let message_height = message.el.offsetHeight

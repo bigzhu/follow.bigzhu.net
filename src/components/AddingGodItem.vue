@@ -29,11 +29,11 @@
 
     <q-card-main class="card-content green-bz">
       <p v-html="description"></p>
-      <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
+      <GodRemark v-model="remark" :godID="god.id" class="card-content green-bz remark"></GodRemark>
     </q-card-main>
     <q-card-actions align="end">
       <!--
-      <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
+      <Follow v-model="god.followed" :godID="god.id" class="follow"></Follow>
       -->
     </q-card-actions>
   </q-card>
@@ -110,12 +110,12 @@
         this.$store.dispatch('postGod', {
           name: this.god_name,
           cat: this.cat
-        }).then(function(god_info) {
-          self.startCheck(god_info)
+        }).then(function(godInfo) {
+          self.startCheck(godInfo)
         })
       },
-      startCheck: function(god_info) {
-        this.setGodInfo(god_info)
+      startCheck: function(godInfo) {
+        this.setGodInfo(godInfo)
         this.adding = false
         this.twitter_loading = true
         let self = this
@@ -197,7 +197,7 @@
       },
       allDone: function(info) {
         this.loading = false
-        // Object.assign(this.god_info, this.god)
+        // Object.assign(this.godInfo, this.god)
         this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.followed = 1
         this.$store.commit('UNSHIFT_MY_GOD', {

@@ -120,8 +120,8 @@
       oauth_info() {
         return this.$store.state.p.oauth_info
       },
-      show_bar() {
-        return this.$store.state.show_bar
+      showBar() {
+        return this.$store.state.showBar
       }
     },
 
@@ -193,16 +193,16 @@
             this.sticky = false
             this.scroll_top = st
           }
-          this.show_bar = false
+          this.showBar = false
         } else {
-          if (!this.show_bar) { // 之前是隐藏时, 设定 top, 使其能滚动出来
+          if (!this.showBar) { // 之前是隐藏时, 设定 top, 使其能滚动出来
             this.sticky = false
             this.scroll_top = st - this.nav_bar_height - 50
           } else if (this.scroll_top + 12 >= st) { // 已经滚动到顶部, 改为 header-sticky
             this.sticky = true
             this.scroll_top = 0
           }
-          this.show_bar = true
+          this.showBar = true
         }
         this.last_scroll_top = st
       }
