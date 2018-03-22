@@ -5,7 +5,6 @@ import p from 'bz-q-lib/module'
 // import 'whatwg-fetch'
 import axios from 'axios'
 import _ from 'lodash'
-// import toastr from 'toastr'
 function initGodMessage(state, godName) {
   if (state.gods_messages[godName] === undefined) {
     Vue.set(state.gods_messages, godName, [])

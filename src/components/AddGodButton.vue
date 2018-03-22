@@ -1,8 +1,8 @@
 <template>
   <div>
-    <q-fixed-position corner="bottom-right" :offset="[-286, 0]" class="bz">
+    <QPageSticky corner="bottom-right" :offset="[-286, 0]" class="bz">
       <q-btn @click="$refs['confirm_refalsh_message'].open(), god_name=''" round color="" icon="add"></q-btn>
-    </q-fixed-position>
+    </QPageSticky>
 
     <q-modal ref="confirm_refalsh_message">
       <q-card class="card">
@@ -25,7 +25,7 @@
     QCardMain,
     QCard,
     QBtn,
-    QFixedPosition,
+    QPageSticky,
     QModal
   } from 'quasar'
   export default {
@@ -36,7 +36,7 @@
       QCardMain,
       QCard,
       QBtn,
-      QFixedPosition,
+      QPageSticky,
       QModal
     },
     computed: {},

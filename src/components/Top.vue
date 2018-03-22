@@ -1,19 +1,19 @@
 <template>
-  <q-fixed-position v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 0]" class="bz">
+  <QPageSticky v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 0]" class="bz">
     <q-btn round color="" icon="keyboard_arrow_up" />
-  </q-fixed-position>
+  </QPageSticky>
 </template>
 
 <script>
   import {
     QBtn,
-    QFixedPosition,
+    QPageSticky,
     BackToTop
   } from 'quasar'
   export default {
     components: {
       QBtn,
-      QFixedPosition
+      QPageSticky
     },
     directives: {
       BackToTop

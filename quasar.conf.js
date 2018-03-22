@@ -47,10 +47,14 @@ module.exports = function(ctx) {
     },
     devServer: {
       proxy: {
+        '/p': {
+          target: 'https://follow.center',
+          changeOrigin: true
+        },
         // proxy all requests starting with /api to jsonplaceholder
         '/api_': {
           target: 'http://127.0.0.1:5000',
-          changeOrigin: true,
+          changeOrigin: true
         }
       }
       // https: true,
