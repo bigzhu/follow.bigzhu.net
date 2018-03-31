@@ -7,7 +7,11 @@ export default [
       { path: '', component: () => import('pages/index') }
     ]
   },
-
+  {
+    path: '/',
+    name: 'Main',
+    component: () => import('pages/index')
+  }, // Default
   { // Always leave this as last one
     path: '*',
     component: () => import('pages/404')
