@@ -54,8 +54,9 @@
     mixins: [Proxy],
     mounted() {
       if (this.isLogin === '') {
-        this.$store.dispatch('getOauthInfo')
-        this.$store.dispatch('getNoTypes')
+        // 取用户信息
+        this.$store.dispatch('lib/getOauthInfo')
+        this.$store.dispatch('user/getNoTypes')
       }
       this.$nextTick(function() {
         this.$store.state.layout = this.$refs.layout

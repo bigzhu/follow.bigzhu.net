@@ -5,11 +5,7 @@ export const someAction = (state) => {
 }
 */
 
-export const getOauthInfo = ({
-    state,
-    commit,
-    dispatch
-  }) => {
+export const getOauthInfo = (state) => {
     axios.get('/api_oauth_info')
       .then(function(response) {
         let data = response.data
