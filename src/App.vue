@@ -14,7 +14,6 @@
             </router-link>
             <span slot="subtitle">Follow your dream</span>
           </q-toolbar-title>
-
           <!--login-->
           <q-btn v-show="!isLogin" @click="login" flat small icon="fa-sign-in">
             {{ $t("登录") }}
@@ -38,8 +37,27 @@
             <q-icon name="menu" />
           </q-btn>
         </q-toolbar>
-
+        <!-- 第二栏标题 -->
+        <q-tabs color="black" inverted>
+          <q-route-tab slot="title" :to="{'name': 'Main'}" replace :label="$t('首页')" />
+          <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('寻他')" />
+          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('关注中')" v-show="isLogin" />
+          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('收藏')" v-show="isLogin" />
+          <q-tab slot="title" @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('传记')" />
+        </q-tabs>
       </q-layout-header>
+
+      <!-- 左菜单 -->
+      <q-layout-drawer side="left">
+      </q-layout-drawer>
+      <!-- 右菜单 -->
+      <q-layout-drawer side="right">
+      </q-layout-drawer>
+
+      <q-page-container>
+        <router-view />
+      </q-page-container>
+
     </q-layout>
     <q-ajax-bar />
   </div>

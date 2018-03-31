@@ -1,5 +1,5 @@
-
 export default [
+  /*
   {
     path: '/',
     component: () => import('layouts/default'),
@@ -7,10 +7,11 @@ export default [
       { path: '', component: () => import('pages/index') }
     ]
   },
+  */
   {
     path: '/',
     name: 'Main',
-    component: () => import('pages/index')
+    component: () => import('pages/Main')
   }, // Default
   { // Always leave this as last one
     path: '*',

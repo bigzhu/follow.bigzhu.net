@@ -2,6 +2,8 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  '收藏': 'Saved',
+  '传记': 'Biography',
+  '寻他': 'What to follow',
+  '关注中': 'Following'
 }

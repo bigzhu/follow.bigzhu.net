@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  import Messages from '../components/Messages'
-  import Top from '../components/Top'
-  import UnRead from '../components/UnRead'
-  import GodInfo from '../components/GodInfo'
-  import RightInfo from '../components/RightInfo'
+  import Messages from './Messages'
+  import Top from './Top'
+  import UnRead from './UnRead'
+  import GodInfo from './GodInfo'
+  import RightInfo from './RightInfo'
   export default {
     components: {
       UnRead,
@@ -24,11 +24,11 @@
       return {}
     },
     computed: {
-      god_info() {
+      godInfo() {
         if (!this.god_name) return
-        let GodInfo = this.$store.state.god_infos[this.god_name]
-        if (GodInfo) {
-          return GodInfo
+        let godInfo = this.$store.state.godInfos[this.god_name]
+        if (godInfo) {
+          return godInfo
         }
       },
       god_name() {
@@ -39,6 +39,7 @@
       if (this.god_name) {
         this.$store.dispatch('getGod', this.god_name)
       }
+      // $('body').visibility()
     },
     watch: {
       '$route': 'getGodInfo'
