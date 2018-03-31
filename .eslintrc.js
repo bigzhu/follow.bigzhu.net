@@ -25,7 +25,9 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
-    // allow async-await
+    "indent": 0,
+    "space-before-function-paren": [2, { "anonymous": "ignore", "named": "ignore", "asyncArrow": "ignore" }],
+
     'generator-star-spacing': 'off',
 
     // allow paren-less arrow functions
@@ -42,6 +44,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
 
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'brace-style': [2, '1tbs', { 'allowSingleLine': true }]
   }
 }
