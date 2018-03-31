@@ -1,11 +1,11 @@
 <template>
   <div>
     <QPageSticky corner="bottom-right" :offset="[-286, 0]" class="bz">
-      <BzFab :content="unread_message_count" color="" icon="" activeIcon="" direction="left">
+      <q-fab :content="unread_message_count" color="" icon="" activeIcon="" direction="left">
         <q-fab-action color="" @click="updateLast" icon="whatshot">
           <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">清空未读!</q-tooltip>
         </q-fab-action>
-      </BzFab>
+      </q-fab>
     </QPageSticky>
   </div>
 </template>
@@ -20,11 +20,9 @@
     QPageSticky,
     QModal
   } from 'quasar'
-  import BzFab from '../libs/components/BzFab'
   export default {
     props: [],
     components: {
-      BzFab,
       QTooltip,
       QFab,
       QFabAction,

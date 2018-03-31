@@ -11,7 +11,7 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${padding_top}px;`">
+    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${paddingTop}px;`">
       <message ref="messages" v-for='message in noTypes_messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
@@ -72,8 +72,8 @@
       }
     },
     computed: {
-      padding_top() {
-        if (this.type === 'main') return this.$store.state.hideParams.padding_top
+      paddingTop() {
+        if (this.type === 'main') return this.$store.state.main.hideParams.paddingTop
         else return 0
       },
       is_login() {
@@ -114,15 +114,15 @@
         switch (this.type) {
           case 'god':
             {
-              return this.$store.state.gods_messages[this.god_name] || []
+              return this.$store.state.message.gods_messages[this.god_name] || []
             }
           case 'collect':
             {
-              return this.$store.state.collect_messages
+              return this.$store.state.message.collect_messages
             }
           default:
             {
-              return this.$store.state.messages
+              return this.$store.state.message.messages
             }
         }
       },
@@ -152,30 +152,30 @@
       onScroll: function(position) {
         if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
 
-        let hideP = this.$store.state.hideParams
+        let hideP = this.$store.state.main.hideParams
         let overTop = position - 500
-        if (overTop > hideP.padding_top) {
+        if (overTop > hideP.paddingTop) {
           let message = this.noTypes_messages[0]
           if (!message) return
 
           let messageHeight = message.el.offsetHeight
 
-          if (overTop - hideP.padding_top < messageHeight) return
+          if (overTop - hideP.paddingTop < messageHeight) return
 
           this.$set(message, 'top_hide', true)
           this.$set(message, 'height', messageHeight)
-          hideP.padding_top += messageHeight
+          hideP.paddingTop += messageHeight
           console.log('hide message')
         } else {
-          while (overTop < hideP.padding_top) {
-            if (hideP.padding_top === 0) return
+          while (overTop < hideP.paddingTop) {
+            if (hideP.paddingTop === 0) return
             if (this.hide_messages.length === 0) return
 
             let message = this.hide_messages[this.hide_messages.length - 1]
 
-            if (hideP.padding_top - overTop < message.height) return
+            if (hideP.paddingTop - overTop < message.height) return
 
-            hideP.padding_top -= message.height
+            hideP.paddingTop -= message.height
             message.top_hide = false
             // console.log('show message')
           }
@@ -233,7 +233,7 @@
           // toast('recordLastMessage')
           this.$store.dispatch('recordLastMessage', after)
         }
-        return this.$store.dispatch('getNew', {
+        return this.$store.dispatch('message/getNew', {
           after: after,
           limit: limit
         })

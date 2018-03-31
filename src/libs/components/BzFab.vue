@@ -1,4 +1,5 @@
 <template>
+  <!-- 貌似废了, 改成全用 js 写了 -->
   <div class="q-fab row inline justify-center" :class="{'q-fab-opened': opened}">
     <q-btn @click="toggle" round :outline="outline" :push="push" :flat="flat" :color="color" :class="{glossy: glossy}">
       {{content}}

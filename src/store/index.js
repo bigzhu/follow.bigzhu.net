@@ -3,11 +3,15 @@ import Vuex from 'vuex'
 
 import lib from '../libs/store'
 import user from './user'
+import main from './main'
+import message from './message'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
+    message,
+    main,
     user,
     lib
   }
