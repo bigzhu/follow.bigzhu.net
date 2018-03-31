@@ -21,7 +21,7 @@
           </q-btn>
           <!--userInfo-->
           <q-btn v-show="isLogin" flat ref="target">
-            <img :src="proxy(oauth_info.avatar)" class="avatar" />
+            <img :src="proxy(oauthInfo.avatar)" class="avatar" />
             <q-popover ref="popover">
               <q-list item-separator link>
                 <q-item @click="$router.push('/UserSet'), $refs.popover.close()">
@@ -46,10 +46,12 @@
 </template>
 
 <script>
+  import Proxy from './libs/components/Proxy'
   import store from './store'
   export default {
     name: 'App',
     store,
+    mixins: [Proxy],
     mounted() {
       if (this.isLogin === '') {
         this.$store.dispatch('getOauthInfo')
