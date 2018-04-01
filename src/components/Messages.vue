@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :god_name="god_name" :show="!(followed_god_count===0)"></Old>
+    <Old :godName="godName" :show="!(followed_god_count===0)"></Old>
     <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
@@ -86,8 +86,8 @@
       followed_god_count() {
         return this.$store.state.followed_god_count
       },
-      god_name() {
-        if (this.$route.params.god_name) return this.$route.params.god_name
+      godName() {
+        if (this.$route.params.godName) return this.$route.params.godName
       },
       new_loading() {
         return this.$store.state.new_loading
@@ -114,7 +114,7 @@
         switch (this.type) {
           case 'god':
             {
-              return this.$store.state.message.gods_messages[this.god_name] || []
+              return this.$store.state.message.gods_messages[this.godName] || []
             }
           case 'collect':
             {
@@ -133,10 +133,10 @@
     mounted() {
       if (!this.messages || this.messages.length === 0) {
         if (this.type === 'god') {
-          this.$store.commit('FILTER_GOD_MESSAGES', this.god_name)
+          this.$store.commit('FILTER_GOD_MESSAGES', this.godName)
           if (this.messages.length === 0) { // 没有过滤值时
             this.$store.dispatch('oldMessage', {
-              god_name: this.god_name,
+              godName: this.godName,
               limit: 10
             })
           }
@@ -222,7 +222,7 @@
       },
       newGodMessage: function() {
         return this.$store.dispatch('newMessage', {
-          god_name: this.god_name,
+          godName: this.godName,
           limit: getCount
         })
       },

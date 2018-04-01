@@ -20,12 +20,12 @@
         return this.$store.state.old_loading
       }
     },
-    props: ['show', 'god_name', 'search_key'],
+    props: ['show', 'godName', 'search_key'],
     mounted () {
     },
     methods: {
       old: function () {
-        this.$store.dispatch('oldMessage', {god_name: this.god_name, search_key: this.search_key, limit: 10})
+        this.$store.dispatch('oldMessage', {godName: this.godName, search_key: this.search_key, limit: 10})
       }
     }
   }

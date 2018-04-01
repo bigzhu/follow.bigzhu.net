@@ -1,11 +1,11 @@
 <template>
   <div class="layout-padding">
-    <NotYetFollow v-show="ordered_my_gods.length===0 && get_done && !cat"></NotYetFollow>
+    <NotYetFollow v-show="ordered_myGods.length===0 && get_done && !cat"></NotYetFollow>
 
     <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="addDone">
+      <AddingGodItem v-show="godName!==''" :godName="godName" @add_done="addDone">
       </AddingGodItem>
-      <GodItem v-for="god in ordered_my_gods" :god="god" :key="god.id" class="god-item">
+      <GodItem v-for="god in ordered_myGods" :god="god" :key="god.id" class="god-item">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
     </q-infinite-scroll>
@@ -18,14 +18,14 @@
   import {
     QInfiniteScroll
   } from 'quasar'
-  import Top from './Top'
-  import NotYetFollow from './NotYetFollow'
-  import SpinnerBz from './SpinnerBz'
-  import AddingGodItem from './AddingGodItem'
-  import AddGodButton from './AddGodButton'
+  import Top from '../components/Top'
+  import NotYetFollow from '../components/NotYetFollow'
+  import SpinnerBz from '../components/SpinnerBz'
+  import AddingGodItem from '../components/AddingGodItem'
+  import AddGodButton from '../components/AddGodButton'
   import _ from 'lodash'
-  import GodItem from './GodItem'
-  import AddGod from './AddGod'
+  import GodItem from '../components/GodItem'
+  import AddGod from '../components/AddGod'
   export default {
     events: {
       'unfollow': function(godID) { // 监听unfollow事件，移除已经unfollow的god
@@ -58,20 +58,20 @@
       cat: function() {
         return this.$route.params.cat
       },
-      filtered_my_gods: function() {
+      filtered_myGods: function() {
         var self = this
-        return self.my_gods.filter(function(my_god) {
-          return my_god.name.indexOf(self.key) !== -1
+        return self.myGods.filter(function(myGod) {
+          return myGod.name.indexOf(self.key) !== -1
         })
       },
-      ordered_my_gods: function() {
-        return _.orderBy(this.filtered_my_gods, 'followed_at', 'desc').filter((o) => {
-          return o.name !== this.god_name
+      ordered_myGods: function() {
+        return _.orderBy(this.filtered_myGods, 'followed_at', 'desc').filter((o) => {
+          return o.name !== this.godName
         })
       },
-      my_gods() {
-        if (this.$store.state.cat_my_gods[this.cat]) {
-          return this.$store.state.cat_my_gods[this.cat]
+      myGods() {
+        if (this.$store.state.cat_myGods[this.cat]) {
+          return this.$store.state.cat_myGods[this.cat]
         } else {
           return []
         }
@@ -80,14 +80,14 @@
     data: function() {
       return {
         get_done: false,
-        god_name: '',
+        godName: '',
         key: ''
       }
     },
     mounted() {},
     methods: {
       addDone() {
-        this.god_name = ''
+        this.godName = ''
         this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
@@ -96,8 +96,8 @@
           setTimeout(done, 1000)
         })
       },
-      add: function(god_name) {
-        this.god_name = god_name
+      add: function(godName) {
+        this.godName = godName
       }
     }
   }

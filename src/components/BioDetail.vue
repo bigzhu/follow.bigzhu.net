@@ -35,18 +35,18 @@
     },
     data () {
       return {
-        god_name: this.$route.params.god_name
+        godName: this.$route.params.godName
       }
     },
     props: {
     },
     mounted () {
-      this.$store.dispatch('getGod', this.god_name)
+      this.$store.dispatch('getGod', this.godName)
       this.getBio()
     },
     computed: {
       godInfo () {
-        let godInfo = this.$store.state.godInfos[this.god_name]
+        let godInfo = this.$store.state.godInfos[this.godName]
         if (godInfo) {
           return godInfo
         }
@@ -54,7 +54,7 @@
       },
       bio () {
         let self = this
-        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.god_name })
+        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.godName })
         if (bio) return bio
         else return {title_img: ''}
       }
@@ -62,7 +62,7 @@
     methods: {
       getDetail: function () {
         let self = this
-        this.$store.dispatch('getRichText', {key: this.god_name}).then(function (data) {
+        this.$store.dispatch('getRichText', {key: this.godName}).then(function (data) {
           self.bio.text = data.rich_text[0].text
         })
       },

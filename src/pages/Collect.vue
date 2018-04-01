@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  import Top from './Top'
+  import Top from '../components/Top'
   // import Messages from './CollectMessages.vue'
-  import Messages from './Messages'
-  import RightInfo from './RightInfo'
-  import UnRead from './UnRead'
+  import Messages from '../components/Messages'
+  import RightInfo from '../components/RightInfo'
+  import UnRead from '../components/UnRead'
   export default {
     components: {
       Top,

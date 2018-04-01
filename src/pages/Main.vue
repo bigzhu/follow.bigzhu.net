@@ -25,19 +25,19 @@
     },
     computed: {
       god_info() {
-        if (!this.god_name) return
-        let GodInfo = this.$store.state.god_infos[this.god_name]
+        if (!this.godName) return
+        let GodInfo = this.$store.state.god_infos[this.godName]
         if (GodInfo) {
           return GodInfo
         }
       },
-      god_name() {
-        if (this.$route.params.god_name) return this.$route.params.god_name
+      godName() {
+        if (this.$route.params.godName) return this.$route.params.godName
       }
     },
     mounted() {
-      if (this.god_name) {
-        this.$store.dispatch('getGod', this.god_name)
+      if (this.godName) {
+        this.$store.dispatch('getGod', this.godName)
       }
     },
     watch: {
@@ -45,8 +45,8 @@
     },
     methods: {
       getGodInfo: function() {
-        if (this.god_name) {
-          this.$store.dispatch('getGod', this.god_name)
+        if (this.godName) {
+          this.$store.dispatch('getGod', this.godName)
         }
       }
     },

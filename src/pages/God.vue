@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  import GodInfo from './GodInfo'
-  import Messages from './Messages'
-  import Top from './Top'
+  import GodInfo from '../components/GodInfo'
+  import Messages from '../components/Messages'
+  import Top from '../components/Top'
   export default {
     components: {
       Top,
@@ -21,17 +21,17 @@
     },
     computed: {
       godInfo() {
-        let godInfo = this.$store.state.godInfos[this.god_name]
+        let godInfo = this.$store.state.godInfos[this.godName]
         if (godInfo) {
           return godInfo
         }
       },
-      god_name() {
-        return this.$route.params.god_name
+      godName() {
+        return this.$route.params.godName
       }
     },
     mounted() {
-      this.$store.dispatch('getGod', this.god_name)
+      this.$store.dispatch('getGod', this.godName)
       this.$nextTick(function() {})
     },
     methods: {}

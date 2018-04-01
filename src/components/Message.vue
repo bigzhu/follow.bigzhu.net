@@ -11,7 +11,7 @@
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
-          <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
+          <router-link :to="{ name: 'God', params: { godName: message.godName }}">
             {{message.name}}
           </router-link>
         </q-item-tile>
@@ -168,7 +168,7 @@
         return this.message.href
       },
       godInfo: function() {
-        let godInfo = this.$store.state.god.godInfos[this.message.god_name]
+        let godInfo = this.$store.state.god.godInfos[this.message.godName]
         if (godInfo) {
           return godInfo
         }
@@ -206,7 +206,7 @@
       getGodInfo: function() {
         if (this.godInfo.id === 0) {
           this.$store.dispatch('getGod', {
-            god_name: this.message.god_name,
+            godName: this.message.godName,
             loading: true
           })
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="layout-padding">
     <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <GodItem v-for="god in not_my_gods" :god="god" :key="god.id">
+      <GodItem v-for="god in not_myGods" :god="god" :key="god.id">
       </GodItem>
       <SpinnerBz :show="loading"></SpinnerBz>
     </q-infinite-scroll>
@@ -13,9 +13,9 @@
   import {
     QInfiniteScroll
   } from 'quasar'
-  import Top from './Top'
-  import SpinnerBz from './SpinnerBz'
-  import GodItem from './GodItem'
+  import Top from '../components/Top'
+  import SpinnerBz from '../components/SpinnerBz'
+  import GodItem from '../components/GodItem'
 
   export default {
     props: {
@@ -66,7 +66,7 @@
           return this.$store.state.p.loading
         }
       },
-      not_my_gods() {
+      not_myGods() {
         if (this.$store.state.cat_gods[this.$route.params.cat]) {
           return this.$store.state.cat_gods[this.$route.params.cat]
         } else {
@@ -99,7 +99,7 @@
       },
       disableGodLoading: function() {
         this.loading = false
-        if (this.not_my_gods.length === 0) {
+        if (this.not_myGods.length === 0) {
           this.no_more = true
         } else {
           this.no_more = false

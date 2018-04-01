@@ -4,11 +4,11 @@
     <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
     <q-item>
-      <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+      <router-link :to="{ name: 'God', params: { godName: god.name }}">
         <q-item-side :avatar="now_avatar||max_social.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
-        <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+        <router-link :to="{ name: 'God', params: { godName: god.name }}">
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
@@ -51,10 +51,10 @@
 
   export default {
     mixins: [GodItemBase],
-    props: ['god_name'],
+    props: ['godName'],
     watch: {
-      'god_name': function() {
-        if (this.god_name === '') {
+      'godName': function() {
+        if (this.godName === '') {
           return
         }
         this.init()
@@ -95,7 +95,7 @@
       },
       init: function() {
         this.god = godData
-        this.god.name = this.god_name
+        this.god.name = this.godName
       },
       showAddGodInput: function() {
         this.input_name = '' // 清空上次的输入
@@ -108,7 +108,7 @@
         let self = this
         this.loading = true
         this.$store.dispatch('postGod', {
-          name: this.god_name,
+          name: this.godName,
           cat: this.cat
         }).then(function(godInfo) {
           self.startCheck(godInfo)
@@ -120,7 +120,7 @@
         this.twitter_loading = true
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.god_name,
+          name: this.godName,
           type: 'twitter'
         }).then(function(data) {
           self.twitterDone(data)
@@ -134,7 +134,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.god_name,
+          name: this.godName,
           type: 'github'
         }).then(function(data) {
           self.githubDone(data)
@@ -149,7 +149,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.god_name,
+          name: this.godName,
           type: 'instagram'
         }).then(function(data) {
           self.instagramDone(data)
@@ -164,7 +164,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.god_name,
+          name: this.godName,
           type: 'tumblr'
         }).then(function(data) {
           self.tumblrDone(data)
@@ -180,7 +180,7 @@
         this.allDone()
         // let self = this
         // this.$store.dispatch('checkSocial', {
-        //   name: this.god_name,
+        //   name: this.godName,
         //   type: 'facebook'
         // }).then(function(data) {
         //   self.facebookDone(data)
@@ -224,13 +224,13 @@
 </script>
 
 <style lang="stylus" scoped>
-  .q-card 
+  .q-card
     .q-spinner
       z-index 99 // 让 spinner 不要被遮住
     position: relative // 让spinner absolute 定位时能在 card 里
     display: inline-block
-    width: 20.9rem 
-    min-height: 20.9rem 
+    width: 20.9rem
+    min-height: 20.9rem
     @media (max-width: 920px)
       min-width 100%
   .q-item-side img // 改大小

@@ -30,7 +30,7 @@
     watch: {
       '$route.params': {
         handler: function () {
-          if (this.my_gods.length === 0) {
+          if (this.myGods.length === 0) {
             this.loading = true
           }
           this.getGods()

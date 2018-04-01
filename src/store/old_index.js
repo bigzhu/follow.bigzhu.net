@@ -44,12 +44,12 @@ export const state = {
 // mutations
 export const mutations = {
   REMOVE_THIS_GOD_CAT_MY_GODS(state, godID) {
-    for (var property in state.cat_my_gods) {
-      if (state.cat_my_gods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.cat_my_gods[property], function(d) {
+    for (var property in state.cat_myGods) {
+      if (state.cat_myGods.hasOwnProperty(property)) {
+        let index = _.findIndex(state.cat_myGods[property], function(d) {
           return d.godID === godID
         })
-        state.cat_my_gods[property].splice(index, 1)
+        state.cat_myGods[property].splice(index, 1)
       }
     }
 
@@ -88,12 +88,12 @@ export const mutations = {
     cat,
     gods
   }) {
-    initCatGod(state, 'cat_my_gods', cat)
-    let mergeGods = state.cat_my_gods[cat].concat(gods)
+    initCatGod(state, 'cat_myGods', cat)
+    let mergeGods = state.cat_myGods[cat].concat(gods)
     let uniqGods = _.uniqBy(mergeGods, function(d) {
       return d.id
     })
-    state.cat_my_gods[cat] = uniqGods
+    state.cat_myGods[cat] = uniqGods
   },
   SET_CAT_GODS(state, {
     cat,
@@ -110,7 +110,7 @@ export const mutations = {
     cat,
     god
   }) {
-    state.cat_my_gods[cat].unshift(god)
+    state.cat_myGods[cat].unshift(god)
   },
   SET_MY_CATS(state, cats) {
     state.my_cats = cats
@@ -146,7 +146,7 @@ export const mutations = {
     }))
   },
   DELETE_MY_GOD(state, godID) { // 移除这个god
-    state.my_gods = _.without(state.my_gods, _.findWhere(state.my_gods, {
+    state.myGods = _.without(state.myGods, _.findWhere(state.myGods, {
       id: godID
     }))
   },
@@ -667,7 +667,7 @@ export const actions = {
       cat: cat,
       followed: true
     }
-    let gods = state.cat_my_gods[cat]
+    let gods = state.cat_myGods[cat]
     if (gods && gods.length > 0) {
       params.before = gods[gods.length - 1].created_at
     }
