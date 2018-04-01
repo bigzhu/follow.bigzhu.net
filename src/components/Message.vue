@@ -222,6 +222,13 @@
 </script>
 
 <style>
+  /* avatar 大小*/
+  .q-item-avatar {
+    top: 1rem;
+    left: 1rem;
+    width: 2rem;
+    height: 2rem;
+  }
   .q-card pre {
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -323,13 +330,6 @@
   .q-card {
     margin-top: 1rem;
     margin-bottom: 1rem;
-  }
-  /* avatar 大小*/
-  .q-item-avatar {
-    top: 1rem;
-    left: 1rem;
-    width: 2rem;
-    height: 2rem;
   }
 
   /* actions 要有间距 */
