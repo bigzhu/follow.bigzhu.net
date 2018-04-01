@@ -60,7 +60,7 @@
       showUnfollow: function() {
         this.$emit('input', 0)
         this.loading = false
-        this.desc = this.$t('Follow.tofollow')
+        this.desc = this.$t('关注')
         this.color = 'faded'
       },
       toggleFollow: function() {

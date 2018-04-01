@@ -2,7 +2,7 @@
   <div>
     <div v-html="remark" v-show="!is_edit && remark" class="remark-bz"></div>
     <p v-show="is_edit" v-html="remark" @blur="save" contenteditable="true" class="remark-edit-content"></p>
-    <q-btn v-show="is_edit" @click="save" color="secondary" small>{{ $t("GodRemark.save") }}</q-btn>
+    <q-btn v-show="is_edit" @click="save" color="secondary" small>{{ $t("保存") }}</q-btn>
     <a v-show="!is_edit" @click="edit" href="javascript:void(0)" class="hover-show-bz">
       <q-icon name="edit"/>
     </a>

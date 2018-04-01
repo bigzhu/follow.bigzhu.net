@@ -1,7 +1,7 @@
 <template>
   <div class="center-container-bz">
     <img src="../statics/assets/no-message.svg">
-    <p>{{ $t("Messages.nofollow") }} <router-link :to="{'name': 'Recommand'}">{{ $t("Messages.whattofollow") }}</router-link>{{ $t("Messages.interesting") }}</p>
+    <p>{{ $t("未关注") }} <router-link :to="{'name': 'Recommand'}">{{ $t("寻他") }}</router-link>{{ $t("里面寻找您感兴趣的人吧!") }}</p>
   </div>
 </template>
 
