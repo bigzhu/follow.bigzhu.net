@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-import p from 'bz-q-lib/module'
-// import 'whatwg-fetch'
 import axios from 'axios'
 import _ from 'lodash'
 function initGodMessage(state, godName) {
@@ -29,40 +27,19 @@ export const state = {
     password: null
   },
   show_how_to_use_collect: false, // 是否显示收藏引导
-  local_unread_message_count: 0, // 取过来还未读的信息
-  followed_god_count: -1, // 关注的god数
   last_scroll_top: 0, //
   nav_bar_height: 0,
   showBar: true, // top bar是否显示
   registered_count: -1,
-  cat_my_gods: {}, // 按 cat 分类的我关注的gods
-  cat_gods: {}, // 按 cat 分类的gods
-  my_cats: [], // god 我的类别
-  cats: [], // god 的类别
   last_reflash_oper: 0,
-  god_isExists: true, // 标记god是否存在
-  godInfos: {}, // 查询的每个god信息存放在这里
-  the_message: {
-    avatar: '',
-    godName: 'bigzhu',
-    id: 0
-  }, // 显示某个message
-  big_gods: [],
-  // my_gods: [],
-  unread_message_count: 0,
-  gods_messages: {},
   last_time: 0,
   old_loading: false,
   new_loading: false,
   info: {
     header: '',
     info: ''
-  },
-  godInfo: {},
-  search_messages: [], // 查找的messages
-  messages: [],
-  explore_messages: [], // 探索的
-  collect_messages: [] // 收藏的
+  }
+
 }
 // mutations
 export const mutations = {
@@ -244,15 +221,11 @@ export const mutations = {
   SET_GOD_INFO(state, godInfo) {
     state.godInfo = godInfo
   },
-  SET_LAST_TIME(state, time) {
-    state.last_time = time
-  },
+
   SET_OLD_LOADING(state, loading) {
     state.old_loading = loading
   },
-  SET_NEW_LOADING(state, loading) {
-    state.new_loading = loading
-  },
+
   SET_OLD_MESSAGES(state, messages) {
     state.messages = _.uniq(
       messages.reverse().concat(state.messages), false,
@@ -280,13 +253,7 @@ export const mutations = {
     })
     state.search_messages = uniqMessages
   },
-  SET_NEW_MESSAGES(state, messages) {
-    let mergeMessages = state.messages.concat(messages)
-    let uniqMessages = _.uniqBy(mergeMessages, function(d) {
-      return d.id
-    })
-    state.messages = uniqMessages
-  }
+
 }
 // actions
 export const actions = {
@@ -755,37 +722,7 @@ export const actions = {
         console.log(error)
       })
   },
-  recordLastMessage({
-    state,
-    commit,
-    dispatch
-  }, time) {
-    // if (state.last_time > parseInt(time, 10)) {
-    //   return
-    // }
-    return axios.put('/api_last', {
-        last: time
-      })
-      .then(function(response) {
-        state.unread_message_count = response.data
-        commit('SET_LAST_TIME', parseInt(time, 10))
-        // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
-        // 如果<20了，就预加载一些
-        /*
-        if (state.local_unread_message_count <= 20) {
-          let after = null
-          if (state.messages.length > 0) {
-            after = state.messages[state.messages.length - 1].created_at
-          }
-          dispatch('getNew', {after: after, limit: 50})
-        }
-        */
-        return response.data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
+
   oldMessage({
     state,
     commit,

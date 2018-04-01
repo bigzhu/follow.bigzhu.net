@@ -88,3 +88,35 @@ export const getNew = ({
       console.log(error)
     })
 }
+
+export const recordLastMessage = ({
+    state,
+    commit,
+    dispatch
+  }, time) => {
+    // if (state.last_time > parseInt(time, 10)) {
+    //   return
+    // }
+    return axios.put('/api_last', {
+        last: time
+      })
+      .then(function(response) {
+        state.unread_message_count = response.data
+        commit('SET_LAST_TIME', parseInt(time, 10))
+        // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
+        // 如果<20了，就预加载一些
+        /*
+        if (state.local_unread_message_count <= 20) {
+          let after = null
+          if (state.messages.length > 0) {
+            after = state.messages[state.messages.length - 1].created_at
+          }
+          dispatch('getNew', {after: after, limit: 50})
+        }
+        */
+        return response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }

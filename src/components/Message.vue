@@ -153,7 +153,7 @@
     },
     computed: {
       loading() {
-        return this.$store.state.p.loading
+        return this.$store.state.lib.loading
       },
       lang() {
         return Vue.config.lang
@@ -168,7 +168,7 @@
         return this.message.href
       },
       godInfo: function() {
-        let godInfo = this.$store.state.godInfos[this.message.god_name]
+        let godInfo = this.$store.state.god.godInfos[this.message.god_name]
         if (godInfo) {
           return godInfo
         }

@@ -5,11 +5,11 @@
     </h3>
     <div class="description" v-html="text"></div>
     <template v-for="(media, index) in medias" :media="media">
-      <div class="description" v-html="media.caption" :key="index"></div>
-      <a @click="openImg(proxy(media.imgUrl))" :key="index">
+      <div class="description" v-html="media.caption" :key="'description-'+index"></div>
+      <a @click="openImg(proxy(media.imgUrl))" :key="'a-'+index">
         <img :src="proxy(media.imgUrl)" class="responsive" >
       </a>
-      <br :key="index">
+      <br :key="'br-'+index">
     </template>
     <video v-if="video" :controls="true" type='video/mp4'>
       <source :src="proxy(video)">

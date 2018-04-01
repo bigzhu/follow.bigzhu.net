@@ -74,7 +74,7 @@
       if (this.isLogin === '') {
         // 取用户信息
         this.$store.dispatch('lib/getOauthInfo')
-        this.$store.dispatch('user/getNoTypes')
+        this.$store.dispatch('getNoTypes')
       }
       this.$nextTick(function() {
         this.$store.state.layout = this.$refs.layout

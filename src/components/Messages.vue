@@ -6,7 +6,7 @@
       <div v-show="show_no_login" class="no-login">
         <img src="../statics/assets/no-message.svg">
         <p>
-          <a href="/login.html">{{ $t("Messages.login") }}</a>{{ $t("Messages.description") }}
+          <a href="/login.html">{{ $t("登录") }}</a>{{ $t("登录后能看到更广阔的世界哟!") }}
         </p>
       </div>
     </q-slide-transition>
@@ -127,7 +127,7 @@
         }
       },
       noTypes() {
-        return this.$store.state.noTypes
+        return this.$store.state.user.noTypes
       }
     },
     mounted() {
@@ -233,7 +233,7 @@
           // toast('recordLastMessage')
           this.$store.dispatch('recordLastMessage', after)
         }
-        return this.$store.dispatch('message/getNew', {
+        return this.$store.dispatch('getNew', {
           after: after,
           limit: limit
         })
