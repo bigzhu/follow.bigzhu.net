@@ -13,3 +13,6 @@ export const SET_NEW_MESSAGES = (state, messages) => {
 export const SET_LAST_TIME = (state, time) => {
   state.last_time = time
 }
+export const SET_SHOW_HOW_TO_USE_COLLECT = (state, show) => {
+  state.show_how_to_use_collect = show
+}

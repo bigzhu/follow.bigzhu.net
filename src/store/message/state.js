@@ -1,4 +1,5 @@
 export default {
+  show_how_to_use_collect: false, // 是否显示收藏引导
   gods_messages: {},
   unread_message_count: 0,
   the_message: {

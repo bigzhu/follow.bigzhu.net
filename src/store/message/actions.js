@@ -156,3 +156,21 @@ export const uncollect = ({
       console.log(error)
     })
 }
+export const getCollect = ({
+  state,
+  commit,
+  dispatch
+}) => {
+  commit('SET_NEW_LOADING', true)
+  return axios.get('/api_collect')
+    .then(function(response) {
+      state.collect_messages = response.data
+      if (state.collect_messages.length === 0) {
+        commit('SET_SHOW_HOW_TO_USE_COLLECT', true)
+      } else {
+        commit('SET_SHOW_HOW_TO_USE_COLLECT', false)
+      }
+      commit('SET_NEW_LOADING', false)
+      return response.data
+    })
+}
