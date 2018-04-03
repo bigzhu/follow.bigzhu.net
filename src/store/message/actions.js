@@ -4,6 +4,7 @@ export const someAction = (state) => {
 }
 */
 
+// 用户信息
 export const getOauthInfo = (state) => {
   return axios.get('/api_oauth_info')
     .then(function(response) {
@@ -20,6 +21,7 @@ export const getOauthInfo = (state) => {
     })
 }
 
+// 获取用户不看的社交类型
 export const getNoTypes = (state) => {
   return axios.get('/api_no_types')
     .then((response) => {
@@ -30,6 +32,7 @@ export const getNoTypes = (state) => {
     })
 }
 
+// 获取新信息
 export const getNew = ({
   state,
   commit,
@@ -89,34 +92,67 @@ export const getNew = ({
     })
 }
 
+// 记录看到哪条信息
 export const recordLastMessage = ({
-    state,
-    commit,
-    dispatch
-  }, time) => {
-    // if (state.last_time > parseInt(time, 10)) {
-    //   return
-    // }
-    return axios.put('/api_last', {
-        last: time
-      })
-      .then(function(response) {
-        state.unread_message_count = response.data
-        commit('SET_LAST_TIME', parseInt(time, 10))
-        // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
-        // 如果<20了，就预加载一些
-        /*
-        if (state.local_unread_message_count <= 20) {
-          let after = null
-          if (state.messages.length > 0) {
-            after = state.messages[state.messages.length - 1].created_at
-          }
-          dispatch('getNew', {after: after, limit: 50})
+  state,
+  commit,
+  dispatch
+}, time) => {
+  // if (state.last_time > parseInt(time, 10)) {
+  //   return
+  // }
+  return axios.put('/api_last', {
+      last: time
+    })
+    .then(function(response) {
+      state.unread_message_count = response.data
+      commit('SET_LAST_TIME', parseInt(time, 10))
+      // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
+      // 如果<20了，就预加载一些
+      /*
+      if (state.local_unread_message_count <= 20) {
+        let after = null
+        if (state.messages.length > 0) {
+          after = state.messages[state.messages.length - 1].created_at
         }
-        */
-        return response.data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+        dispatch('getNew', {after: after, limit: 50})
+      }
+      */
+      return response.data
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+}
+// 收藏
+export const collect = ({
+  state,
+  commit,
+  dispatch
+}, messageID) => {
+  var params = {
+    message_id: messageID
   }
+  return axios.post('/api_collect', params)
+    .then(function(response) {})
+    .catch(function(error) {
+      console.log(error)
+    })
+}
+
+// 取消收藏
+export const uncollect = ({
+  state,
+  commit,
+  dispatch
+}, messageID) => {
+  return axios.delete('/api_collect', {
+      params: {
+        message_id: messageID
+      }
+    })
+    .then(function(response) {})
+    .catch(function(error) {
+      console.log(error)
+    })
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-padding">
+  <q-page padding>
     <NotYetFollow v-show="ordered_myGods.length===0 && get_done && !cat"></NotYetFollow>
 
     <q-infinite-scroll :offset="1000" :handler="loadMore">
@@ -11,7 +11,7 @@
     </q-infinite-scroll>
     <AddGodButton v-on:add="add"></AddGodButton>
     <Top></Top>
-  </div>
+  </q-page>
 </template>
 
 <script>

@@ -76,23 +76,6 @@
 </template>
 
 <script>
-  import 'quasar-extras/fontawesome'
-  import {
-    QSpinnerGears,
-    QInnerLoading,
-    QModal,
-    QBtn,
-    QIcon,
-    QItemTile,
-    QItemSide,
-    QItemMain,
-    QItem,
-    QCard,
-    QCardMain,
-    QCardActions,
-    QCardTitle
-  } from 'quasar'
-  import checkLogin from '../libs/functions/checkLogin'
   import Twitter from './Twitter'
   import Github from './Github'
   import Instagram from './Instagram'
@@ -118,20 +101,7 @@
       }
     },
     components: {
-      QSpinnerGears,
-      QInnerLoading,
-      QModal,
       GodItem,
-      QBtn,
-      QIcon,
-      QItemTile,
-      QItemMain,
-      QItemSide,
-      QItem,
-      QCardTitle,
-      QCardActions,
-      QCardMain,
-      QCard,
       TimeLen,
       Facebook,
       Twitter,
@@ -139,15 +109,14 @@
       Instagram,
       Tumblr
     },
-    directives: {},
     data: function() {
       return {
-        collected: false,
         anki_color: '#B3B3B3' // #57ADE3
       }
     },
     mounted() {
       this.$nextTick(function() {
+        // 给 anki 用
         this.message.el = this.$el
       })
     },
@@ -157,9 +126,6 @@
       },
       lang() {
         return Vue.config.lang
-      },
-      is_login() {
-        return checkLogin()
       },
       href: function() {
         if (this.message.m_type === 'github') {
@@ -174,7 +140,7 @@
         }
         return {
           id: 0,
-          name: 'bigzhu'
+          name: ''
         }
       },
       avatar: function() {
@@ -185,7 +151,6 @@
       anki: function() {
         if (this.message.anki) return
         this.message.anki = 1
-        // let front = $(this.$el).find('.content-bz').html()
         let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
         this.$store.dispatch('postAnki', {
           front: front,
@@ -210,24 +175,16 @@
             loading: true
           })
         }
-      },
-      collectDone: function(message) {
-        message.collect = 1
-      },
-      uncollectDone: function(message) {
-        message.collect = null
       }
     }
   }
 </script>
 
 <style>
-  /* avatar 大小*/
+  /* 取消原本设定的图片大小 */
   .q-item-avatar {
-    top: 1rem;
-    left: 1rem;
-    width: 2rem;
-    height: 2rem;
+    width: inherit;
+    height: inherit;
   }
   .q-card pre {
     white-space: pre-wrap;
@@ -312,6 +269,7 @@
 
   .q-item-side.bz_avatar // 图标和名字拉近一点
     cursor pointer // 变可手, 可点击
+    // 头像缩小
     width 2rem
     height 2rem
     min-width inherit

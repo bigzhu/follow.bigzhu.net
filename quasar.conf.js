@@ -54,6 +54,8 @@ module.exports = function (ctx) {
       // open: true // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
+    framework: 'all',
+    /*
     framework: {
       components: [
         'QTab',
@@ -85,6 +87,7 @@ module.exports = function (ctx) {
         'Notify'
       ]
     },
+    */
     // animations: 'all' --- includes all animations
     animations: [
     ],

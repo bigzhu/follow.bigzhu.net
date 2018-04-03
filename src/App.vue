@@ -67,8 +67,8 @@
   import Proxy from './libs/components/Proxy'
   import store from './store'
   export default {
-    name: 'App',
     store,
+    name: 'App',
     mixins: [Proxy],
     mounted() {
       if (this.isLogin === '') {

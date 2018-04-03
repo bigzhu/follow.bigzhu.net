@@ -1,9 +1,9 @@
 <template>
-  <div class="layout-padding">
+  <q-page padding>
     <messages></messages>
     <Top></Top>
     <UnRead></UnRead>
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -24,21 +24,12 @@
       return {}
     },
     computed: {
-      god_info() {
-        if (!this.godName) return
-        let GodInfo = this.$store.state.god_infos[this.godName]
-        if (GodInfo) {
-          return GodInfo
-        }
-      },
       godName() {
         if (this.$route.params.godName) return this.$route.params.godName
       }
     },
     mounted() {
-      if (this.godName) {
-        this.$store.dispatch('getGod', this.godName)
-      }
+      this.getGodInfo()
     },
     watch: {
       '$route': 'getGodInfo'
@@ -49,10 +40,6 @@
           this.$store.dispatch('getGod', this.godName)
         }
       }
-    },
-    beforeRouteLeave(to, from, next) {
-      this.$store.commit('SET_SHOW_BAR', true) // 离开时，确保Bar显示出来
-      next()
     }
   }
 </script>

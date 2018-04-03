@@ -20,6 +20,7 @@
      name: 'Main',
      component: () => import('pages/Main')
    }, // Default
+   importByName('Login'),
    importByName('God'),
    importByName('Collect'),
    importByName('Following'),

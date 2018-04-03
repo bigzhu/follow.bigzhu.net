@@ -817,36 +817,8 @@ export const actions = {
       .catch(function(error) {
         console.log(error)
       })
-  },
-  collect({
-    state,
-    commit,
-    dispatch
-  }, messageID) {
-    var params = {
-      messageID: messageID
-    }
-    return axios.post('/api_collect', params)
-      .then(function(response) {})
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
-  uncollect({
-    state,
-    commit,
-    dispatch
-  }, messageID) {
-    return axios.delete('/api_collect', {
-        params: {
-          messageID: messageID
-        }
-      })
-      .then(function(response) {})
-      .catch(function(error) {
-        console.log(error)
-      })
   }
+
 }
 
 // getters
