@@ -73,7 +73,9 @@
     mounted() {
       if (this.isLogin === '') {
         // 取用户信息
-        this.$store.dispatch('lib/getOauthInfo')
+        this.$store.dispatch('lib/getOauthInfo').catch((error) => {
+          this.$q.notify(error.response.data)
+        })
         this.$store.dispatch('getNoTypes')
       }
       this.$nextTick(function() {
