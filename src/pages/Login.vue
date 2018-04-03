@@ -18,11 +18,10 @@
           password: password
         }).then((data) => {
           this.$store.commit('lib/SET_LOADING', false)
-          if (data === '0') {
-            this.$router.push('/')
-          } else {
-            this.$q.notify(data)
-          }
+          this.$router.push('/')
+        }).catch((error) => {
+          console.log(error.response)
+          this.$q.notify(error.response.data)
         })
       }
     }
