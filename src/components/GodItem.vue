@@ -1,11 +1,11 @@
 <template>
   <q-card class="the-hover-bz" inline>
     <q-item>
-      <router-link :to="{ name: 'God', params: { godName: god.name }}">
+      <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="proxy(avatar)||'/statics/assets/avatar.svg'"/>
       </router-link>
       <q-item-main>
-        <router-link :to="{ name: 'God', params: { godName: god.name }}">
+        <router-link :to="{ name: 'God', params: { god_name: god.name }}">
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
@@ -35,17 +35,6 @@
 </template>
 
 <script>
-  import {
-    QCardTitle,
-    QCardActions,
-    QCardMain,
-    QItem,
-    QCardMedia,
-    QItemSide,
-    QItemTile,
-    QItemMain,
-    QCard
-  } from 'quasar'
   import Follow from './Follow'
   import GodRemark from './GodRemark'
   import SocialBadge from './SocialBadge'
@@ -64,15 +53,6 @@
       isMy: {}
     },
     components: {
-      QCardTitle,
-      QCardActions,
-      QCardMain,
-      QItem,
-      QCardMedia,
-      QItemSide,
-      QItemTile,
-      QItemMain,
-      QCard,
       SocialBadge,
       Follow,
       GodRemark
@@ -97,7 +77,7 @@
         this.loading = true
         let self = this
         this.$store.dispatch('postBlock', god.godID).then(function(data) {
-          self.$store.commit('REMOVE_THIS_GOD_CAT_MY_GODS', god.godID)
+          self.$store.commit('REMOVE_THIS_GOD_cat_my_gods', god.godID)
           self.loading = false
         })
         if (god.followed === 1) {
@@ -114,7 +94,7 @@
     @media (max-width: 920px)
       min-width 100%
     overflow-wrap: break-word // 让 a 换行
-  .q-item-side img // 改大小
+  .q-item-side >>> .q-item-avatar // 改大小, 用 >>> 来深入改 component 里面的东西
     width 6rem
     height 6rem
     margin-right 1rem

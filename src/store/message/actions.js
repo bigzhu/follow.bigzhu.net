@@ -25,7 +25,7 @@ export const getOauthInfo = (state) => {
 export const getNoTypes = (state) => {
   return axios.get('/api_no_types')
     .then((response) => {
-      state.noTypes = response.data
+      state.no_types = response.data
     })
     .catch(function(error) {
       console.log(error)
@@ -38,18 +38,18 @@ export const getNew = ({
   commit,
   dispatch
 }, {
-  godName,
+  god_name,
   searchKey,
   after,
   limit,
   explore
 }) => {
-  commit('SET_NEW_LOADING', true)
+  commit('new_loading', true)
   var params = {
-    not: state.noTypes,
+    not: state.no_types,
     limit: limit,
     after: after,
-    godName: godName,
+    god_name: god_name,
     searchKey: searchKey
   }
   return axios.get('/api_new', {
@@ -62,29 +62,29 @@ export const getNew = ({
         state.followed_god_count = data.followed_god_count
         if (searchKey && state.search_messages.length === 0) {
           // oldMessage({ dispatch, state }, {searchKey: searchKey})
-        } else if (godName && state.gods_messages[godName].length === 0) { // 没数就查出old
-          // oldMessage({ dispatch, state }, {godName: godName})
+        } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
+          // oldMessage({ dispatch, state }, {god_name: god_name})
         } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
           // oldMessage({ dispatch, state }, {limit: 2})
         }
       } else {
         // state.followed_god_count = -1
-        if (godName) { // 查god的new
-          commit('SET_GODS_NEW_MESSAGES', {
-            godName: godName,
+        if (god_name) { // 查god的new
+          commit('god_new_messages', {
+            god_name: god_name,
             messages: data.messages
           })
         } else if (explore) { // explore
-          commit('SET_EXPLORE_NEW_MESSAGES', data.messages)
+          commit('SET_EXPLORE_new_messages', data.messages)
         } else if (searchKey) { // search
           commit('SET_NEW_SEARCH_MESSAGES', data.messages)
         } else { // main
-          commit('NEW_MESSAGES', data.messages)
+          commit('new_messages', data.messages)
           // commit('REFRESH_UNREAD_MESSAGE_COUNT')
         }
       }
-      commit('SET_NEW_LOADING', false)
-      // commit('REFLASH_TIME_LEN')
+      commit('new_loading', false)
+      // commit('reflash_time_len')
       return data
     })
     .catch(function(error) {
@@ -106,7 +106,7 @@ export const recordLastMessage = ({
     })
     .then(function(response) {
       state.unread_message_count = response.data
-      commit('LAST_TIME', parseInt(time, 10))
+      commit('last_time', parseInt(time, 10))
       // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
       // 如果<20了，就预加载一些
       /*
@@ -161,16 +161,154 @@ export const getCollect = ({
   commit,
   dispatch
 }) => {
-  commit('SET_NEW_LOADING', true)
+  commit('new_loading', true)
   return axios.get('/api_collect')
     .then(function(response) {
-      commit('COLLECT_MESSAGES', response.data)
+      commit('collect_messages', response.data)
       if (state.collect_messages.length === 0) {
-        commit('SHOW_HOW_TO_USE_COLLECT', true)
+        commit('show_how_to_use_collect', true)
       } else {
-        commit('SHOW_HOW_TO_USE_COLLECT', false)
+        commit('show_how_to_use_collect', false)
       }
-      commit('SET_NEW_LOADING', false)
+      commit('new_loading', false)
       return response.data
+    })
+}
+export const newMessage = ({
+  state,
+  commit,
+  dispatch
+}, {
+  god_name,
+  searchKey,
+  limit,
+  explore
+}) => {
+  let messages = null
+  let after = null
+  if (god_name) {
+    messages = state.gods_messages[god_name]
+  } else if (explore) {
+    messages = state.explore_messages
+  } else if (searchKey) {
+    messages = state.search_messages
+  } else {
+    messages = state.messages
+  }
+  if (messages.length > 0) {
+    after = messages[messages.length - 1].created_at
+  } else { // 第一次, 找最近3天的
+    let dt = new Date()
+    dt.setDate(dt.getDate() - 2)
+    after = dt.getTime()
+    if (god_name) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
+      after = null
+    }
+  }
+  if (!limit) {
+    limit = 10
+  }
+  return dispatch('getNew', {
+    god_name: god_name,
+    searchKey: searchKey,
+    after: after,
+    limit: limit,
+    explore: explore
+  })
+}
+export const oldMessage = ({
+  state,
+  commit,
+  dispatch
+}, {
+  god_name,
+  searchKey,
+  limit
+}) => {
+  let messages = null
+  let before = null
+  if (god_name) {
+    messages = state.gods_messages[god_name]
+  } else if (searchKey) {
+    messages = state.search_messages
+  } else {
+    messages = state.messages
+  }
+  if (messages.length > 0) {
+    before = messages[0].out_created_at
+  } else { // 第一次, 找当前以前的
+    // before = new Date().getTime()
+    // before = (new Date()).toISOString()
+    before = (new Date()).toJSON()
+  }
+  if (!limit) {
+    limit = 10
+  }
+  return dispatch('getOld', {
+    god_name: god_name,
+    searchKey: searchKey,
+    before: before,
+    limit: limit
+  })
+}
+
+export const getOld = ({
+  state,
+  commit,
+  dispatch
+}, {
+  god_name,
+  searchKey,
+  before,
+  limit
+}) => {
+  commit('old_loading', true)
+  var params = {
+    not: state.no_types,
+    god_name: god_name,
+    searchKey: searchKey,
+    limit: limit,
+    before: before
+  }
+  return axios.get('/api_old', {
+      params: params
+    })
+    .then(function(response) {
+      let messages = response.data
+      if (messages.length === 0) { // 没有取到数
+        if (god_name) {
+          // toastr.info(god_name + '没有更多的历史消息可以看了')
+        } else if (searchKey) {
+          // toastr.info('没有更多的历史了')
+        } else {
+          if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
+            // toastr.info('请先关注你感兴趣的人')
+            window.router.go({
+              name: 'Recommand',
+              params: {
+                cat: 'recommand'
+              }
+            })
+          } else {
+            // toastr.info('没有更多的历史了')
+          }
+        }
+      } else {
+        if (god_name) {
+          commit('god_old_messages', {
+            god_name: god_name,
+            messages: messages
+          })
+        } else if (searchKey) { // search
+          commit('SET_OLD_SEARCH_MESSAGES', messages)
+        } else { // main
+          commit('SET_OLD_MESSAGES', messages)
+        }
+      }
+      commit('old_loading', false)
+      commit('reflash_time_len')
+    })
+    .catch(function(error) {
+      console.log(error)
     })
 }

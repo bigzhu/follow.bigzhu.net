@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :godName="godName" :show="!(followed_god_count===0)"></Old>
+    <Old :god_name="god_name" :show="!(followed_god_count===0)"></Old>
     <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
@@ -12,7 +12,7 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${paddingTop}px;`">
-      <message ref="messages" v-for='message in noTypes_messages' :message='message' :key="message.id">
+      <message ref="messages" v-for='message in no_types_messages' :message='message' :key="message.id">
       </message>
       <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("没有更多内容了, 看看") }}
@@ -86,8 +86,8 @@
       followed_god_count() {
         return this.$store.state.followed_god_count
       },
-      godName() {
-        if (this.$route.params.godName) return this.$route.params.godName
+      god_name() {
+        if (this.$route.params.god_name) return this.$route.params.god_name
       },
       new_loading() {
         return this.$store.state.new_loading
@@ -105,20 +105,20 @@
           return !d.top_hide
         })
       },
-      noTypes_messages() {
+      no_types_messages() {
         return this.show_messages.filter((d) => {
-          return !isInList(d.m_type, this.noTypes)
+          return !isInList(d.m_type, this.no_types)
         })
       },
       messages() {
         switch (this.type) {
           case 'god':
             {
-              return this.$store.state.message.gods_messages[this.godName] || []
+              return this.$store.state.message.gods_messages[this.god_name] || []
             }
           case 'collect':
             {
-              return this.$store.state.message.collectMessages
+              return this.$store.state.message.collect_messages
             }
           default:
             {
@@ -126,17 +126,17 @@
             }
         }
       },
-      noTypes() {
-        return this.$store.state.user.noTypes
+      no_types() {
+        return this.$store.state.user.no_types
       }
     },
     mounted() {
       if (!this.messages || this.messages.length === 0) {
         if (this.type === 'god') {
-          this.$store.commit('FILTER_GOD_MESSAGES', this.godName)
+          this.$store.commit('filter_god_messages', this.god_name)
           if (this.messages.length === 0) { // 没有过滤值时
             this.$store.dispatch('oldMessage', {
-              godName: this.godName,
+              god_name: this.god_name,
               limit: 10
             })
           }
@@ -155,7 +155,7 @@
         let hideP = this.$store.state.main.hideParams
         let overTop = position - 500
         if (overTop > hideP.paddingTop) {
-          let message = this.noTypes_messages[0]
+          let message = this.no_types_messages[0]
           if (!message) return
 
           let messageHeight = message.el.offsetHeight
@@ -222,7 +222,7 @@
       },
       newGodMessage: function() {
         return this.$store.dispatch('newMessage', {
-          godName: this.godName,
+          god_name: this.god_name,
           limit: getCount
         })
       },

@@ -4,7 +4,7 @@
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
     <Cat v-if="name==='Recommand'"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
-    <GodInfo v-show="godName" :god="godInfo"></GodInfo>
+    <GodInfo v-show="god_name" :god="god_info"></GodInfo>
     <MessageConf/>
   </q-scroll-area>
 </template>
@@ -33,14 +33,14 @@
       name() {
         return this.$route.name
       },
-      godInfo() {
-        let godInfo = this.$store.state.godInfos[this.godName]
-        if (godInfo) {
-          return godInfo
+      god_info() {
+        let god_info = this.$store.state.god_infos[this.god_name]
+        if (god_info) {
+          return god_info
         }
       },
-      godName() {
-        return this.$route.params.godName
+      god_name() {
+        return this.$route.params.god_name
       }
     },
     data: function() {

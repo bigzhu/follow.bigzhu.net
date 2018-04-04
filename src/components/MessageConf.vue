@@ -20,12 +20,12 @@
       QOptionGroup
     },
     computed: {
-      noTypes() {
-        return this.$store.state.noTypes
+      no_types() {
+        return this.$store.state.no_types
       },
       showTypes: {
         get() {
-          return _.difference(this.types, this.noTypes)
+          return _.difference(this.types, this.no_types)
         },
         set(showTypes) {
           this.$store.state.showTypes = showTypes
@@ -44,8 +44,8 @@
     },
     methods: {
       change() {
-        let noTypes = _.difference(this.types, this.showTypes)
-        this.$store.dispatch('setNoTypes', noTypes)
+        let no_types = _.difference(this.types, this.showTypes)
+        this.$store.dispatch('setNoTypes', no_types)
       }
     }
   }

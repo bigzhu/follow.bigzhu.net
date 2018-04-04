@@ -10,14 +10,28 @@ function initCatGod(state, type, cat) {
     Vue.set(state[type], cat, [])
   }
 }
-export const CAT_MY_GODS = (state, {
+export const cat_my_gods = (state, {
   cat,
   gods
 }) => {
-  initCatGod(state, 'catMyGods', cat)
-  let mergeGods = state.catMyGods[cat].concat(gods)
+  initCatGod(state, 'cat_my_gods', cat)
+  let mergeGods = state.cat_my_gods[cat].concat(gods)
   let uniqGods = _.uniqBy(mergeGods, function(d) {
     return d.id
   })
-  state.catMyGods[cat] = uniqGods
+  state.cat_my_gods[cat] = uniqGods
+}
+export const god_infos = (state, god_info) => {
+  Vue.set(state.god_infos, god_info.name, god_info)
+}
+export const cat_gods = (state, {
+  cat,
+  gods
+}) => {
+  initCatGod(state, 'cat_gods', cat)
+  let mergeGods = state.cat_gods[cat].concat(gods)
+  let uniqGods = _.uniqBy(mergeGods, function(d) {
+    return d.id
+  })
+  state.cat_gods[cat] = uniqGods
 }

@@ -21,7 +21,11 @@
      component: () => import('pages/Main')
    }, // Default
    importByName('Login'),
-   importByName('God'),
+    {
+      path: '/God/:god_name',
+      name: 'God',
+      component: () => import('pages/God')
+    },
    importByName('Collect'),
    importByName('Following'),
    importByName('TheMessage'),

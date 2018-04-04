@@ -23,7 +23,7 @@ export const getOauthInfo = (state) => {
 export const getNoTypes = (state) => {
   return axios.get('/api_no_types')
     .then((response) => {
-      state.noTypes = response.data
+      state.no_types = response.data
     })
     .catch(function(error) {
       console.log(error)
@@ -38,7 +38,7 @@ export const getMyGods = ({
     cat: cat,
     followed: true
   }
-  let gods = state.catMyGods[cat]
+  let gods = state.cat_my_gods[cat]
   if (gods && gods.length > 0) {
     params.before = gods[gods.length - 1].created_at
   }
@@ -46,10 +46,63 @@ export const getMyGods = ({
       params: params
     })
     .then(function(response) {
-      commit('CAT_MY_GODS', {
+      commit('cat_my_gods', {
         cat: cat,
         gods: response.data
       })
       return response.data
+    })
+}
+export const getGod = ({
+  state,
+  commit,
+  dispatch
+}, val) => {
+  let god_name
+  if (typeof val === 'string') {
+    god_name = val
+  } else {
+    god_name = val.god_name
+    // loading = val.loading
+  }
+  if (state.god_infos[god_name]) {
+    return
+  }
+  return axios.get('/api_god', {
+      params: {
+        god_name: god_name
+      }
+    })
+    .then(function(response) {
+      commit('god_infos', response.data)
+      return response.data
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+}
+export const getPublicGods = ({
+  state,
+  commit,
+  dispatch
+}, cat) => {
+  let params = {
+    cat: cat
+  }
+  let gods = state.cat_gods[cat]
+  if (gods) {
+    params.before = gods[gods.length - 1].created_at
+  }
+  return axios.get('/api_gods', {
+      params: params
+    })
+    .then(function(response) {
+      commit('cat_gods', {
+        cat: cat,
+        gods: response.data
+      })
+    })
+    .catch(function(error) {
+      console.log(error)
     })
 }

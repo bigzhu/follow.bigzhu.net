@@ -3,17 +3,6 @@
 </template>
 
 <script>
-  import {
-    QCardTitle,
-    QCardActions,
-    QCardMain,
-    QItem,
-    QCardMedia,
-    QItemSide,
-    QItemTile,
-    QItemMain,
-    QCard
-  } from 'quasar'
   import Follow from './Follow'
   import _ from 'lodash'
   import myautolinker from '../functions/myautolinker'
@@ -21,15 +10,6 @@
   import SocialBadge from './SocialBadge'
   export default {
     components: {
-      QCardTitle,
-      QCardActions,
-      QCardMain,
-      QItem,
-      QCardMedia,
-      QItemSide,
-      QItemTile,
-      QItemMain,
-      QCard,
       SocialBadge,
       Follow,
       GodRemark

@@ -23,7 +23,7 @@ export const getOauthInfo = (state) => {
 export const getNoTypes = (state) => {
   return axios.get('/api_no_types')
     .then((response) => {
-      state.noTypes = response.data
+      state.no_types = response.data
     })
     .catch(function(error) {
       console.log(error)

@@ -3,15 +3,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 import axios from 'axios'
 import _ from 'lodash'
-function initGodMessage(state, godName) {
-  if (state.gods_messages[godName] === undefined) {
-    Vue.set(state.gods_messages, godName, [])
-  }
-}
 
 // state
 export const state = {
-  noTypes: ['github'],
+  no_types: ['github'],
   show_types: ['twitter', 'instagram', 'tumblr'],
   layout: null,
   hide_params: { // 为了 scroll 效率, 只部分显示 messages
@@ -37,13 +32,13 @@ export const state = {
 }
 // mutations
 export const mutations = {
-  REMOVE_THIS_GOD_CAT_MY_GODS(state, godID) {
-    for (var property in state.catMyGods) {
-      if (state.catMyGods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.catMyGods[property], function(d) {
+  REMOVE_THIS_GOD_cat_my_gods(state, godID) {
+    for (var property in state.cat_my_gods) {
+      if (state.cat_my_gods.hasOwnProperty(property)) {
+        let index = _.findIndex(state.cat_my_gods[property], function(d) {
           return d.godID === godID
         })
-        state.catMyGods[property].splice(index, 1)
+        state.cat_my_gods[property].splice(index, 1)
       }
     }
 
@@ -78,51 +73,20 @@ export const mutations = {
   SET_SHOW_BAR(state, showBar) {
     state.showBar = showBar
   },
-
-  SET_CAT_GODS(state, {
-    cat,
-    gods
-  }) {
-    initCatGod(state, 'cat_gods', cat)
-    let mergeGods = state.cat_gods[cat].concat(gods)
-    let uniqGods = _.uniqBy(mergeGods, function(d) {
-      return d.id
-    })
-    state.cat_gods[cat] = uniqGods
-  },
   UNSHIFT_MY_GOD(state, {
     cat,
     god
   }) {
-    state.catMyGods[cat].unshift(god)
+    state.cat_my_gods[cat].unshift(god)
   },
   SET_MY_CATS(state, cats) {
     state.my_cats = cats
-  },
-  REFLASH_TIME_LEN(state) { // 更新时间隔
-    if (state.last_reflash_oper) {
-      _.map(state.messages,
-        (d) => {
-          d.created_at = d.created_at + 1
-          return d
-        }
-      )
-      state.last_reflash_oper = 0
-    } else {
-      _.map(state.messages,
-        (d) => {
-          d.created_at = d.created_at - 1
-          return d
-        }
-      )
-      state.last_reflash_oper = 1
-    }
   },
   SET_THE_MESSAGE(state, message) {
     state.the_message = message
   },
   SET_GOD_IS_EXISTS(state, isExists) {
-    state.god_isExists = isExists
+    state.god_is_exists = isExists
   },
   REMOVE_FROM_MY_MESSAGES(state, godID) { // 移除这个god
     state.messages = _.without(state.messages, _.findWhere(state.messages, {
@@ -134,9 +98,6 @@ export const mutations = {
       id: godID
     }))
   },
-  SET_GOD_INFOS(state, godInfo) {
-    Vue.set(state.godInfos, godInfo.name, godInfo)
-  },
   SET_BIG_GODS(state, gods) {
     state.big_gods = gods
   },
@@ -146,13 +107,13 @@ export const mutations = {
     })[0]
     state.local_unread_message_count = unreadMessages.length
   },
-  FILTER_GOD_MESSAGES(state, godName) { // 从主线messages中把god message 过滤出来，避免页面空白
-    initGodMessage(state, godName)
-    if (state.messages.length !== 0 && state.gods_messages[godName].length === 0) {
+  filter_god_messages(state, god_name) { // 从主线messages中把god message 过滤出来，避免页面空白
+    initGodMessage(state, god_name)
+    if (state.messages.length !== 0 && state.gods_messages[god_name].length === 0) {
       let godMessages = _.filter(state.messages, (d) => {
-        return d.godName === godName
+        return d.god_name === god_name
       })
-      state.gods_messages[godName] = godMessages
+      state.gods_messages[god_name] = godMessages
     }
   },
   FILTER_SEARCH_MESSAGES(state, searchKey) { // 从主线messages中把查找的信息过滤出来，避免页面空白
@@ -171,19 +132,7 @@ export const mutations = {
       })
     }
   },
-  SET_GODS_OLD_MESSAGES(state, {
-    godName,
-    messages
-  }) {
-    initGodMessage(state, godName)
-    state.gods_messages[godName] = _.uniq(
-      messages.reverse().concat(state.gods_messages[godName]), false,
-      function(item, key, a) {
-        return item.id
-      }
-    )
-  },
-  SET_EXPLORE_NEW_MESSAGES(state, godName, messages) {
+  SET_EXPLORE_new_messages(state, god_name, messages) {
     state.explore_messages = _.uniq(
       state.explore_messages.concat(messages), false,
       function(item, key, a) {
@@ -191,22 +140,12 @@ export const mutations = {
       }
     )
   },
-  SET_GODS_NEW_MESSAGES(state, {
-    godName,
-    messages
-  }) {
-    initGodMessage(state, godName)
-    let mergeMessages = state.gods_messages[godName].concat(messages)
-    let uniqMessages = _.uniqBy(mergeMessages, function(d) {
-      return d.id
-    })
-    state.gods_messages[godName] = uniqMessages
-  },
-  SET_GOD_INFO(state, godInfo) {
-    state.godInfo = godInfo
+
+  SET_GOD_INFO(state, god_info) {
+    state.god_info = god_info
   },
 
-  SET_OLD_LOADING(state, loading) {
+  old_loading(state, loading) {
     state.old_loading = loading
   },
 
@@ -248,7 +187,7 @@ export const actions = {
   }) {
     return axios.get('/api_no_types')
       .then((response) => {
-        state.noTypes = response.data
+        state.no_types = response.data
       })
       .catch(function(error) {
         console.log(error)
@@ -258,9 +197,9 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, noTypes) {
-    state.noTypes = noTypes
-    return axios.put('/api_no_types', noTypes)
+  }, no_types) {
+    state.no_types = no_types
+    return axios.put('/api_no_types', no_types)
       .then((response) => {})
       .catch(function(error) {
         console.log(error)
@@ -396,48 +335,7 @@ export const actions = {
       return data
     })
   },
-  newMessage({
-    state,
-    commit,
-    dispatch
-  }, {
-    godName,
-    searchKey,
-    limit,
-    explore
-  }) {
-    let messages = null
-    let after = null
-    if (godName) {
-      messages = state.gods_messages[godName]
-    } else if (explore) {
-      messages = state.explore_messages
-    } else if (searchKey) {
-      messages = state.search_messages
-    } else {
-      messages = state.messages
-    }
-    if (messages.length > 0) {
-      after = messages[messages.length - 1].created_at
-    } else { // 第一次, 找最近3天的
-      let dt = new Date()
-      dt.setDate(dt.getDate() - 2)
-      after = dt.getTime()
-      if (godName) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
-        after = null
-      }
-    }
-    if (!limit) {
-      limit = 10
-    }
-    return dispatch('getNew', {
-      godName: godName,
-      searchKey: searchKey,
-      after: after,
-      limit: limit,
-      explore: explore
-    })
-  },
+
   unfollow({
     state,
     commit,
@@ -477,8 +375,8 @@ export const actions = {
     })
     // 在god message里再找找
     if (!message) {
-      for (var godName in state.gods_messages) {
-        message = _.find(state.gods_messages[godName], function(d) {
+      for (var god_name in state.gods_messages) {
+        message = _.find(state.gods_messages[god_name], function(d) {
           return d.id === parseInt(id, 10)
         })
       }
@@ -515,18 +413,18 @@ export const actions = {
     commit,
     dispatch
   }, {
-    godName,
+    god_name,
     searchKey,
     after,
     limit,
     explore
   }) {
-    commit('SET_NEW_LOADING', true)
+    commit('new_loading', true)
     var params = {
-      not: state.noTypes,
+      not: state.no_types,
       limit: limit,
       after: after,
-      godName: godName,
+      god_name: god_name,
       searchKey: searchKey
     }
     return axios.get('/api_new', {
@@ -539,29 +437,29 @@ export const actions = {
           state.followed_god_count = data.followed_god_count
           if (searchKey && state.search_messages.length === 0) {
             // oldMessage({ dispatch, state }, {searchKey: searchKey})
-          } else if (godName && state.gods_messages[godName].length === 0) { // 没数就查出old
-            // oldMessage({ dispatch, state }, {godName: godName})
+          } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
+            // oldMessage({ dispatch, state }, {god_name: god_name})
           } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
             // oldMessage({ dispatch, state }, {limit: 2})
           }
         } else {
           // state.followed_god_count = -1
-          if (godName) { // 查god的new
-            commit('SET_GODS_NEW_MESSAGES', {
-              godName: godName,
+          if (god_name) { // 查god的new
+            commit('god_new_messages', {
+              god_name: god_name,
               messages: data.messages
             })
           } else if (explore) { // explore
-            commit('SET_EXPLORE_NEW_MESSAGES', data.messages)
+            commit('SET_EXPLORE_new_messages', data.messages)
           } else if (searchKey) { // search
             commit('SET_NEW_SEARCH_MESSAGES', data.messages)
           } else { // main
-            commit('SET_NEW_MESSAGES', data.messages)
+            commit('SET_new_messages', data.messages)
             // commit('REFRESH_UNREAD_MESSAGE_COUNT')
           }
         }
-        commit('SET_NEW_LOADING', false)
-        // commit('REFLASH_TIME_LEN')
+        commit('new_loading', false)
+        // commit('reflash_time_len')
         return data
       })
       .catch(function(error) {
@@ -596,31 +494,6 @@ export const actions = {
         console.log(error)
       })
   },
-  getPublicGods({
-    state,
-    commit,
-    dispatch
-  }, cat) {
-    let params = {
-      cat: cat
-    }
-    let gods = state.cat_gods[cat]
-    if (gods) {
-      params.before = gods[gods.length - 1].created_at
-    }
-    return axios.get('/api_gods', {
-        params: params
-      })
-      .then(function(response) {
-        commit('SET_CAT_GODS', {
-          cat: cat,
-          gods: response.data
-        })
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
 
   getMyGods({
     state,
@@ -631,7 +504,7 @@ export const actions = {
       cat: cat,
       followed: true
     }
-    let gods = state.catMyGods[cat]
+    let gods = state.cat_my_gods[cat]
     if (gods && gods.length > 0) {
       params.before = gods[gods.length - 1].created_at
     }
@@ -639,7 +512,7 @@ export const actions = {
         params: params
       })
       .then(function(response) {
-        commit('SET_CAT_MY_GODS', {
+        commit('SET_cat_my_gods', {
           cat: cat,
           gods: response.data
         })
@@ -663,23 +536,23 @@ export const actions = {
     commit,
     dispatch
   }, val) {
-    let godName
+    let god_name
     if (typeof val === 'string') {
-      godName = val
+      god_name = val
     } else {
-      godName = val.godName
+      god_name = val.god_name
       // loading = val.loading
     }
-    if (state.godInfos[godName]) {
+    if (state.god_infos[god_name]) {
       return
     }
     return axios.get('/api_god', {
         params: {
-          godName: godName
+          god_name: god_name
         }
       })
       .then(function(response) {
-        commit('SET_GOD_INFOS', response.data)
+        commit('god_infos', response.data)
         return response.data
       })
       .catch(function(error) {
@@ -687,101 +560,8 @@ export const actions = {
       })
   },
 
-  oldMessage({
-    state,
-    commit,
-    dispatch
-  }, {
-    godName,
-    searchKey,
-    limit
-  }) {
-    let messages = null
-    let before = null
-    if (godName) {
-      messages = state.gods_messages[godName]
-    } else if (searchKey) {
-      messages = state.search_messages
-    } else {
-      messages = state.messages
-    }
-    if (messages.length > 0) {
-      before = messages[0].out_created_at
-    } else { // 第一次, 找当前以前的
-      // before = new Date().getTime()
-      // before = (new Date()).toISOString()
-      before = (new Date()).toJSON()
-    }
-    if (!limit) {
-      limit = 10
-    }
-    return dispatch('getOld', {
-      godName: godName,
-      searchKey: searchKey,
-      before: before,
-      limit: limit
-    })
-  },
-  getOld({
-    state,
-    commit,
-    dispatch
-  }, {
-    godName,
-    searchKey,
-    before,
-    limit
-  }) {
-    commit('SET_OLD_LOADING', true)
-    var params = {
-      not: state.noTypes,
-      godName: godName,
-      searchKey: searchKey,
-      limit: limit,
-      before: before
-    }
-    return axios.get('/api_old', {
-        params: params
-      })
-      .then(function(response) {
-        let messages = response.data
-        if (messages.length === 0) { // 没有取到数
-          if (godName) {
-            // toastr.info(godName + '没有更多的历史消息可以看了')
-          } else if (searchKey) {
-            // toastr.info('没有更多的历史了')
-          } else {
-            if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
-              // toastr.info('请先关注你感兴趣的人')
-              window.router.go({
-                name: 'Recommand',
-                params: {
-                  cat: 'recommand'
-                }
-              })
-            } else {
-              // toastr.info('没有更多的历史了')
-            }
-          }
-        } else {
-          if (godName) {
-            commit('SET_GODS_OLD_MESSAGES', {
-              godName: godName,
-              messages: messages
-            })
-          } else if (searchKey) { // search
-            commit('SET_OLD_SEARCH_MESSAGES', messages)
-          } else { // main
-            commit('SET_OLD_MESSAGES', messages)
-          }
-        }
-        commit('SET_OLD_LOADING', false)
-        commit('REFLASH_TIME_LEN')
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  }
+
+
 
 }
 

@@ -9,7 +9,7 @@
             <div v-html="bio.text">
             </div>
           </div>
-          <god-item :god='godInfo' isMy="true" class="bio-god-card"></god-item>
+          <god-item :god='god_info' isMy="true" class="bio-god-card"></god-item>
         </div>
       </div>
 
@@ -35,26 +35,26 @@
     },
     data () {
       return {
-        godName: this.$route.params.godName
+        god_name: this.$route.params.god_name
       }
     },
     props: {
     },
     mounted () {
-      this.$store.dispatch('getGod', this.godName)
+      this.$store.dispatch('getGod', this.god_name)
       this.getBio()
     },
     computed: {
-      godInfo () {
-        let godInfo = this.$store.state.godInfos[this.godName]
-        if (godInfo) {
-          return godInfo
+      god_info () {
+        let god_info = this.$store.state.god_infos[this.god_name]
+        if (god_info) {
+          return god_info
         }
         return {id: 0, name: ''}
       },
       bio () {
         let self = this
-        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.godName })
+        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.god_name })
         if (bio) return bio
         else return {title_img: ''}
       }
@@ -62,7 +62,7 @@
     methods: {
       getDetail: function () {
         let self = this
-        this.$store.dispatch('getRichText', {key: this.godName}).then(function (data) {
+        this.$store.dispatch('getRichText', {key: this.god_name}).then(function (data) {
           self.bio.text = data.rich_text[0].text
         })
       },

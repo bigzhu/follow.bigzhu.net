@@ -17,7 +17,7 @@
       <div class="ui stackable grid">
         <div class="six wide column">
           <div class="god-avatar-bz">
-            <router-link :to="{ name: 'God', params: { godName: godName }}" class="header god-name-bz user-name-a">
+            <router-link :to="{ name: 'God', params: { god_name: god_name }}" class="header god-name-bz user-name-a">
               <img :src="proxy(avatar)" class="avatar-img-bz">
             </router-link>
           </div>
@@ -31,14 +31,14 @@
               <social-badge :loading="tumblr_loading" :info="tumblr_info"></social-badge>
               <social-badge :loading="facebook_loading" :info="facebook_info"></social-badge>
             </div>
-            <router-link :to="{ name: 'God', params: { godName: godName }}" class="header newgod-name user-name-a">
-              <h3>{{godName}}</h3>
+            <router-link :to="{ name: 'God', params: { god_name: god_name }}" class="header newgod-name user-name-a">
+              <h3>{{god_name}}</h3>
             </router-link>
             <a class="followers-number-bz">
               {{ $t("AddGod.follownumber") }}
             </a>
             <div class="god-discription-bz" v-html="description"></div>
-            <follow :class="{'disabled': disabled}" v-model="godInfo.followed" :godID="0" class="button-to-follow-bz"></follow>
+            <follow :class="{'disabled': disabled}" v-model="god_info.followed" :godID="0" class="button-to-follow-bz"></follow>
           </div>
         </div>
       </div>
@@ -61,10 +61,10 @@
     },
     data: function() {
       return {
-        godName: '',
+        god_name: '',
         input_name: '',
         stat: 'button',
-        godInfo: {},
+        god_info: {},
         twitter_info: {
           type: 'twitter',
           count: -4
@@ -145,25 +145,25 @@
       },
       add: function() {
         this.init()
-        this.godName = this.input_name.trim()
+        this.god_name = this.input_name.trim()
         this.stat = 'adding'
         let self = this
         this.adding = true
-        // this.addGod(this.godName, this.$route.params.cat, this.startCheck)
+        // this.addGod(this.god_name, this.$route.params.cat, this.startCheck)
         this.$store.dispatch('postGod', {
-          name: this.godName,
+          name: this.god_name,
           cat: this.$route.params.cat
         }).then(function(data) {
-          self.startCheck(data.godInfo)
+          self.startCheck(data.god_info)
         })
       },
-      startCheck: function(godInfo) {
-        this.setGodInfo(godInfo)
+      startCheck: function(god_info) {
+        this.setGodInfo(god_info)
         this.adding = false
         this.twitter_loading = true
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'twitter'
         }).then(function(data) {
           self.twitterDone(data.info)
@@ -177,7 +177,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'github'
         }).then(function(data) {
           self.githubDone(data.info)
@@ -192,7 +192,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'instagram'
         }).then(function(data) {
           self.instagramDone(data.info)
@@ -207,7 +207,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'tumblr'
         }).then(function(data) {
           self.tumblrDone(data.info)
@@ -222,7 +222,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'facebook'
         }).then(function(data) {
           self.facebookDone(data.info)
@@ -242,17 +242,17 @@
         this.createGod()
         this.$store.commit('UNSHIFT_MY_GOD', {
           cat: this.cat,
-          god: this.godInfo
+          god: this.god_info
         })
         // this.$store.dispatch('queryCat')
         this.stat = 'button'
-        this.$emit('add_done', this.godInfo)
-        this.godInfo = {}
+        this.$emit('add_done', this.god_info)
+        this.god_info = {}
       },
       setGodSocial: function(type) {
         if (this[type + '_info'].count !== -4) {
-          this.godInfo[type] = this.godName
-          this.godInfo[type + '_user'] = this[type + '_info']
+          this.god_info[type] = this.god_name
+          this.god_info[type + '_user'] = this[type + '_info']
         }
       },
       createGod: function() {
@@ -261,10 +261,10 @@
         this.setGodSocial('tumblr')
         this.setGodSocial('instagram')
         this.setGodSocial('facebook')
-        this.godInfo.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.god_info.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
-      setGodInfo: function(godInfo) {
-        this.godInfo = godInfo
+      setGodInfo: function(god_info) {
+        this.god_info = god_info
       },
       setInfo: function(info) {
         if (info.avatar) {

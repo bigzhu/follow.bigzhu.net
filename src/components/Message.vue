@@ -4,14 +4,14 @@
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
       </q-inner-loading>
-      <GodItem :god="godInfo" :key="godInfo.id" style="width: 100%" />
+      <GodItem :god="god_info" :key="god_info.id" style="width: 100%" />
     </q-modal>
     <q-item>
       <q-item-side @click="$refs.basicModal.toggle()" :avatar="proxy(avatar)" class="bz_avatar">
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
-          <router-link :to="{ name: 'God', params: { godName: message.godName }}">
+          <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
             {{message.name}}
           </router-link>
         </q-item-tile>
@@ -76,222 +76,238 @@
 </template>
 
 <script>
-  import Twitter from './Twitter'
-  import Github from './Github'
-  import Instagram from './Instagram'
-  import Tumblr from './Tumblr'
-  import Facebook from './Facebook'
-  import TimeLen from '../libs/components/TimeLen'
-  import Vue from 'vue'
-  import Proxy from './Proxy'
-  import GodItem from './GodItem'
+import Twitter from './Twitter'
+import Github from './Github'
+import Instagram from './Instagram'
+import Tumblr from './Tumblr'
+import Facebook from './Facebook'
+import TimeLen from '../libs/components/TimeLen'
+import Vue from 'vue'
+import Proxy from './Proxy'
+import GodItem from './GodItem'
 
-  export default {
-    mixins: [Proxy],
-    props: {
-      message: {
-        type: Object,
-        default: function() {
-          return {
-            avatar: '',
-            name: 'loading',
-            id: 0
-          }
-        }
-      }
-    },
-    components: {
-      GodItem,
-      TimeLen,
-      Facebook,
-      Twitter,
-      Github,
-      Instagram,
-      Tumblr
-    },
-    data: function() {
-      return {
-        anki_color: '#B3B3B3' // #57ADE3
-      }
-    },
-    mounted() {
-      this.$nextTick(function() {
-        // 给 anki 用
-        this.message.el = this.$el
-      })
-    },
-    computed: {
-      loading() {
-        return this.$store.state.lib.loading
-      },
-      lang() {
-        return Vue.config.lang
-      },
-      href: function() {
-        if (this.message.m_type === 'github') {
-          return `https://github.com/${this.message.name}`
-        }
-        return this.message.href
-      },
-      godInfo: function() {
-        let godInfo = this.$store.state.god.godInfos[this.message.godName]
-        if (godInfo) {
-          return godInfo
-        }
+export default {
+  mixins: [Proxy],
+  props: {
+    message: {
+      type: Object,
+      default: function() {
         return {
-          id: 0,
-          name: ''
-        }
-      },
-      avatar: function() {
-        return this.message.avatar
-      }
-    },
-    methods: {
-      anki: function() {
-        if (this.message.anki) return
-        this.message.anki = 1
-        let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
-        this.$store.dispatch('postAnki', {
-          front: front,
-          message_id: this.message.id
-        }).then(function() {
-          // self.message.anki = 1
-        })
-      },
-      toggleCollect: function(message) {
-        if (message.collect) {
-          message.collect = 0
-          this.$store.dispatch('uncollect', message.id)
-        } else {
-          message.collect = 1
-          this.$store.dispatch('collect', message.id)
-        }
-      },
-      getGodInfo: function() {
-        if (this.godInfo.id === 0) {
-          this.$store.dispatch('getGod', {
-            godName: this.message.godName,
-            loading: true
-          })
+          avatar: '',
+          name: 'loading',
+          id: 0
         }
       }
     }
+  },
+  components: {
+    GodItem,
+    TimeLen,
+    Facebook,
+    Twitter,
+    Github,
+    Instagram,
+    Tumblr
+  },
+  data: function() {
+    return {
+      anki_color: '#B3B3B3' // #57ADE3
+    }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      // 给 anki 用
+      this.message.el = this.$el
+    })
+  },
+  computed: {
+    loading() {
+      return this.$store.state.lib.loading
+    },
+    lang() {
+      return Vue.config.lang
+    },
+    href: function() {
+      if (this.message.m_type === 'github') {
+        return `https://github.com/${this.message.name}`
+      }
+      return this.message.href
+    },
+    god_info: function() {
+      let god_info = this.$store.state.god.god_infos[this.message.god_name]
+      if (god_info) {
+        return god_info
+      }
+      return {
+        id: 0,
+        name: ''
+      }
+    },
+    avatar: function() {
+      return this.message.avatar
+    }
+  },
+  methods: {
+    anki: function() {
+      if (this.message.anki) return
+      this.message.anki = 1
+      let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
+      this.$store
+        .dispatch('postAnki', {
+          front: front,
+          message_id: this.message.id
+        })
+        .then(function() {
+          // self.message.anki = 1
+        })
+    },
+    toggleCollect: function(message) {
+      if (message.collect) {
+        message.collect = 0
+        this.$store.dispatch('uncollect', message.id)
+      } else {
+        message.collect = 1
+        this.$store.dispatch('collect', message.id)
+      }
+    },
+    getGodInfo: function() {
+      if (this.god_info.id === 0) {
+        this.$store.dispatch('getGod', {
+          god_name: this.message.godname_,
+          loading: true
+        })
+      }
+    }
   }
+}
 </script>
 
 <style>
-  /* 取消原本设定的图片大小 */
-  .q-item-avatar {
-    width: inherit;
-    height: inherit;
-  }
-  .q-card pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
+/* 取消原本设定的图片大小 */
+.q-item-avatar {
+  width: inherit;
+  height: inherit;
+}
+.q-card pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
-  .q-card code {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
+.q-card code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
-  /* 图片最多也就 100% */
-  .q-card img {
-    max-width: 100%;
-  }
+/* 图片最多也就 100% */
+.q-card img {
+  max-width: 100%;
+}
 
-  @media (max-width: 767px) {
-    .message-bz {
-      box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 1px 3px 0px !important;
-    }
-    .anki-bz svg {
-      margin-top: 0.11rem;
-    }
-    .q-card-actions.bz {
-      font-size: 1.3rem;
-    }
-    .hover-show-bz {
-      opacity: 1;
-    }
-    .anki-bz {
-      vertical-align: middle;
-      width: 1.3rem;
-      height: 1.3rem;
-    }
+@media (max-width: 767px) {
+  .message-bz {
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 0px 1px,
+      rgba(0, 0, 0, 0.03) 0px 1px 3px 0px !important;
   }
-
-  @media (min-width: 767px) {
-    .q-card-actions.bz {
-      padding-top: 0;
-      padding-bottom: .5rem;
-      font-size: 1rem;
-    }
+  .anki-bz svg {
+    margin-top: 0.11rem;
   }
-
-  .item.two-lines.bz {
-    height: 3rem;
+  .q-card-actions.bz {
+    font-size: 1.3rem;
   }
-
-  .item.two-lines>.item-content.bz>.stamp {
-    font-size: 12px;
+  .hover-show-bz {
+    opacity: 1;
   }
+  .anki-bz {
+    vertical-align: middle;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+}
 
-  .item.two-lines>.item-content.bz {
-    margin-left: 3.5rem;
-    padding-top: .84rem;
+@media (min-width: 767px) {
+  .q-card-actions.bz {
+    padding-top: 0;
+    padding-bottom: 0.5rem;
     font-size: 1rem;
   }
+}
+
+.item.two-lines.bz {
+  height: 3rem;
+}
+
+.item.two-lines > .item-content.bz > .stamp {
+  font-size: 12px;
+}
+
+.item.two-lines > .item-content.bz {
+  margin-left: 3.5rem;
+  padding-top: 0.84rem;
+  font-size: 1rem;
+}
 </style>
 
 <style lang="stylus" scoped>
-  .q-card-container
-    padding-bottom 0
+.q-card-container {
+  padding-bottom: 0;
+}
 
-  .modal .q-card
-    margin 0
-  .q-card
-    overflow-wrap: break-word // 让 a 换行
+.modal .q-card {
+  margin: 0;
+}
 
-  @media (min-width: 767px)
-    .anki-bz // anki button 对齐
-      vertical-align: middle
-      width: 1rem
-      height: 1rem
-    .bookmark:hover
-      color #FBBD08
+.q-card {
+  overflow-wrap: break-word; // 让 a 换行
+}
 
-  // 为了对齐
-  .q-item
-    padding 16px
-    padding-bottom 0
-    padding-top 8px
-
-  .q-item-side.bz_avatar // 图标和名字拉近一点
-    cursor pointer // 变可手, 可点击
-    // 头像缩小
-    width 2rem
-    height 2rem
-    min-width inherit
-
-  .more-infor-bz:hover {
-    color: #54B98F;
+@media (min-width: 767px) {
+  .anki-bz { // anki button 对齐
+    vertical-align: middle;
+    width: 1rem;
+    height: 1rem;
   }
-  .bookmark-light {
+
+  .bookmark:hover {
     color: #FBBD08;
   }
-  i.icon {
-    font-size: 1rem;
-    vertical-align: baseline;
-  }
-  /* message margin 要拉开*/
-  .q-card {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+}
 
-  /* actions 要有间距 */
-  .q-card-actions a {
-    padding-left: 0.5rem;
-  }
+// 为了对齐
+.q-item {
+  padding: 16px;
+  padding-bottom: 0;
+  padding-top: 8px;
+}
+
+.q-item-side.bz_avatar { // 图标和名字拉近一点
+  cursor: pointer; // 变可手, 可点击
+  // 头像缩小
+  width: 2rem;
+  height: 2rem;
+  min-width: inherit;
+}
+
+.more-infor-bz:hover {
+  color: #54B98F;
+}
+
+.bookmark-light {
+  color: #FBBD08;
+}
+
+i.icon {
+  font-size: 1rem;
+  vertical-align: baseline;
+}
+
+/* message margin 要拉开 */
+.q-card {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* actions 要有间距 */
+.q-card-actions a {
+  padding-left: 0.5rem;
+}
 </style>

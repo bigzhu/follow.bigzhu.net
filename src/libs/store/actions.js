@@ -20,11 +20,11 @@ export const login = ({
   commit,
   dispatch
 }, {
-  userName,
+  user_name,
   password
 }) => {
   let params = {}
-  params.user_name = userName
+  params.user_name = user_name
   params.password = password
   return axios.post('/api_login', params)
     .then(function(response) {

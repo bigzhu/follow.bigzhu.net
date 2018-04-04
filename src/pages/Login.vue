@@ -11,10 +11,10 @@
       Login
     },
     methods: {
-      login: function(userName, password) {
+      login: function(user_name, password) {
         this.$store.commit('lib/SET_LOADING', true)
         this.$store.dispatch('lib/login', {
-          userName: userName,
+          user_name: user_name,
           password: password
         }).then((data) => {
           this.$store.commit('lib/SET_LOADING', false)

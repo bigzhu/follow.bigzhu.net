@@ -3,7 +3,7 @@
     <NotYetFollow v-show="ordered_myGods.length===0 && get_done && !cat"></NotYetFollow>
 
     <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <AddingGodItem v-show="godName!==''" :godName="godName" @add_done="addDone">
+      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="addDone">
       </AddingGodItem>
       <GodItem v-for="god in ordered_myGods" :god="god" :key="god.id" class="god-item">
       </GodItem>
@@ -66,12 +66,12 @@
       },
       ordered_myGods: function () {
         return _.orderBy(this.filtered_myGods, 'followed_at', 'desc').filter((o) => {
-          return o.name !== this.godName
+          return o.name !== this.god_name
         })
       },
       myGods() {
-        if (this.$store.state.god.catMyGods[this.cat]) {
-          return this.$store.state.god.catMyGods[this.cat]
+        if (this.$store.state.god.cat_my_gods[this.cat]) {
+          return this.$store.state.god.cat_my_gods[this.cat]
         } else {
           return []
         }
@@ -80,14 +80,14 @@
     data: function () {
       return {
         get_done: false,
-        godName: '',
+        god_name: '',
         key: ''
       }
     },
     mounted() {},
     methods: {
       addDone() {
-        this.godName = ''
+        this.god_name = ''
         this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
@@ -96,8 +96,8 @@
           setTimeout(done, 1000)
         })
       },
-      add: function (godName) {
-        this.godName = godName
+      add: function (god_name) {
+        this.god_name = god_name
       }
     }
   }

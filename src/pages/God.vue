@@ -20,18 +20,18 @@
       return {}
     },
     computed: {
-      godInfo() {
-        let godInfo = this.$store.state.godInfos[this.godName]
-        if (godInfo) {
-          return godInfo
+      god_info() {
+        let god_info = this.$store.state.god_infos[this.god_name]
+        if (god_info) {
+          return god_info
         }
       },
-      godName() {
-        return this.$route.params.godName
+      god_name() {
+        return this.$route.params.god_name
       }
     },
     mounted() {
-      this.$store.dispatch('getGod', this.godName)
+      this.$store.dispatch('getGod', this.god_name)
       this.$nextTick(function() {})
     },
     methods: {}

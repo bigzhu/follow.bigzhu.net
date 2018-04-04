@@ -4,11 +4,11 @@
     <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
     <q-item>
-      <router-link :to="{ name: 'God', params: { godName: god.name }}">
+      <router-link :to="{ name: 'God', params: { god_name: god.name }}">
         <q-item-side :avatar="now_avatar||max_social.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
-        <router-link :to="{ name: 'God', params: { godName: god.name }}">
+        <router-link :to="{ name: 'God', params: { god_name: god.name }}">
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
@@ -51,10 +51,10 @@
 
   export default {
     mixins: [GodItemBase],
-    props: ['godName'],
+    props: ['god_name'],
     watch: {
-      'godName': function() {
-        if (this.godName === '') {
+      'god_name': function() {
+        if (this.god_name === '') {
           return
         }
         this.init()
@@ -95,7 +95,7 @@
       },
       init: function() {
         this.god = godData
-        this.god.name = this.godName
+        this.god.name = this.god_name
       },
       showAddGodInput: function() {
         this.input_name = '' // 清空上次的输入
@@ -108,19 +108,19 @@
         let self = this
         this.loading = true
         this.$store.dispatch('postGod', {
-          name: this.godName,
+          name: this.god_name,
           cat: this.cat
-        }).then(function(godInfo) {
-          self.startCheck(godInfo)
+        }).then(function(god_info) {
+          self.startCheck(god_info)
         })
       },
-      startCheck: function(godInfo) {
-        this.setGodInfo(godInfo)
+      startCheck: function(god_info) {
+        this.setGodInfo(god_info)
         this.adding = false
         this.twitter_loading = true
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'twitter'
         }).then(function(data) {
           self.twitterDone(data)
@@ -134,7 +134,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'github'
         }).then(function(data) {
           self.githubDone(data)
@@ -149,7 +149,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'instagram'
         }).then(function(data) {
           self.instagramDone(data)
@@ -164,7 +164,7 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.godName,
+          name: this.god_name,
           type: 'tumblr'
         }).then(function(data) {
           self.tumblrDone(data)
@@ -180,7 +180,7 @@
         this.allDone()
         // let self = this
         // this.$store.dispatch('checkSocial', {
-        //   name: this.godName,
+        //   name: this.god_name,
         //   type: 'facebook'
         // }).then(function(data) {
         //   self.facebookDone(data)
@@ -197,7 +197,7 @@
       },
       allDone: function(info) {
         this.loading = false
-        // Object.assign(this.godInfo, this.god)
+        // Object.assign(this.god_info, this.god)
         this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.followed = 1
         this.$store.commit('UNSHIFT_MY_GOD', {

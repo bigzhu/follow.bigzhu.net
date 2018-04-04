@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class='ui center aligned basic segment'>
-      <old :godName="godName" :search_key="search_key"></old>
+      <old :god_name="god_name" :search_key="search_key"></old>
     </div>
     <q-infinite-scroll :offset="1000" :handler="call_back">
       <message v-for="message in messages" :message='message' :key="message.id">

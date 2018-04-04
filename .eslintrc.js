@@ -27,8 +27,8 @@ module.exports = {
   'rules': {
     "indent": 0,
     "space-before-function-paren": [2, { "anonymous": "ignore", "named": "ignore", "asyncArrow": "ignore" }],
-
     'generator-star-spacing': 'off',
+    "camelcase": 0,
 
     // allow paren-less arrow functions
     'arrow-parens': 0,

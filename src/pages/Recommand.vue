@@ -60,15 +60,15 @@
     computed: {
       loading: {
         set(loading) {
-          this.$store.state.p.loading = loading
+          this.$store.state.lib.loading = loading
         },
         get() {
-          return this.$store.state.p.loading
+          return this.$store.state.lib.loading
         }
       },
       not_myGods() {
-        if (this.$store.state.cat_gods[this.$route.params.cat]) {
-          return this.$store.state.cat_gods[this.$route.params.cat]
+        if (this.$store.state.god.cat_gods[this.$route.params.cat]) {
+          return this.$store.state.god.cat_gods[this.$route.params.cat]
         } else {
           return []
         }
@@ -79,10 +79,10 @@
         }
         return this.message.href
       },
-      godInfo: function() {
-        let godInfo = this.$store.state.godInfos[this.message.user_name]
-        if (godInfo) {
-          return godInfo
+      god_info: function() {
+        let god_info = this.$store.state.god_infos[this.message.user_name]
+        if (god_info) {
+          return god_info
         }
         return {
           godID: 0
