@@ -28,13 +28,13 @@
   import AddGod from '../components/AddGod'
   export default {
     events: {
-      'unfollow': function(godID) { // 监听unfollow事件，移除已经unfollow的god
+      'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
         this.$store.commit('DELETE_MY_GOD', godID)
       }
     },
     watch: {
       '$route.params': {
-        handler: function() {
+        handler: function () {
           this.$store.dispatch('getMyGods', this.cat)
         },
         deep: true
@@ -53,31 +53,31 @@
     },
     computed: {
       loading() {
-        return this.$store.state.p.loading
+        return this.$store.state.lib.loading
       },
-      cat: function() {
+      cat: function () {
         return this.$route.params.cat
       },
-      filtered_myGods: function() {
+      filtered_myGods: function () {
         var self = this
-        return self.myGods.filter(function(myGod) {
+        return self.myGods.filter(function (myGod) {
           return myGod.name.indexOf(self.key) !== -1
         })
       },
-      ordered_myGods: function() {
+      ordered_myGods: function () {
         return _.orderBy(this.filtered_myGods, 'followed_at', 'desc').filter((o) => {
           return o.name !== this.godName
         })
       },
       myGods() {
-        if (this.$store.state.cat_myGods[this.cat]) {
-          return this.$store.state.cat_myGods[this.cat]
+        if (this.$store.state.god.catMyGods[this.cat]) {
+          return this.$store.state.god.catMyGods[this.cat]
         } else {
           return []
         }
       }
     },
-    data: function() {
+    data: function () {
       return {
         get_done: false,
         godName: '',
@@ -91,20 +91,22 @@
         this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
-      loadMore: function(index, done) {
-        this.$store.dispatch('getMyGods', this.cat).then(function() {
+      loadMore: function (index, done) {
+        this.$store.dispatch('getMyGods', this.cat).then(() => {
           setTimeout(done, 1000)
         })
       },
-      add: function(godName) {
+      add: function (godName) {
         this.godName = godName
       }
     }
   }
+
 </script>
 
 <style scoped>
   .floating-label {
     width: 30%;
   }
+
 </style>

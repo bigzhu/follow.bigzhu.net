@@ -9,11 +9,6 @@ function initGodMessage(state, godName) {
   }
 }
 
-function initCatGod(state, type, cat) {
-  if (state[type][cat] === undefined) {
-    Vue.set(state[type], cat, [])
-  }
-}
 // state
 export const state = {
   noTypes: ['github'],
@@ -26,7 +21,6 @@ export const state = {
     user_name: null,
     password: null
   },
-  show_how_to_use_collect: false, // 是否显示收藏引导
   last_scroll_top: 0, //
   nav_bar_height: 0,
   showBar: true, // top bar是否显示
@@ -44,12 +38,12 @@ export const state = {
 // mutations
 export const mutations = {
   REMOVE_THIS_GOD_CAT_MY_GODS(state, godID) {
-    for (var property in state.cat_myGods) {
-      if (state.cat_myGods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.cat_myGods[property], function(d) {
+    for (var property in state.catMyGods) {
+      if (state.catMyGods.hasOwnProperty(property)) {
+        let index = _.findIndex(state.catMyGods[property], function(d) {
           return d.godID === godID
         })
-        state.cat_myGods[property].splice(index, 1)
+        state.catMyGods[property].splice(index, 1)
       }
     }
 
@@ -84,17 +78,7 @@ export const mutations = {
   SET_SHOW_BAR(state, showBar) {
     state.showBar = showBar
   },
-  SET_CAT_MY_GODS(state, {
-    cat,
-    gods
-  }) {
-    initCatGod(state, 'cat_myGods', cat)
-    let mergeGods = state.cat_myGods[cat].concat(gods)
-    let uniqGods = _.uniqBy(mergeGods, function(d) {
-      return d.id
-    })
-    state.cat_myGods[cat] = uniqGods
-  },
+
   SET_CAT_GODS(state, {
     cat,
     gods
@@ -110,7 +94,7 @@ export const mutations = {
     cat,
     god
   }) {
-    state.cat_myGods[cat].unshift(god)
+    state.catMyGods[cat].unshift(god)
   },
   SET_MY_CATS(state, cats) {
     state.my_cats = cats
@@ -637,27 +621,7 @@ export const actions = {
         console.log(error)
       })
   },
-  getCollect({
-    state,
-    commit,
-    dispatch
-  }) {
-    commit('SET_NEW_LOADING', true)
-    return axios.get('/api_collect')
-      .then(function(response) {
-        state.collect_messages = response.data
-        if (state.collect_messages.length === 0) {
-          state.show_how_to_use_collect = true
-        } else {
-          state.show_how_to_use_collect = false
-        }
-        commit('SET_NEW_LOADING', false)
-        return response.data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
+
   getMyGods({
     state,
     commit,
@@ -667,7 +631,7 @@ export const actions = {
       cat: cat,
       followed: true
     }
-    let gods = state.cat_myGods[cat]
+    let gods = state.catMyGods[cat]
     if (gods && gods.length > 0) {
       params.before = gods[gods.length - 1].created_at
     }

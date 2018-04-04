@@ -5,82 +5,80 @@
 </template>
 
 <script>
-  import {
-    QBtn,
-    QIcon
-  } from 'quasar'
-  export default {
-    components: {
-      QIcon,
-      QBtn
+import { QBtn, QIcon } from 'quasar'
+export default {
+  components: {
+    QIcon,
+    QBtn
+  },
+  props: {
+    value: {
+      required: true,
+      // type: Number,
+      default: 0
     },
-    props: {
-      value: {
-        required: true,
-        // type: Number,
-        default: 0
-      },
-      godID: {
-        required: true,
-        type: Number
+    godID: {
+      required: true,
+      type: Number
+    }
+  },
+  computed: {},
+  data: function() {
+    return {
+      color: '',
+      loading: true,
+      desc: ''
+    }
+  },
+  watch: {
+    value: function() {
+      this.checkStatus()
+    }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      this.checkStatus()
+    })
+  },
+  methods: {
+    checkStatus: function() {
+      if (this.value === 0 || this.value === null) {
+        this.showUnfollow()
+      } else {
+        this.showFollow()
       }
     },
-    computed: {},
-    data: function() {
-      return {
-        color: '',
-        loading: true,
-        desc: ''
-      }
+    showFollow: function() {
+      this.$emit('input', 1)
+      this.loading = false
+      this.desc = this.$t('关注中')
+      this.color = 'secondary'
     },
-    watch: {
-      'value': function() {
-        this.checkStatus()
-      }
+    showUnfollow: function() {
+      this.$emit('input', 0)
+      this.loading = false
+      this.desc = this.$t('关注')
+      this.color = 'faded'
     },
-    mounted() {
-      this.$nextTick(function() {
-        this.checkStatus()
-      })
-    },
-    methods: {
-      checkStatus: function() {
-        if (this.value === 0 || this.value === null) {
-          this.showUnfollow()
-        } else {
-          this.showFollow()
-        }
-      },
-      showFollow: function() {
-        this.$emit('input', 1)
-        this.loading = false
-        this.desc = this.$t('Follow.following')
-        this.color = 'secondary'
-      },
-      showUnfollow: function() {
-        this.$emit('input', 0)
-        this.loading = false
-        this.desc = this.$t('关注')
-        this.color = 'faded'
-      },
-      toggleFollow: function() {
-        let self = this
-        this.loading = true
-        if (this.value === 1) {
-          this.$store.dispatch('unfollow', this.godID).then(function(data) {
-            self.showUnfollow()
-          })
-        } else {
-          this.$store.dispatch('follow', this.godID).then(function(data) {
-            self.showFollow()
-          })
-        }
+    toggleFollow: function() {
+      let self = this
+      this.loading = true
+      if (this.value === 1) {
+        this.$store.dispatch('unfollow', this.godID).then(function(data) {
+          self.showUnfollow()
+        })
+      } else {
+        this.$store.dispatch('follow', this.godID).then(function(data) {
+          self.showFollow()
+        })
       }
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
-  .q-btn
-    margin .5rem
+.q-btn {
+  margin: 0.5rem;
+}
 </style>

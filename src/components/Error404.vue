@@ -8,21 +8,10 @@
         <q-icon name="error_outline" color="grey-5" />
         <p class="caption text-center">Oops. Nothing here...</p>
         <p class="text-center group">
-          <q-btn
-            v-if="canGoBack"
-            color="primary"
-            push
-            @click="goBack"
-            icon="keyboard_arrow_left"
-          >
+          <q-btn v-if="canGoBack" color="primary" push @click="goBack" icon="keyboard_arrow_left">
             Go back
           </q-btn>
-          <q-btn
-            color="primary"
-            push
-            @click="$router.replace('/')"
-            icon-right="home"
-          >
+          <q-btn color="primary" push @click="$router.replace('/')" icon-right="home">
             Go home
           </q-btn>
         </p>
@@ -32,20 +21,20 @@
 </template>
 
 <script>
-import { QBtn, QIcon } from 'quasar'
+import { QBtn, QIcon } from 'quasar';
 
 export default {
   components: {
     QBtn,
     QIcon
   },
-  data () {
+  data() {
     return {
       canGoBack: window.history.length > 1
     }
   },
   methods: {
-    goBack () {
+    goBack() {
       window.history.go(-1)
     }
   }
@@ -53,20 +42,26 @@ export default {
 </script>
 
 <style lang="stylus">
-.error-page
-  .error-code
-    height 50vh
-    width 100%
-    padding-top 15vh
-    font-size 30vmax
-    color rgba(255, 255, 255, .2)
-    overflow hidden
-  .error-card
-    border-radius 2px
-    margin-top -50px
-    width 80vw
-    max-width 600px
-    padding 25px
-    > i
-      font-size 5rem
+.error-page {
+  .error-code {
+    height: 50vh;
+    width: 100%;
+    padding-top: 15vh;
+    font-size: 30vmax;
+    color: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+  }
+
+  .error-card {
+    border-radius: 2px;
+    margin-top: -50px;
+    width: 80vw;
+    max-width: 600px;
+    padding: 25px;
+
+    > i {
+      font-size: 5rem;
+    }
+  }
+}
 </style>

@@ -79,7 +79,7 @@ export const getNew = ({
         } else if (searchKey) { // search
           commit('SET_NEW_SEARCH_MESSAGES', data.messages)
         } else { // main
-          commit('SET_NEW_MESSAGES', data.messages)
+          commit('NEW_MESSAGES', data.messages)
           // commit('REFRESH_UNREAD_MESSAGE_COUNT')
         }
       }
@@ -106,7 +106,7 @@ export const recordLastMessage = ({
     })
     .then(function(response) {
       state.unread_message_count = response.data
-      commit('SET_LAST_TIME', parseInt(time, 10))
+      commit('LAST_TIME', parseInt(time, 10))
       // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
       // 如果<20了，就预加载一些
       /*
@@ -164,11 +164,11 @@ export const getCollect = ({
   commit('SET_NEW_LOADING', true)
   return axios.get('/api_collect')
     .then(function(response) {
-      state.collect_messages = response.data
+      commit('COLLECT_MESSAGES', response.data)
       if (state.collect_messages.length === 0) {
-        commit('SET_SHOW_HOW_TO_USE_COLLECT', true)
+        commit('SHOW_HOW_TO_USE_COLLECT', true)
       } else {
-        commit('SET_SHOW_HOW_TO_USE_COLLECT', false)
+        commit('SHOW_HOW_TO_USE_COLLECT', false)
       }
       commit('SET_NEW_LOADING', false)
       return response.data

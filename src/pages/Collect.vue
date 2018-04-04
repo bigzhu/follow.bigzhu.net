@@ -18,12 +18,9 @@
       RightInfo,
       Messages
     },
-    data() {
-      return {}
-    },
     computed: {
       show_how_to_use_collect() {
-        return this.$store.state.show_how_to_use_collect
+        return this.$store.state.message.show_how_to_use_collect
       }
     }
   }

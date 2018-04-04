@@ -118,7 +118,7 @@
             }
           case 'collect':
             {
-              return this.$store.state.message.collect_messages
+              return this.$store.state.message.collectMessages
             }
           default:
             {

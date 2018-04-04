@@ -4,23 +4,21 @@
 <script>
   export default {
     props: [],
-    components: {
-    },
-    computed: {
-    },
+    components: {},
+    computed: {},
     data: function () {
-      return {
-      }
+      return {}
     },
     mounted: function () {
       this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },
-    methods: {
-    }
+    methods: {}
   }
+
 </script>
 
 <style lang="stylus" scoped>
+
 </style>
