@@ -241,18 +241,7 @@ export const actions = {
         console.log(error)
       })
   },
-  putGod({
-    dispatch,
-    state,
-    actions
-  }, god) {
-    var params = god
-    return axios.put('/api_god', params)
-      .then(function(response) {})
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
+
   addRemark({
     dispatch,
     state

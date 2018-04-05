@@ -11,29 +11,29 @@
     <q-card-main>
       <p v-html="description"></p>
       <GodRemark v-model="remark" :godID="god.id" class="green-bz remark"></GodRemark>
-      <q-field icon="fa-instagram" helper="" error-label="We got an error">
+      <q-field icon="fab fa-instagram" helper="" error-label="We got an error">
         <q-input v-model="god.instagram.name" :disable="disable_edit" float-label="Instagram" />
       </q-field>
-      <q-field icon="fa-twitter" helper="" error-label="We got an error">
+      <q-field icon="fab fa-twitter" helper="" error-label="We got an error">
         <q-input v-model="god.twitter.name" :disable="disable_edit" float-label="Twitter" />
       </q-field>
-      <q-field icon="fa-github" helper="" error-label="We got an error">
+      <q-field icon="fab fa-github" helper="" error-label="We got an error">
         <q-input v-model="god.github.name" :disable="disable_edit" float-label="Github" />
       </q-field>
-      <q-field icon="fa-tumblr" helper="" error-label="We got an error">
+      <q-field icon="fab fa-tumblr" helper="" error-label="We got an error">
         <q-input v-model="god.tumblr.name" :disable="disable_edit" float-label="Tumblr" />
       </q-field>
-      <q-field icon="fa-facebook" helper="" error-label="We got an error">
-        <q-input v-model="god.facebook.name" :disable="disable_edit" float-label="Facebook(不再同步了)" />
+      <q-field icon="fab fa-facebook" helper="" error-label="We got an error">
+        <q-input v-model="god.facebook.name" :disable="disable_edit" float-label="Facebook" />
       </q-field>
     </q-card-main>
 
     <q-card-actions align="around">
       <q-btn v-show="disable_edit" @click="save" class="light">
-        {{ $t("GodInfo.edit") }}
+        {{ $t("编辑") }}
       </q-btn>
       <q-btn color="secondary" v-show="!disable_edit" @click="save">
-        {{ $t("GodInfo.save") }}
+        {{ $t("保存") }}
       </q-btn>
       <Follow v-model="god.followed" :godID="god.id"></Follow>
     </q-card-actions>
@@ -41,17 +41,6 @@
 </template>
 
 <script>
-  import {
-    QCardActions,
-    QBtn,
-    QField,
-    QInput,
-    QList,
-    QCardMain,
-    QCard,
-    QCardMedia,
-    QCardTitle
-  } from 'quasar'
   import GodRemark from './GodRemark'
   import Follow from './Follow'
   import godData from '../datas/god'
@@ -60,15 +49,6 @@
   export default {
     mixins: [GodItemBase],
     components: {
-      QCardActions,
-      QBtn,
-      QField,
-      QInput,
-      QList,
-      QCardMain,
-      QCardTitle,
-      QCardMedia,
-      QCard,
       GodRemark,
       Follow
     },
@@ -131,13 +111,18 @@
   }
 </script>
 
-<style lang="stylus">
-  .q-field i
-    font-size 1.5rem
-</style>
 <style lang="stylus" scoped>
+// 图标大小
+  .q-field >>> i
+    font-size 1.5rem
+// 拉开间距
+  .q-field
+    margin-top 1rem
+    margin-bottom 0.5rem
+// 编辑按钮会被拉长,这里要设定, 不知为什么
   .q-btn
     margin .5rem
+
   /*
   .card {
     display: flex;

@@ -1,6 +1,6 @@
 <template>
   <div id="q-app">
-    <q-layout>
+    <q-layout view="hhh LpR lfr">
       <q-layout-header>
         <BarOne/>
         <BarTwo/>
@@ -56,10 +56,13 @@
     */
 </style>
 <style lang="stylus" scoped>
-  // 左右划出控件, 背景继承自父, 不要有差异
+// 浮动右边划出, 不要有阴影
+  .q-layout-drawer-delimiter
+    box-shadow none
+// 左右滑出控件, 背景继承自父, 不要有差异
   .q-drawer-container >>> .q-layout-drawer
     background: inherit
-  // 框架带的 padding 太宽, 改小一些
+// 框架带的 padding 太宽, 改小一些
   .layout-padding
     padding: 1rem
     padding-top: 0

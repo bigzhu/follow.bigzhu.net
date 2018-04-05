@@ -106,3 +106,11 @@ export const getPublicGods = ({
       console.log(error)
     })
 }
+export const putGod = ({
+    dispatch,
+    state,
+    actions
+  }, god) => {
+    var params = god
+    return axios.put('/api_god', params)
+  }
