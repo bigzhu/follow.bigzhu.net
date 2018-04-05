@@ -19,24 +19,26 @@
     <!--userInfo-->
     <UserInfo v-show="is_login" />
     <!--点击呼出右侧菜单-->
-    <q-btn flat @click="$refs.layout.toggleRight()">
+    <q-btn flat @click="$store.commit('show_right', !show_right)">
       <q-icon name="menu" />
     </q-btn>
   </q-toolbar>
 </template>
 
 <script>
+  import {
+    mapState
+  } from 'vuex'
   import UserInfo from './UserInfo'
   export default {
     props: [],
     components: {
       UserInfo
     },
-    computed: {
-      is_login() {
-        return this.$store.state.lib.oauth_info.name
-      }
-    },
+    computed: mapState({
+      show_right: state => state.main.show_right,
+      is_login: state => state.lib.oauth_info.name
+    }),
     data: function() {
       return {}
     },

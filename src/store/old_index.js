@@ -395,19 +395,6 @@ export const actions = {
       commit('SET_THE_MESSAGE', data.message)
     })
   },
-  getRegisteredCount({
-    state,
-    commit,
-    dispatch
-  }, status) {
-    return axios.get('/api_registered')
-      .then(function(response) {
-        state.registered_count = response.data.registered_count
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
   getNew({
     state,
     commit,

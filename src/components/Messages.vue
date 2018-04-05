@@ -73,7 +73,7 @@
     },
     computed: {
       paddingTop() {
-        if (this.type === 'main') return this.$store.state.main.hideParams.paddingTop
+        if (this.type === 'main') return this.$store.state.main.hide_params.paddingTop
         else return 0
       },
       is_login() {
@@ -152,7 +152,7 @@
       onScroll: function(position) {
         if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
 
-        let hideP = this.$store.state.main.hideParams
+        let hideP = this.$store.state.main.hide_params
         let overTop = position - 500
         if (overTop > hideP.paddingTop) {
           let message = this.no_types_messages[0]

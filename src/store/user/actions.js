@@ -20,12 +20,29 @@ export const getOauthInfo = (state) => {
     })
 }
 
-export const getNoTypes = (state) => {
+export const getNoTypes = ({
+  state,
+  commit,
+  dispatch
+}) => {
   return axios.get('/api_no_types')
     .then((response) => {
-      state.no_types = response.data
+      commit('no_types', response.data)
+      return response.data
     })
     .catch(function(error) {
       console.log(error)
+    })
+}
+
+export const getRegisteredCount = ({
+  state,
+  commit,
+  dispatch
+}, status) => {
+  return axios.get('/api_registered')
+    .then(function(response) {
+      commit('registered_count', response.data.registered_count)
+      return response.data.registered_count
     })
 }

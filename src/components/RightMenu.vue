@@ -10,10 +10,6 @@
 </template>
 
 <script>
-  import {
-    QCard,
-    QScrollArea
-  } from 'quasar'
   import isInList from '../libs/functions/isInList.js'
   import GodInfo from './GodInfo'
   import Cat from './Cat'
@@ -22,9 +18,7 @@
   export default {
     props: [],
     components: {
-      QCard,
       MessageConf,
-      QScrollArea,
       Cat,
       GodInfo,
       RightInfo
@@ -34,7 +28,7 @@
         return this.$route.name
       },
       god_info() {
-        let god_info = this.$store.state.god_infos[this.god_name]
+        let god_info = this.$store.state.god.god_infos[this.god_name]
         if (god_info) {
           return god_info
         }
