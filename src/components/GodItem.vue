@@ -26,10 +26,10 @@
 
     <q-card-main class="green-bz">
       <p v-html="description"></p>
-      <GodRemark v-model="remark" :godID="god.id" class="green-bz remark"></GodRemark>
+      <GodRemark v-model="remark" :god_id="god.id" class="green-bz remark"></GodRemark>
     </q-card-main>
     <q-card-actions align="end">
-      <Follow v-model="god.followed" :godID="god.id" class="follow"></Follow>
+      <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -68,20 +68,20 @@
       show: function() {
         return this.god.id !== 0
       },
-      godID: function() {
-        return this.god.godID
+      god_id: function() {
+        return this.god.god_id
       }
     },
     methods: {
       block: function(god) {
         this.loading = true
         let self = this
-        this.$store.dispatch('postBlock', god.godID).then(function(data) {
-          self.$store.commit('REMOVE_THIS_GOD_cat_my_gods', god.godID)
+        this.$store.dispatch('postBlock', god.god_id).then(function(data) {
+          self.$store.commit('REMOVE_THIS_GOD_cat_my_gods', god.god_id)
           self.loading = false
         })
         if (god.followed === 1) {
-          self.$store.dispatch('unfollow', god.godID)
+          self.$store.dispatch('unfollow', god.god_id)
         }
       }
     }

@@ -29,11 +29,11 @@
 
     <q-card-main class="card-content green-bz">
       <p v-html="description"></p>
-      <GodRemark v-model="remark" :godID="god.id" class="card-content green-bz remark"></GodRemark>
+      <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
     </q-card-main>
     <q-card-actions align="end">
       <!--
-      <Follow v-model="god.followed" :godID="god.id" class="follow"></Follow>
+      <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
       -->
     </q-card-actions>
   </q-card>

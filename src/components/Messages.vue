@@ -61,8 +61,8 @@
     //   '$route': 'fetchData'
     // },
     events: {
-      'unfollow': function(godID) { // 监听unfollow事件，移除已经unfollow的god的message
-        this.$store.dispatch('removeFromMessages', godID)
+      'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god的message
+        this.$store.dispatch('removeFromMessages', god_id)
       }
     },
     data: function() {

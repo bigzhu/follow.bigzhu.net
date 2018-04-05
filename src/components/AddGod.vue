@@ -38,7 +38,7 @@
               {{ $t("AddGod.follownumber") }}
             </a>
             <div class="god-discription-bz" v-html="description"></div>
-            <follow :class="{'disabled': disabled}" v-model="god_info.followed" :godID="0" class="button-to-follow-bz"></follow>
+            <follow :class="{'disabled': disabled}" v-model="god_info.followed" :god_id="0" class="button-to-follow-bz"></follow>
           </div>
         </div>
       </div>

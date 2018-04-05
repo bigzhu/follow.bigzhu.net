@@ -28,8 +28,8 @@
   import AddGod from '../components/AddGod'
   export default {
     events: {
-      'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
-        this.$store.commit('DELETE_MY_GOD', godID)
+      'unfollow': function (god_id) { // 监听unfollow事件，移除已经unfollow的god
+        this.$store.commit('DELETE_MY_GOD', god_id)
       }
     },
     watch: {

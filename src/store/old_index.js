@@ -32,11 +32,11 @@ export const state = {
 }
 // mutations
 export const mutations = {
-  REMOVE_THIS_GOD_cat_my_gods(state, godID) {
+  REMOVE_THIS_GOD_cat_my_gods(state, god_id) {
     for (var property in state.cat_my_gods) {
       if (state.cat_my_gods.hasOwnProperty(property)) {
         let index = _.findIndex(state.cat_my_gods[property], function(d) {
-          return d.godID === godID
+          return d.god_id === god_id
         })
         state.cat_my_gods[property].splice(index, 1)
       }
@@ -45,15 +45,15 @@ export const mutations = {
     for (property in state.cat_gods) {
       if (state.cat_gods.hasOwnProperty(property)) {
         let index = _.findIndex(state.cat_gods[property], function(d) {
-          return d.godID === godID
+          return d.god_id === god_id
         })
         state.cat_gods[property].splice(index, 1)
       }
     }
   },
-  REMOVE_THIS_GOD_MESSAGE(state, godID) {
+  REMOVE_THIS_GOD_MESSAGE(state, god_id) {
     state.messages = _.filter(state.messages, function(d) {
-      return d.godID !== godID
+      return d.god_id !== god_id
     })
   },
   CHECK_BAR(state, scrollTarget) {
@@ -88,14 +88,14 @@ export const mutations = {
   SET_GOD_IS_EXISTS(state, isExists) {
     state.god_is_exists = isExists
   },
-  REMOVE_FROM_MY_MESSAGES(state, godID) { // 移除这个god
+  REMOVE_FROM_MY_MESSAGES(state, god_id) { // 移除这个god
     state.messages = _.without(state.messages, _.findWhere(state.messages, {
-      godID: godID
+      god_id: god_id
     }))
   },
-  DELETE_MY_GOD(state, godID) { // 移除这个god
+  DELETE_MY_GOD(state, god_id) { // 移除这个god
     state.myGods = _.without(state.myGods, _.findWhere(state.myGods, {
-      id: godID
+      id: god_id
     }))
   },
   SET_BIG_GODS(state, gods) {
@@ -311,9 +311,9 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, godID) {
+  }, god_id) {
     let parm = {
-      godID: godID
+      god_id: god_id
     }
     return dispatch('post', {
       url: '/api_block',
@@ -325,35 +325,7 @@ export const actions = {
     })
   },
 
-  unfollow({
-    state,
-    commit,
-    dispatch
-  }, godID) {
-    return axios.delete('/api_follow', {
-        params: {
-          godID: godID
-        }
-      })
-      .then(function(response) {})
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
-  follow({
-    state,
-    commit,
-    dispatch
-  }, godID) {
-    let params = {
-      godID: godID
-    }
-    return axios.post('/api_follow', params)
-      .then(function(response) {})
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
+
   getTheMessage({
     state,
     commit,

@@ -75,7 +75,7 @@
           return god_info
         }
         return {
-          godID: 0
+          god_id: 0
         }
       }
     },

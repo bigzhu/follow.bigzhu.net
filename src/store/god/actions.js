@@ -135,3 +135,24 @@ export const getCat = ({
       return response.data
     })
 }
+export const unfollow = ({
+  state,
+  commit,
+  dispatch
+}, god_id) => {
+  return axios.delete('/api_follow', {
+      params: {
+        god_id: god_id
+      }
+    })
+}
+export const follow = ({
+    state,
+    commit,
+    dispatch
+  }, god_id) => {
+    let params = {
+      god_id: god_id
+    }
+    return axios.post('/api_follow', params)
+  }
