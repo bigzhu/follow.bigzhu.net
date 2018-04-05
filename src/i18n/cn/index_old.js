@@ -71,7 +71,7 @@
      unread: '未读消息数'
    },
    Follow: {
-     following: '关注中',
+     following: '跟踪',
      tofollow: '关注'
    },
    '首页': '首页',

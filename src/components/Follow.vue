@@ -1,16 +1,11 @@
 <template>
-  <q-btn :class="{'followed': value}" @click="toggleFollow" :color="color">
+  <q-btn outline :class="{'followed': value}" @click="toggleFollow" :color="color">
     <q-icon name="add" v-show="value==0" />{{desc}}
   </q-btn>
 </template>
 
 <script>
-import { QBtn, QIcon } from 'quasar'
 export default {
-  components: {
-    QIcon,
-    QBtn
-  },
   props: {
     value: {
       required: true,
@@ -51,14 +46,14 @@ export default {
     showFollow: function() {
       this.$emit('input', 1)
       this.loading = false
-      this.desc = this.$t('关注中')
-      this.color = 'secondary'
+      this.desc = this.$t('已跟踪')
+      this.color = 'light'
     },
     showUnfollow: function() {
       this.$emit('input', 0)
       this.loading = false
-      this.desc = this.$t('关注')
-      this.color = 'faded'
+      this.desc = this.$t('跟踪')
+      this.color = 'secondary'
     },
     toggleFollow: function() {
       let self = this

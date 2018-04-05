@@ -104,9 +104,10 @@
 
 </script>
 
-<style scoped>
-  .floating-label {
-    width: 30%;
-  }
-
+<style lang="stylus" scoped>
+// god 直接留出间距
+  .q-card
+    margin 0.5rem
+  .floating-label
+    width 30%
 </style>

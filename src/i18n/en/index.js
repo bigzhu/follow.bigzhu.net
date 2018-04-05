@@ -16,7 +16,7 @@ export default {
   '人关注': 'Followers',
   '您还没有关注任何人，从': 'From',
   '里面寻找您感兴趣的人吧!': 'to find what you like!',
-  '关注中': 'Following',
+  '跟踪': 'Following',
   '历史消息': 'History',
   '未关注': 'no follow'
   /*
@@ -57,7 +57,7 @@ export default {
      'APP': 'APP'
      backtotop: '回到顶部':'Back to top',
      unread: '未读消息数':'Unread',
-     following: '关注中':'Following',
+     following: '跟踪':'Following',
      main: '首页',
      settings: '设置':'Settings',
      search: '搜索资讯':'Search',
