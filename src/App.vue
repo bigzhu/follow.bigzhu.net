@@ -14,8 +14,8 @@
       <q-page-container>
         <router-view />
       </q-page-container>
-
     </q-layout>
+    <!-- 自动的 loading -->
     <q-ajax-bar />
   </div>
 </template>
@@ -31,32 +31,8 @@
       BarOne,
       BarTwo
     },
-    mounted() {
-      this.$nextTick(function() {
-        this.$store.state.layout = this.$refs.layout
-      })
-    },
-    computed: {
-    },
-    methods: {
-      scroll: function(data) {
-        let self = this
-        if (data.direction === 'up') {
-          if (!this.will_hide_header) {
-            this.will_hide_header = true
-            this.timeout_id = setTimeout(function() {
-              self.$refs.layout.headerOnScreen = false
-              self.will_hide_header = false
-            }, 1400)
-          }
-        }
-        if (data.position === 0) {
-          clearTimeout(this.timeout_id)
-          this.$refs.layout.headerOnScreen = true
-          self.will_hide_header = false
-        }
-      }
-    }
+    computed: {},
+    methods: {}
   }
 </script>
 
