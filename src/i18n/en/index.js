@@ -2,6 +2,7 @@
 // so you can safely delete all default props below
 
 export default {
+  '帐号名, 比如: bigzhu': 'ID, for example: bigzhu',
   '没有更多内容了, 看看': '',
   '登录后能看到更广阔的世界哟!': 'You will find a colorful and wide world!',
   '登录': 'Login',
@@ -16,12 +17,12 @@ export default {
   '人关注': 'Followers',
   '您还没有关注任何人，从': 'From',
   '里面寻找您感兴趣的人吧!': 'to find what you like!',
-  '跟踪': 'Following',
+  '已跟踪': 'Following',
   '历史消息': 'History',
-  '未关注': 'no follow'
+  '跟踪': 'no follow'
   /*
    '添加要跟踪的新目标':'Add what you want to follow',
-     example: '帐号名，比如 bigzhu':'ID, for example: bigzhu',
+     example: '帐号名, 比如 bigzhu':'ID, for example: bigzhu',
      '添加':'Add',
      adding: '添加中':'Adding',
      addnewcat: '添加临时分类':'Add a new category',

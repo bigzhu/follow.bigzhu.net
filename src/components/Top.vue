@@ -1,5 +1,5 @@
 <template>
-  <QPageSticky v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 0]" class="bz">
+  <QPageSticky v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 80]" class="bz">
     <q-btn round color="" icon="keyboard_arrow_up" />
   </QPageSticky>
 </template>
@@ -38,5 +38,4 @@
 <style lang="stylus" scoped>
   .fixed-bottom-right
     z-index 9999
-    bottom 6rem
 </style>

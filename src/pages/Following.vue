@@ -15,9 +15,6 @@
 </template>
 
 <script>
-  import {
-    QInfiniteScroll
-  } from 'quasar'
   import Top from '../components/Top'
   import NotYetFollow from '../components/NotYetFollow'
   import SpinnerBz from '../components/SpinnerBz'
@@ -43,7 +40,6 @@
     props: [],
     components: {
       Top,
-      QInfiniteScroll,
       NotYetFollow,
       SpinnerBz,
       AddingGodItem,

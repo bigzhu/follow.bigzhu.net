@@ -1,69 +1,33 @@
 <template>
-  <div>
-    <QPageSticky corner="bottom-right" :offset="[-286, 0]" class="bz">
-      <q-btn @click="$refs['confirm_refalsh_message'].open(), god_name=''" round color="" icon="add"></q-btn>
-    </QPageSticky>
-
-    <q-modal ref="confirm_refalsh_message">
-      <q-card class="card">
-        <q-card-main>
-          <q-input @keyup.13="add" v-model="god_name" required :float-label="$t('AddGod.example')" />
-        </q-card-main>
-        <q-card-actions align="around">
-          <q-btn color="secondary" @click="add">好的</q-btn>
-          <q-btn class="light" @click="$refs.confirm_refalsh_message.close()">取消</q-btn>
-        </q-card-actions>
-      </q-card>
-    </q-modal>
-  </div>
+  <QPageSticky corner="bottom-right" :offset="[-286, 28]" class="bz">
+    <q-btn @click="dialog(), god_name=''" round color="" icon="add"></q-btn>
+  </QPageSticky>
 </template>
 
 <script>
-  import {
-    QInput,
-    QCardActions,
-    QCardMain,
-    QCard,
-    QBtn,
-    QPageSticky,
-    QModal
-  } from 'quasar'
   export default {
-    props: [],
-    components: {
-      QInput,
-      QCardActions,
-      QCardMain,
-      QCard,
-      QBtn,
-      QPageSticky,
-      QModal
-    },
-    computed: {},
-    data: function() {
-      return {
-        god_name: ''
-      }
-    },
-    mounted() {
-      // $(this.$el).popup()
-    },
     methods: {
-      add: function() {
-        this.$refs.confirm_refalsh_message.close()
-        this.$emit('add', this.god_name.trim())
+      dialog: function() {
+        this.$q.dialog({
+          title: this.$t('添加'),
+          message: this.$t('帐号名, 比如: bigzhu'),
+          ok: this.$t('分析'),
+          color: 'secondary',
+          prompt: {
+            model: '',
+            type: 'text' // optional
+          }
+        }).then(data => {
+          this.$emit('add', data.trim())
+        }).catch(() => {
+          this.$q.notify('Ok, no mood for talking, right?')
+        })
       }
     }
   }
 </script>
 
 <style lang="stylus" scoped>
-  .q-card {
-    margin: 0;
-  }
-
-  .fixed-bottom-right {
-    bottom: 1rem
-    z-index 9999
-  }
+  .fixed-bottom-right
+    z-index 9999  //浮动在最上面
 </style>
