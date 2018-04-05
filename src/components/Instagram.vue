@@ -1,10 +1,9 @@
 <template>
   <div>
     <div class="description word-wrap-bz" v-html="description"></div>
-
     <a v-for="(image,index) in message.images" :key="index" v-if="type==='image'" @click="openImg(image)">
-      <q-alert icon="fab fa-instagram" v-show="image=='error'" color="secondary">图片地址被 instagram 重置失效了!</q-alert>
-      <img :src="image" class="responsive" v-show="image!='error'">
+      <q-alert icon="fab fa-instagram" v-if="image=='error'" color="secondary">图片地址被 instagram 重置失效了!</q-alert>
+      <img :src="image" class="responsive" v-if="image!='error'">
     </a>
 
     <!--

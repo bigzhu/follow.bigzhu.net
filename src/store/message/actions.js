@@ -340,3 +340,10 @@ export const getTheMessage = ({
     return response.data
   })
 }
+export const postAnki = ({
+  state,
+  commit,
+  dispatch
+}, params) => {
+  return axios.post('/api_anki', params)
+}

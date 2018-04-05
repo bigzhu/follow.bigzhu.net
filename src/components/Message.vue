@@ -76,110 +76,112 @@
 </template>
 
 <script>
-import Twitter from './Twitter'
-import Github from './Github'
-import Instagram from './Instagram'
-import Tumblr from './Tumblr'
-import Facebook from './Facebook'
-import TimeLen from '../libs/components/TimeLen'
-import Vue from 'vue'
-import Proxy from './Proxy'
-import GodItem from './GodItem'
+  import Twitter from './Twitter'
+  import Github from './Github'
+  import Instagram from './Instagram'
+  import Tumblr from './Tumblr'
+  import Facebook from './Facebook'
+  import TimeLen from '../libs/components/TimeLen'
+  import Vue from 'vue'
+  import Proxy from './Proxy'
+  import GodItem from './GodItem'
 
-export default {
-  mixins: [Proxy],
-  props: {
-    message: {
-      type: Object,
-      default: function() {
+  export default {
+    mixins: [Proxy],
+    props: {
+      message: {
+        type: Object,
+        default: function() {
+          return {
+            avatar: '',
+            name: 'loading',
+            id: 0
+          }
+        }
+      }
+    },
+    components: {
+      GodItem,
+      TimeLen,
+      Facebook,
+      Twitter,
+      Github,
+      Instagram,
+      Tumblr
+    },
+    data: function() {
+      return {
+        anki_color: '#B3B3B3' // #57ADE3
+      }
+    },
+    mounted() {
+      this.$nextTick(function() {
+        // 给 anki 用
+        this.message.el = this.$el
+      })
+    },
+    computed: {
+      loading() {
+        return this.$store.state.lib.loading
+      },
+      lang() {
+        return Vue.config.lang
+      },
+      href: function() {
+        if (this.message.m_type === 'github') {
+          return `https://github.com/${this.message.name}`
+        }
+        return this.message.href
+      },
+      god_info: function() {
+        let god_info = this.$store.state.god.god_infos[this.message.god_name]
+        if (god_info) {
+          return god_info
+        }
         return {
-          avatar: '',
-          name: 'loading',
-          id: 0
+          id: 0,
+          name: 'bigzhu'
+        }
+      },
+      avatar: function() {
+        return this.message.avatar
+      }
+    },
+    methods: {
+      anki: function() {
+        if (this.message.anki) return
+        this.message.anki = 1
+        let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
+        this.$store
+          .dispatch('postAnki', {
+            front: front,
+            message_id: this.message.id
+          })
+          .then(function() {
+            // self.message.anki = 1
+          }).catch((error) => {
+            this.$q.notify(error.response.data)
+          })
+      },
+      toggleCollect: function(message) {
+        if (message.collect) {
+          message.collect = 0
+          this.$store.dispatch('uncollect', message.id)
+        } else {
+          message.collect = 1
+          this.$store.dispatch('collect', message.id)
+        }
+      },
+      getGodInfo: function() {
+        if (this.god_info.id === 0) {
+          this.$store.dispatch('getGod', {
+            god_name: this.message.godname_,
+            loading: true
+          })
         }
       }
     }
-  },
-  components: {
-    GodItem,
-    TimeLen,
-    Facebook,
-    Twitter,
-    Github,
-    Instagram,
-    Tumblr
-  },
-  data: function() {
-    return {
-      anki_color: '#B3B3B3' // #57ADE3
-    }
-  },
-  mounted() {
-    this.$nextTick(function() {
-      // 给 anki 用
-      this.message.el = this.$el
-    })
-  },
-  computed: {
-    loading() {
-      return this.$store.state.lib.loading
-    },
-    lang() {
-      return Vue.config.lang
-    },
-    href: function() {
-      if (this.message.m_type === 'github') {
-        return `https://github.com/${this.message.name}`
-      }
-      return this.message.href
-    },
-    god_info: function() {
-      let god_info = this.$store.state.god.god_infos[this.message.god_name]
-      if (god_info) {
-        return god_info
-      }
-      return {
-        id: 0,
-        name: ''
-      }
-    },
-    avatar: function() {
-      return this.message.avatar
-    }
-  },
-  methods: {
-    anki: function() {
-      if (this.message.anki) return
-      this.message.anki = 1
-      let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
-      this.$store
-        .dispatch('postAnki', {
-          front: front,
-          message_id: this.message.id
-        })
-        .then(function() {
-          // self.message.anki = 1
-        })
-    },
-    toggleCollect: function(message) {
-      if (message.collect) {
-        message.collect = 0
-        this.$store.dispatch('uncollect', message.id)
-      } else {
-        message.collect = 1
-        this.$store.dispatch('collect', message.id)
-      }
-    },
-    getGodInfo: function() {
-      if (this.god_info.id === 0) {
-        this.$store.dispatch('getGod', {
-          god_name: this.message.godname_,
-          loading: true
-        })
-      }
-    }
   }
-}
 </script>
 
 <style>

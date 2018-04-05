@@ -214,17 +214,7 @@ export const actions = {
       loading: true
     })
   },
-  postAnki({
-    state,
-    commit,
-    dispatch
-  }, params) {
-    return axios.post('/api_anki', params)
-      .then(function(response) {})
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
+
 
   addRemark({
     dispatch,
