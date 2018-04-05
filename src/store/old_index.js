@@ -144,14 +144,6 @@ export const mutations = {
     state.old_loading = loading
   },
 
-  SET_OLD_MESSAGES(state, messages) {
-    state.messages = _.uniq(
-      messages.reverse().concat(state.messages), false,
-      function(item, key, a) {
-        return item.id
-      }
-    )
-  },
   SET_OLD_SEARCH_MESSAGES(state, messages) {
     state.search_messages = _.uniq(
       messages.reverse().concat(state.search_messages), false,

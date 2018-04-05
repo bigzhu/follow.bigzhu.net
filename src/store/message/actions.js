@@ -302,13 +302,10 @@ export const getOld = ({
         } else if (searchKey) { // search
           commit('SET_OLD_SEARCH_MESSAGES', messages)
         } else { // main
-          commit('SET_OLD_MESSAGES', messages)
+          commit('old_messages', messages)
         }
       }
       commit('old_loading', false)
       commit('reflash_time_len')
-    })
-    .catch(function(error) {
-      console.log(error)
     })
 }

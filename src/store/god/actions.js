@@ -116,18 +116,18 @@ export const getCat = ({
   state,
   commit,
   dispatch
-}, isMy) => {
+}, is_my) => {
   let params = {}
-  if (isMy !== 0) {
+  if (is_my !== 0) {
     params = {
-      isMy: isMy
+      is_my: is_my
     }
   }
   return axios.get('/api_cat', {
       params: params
     })
     .then(function(response) {
-      if (isMy) {
+      if (is_my) {
         commit('my_cats', response.data)
       } else {
         commit('cats', response.data)

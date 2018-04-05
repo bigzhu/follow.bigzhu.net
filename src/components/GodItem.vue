@@ -50,7 +50,7 @@
           return godData
         }
       },
-      isMy: {}
+      is_my: {}
     },
     components: {
       SocialBadge,

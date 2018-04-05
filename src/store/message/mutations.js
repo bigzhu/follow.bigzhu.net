@@ -80,3 +80,17 @@ export const reflash_time_len = (state) => { // 更新时间隔
     state.last_reflash_oper = 1
   }
 }
+export const old_messages = (state, messages) => {
+  state.messages = _.uniq(
+    messages.reverse().concat(state.messages), false,
+    function(item, key, a) {
+      return item.id
+    }
+  )
+}
+export const new_loading = (state, loading) => {
+  state.new_loading = loading
+}
+export const old_loading = (state, loading) => {
+  state.old_loading = loading
+}

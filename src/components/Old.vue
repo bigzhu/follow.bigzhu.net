@@ -20,7 +20,7 @@
     },
     computed: {
       old_loading() {
-        return this.$store.state.old_loading
+        return this.$store.state.message.old_loading
       }
     },
     props: ['show', 'god_name', 'search_key'],
