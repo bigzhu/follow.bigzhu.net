@@ -2,9 +2,10 @@
   <div>
     <div class="description" v-html="text">
     </div>
+
     <a v-for="(image,index) in message.images" :key="index" @click="openImg(image)" href='javascript:void(0)'>
-        <img :src="image" class="responsive" />
-      </a>
+        <img :src="image" class="responsive" v-show="image!='error'">
+    </a>
 
     <div v-for="(media,index) in medias" :key="index">
       <video v-for="(video,index) in media.videos" :key="index" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4'>
