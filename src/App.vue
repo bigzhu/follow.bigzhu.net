@@ -15,23 +15,11 @@
             <span slot="subtitle">Follow your dream</span>
           </q-toolbar-title>
           <!--login-->
-          <q-btn v-show="!isLogin" @click="login" flat small icon="fa-sign-in">
+          <q-btn v-show="!is_login" @click="login" flat small icon="fa-sign-in">
             {{ $t("登录") }}
           </q-btn>
           <!--userInfo-->
-          <q-btn v-show="isLogin" flat ref="target">
-            <img :src="proxy(oauthInfo.avatar)" class="avatar" />
-            <q-popover ref="popover">
-              <q-list item-separator link>
-                <q-item @click="$router.push('/UserSet'), $refs.popover.close()">
-                  {{ $t("设置") }}
-                </q-item>
-                <q-item @click="logout(), $refs.popover.close()">
-                  {{ $t("退出") }}
-                </q-item>
-              </q-list>
-            </q-popover>
-          </q-btn>
+          <UserInfo v-show="is_login"/>
           <!--点击呼出右侧菜单-->
           <q-btn flat @click="$refs.layout.toggleRight()">
             <q-icon name="menu" />
@@ -41,8 +29,8 @@
         <q-tabs color="black" inverted>
           <q-route-tab slot="title" :to="{'name': 'Main'}" replace :label="$t('首页')" />
           <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('寻他')" />
-          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('关注中')" v-show="isLogin" />
-          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('收藏')" v-show="isLogin" />
+          <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('关注中')" v-show="is_login" />
+          <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('收藏')" v-show="is_login" />
           <q-tab slot="title" @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('传记')" />
         </q-tabs>
       </q-layout-header>
@@ -64,14 +52,16 @@
 </template>
 
 <script>
-  import Proxy from './libs/components/Proxy'
+  import UserInfo from './components/UserInfo'
   import store from './store'
   export default {
     store,
     name: 'App',
-    mixins: [Proxy],
+    components: {
+      UserInfo
+    },
     mounted() {
-      if (this.isLogin === '') {
+      if (this.is_login === '') {
         // 取用户信息
         this.$store.dispatch('lib/getOauthInfo').catch((error) => {
           this.$q.notify(error.response.data)
@@ -83,14 +73,14 @@
       })
     },
     computed: {
-      isLogin() {
-        return this.$store.state.lib.oauthInfo.name
+      is_login() {
+        return this.$store.state.lib.oauth_info.name
       },
-      routeName() {
+      route_name() {
         return this.$route.name
       },
-      oauthInfo() {
-        return this.$store.state.lib.oauthInfo
+      oauth_info() {
+        return this.$store.state.lib.oauth_info
       }
     },
     methods: {
@@ -115,9 +105,6 @@
           self.will_hide_header = false
         }
       },
-      logout: function() {
-        window.location = '/api_logout'
-      },
       login: function() {
         this.$router.push({
           name: 'Oauth'
@@ -132,9 +119,6 @@
     box-shadow none
 </style>
 <style lang="stylus" scoped>
-  .avatar
-    width 2.4rem
-    height 2.4rem
   //q-toolbar-inverted 的没法用 variables 来改 改为白色
   .q-toolbar-inverted {
     background-color: white;

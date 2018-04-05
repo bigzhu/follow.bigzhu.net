@@ -10,7 +10,7 @@ export const getOauthInfo = (state) => {
     .then(function(response) {
       let data = response.data
       if (!data.error) {
-        state.oauthInfo = data
+        state.oauth_info = data
         return data
       } else {
         console.log(response)
