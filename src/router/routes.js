@@ -26,10 +26,14 @@
       name: 'God',
       component: () => import('pages/God')
     },
+    {
+      path: '/Recommand/:cat*',
+      name: 'Recommand',
+      component: () => import('pages/Recommand')
+    },
    importByName('Collect'),
    importByName('Following'),
    importByName('TheMessage'),
-   importByName('Recommand'),
    { // Always leave this as last one
      path: '*',
      component: () =>

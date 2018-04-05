@@ -11,20 +11,8 @@
 </template>
 
 <script>
-  import {
-    QItemTile,
-    QItemMain,
-    QItemSide,
-    QItem,
-    QList
-  } from 'quasar'
   export default {
     components: {
-      QItemTile,
-      QItemMain,
-      QItemSide,
-      QItem,
-      QList
     },
     watch: {
       'the_route': function() {
@@ -46,9 +34,9 @@
       },
       cats: function() {
         if (this.just_my) {
-          return this.$store.state.my_cats
+          return this.$store.state.god.my_cats
         } else {
-          return this.$store.state.cats
+          return this.$store.state.god.cats
         }
       },
       link: function() {
@@ -205,13 +193,13 @@
 </script>
 
 <style lang="stylus" scoped>
-  .item.active {
-    background: rgba(0, 0, 0, .03);
-  }
+  .list
+    border 0
+  .item.active
+    background rgba(0, 0, 0, .03)
 
-  .list {
-    background: #fff;
-  }
+  .list
+    background #fff;
   /* 对齐右边 */
 
   .row>.list {

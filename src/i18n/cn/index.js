@@ -2,6 +2,7 @@
 // so you can safely delete all default props below
 
 export default {
+  '编辑': '编辑',
   '收藏': '收藏',
   '寻他': '寻他',
   '关注中': '关注中',
