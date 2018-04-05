@@ -2,8 +2,8 @@
   <div>
     <div class="description word-wrap-bz" v-html="the_text"></div>
     <div class="description word-wrap-bz" v-html="description"></div>
-    <a v-show="imgUrl && type!=='video'" @click="openImg(imgUrl)">
-      <img :src="proxy(imgUrl)" class="responsive">
+    <a v-show="img_url && type!=='video'" @click="openImg(img_url)">
+      <img :src="proxy(img_url)" class="responsive">
     </a>
     <video v-if="type==='video'" :controls="true" type='video/mp4'>
       <source :src="proxy(video)">
@@ -26,7 +26,7 @@
       type: function () {
         return this.message.type
       },
-      imgUrl: function () {
+      img_url: function () {
         if (this.message.extended_entities.pictrue) {
           return this.message.extended_entities.pictrue
         } else {
@@ -51,9 +51,9 @@
       }
     },
     methods: {
-      openImg: function (imgUrl) {
+      openImg: function (img_url) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(imgUrl, '_blank')
+          window.open(img_url, '_blank')
         } else {
           this.$router.push({name: 'TheMessage', params: {id: this.message.id}})
         }

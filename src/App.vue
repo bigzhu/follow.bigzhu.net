@@ -26,6 +26,7 @@
   import {
     mapState
   } from 'vuex'
+  import _ from 'lodash'
   import LeftMenu from './components/LeftMenu'
   import RightMenu from './components/RightMenu'
 
@@ -42,8 +43,8 @@
       BarTwo
     },
     computed: mapState({
-      show_left: state => state.main.show_left,
-      show_right: state => state.main.show_right
+      show_left: state => _.cloneDeep(state.main.show_left),
+      show_right: state => _.cloneDeep(state.main.show_right)
     }),
     methods: {}
   }

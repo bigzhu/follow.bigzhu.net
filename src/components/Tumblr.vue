@@ -6,8 +6,8 @@
     <div class="description" v-html="text"></div>
     <template v-for="(media, index) in medias" :media="media">
       <div class="description" v-html="media.caption" :key="'description-'+index"></div>
-      <a @click="openImg(proxy(media.imgUrl))" :key="'a-'+index">
-        <img :src="proxy(media.imgUrl)" class="responsive" >
+      <a @click="openImg(proxy(media.img_url))" :key="'a-'+index">
+        <img :src="proxy(media.img_url)" class="responsive" >
       </a>
       <br :key="'br-'+index">
     </template>
@@ -30,14 +30,14 @@
         if (this.message.extended_entities && this.message.type === 'photo') {
           return _.map(
             this.message.extended_entities, function (d) {
-              // var caption, height, img_height, imgUrl, img_width, t
-              var imgUrl = d.original_size.url
-              // imgUrl = d.original_size.url
+              // var caption, height, img_height, img_url, img_width, t
+              var img_url = d.original_size.url
+              // img_url = d.original_size.url
               // img_height = d.original_size.height
               // img_width = d.original_size.width
               // height = getFitHeightForSemantic(img_height, img_width)
               var t = {
-                imgUrl: imgUrl,
+                img_url: img_url,
                 // height: height,
                 caption: d.caption
               }
@@ -61,9 +61,9 @@
       }
     },
     methods: {
-      openImg: function (imgUrl) {
+      openImg: function (img_url) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(imgUrl, '_blank')
+          window.open(img_url, '_blank')
         } else {
           this.$router.push({name: 'TheMessage', params: {id: this.message.id}})
         }

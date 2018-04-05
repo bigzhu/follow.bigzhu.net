@@ -94,3 +94,6 @@ export const new_loading = (state, loading) => {
 export const old_loading = (state, loading) => {
   state.old_loading = loading
 }
+export const unread_message_count = (state, unread_message_count) => {
+  state.unread_message_count = unread_message_count
+}

@@ -1,86 +1,88 @@
 <template>
   <div>
-  <q-card class="card">
-    <div class="info">
-    <i class="wechat icon"></i>{{ $t("微信") }}
-    </div>
-    <img src="../statics/assets/by_me.png" class="qr-bz">
-    <div class="info">
-    <i class="qq icon"></i>{{ $t("QQ") }}
-    </div>
-  </q-card>
+    <!--
+    <q-card class="card">
+      <div class="info">
+        <i class="wechat icon"></i>{{ $t("微信") }}
+      </div>
+      <img src="../statics/assets/by_me.png" class="qr-bz">
+      <div class="info">
+        <i class="qq icon"></i>{{ $t("QQ") }}
+      </div>
+    </q-card>
+    -->
 
-  <div class="info">
-  <div class="about">
-    <a class="footer-element" href="/about.html">{{ $t("关于") }}</a>
-    <a class="footer-element" href="http://bigzhu.lorstone.com">{{ $t("博客") }}</a>
-    <router-link class="footer-element" :to="{ name: 'ChangeLog'}">{{ $t("Change Log") }}</router-link>
-  </div>
+    <div class="info">
+      <div class="about">
+        <a class="footer-element" href="/about.html">{{ $t("关于") }}</a>
+        <a class="footer-element" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
+        <router-link class="footer-element" :to="{ name: 'ChangeLog'}">{{ $t("Change Log") }}</router-link>
+      </div>
 
-  <div class="footer">
-    <span class="footer-element">{{ $t("注册人数") }}: {{registered_count}}</span>
-    <span>© 2017 Follow Center</span>
-  </div>
-  <q-select type="list" v-model="lang" :options="lang_options">
-  </q-select>
-  </div>
+      <div class="footer">
+        <span class="footer-element">{{ $t("注册人数") }}: {{registered_count}}</span>
+        <span>© 2017 Follow Center</span>
+      </div>
+      <q-select type="list" v-model="lang" :options="lang_options">
+      </q-select>
+    </div>
   </div>
 </template>
 
 <script>
   import {
-  QCard,
-  QSelect
-  } from 'quasar'
-  export default {
-  props: [],
-  components: {
     QCard,
     QSelect
-  },
-  computed: {
-    lang: {
-    get: function() {
-      return this.$i18n.locale
+  } from 'quasar'
+  export default {
+    props: [],
+    components: {
+      QCard,
+      QSelect
     },
-    set: function(v) {
-      this.$i18n.locale = v
-      window.localStorage.setItem('lang', v)
-    }
-    },
-    registered_count() {
-    return this.$store.state.registered_count
-    }
-  },
-  data: function() {
-    return {
-    lang_options: [{
-      label: 'English',
-      value: 'en'
+    computed: {
+      lang: {
+        get: function() {
+          return this.$i18n.locale
+        },
+        set: function(v) {
+          this.$i18n.locale = v
+          window.localStorage.setItem('lang', v)
+        }
       },
-      {
-      label: '中文',
-      value: 'cn'
+      registered_count() {
+        return this.$store.state.registered_count
       }
-    ]
-    }
-  },
-  mounted: function() {
-    this.$store.dispatch('getRegisteredCount')
-    this.$nextTick(function() {
-    // $(this.$el).find('.ui.dropdown').dropdown()
-    // code that assumes this.$el is in-document
-    })
-  },
-  methods: {
-    whichLang: function() {
-    if (this.lang === 'cn') return '中文'
-    if (this.lang === 'en') return 'English'
     },
-    setLang: function(lang) {
-    window.localStorage.setItem('lang', lang)
+    data: function() {
+      return {
+        lang_options: [{
+            label: 'English',
+            value: 'en'
+          },
+          {
+            label: '中文',
+            value: 'cn'
+          }
+        ]
+      }
+    },
+    mounted: function() {
+      this.$store.dispatch('getRegisteredCount')
+      this.$nextTick(function() {
+        // $(this.$el).find('.ui.dropdown').dropdown()
+        // code that assumes this.$el is in-document
+      })
+    },
+    methods: {
+      whichLang: function() {
+        if (this.lang === 'cn') return '中文'
+        if (this.lang === 'en') return 'English'
+      },
+      setLang: function(lang) {
+        window.localStorage.setItem('lang', lang)
+      }
     }
-  }
   }
 </script>
 

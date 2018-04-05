@@ -40,9 +40,9 @@
       }
     },
     methods: {
-      openImg: function (imgUrl) {
+      openImg: function (img_url) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(imgUrl, '_blank')
+          window.open(img_url, '_blank')
         } else {
           this.$router.push({name: 'TheMessage', params: {id: this.message.id}})
         }
