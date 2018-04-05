@@ -101,6 +101,7 @@ export const getPublicGods = ({
         cat: cat,
         gods: response.data
       })
+      return response.data
     })
 }
 export const putGod = ({

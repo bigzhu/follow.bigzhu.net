@@ -34,25 +34,19 @@
     directives: {},
     data: function() {
       return {
-        no_more: false
+        no_more: false // 避免没有更多god时候, 反复去 loadMore
       }
     },
     watch: {
       '$route.params': {
         handler: function() {
-          let _this = this
-          this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
-            _this.disableGodLoading()
-          })
-          this.stat = 'button'
+          // 参数变化时候, 重置 no_more
+          this.no_more = false
+          this.loadMore()
         },
         deep: true
       }
     },
-    mounted() {
-      // this.loadMore()
-    },
-    attached: function() {},
     computed: {
       loading: {
         set(loading) {
@@ -87,8 +81,15 @@
     },
     methods: {
       loadMore: function(index, done) {
+        if (this.no_more) {
+          setTimeout(done, 1000)
+          return
+        }
         this.loading = true
         this.$store.dispatch('getPublicGods', this.$route.params.cat).then((data) => {
+          if (data.length === 0) {
+            this.no_more = true
+          }
           this.loading = false
           setTimeout(done, 1000)
         })
