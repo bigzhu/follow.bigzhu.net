@@ -10,9 +10,6 @@
 </template>
 
 <script>
-  import {
-    QInfiniteScroll
-  } from 'quasar'
   import Top from '../components/Top'
   import SpinnerBz from '../components/SpinnerBz'
   import GodItem from '../components/GodItem'
@@ -31,7 +28,6 @@
     },
     components: {
       Top,
-      QInfiniteScroll,
       SpinnerBz,
       GodItem
     },
@@ -130,6 +126,9 @@
 </script>
 
 <style lang="stylus" scoped>
+// god 直接留出间距
+  .q-card
+    margin 0.5rem
 //  .clear-button-bz {
 //    color: inherit!important;
 //    background-color: inherit!important;

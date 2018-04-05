@@ -248,66 +248,58 @@ export default {
 </style>
 
 <style lang="stylus" scoped>
-.q-card-container {
-  padding-bottom: 0;
-}
-
-.modal .q-card {
-  margin: 0;
-}
-
-.q-card {
-  overflow-wrap: break-word; // 让 a 换行
-}
-
-@media (min-width: 767px) {
-  .anki-bz { // anki button 对齐
-    vertical-align: middle;
-    width: 1rem;
-    height: 1rem;
+  .q-card
+    box-shadow none //不要显示消息边框
+    border-bottom 1px solid #eee // 显示一个弱弱的小横线,表示结束
+  .q-card-container {
+    padding-bottom: 0;
   }
-
-  .bookmark:hover {
+  .modal .q-card {
+    margin: 0;
+  }
+  .q-card {
+    overflow-wrap: break-word; // 让 a 换行
+  }
+  @media (min-width: 767px) {
+    .anki-bz { // anki button 对齐
+      vertical-align: middle;
+      width: 1rem;
+      height: 1rem;
+    }
+    .bookmark:hover {
+      color: #FBBD08;
+    }
+  }
+  // 为了对齐
+  .q-item {
+    padding: 16px;
+    padding-bottom: 0;
+    padding-top: 8px;
+  }
+  .q-item-side.bz_avatar { // 图标和名字拉近一点
+    cursor: pointer; // 变可手, 可点击
+    // 头像缩小
+    width: 2rem;
+    height: 2rem;
+    min-width: inherit;
+  }
+  .more-infor-bz:hover {
+    color: #54B98F;
+  }
+  .bookmark-light {
     color: #FBBD08;
   }
-}
-
-// 为了对齐
-.q-item {
-  padding: 16px;
-  padding-bottom: 0;
-  padding-top: 8px;
-}
-
-.q-item-side.bz_avatar { // 图标和名字拉近一点
-  cursor: pointer; // 变可手, 可点击
-  // 头像缩小
-  width: 2rem;
-  height: 2rem;
-  min-width: inherit;
-}
-
-.more-infor-bz:hover {
-  color: #54B98F;
-}
-
-.bookmark-light {
-  color: #FBBD08;
-}
-
-i.icon {
-  font-size: 1rem;
-  vertical-align: baseline;
-}
-
-/* message margin 要拉开 */
-.q-card {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-/* actions 要有间距 */
-.q-card-actions a {
-  padding-left: 0.5rem;
-}
+  i.icon {
+    font-size: 1rem;
+    vertical-align: baseline;
+  }
+  /* message margin 要拉开 */
+  .q-card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  /* actions 要有间距 */
+  .q-card-actions a {
+    padding-left: 0.5rem;
+  }
 </style>

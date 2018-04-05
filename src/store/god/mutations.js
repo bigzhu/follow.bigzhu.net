@@ -35,3 +35,9 @@ export const cat_gods = (state, {
   })
   state.cat_gods[cat] = uniqGods
 }
+export const cats = (state, cats) => {
+  state.cats = cats
+}
+export const my_cats = (state, my_cats) => {
+  state.cats = my_cats
+}

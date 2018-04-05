@@ -442,34 +442,6 @@ export const actions = {
         console.log(error)
       })
   },
-  getCat({
-    state,
-    commit,
-    dispatch
-  }, isMy) {
-    let params = {}
-    if (isMy !== 0) {
-      params = {
-        isMy: isMy
-      }
-    }
-
-    return axios.get('/api_cat', {
-        params: params
-      })
-      .then(function(response) {
-        let data = response.data
-        if (isMy) {
-          state.my_cats = data
-        } else {
-          state.cats = data
-        }
-        return data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
 
   getMyGods({
     state,

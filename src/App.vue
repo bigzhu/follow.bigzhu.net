@@ -50,15 +50,15 @@
 </script>
 
 <style lang="stylus">
+// 浮动右边划出, 不要有阴影
+  .q-layout-drawer-delimiter
+    box-shadow none
 /*
   .layout-aside.fixed.on-layout.layout-aside-right.scroll
     box-shadow none
     */
 </style>
 <style lang="stylus" scoped>
-// 浮动右边划出, 不要有阴影
-  .q-layout-drawer-delimiter
-    box-shadow none
 // 左右滑出控件, 背景继承自父, 不要有差异
   .q-drawer-container >>> .q-layout-drawer
     background: inherit

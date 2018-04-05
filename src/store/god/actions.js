@@ -102,15 +102,35 @@ export const getPublicGods = ({
         gods: response.data
       })
     })
-    .catch(function(error) {
-      console.log(error)
-    })
 }
 export const putGod = ({
-    dispatch,
-    state,
-    actions
-  }, god) => {
-    var params = god
-    return axios.put('/api_god', params)
+  dispatch,
+  state,
+  actions
+}, god) => {
+  var params = god
+  return axios.put('/api_god', params)
+}
+export const getCat = ({
+  state,
+  commit,
+  dispatch
+}, isMy) => {
+  let params = {}
+  if (isMy !== 0) {
+    params = {
+      isMy: isMy
+    }
   }
+  return axios.get('/api_cat', {
+      params: params
+    })
+    .then(function(response) {
+      if (isMy) {
+        commit('my_cats', response.data)
+      } else {
+        commit('cats', response.data)
+      }
+      return response.data
+    })
+}
