@@ -77,9 +77,6 @@ export const mutations = {
   SET_MY_CATS(state, cats) {
     state.my_cats = cats
   },
-  SET_THE_MESSAGE(state, message) {
-    state.the_message = message
-  },
   SET_GOD_IS_EXISTS(state, isExists) {
     state.god_is_exists = isExists
   },
@@ -273,36 +270,7 @@ export const actions = {
   },
 
 
-  getTheMessage({
-    state,
-    commit,
-    dispatch
-  }, id) {
-    let message = _.find(state.messages, function(d) {
-      return d.id === parseInt(id, 10)
-    })
-    // 在god message里再找找
-    if (!message) {
-      for (var god_name in state.gods_messages) {
-        message = _.find(state.gods_messages[god_name], function(d) {
-          return d.id === parseInt(id, 10)
-        })
-      }
-    }
-    if (message) {
-      commit('SET_THE_MESSAGE', message)
-      return
-    }
-    let parm = {
-      id: id
-    }
-    return dispatch('get', {
-      url: '/api_message',
-      body: parm
-    }).then(function(data) {
-      commit('SET_THE_MESSAGE', data.message)
-    })
-  },
+
   getNew({
     state,
     commit,

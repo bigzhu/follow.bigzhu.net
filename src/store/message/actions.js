@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 /*
 export const someAction = (state) => {
 }
@@ -308,4 +309,34 @@ export const getOld = ({
       commit('old_loading', false)
       commit('reflash_time_len')
     })
+}
+export const getTheMessage = ({
+  state,
+  commit,
+  dispatch
+}, id) => {
+  let message = _.find(state.messages, function(d) {
+    return d.id === parseInt(id, 10)
+  })
+  // 在god message里再找找
+  if (!message) {
+    for (var god_name in state.gods_messages) {
+      message = _.find(state.gods_messages[god_name], function(d) {
+        return d.id === parseInt(id, 10)
+      })
+    }
+  }
+  if (message) {
+    commit('the_message', message)
+    return
+  }
+  let params = {
+    id: id
+  }
+  return axios.get('/api_message', {
+    params: params
+  }).then((response) => {
+    commit('the_message', response.data)
+    return response.data
+  })
 }

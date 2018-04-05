@@ -18,7 +18,7 @@
     },
     computed: {
       the_message() {
-        return this.$store.state.the_message
+        return this.$store.state.message.the_message
       },
       id() {
         return this.$route.params.id
@@ -30,12 +30,12 @@
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        // 通过 `vm` 访问组件实例
-        vm.$store.state.layout.hideRight()
+        // vm.$store.state.layout.hideRight()
+        vm.$store.commit('show_right', false)
       })
     },
     beforeRouteLeave(to, from, next) {
-      this.$store.state.layout.showRight()
+      this.$store.commit('show_right', true)
       next()
     },
     methods: {}

@@ -36,8 +36,12 @@
       name: 'Following',
       component: () => import('pages/Following')
     },
+    {
+      path: '/TheMessage/:id',
+      name: 'TheMessage',
+      component: () => import('pages/TheMessage')
+    },
    importByName('Collect'),
-   importByName('TheMessage'),
    { // Always leave this as last one
      path: '*',
      component: () =>

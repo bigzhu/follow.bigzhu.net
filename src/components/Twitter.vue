@@ -3,7 +3,7 @@
     <div class="description" v-html="text">
     </div>
 
-    <a v-for="(image,index) in message.images" :key="index" @click="openImg(image)" href='javascript:void(0)'>
+    <a v-for="(image,index) in message.images" :key="index" v-if="message.type==='photo'" @click="openImg(image)" href='javascript:void(0)'>
         <img :src="image" class="responsive" v-show="image!='error'">
     </a>
 

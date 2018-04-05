@@ -90,7 +90,7 @@
         if (this.$route.params.god_name) return this.$route.params.god_name
       },
       new_loading() {
-        return this.$store.state.new_loading
+        return this.$store.state.message.new_loading
       },
       old_loading() {
         return this.$store.state.old_loading
