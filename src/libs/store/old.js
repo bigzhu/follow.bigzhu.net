@@ -110,7 +110,7 @@ export const actions = {
     // console.log(url)
 
     if (loading === true || loading === undefined) {
-      commit('SET_LOADING', true)
+      commit('loading', true)
     }
     return fetch(url, {
         credentials: 'same-origin',
@@ -124,7 +124,7 @@ export const actions = {
       })
       .then(function(response) {
         if (loading === true || loading === undefined) {
-          commit('SET_LOADING', false)
+          commit('loading', false)
         }
         return response
       }).then(function(response) {
@@ -153,7 +153,7 @@ export const actions = {
     loading
   }) {
     if (loading === true || loading === undefined) {
-      commit('SET_LOADING', true)
+      commit('loading', true)
     }
     return fetch(url, {
         credentials: 'same-origin',
@@ -166,7 +166,7 @@ export const actions = {
       })
       .then(function(response) {
         if (loading === true || loading === undefined) {
-          commit('SET_LOADING', false)
+          commit('loading', false)
         }
         return response
       }).then(function(response) {
@@ -190,7 +190,7 @@ export const actions = {
     state,
     commit
   }, url) {
-    commit('SET_LOADING', true)
+    commit('loading', true)
     return fetch(url, {
         credentials: 'same-origin',
         method: 'delete',
@@ -200,7 +200,7 @@ export const actions = {
         }
       })
       .then(function(response) {
-        commit('SET_LOADING', false)
+        commit('loading', false)
         return response
       }).then(function(response) {
         if (response.status !== 200) {
@@ -227,7 +227,7 @@ export const actions = {
     loading
   }) {
     if (loading === true || loading === undefined) {
-      commit('SET_LOADING', true)
+      commit('loading', true)
     }
     return fetch(url, {
         credentials: 'same-origin',
@@ -240,7 +240,7 @@ export const actions = {
       })
       .then(function(response) {
         if (loading === true || loading === undefined) {
-          commit('SET_LOADING', false)
+          commit('loading', false)
         }
         return response
       }).then(function(response) {

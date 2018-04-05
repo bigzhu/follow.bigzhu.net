@@ -56,7 +56,7 @@
     computed: {
       loading: {
         set(loading) {
-          this.$store.state.lib.loading = loading
+          this.$store.commit('lib/loading', loading)
         },
         get() {
           return this.$store.state.lib.loading
@@ -87,12 +87,13 @@
     },
     methods: {
       loadMore: function(index, done) {
-        let self = this
-        this.$store.dispatch('getPublicGods', this.$route.params.cat).then(function(data) {
-          self.disableGodLoading()
+        this.loading = true
+        this.$store.dispatch('getPublicGods', this.$route.params.cat).then((data) => {
+          this.loading = false
           setTimeout(done, 1000)
         })
       },
+      /*
       disableGodLoading: function() {
         this.loading = false
         if (this.not_myGods.length === 0) {
@@ -101,6 +102,7 @@
           this.no_more = false
         }
       },
+      */
       toggleCollect: function(message) {
         if (message.collect) {
           this.$store.dispatch('uncollect', message.id).then(function(data) {

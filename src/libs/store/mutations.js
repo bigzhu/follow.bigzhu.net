@@ -3,7 +3,7 @@ export const someMutation = (state) => {
 }
 */
 
-export const SET_LOADING = (state, loading) => {
+export const loading = (state, loading) => {
   // 加入计数器
   if (loading) {
     state.loading_count += 1
