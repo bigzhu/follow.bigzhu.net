@@ -50,12 +50,24 @@
 </script>
 
 <style lang="stylus">
+/*
   .layout-aside.fixed.on-layout.layout-aside-right.scroll
     box-shadow none
+    */
 </style>
 <style lang="stylus" scoped>
+  // 左右划出控件, 背景继承自父, 不要有差异
+  .q-drawer-container >>> .q-layout-drawer
+    background: inherit
+  // 框架带的 padding 太宽, 改小一些
+  .layout-padding
+    padding: 1rem
+    padding-top: 0
+
   //q-toolbar-inverted 的没法用 variables 来改 改为白色
+  /*
   .q-toolbar-inverted {
     background-color: white;
   }
+  */
 </style>

@@ -52,12 +52,12 @@
 </script>
 
 <style lang="stylus" scoped>
+/*
   .q-list + .q-list
     margin-top 0
-  .blank-padding-20 {
-    padding: 20px;
-  }
-  .blank-padding-11 {
-    padding: 11px;
-  }
+  */
+  .blank-padding-20
+    padding-top 48px // 字体高度不可知, 我这里是 20px, 只有先写死 20px+2*1rem = 48px
+  .blank-padding-11
+    padding 11px
 </style>
