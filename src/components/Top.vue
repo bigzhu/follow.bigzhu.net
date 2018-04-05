@@ -6,32 +6,12 @@
 
 <script>
   import {
-    QBtn,
-    QPageSticky,
     BackToTop
   } from 'quasar'
   export default {
-    components: {
-      QBtn,
-      QPageSticky
-    },
     directives: {
       BackToTop
-    },
-    vuex: {
-      getters: {},
-      actions: {}
-    },
-    props: [],
-
-    computed: {},
-    data: function() {
-      return {}
-    },
-    mounted() {
-      // $(this.$el).popup()
-    },
-    methods: {}
+    }
   }
 </script>
 
