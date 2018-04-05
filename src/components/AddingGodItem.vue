@@ -105,13 +105,12 @@
         // this.queryNotMyGods(this.$route.params.cat)
       },
       getGodInfo: function() {
-        let self = this
         this.loading = true
         this.$store.dispatch('postGod', {
           name: this.god_name,
           cat: this.cat
-        }).then(function(god_info) {
-          self.startCheck(god_info)
+        }).then((god_info) => {
+          this.startCheck(god_info)
         })
       },
       startCheck: function(god_info) {
@@ -200,7 +199,7 @@
         // Object.assign(this.god_info, this.god)
         this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.followed = 1
-        this.$store.commit('UNSHIFT_MY_GOD', {
+        this.$store.commit('unshift_my_god', {
           cat: this.cat,
           god: this.god
         })

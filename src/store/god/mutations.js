@@ -39,5 +39,11 @@ export const cats = (state, cats) => {
   state.cats = cats
 }
 export const my_cats = (state, my_cats) => {
-  state.cats = my_cats
+  state.my_cats = my_cats
+}
+export const unshift_my_god = (state, {
+  cat,
+  god
+}) => {
+  state.cat_my_gods[cat].unshift(god)
 }

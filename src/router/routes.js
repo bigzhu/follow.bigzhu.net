@@ -31,8 +31,12 @@
       name: 'Recommand',
       component: () => import('pages/Recommand')
     },
+    {
+      path: '/Following/:cat*',
+      name: 'Following',
+      component: () => import('pages/Following')
+    },
    importByName('Collect'),
-   importByName('Following'),
    importByName('TheMessage'),
    { // Always leave this as last one
      path: '*',

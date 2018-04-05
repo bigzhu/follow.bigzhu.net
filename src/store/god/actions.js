@@ -141,18 +141,54 @@ export const unfollow = ({
   dispatch
 }, god_id) => {
   return axios.delete('/api_follow', {
-      params: {
-        god_id: god_id
-      }
-    })
-}
-export const follow = ({
-    state,
-    commit,
-    dispatch
-  }, god_id) => {
-    let params = {
+    params: {
       god_id: god_id
     }
-    return axios.post('/api_follow', params)
+  })
+}
+export const follow = ({
+  state,
+  commit,
+  dispatch
+}, god_id) => {
+  let params = {
+    god_id: god_id
   }
+  return axios.post('/api_follow', params)
+}
+export const postGod = ({
+  state,
+  commit,
+  dispatch
+}, {
+  name,
+  cat
+}) => {
+  var params = {
+    name: name,
+    cat: cat
+  }
+  return axios.post('/api_god', params)
+    .then(function(response) {
+      return response.data
+    })
+}
+export const checkSocial = ({
+  state,
+  commit,
+  dispatch
+}, {
+  name,
+  type
+}) => {
+  var params = {
+    name: name,
+    type: type
+  }
+  return axios.get('/api_social', {
+      params: params
+    })
+    .then((response) => {
+      return response.data
+    })
+}

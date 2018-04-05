@@ -73,12 +73,7 @@ export const mutations = {
   SET_SHOW_BAR(state, showBar) {
     state.showBar = showBar
   },
-  UNSHIFT_MY_GOD(state, {
-    cat,
-    god
-  }) {
-    state.cat_my_gods[cat].unshift(god)
-  },
+
   SET_MY_CATS(state, cats) {
     state.my_cats = cats
   },
@@ -254,48 +249,8 @@ export const actions = {
         console.log(error)
       })
   },
-  checkSocial({
-    state,
-    commit,
-    dispatch
-  }, {
-    name,
-    type
-  }) {
-    var params = {
-      name: name,
-      type: type
-    }
-    return axios.get('/api_social', {
-        params: params
-      })
-      .then((response) => {
-        return response.data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
-  postGod({
-    state,
-    commit,
-    dispatch
-  }, {
-    name,
-    cat
-  }) {
-    var params = {
-      name: name,
-      cat: cat
-    }
-    return axios.post('/api_god', params)
-      .then(function(response) {
-        return response.data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  },
+
+
   getBlock({
     state,
     commit,

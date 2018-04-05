@@ -1,5 +1,5 @@
 <template>
-  <QPageSticky v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 28]" class="bz">
+  <QPageSticky corner="bottom-right" :offset="[-286, 28]" class="bz">
     <q-btn @click="dialog" round color="" icon="add"></q-btn>
   </QPageSticky>
 </template>

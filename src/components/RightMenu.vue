@@ -5,7 +5,7 @@
     <Cat v-if="name==='Recommand'" route_name="Recommand"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
     <GodInfo v-show="god_name" :god="god_info"></GodInfo>
-    <MessageConf v-if="name!='Recommand'"/>
+    <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])"/>
   </q-scroll-area>
 </template>
 
