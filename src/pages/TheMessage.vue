@@ -35,7 +35,9 @@
       })
     },
     beforeRouteLeave(to, from, next) {
-      this.$store.commit('show_right', true)
+      if (!this.$q.platform.is.mobile) {
+        this.$store.commit('show_right', true)
+      }
       next()
     },
     methods: {}

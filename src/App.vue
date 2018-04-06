@@ -63,15 +63,11 @@
 // 浮动右边划出, 不要有阴影
   .q-layout-drawer-delimiter
     box-shadow none
-/*
-  .layout-aside.fixed.on-layout.layout-aside-right.scroll
-    box-shadow none
-    */
 </style>
 <style lang="stylus" scoped>
-  // 左右滑出控件, 背景继承自父, 不要有差异
+  // 左右滑出控件, 背景用白色
   .q-drawer-container >>> .q-layout-drawer
-    background: inherit
+    background: white
   // 框架带的 padding 太宽, 改小一些
   .layout-padding
     padding: 1rem
