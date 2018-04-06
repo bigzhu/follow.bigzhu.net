@@ -16,7 +16,7 @@
       <div class="about">
         <a class="footer-element" href="/about.html">{{ $t("关于") }}</a>
         <a class="footer-element" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
-        <router-link class="footer-element" :to="{ name: 'ChangeLog'}">{{ $t("Change Log") }}</router-link>
+        <a class="footer-element" href="http://bigzhu.lorstone.com/follow%20center.html">Change Log</a>
       </div>
 
       <div class="footer">

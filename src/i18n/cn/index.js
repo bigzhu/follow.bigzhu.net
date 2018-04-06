@@ -2,6 +2,9 @@
 // so you can safely delete all default props below
 
 export default {
+  '注册人数': '注册人数',
+  '使用教程': '使用教程',
+  '关于': '关于',
   '添加': '添加',
   '帐号名, 比如: bigzhu': '帐号名, 比如: bigzhu',
   '编辑': '编辑',

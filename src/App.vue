@@ -23,10 +23,6 @@
 </template>
 
 <script>
-  import {
-    mapState
-  } from 'vuex'
-  import _ from 'lodash'
   import LeftMenu from './components/LeftMenu'
   import RightMenu from './components/RightMenu'
 
@@ -42,11 +38,24 @@
       BarOne,
       BarTwo
     },
-    computed: mapState({
-      show_left: state => _.cloneDeep(state.main.show_left),
-      show_right: state => _.cloneDeep(state.main.show_right)
-    }),
-    methods: {}
+    computed: {
+      show_right: {
+        get: function() {
+          return this.$store.state.main.show_right
+        },
+        set: function(show_right) {
+          this.$store.commit('show_right', show_right)
+        }
+      },
+      show_left: {
+        get: function() {
+          return this.$store.state.main.show_left
+        },
+        set: function() {
+          this.$store.commit('show_left', true)
+        }
+      }
+    }
   }
 </script>
 
@@ -60,13 +69,17 @@
     */
 </style>
 <style lang="stylus" scoped>
-// 左右滑出控件, 背景继承自父, 不要有差异
+  // 左右滑出控件, 背景继承自父, 不要有差异
   .q-drawer-container >>> .q-layout-drawer
     background: inherit
-// 框架带的 padding 太宽, 改小一些
+  // 框架带的 padding 太宽, 改小一些
   .layout-padding
     padding: 1rem
     padding-top: 0
+  // 平板不要 padding
+  @media (max-width 991px)
+    .layout-padding
+      padding: 0
 
   //q-toolbar-inverted 的没法用 variables 来改 改为白色
   /*

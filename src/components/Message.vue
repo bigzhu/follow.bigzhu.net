@@ -250,6 +250,13 @@
 </style>
 
 <style lang="stylus" scoped>
+  @media (max-width 991px)
+    .q-card-main // 平板不要 padding, 让图片拉到边上
+      padding-left 0
+      padding-right 0
+    .q-card-main >>> .description // 文字内容此时反而要离开边上, 不然顶住不好看
+      padding-left 16px
+      padding-right 16px
   .q-card
     box-shadow none //不要显示消息边框
     border-bottom 1px solid #eee // 显示一个弱弱的小横线,表示结束

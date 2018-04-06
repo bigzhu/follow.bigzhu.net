@@ -26,21 +26,24 @@
 </template>
 
 <script>
-  import {
-    mapState
-  } from 'vuex'
   import UserInfo from './UserInfo'
   export default {
     props: [],
     components: {
       UserInfo
     },
-    computed: mapState({
-      show_right: state => state.main.show_right,
-      is_login: state => state.lib.oauth_info.name
-    }),
-    data: function() {
-      return {}
+    computed: {
+      show_right: {
+        get: function() {
+          return this.$store.state.main.show_right
+        },
+        set: function(show_right) {
+          this.$store.commit('show_right', show_right)
+        }
+      },
+      is_login: function() {
+        return this.$store.state.lib.oauth_info.name
+      }
     },
     mounted: function() {
       if (this.is_login === '') {

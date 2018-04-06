@@ -17,7 +17,6 @@ export default {
       type: Number
     }
   },
-  computed: {},
   data: function() {
     return {
       color: '',

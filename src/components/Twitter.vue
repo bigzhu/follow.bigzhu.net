@@ -3,11 +3,11 @@
     <div class="description" v-html="text">
     </div>
 
-    <a v-for="(image,index) in message.images" :key="index" v-if="message.type==='photo'" @click="openImg(image)" href='javascript:void(0)'>
+    <a v-for="(image,index) in message.images" :key="'image-'+index" v-if="message.type==='photo'" @click="openImg(image)" href='javascript:void(0)'>
         <img :src="image" class="responsive" v-show="image!='error'">
     </a>
 
-    <div v-for="(media,index) in medias" :key="index">
+    <div v-for="(media,index) in medias" :key="'media'+index">
       <video v-for="(video,index) in media.videos" :key="index" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4'>
         <source :src="proxy(video.url)">
       </video>
