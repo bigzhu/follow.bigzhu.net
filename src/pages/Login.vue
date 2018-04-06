@@ -1,6 +1,6 @@
 <template>
-  <q-page padding>
-    <Login @login='login' />
+  <q-page padding >
+    <Login @login='login' class="absolute-center"/>
   </q-page>
 </template>
 
@@ -20,10 +20,22 @@
           this.$store.commit('lib/SET_LOADING', false)
           this.$router.push('/')
         }).catch((error) => {
-          console.log(error.response)
           this.$q.notify(error.response.data)
         })
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        vm.$store.commit('show_right', false)
+        vm.$store.commit('show_header', false)
+      })
+    },
+    beforeRouteLeave(to, from, next) {
+      if (!this.$q.platform.is.mobile) {
+        this.$store.commit('show_right', true)
+      }
+      this.$store.commit('show_header', true)
+      next()
     }
   }
 </script>

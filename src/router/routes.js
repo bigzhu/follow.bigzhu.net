@@ -16,6 +16,7 @@
      ]
    },
    */
+   importByName('UserSet'),
    importByName('Oauth'),
    importByName('Login'),
    {

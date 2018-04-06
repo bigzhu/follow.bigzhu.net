@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{'center-container-bz':$q.platform.is.mobile}">
     <div class="description" v-html="text">
     </div>
 

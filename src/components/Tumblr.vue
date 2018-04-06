@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{'center-container-bz':$q.platform.is.mobile}">
     <h3 v-show="message.title" class="ui center aligned header">
       {{message.title}}
     </h3>
@@ -11,7 +11,7 @@
       </a>
       <br :key="'br-'+index">
     </template>
-    <video v-if="video" :controls="true" type='video/mp4'>
+    <video v-if="video"  :controls="true" type='video/mp4'>
       <source :src="proxy(video)">
     </video>
   </div>

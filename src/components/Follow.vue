@@ -5,74 +5,83 @@
 </template>
 
 <script>
-export default {
-  props: {
-    value: {
-      required: true,
-      // type: Number,
-      default: 0
-    },
-    god_id: {
-      required: true,
-      type: Number
-    }
-  },
-  data: function() {
-    return {
-      color: '',
-      loading: true,
-      desc: ''
-    }
-  },
-  watch: {
-    value: function() {
-      this.checkStatus()
-    }
-  },
-  mounted() {
-    this.$nextTick(function() {
-      this.checkStatus()
-    })
-  },
-  methods: {
-    checkStatus: function() {
-      if (this.value === 0 || this.value === null) {
-        this.showUnfollow()
-      } else {
-        this.showFollow()
+  export default {
+    props: {
+      value: {
+        required: true,
+        // type: Number,
+        default: 0
+      },
+      god_id: {
+        required: true,
+        type: Number
       }
     },
-    showFollow: function() {
-      this.$emit('input', 1)
-      this.loading = false
-      this.desc = this.$t('已跟踪')
-      this.color = 'light'
+    data: function() {
+      return {
+        color: '',
+        loading: true,
+        desc: ''
+      }
     },
-    showUnfollow: function() {
-      this.$emit('input', 0)
-      this.loading = false
-      this.desc = this.$t('跟踪')
-      this.color = 'secondary'
+    watch: {
+      value: function() {
+        this.checkStatus()
+      }
     },
-    toggleFollow: function() {
-      let self = this
-      this.loading = true
-      if (this.value === 1) {
-        this.$store.dispatch('unfollow', this.god_id).then(function(data) {
-          self.showUnfollow()
-        })
-      } else {
-        this.$store.dispatch('follow', this.god_id).then(function(data) {
-          self.showFollow()
-        })
+    mounted() {
+      this.$nextTick(function() {
+        this.checkStatus()
+      })
+    },
+    methods: {
+      checkStatus: function() {
+        if (this.value === 0 || this.value === null) {
+          this.showUnfollow()
+        } else {
+          this.showFollow()
+        }
+      },
+      showFollow: function() {
+        this.$emit('input', 1)
+        this.loading = false
+        this.desc = this.$t('已跟踪')
+        this.color = 'light'
+      },
+      showUnfollow: function() {
+        this.$emit('input', 0)
+        this.loading = false
+        this.desc = this.$t('跟踪')
+        this.color = 'secondary'
+      },
+      toggleFollow: function() {
+        let self = this
+        this.loading = true
+        if (this.value === 1) {
+          this.$store.dispatch('unfollow', this.god_id).then(function(data) {
+            self.showUnfollow()
+          }).catch((error) => {
+            this.$q.notify(error.response.data)
+          })
+        } else {
+          this.$store.dispatch('follow', this.god_id).then(function(data) {
+            self.showFollow()
+          }).catch((error) => {
+            if (error.response.data === "'user_id'") {
+              this.$router.push({
+                name: 'Oauth'
+              })
+              return
+            }
+            this.$q.notify(error.response.data)
+          })
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="stylus" scoped>
-.q-btn {
-  margin: 0.5rem;
-}
+  .q-btn
+    margin 0.5rem
 </style>
