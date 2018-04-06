@@ -76,7 +76,6 @@
   @media (max-width 991px)
     .layout-padding
       padding: 0
-
   //q-toolbar-inverted 的没法用 variables 来改 改为白色
   /*
   .q-toolbar-inverted {

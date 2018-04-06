@@ -51,7 +51,7 @@
         }
       },
       registered_count() {
-        return this.$store.state.registered_count
+        return this.$store.state.user.registered_count
       }
     },
     data: function() {
