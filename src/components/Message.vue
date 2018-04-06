@@ -1,13 +1,14 @@
 <template>
   <q-card class="the-hover-bz">
-    <q-modal @open="getGodInfo" position="left" ref="basicModal" :content-css="{padding: '0px'}">
+    <q-modal v-model="opened" @show="getGodInfo" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
       </q-inner-loading>
       <GodItem :god="god_info" :key="god_info.id" style="width: 100%" />
     </q-modal>
+
     <q-item>
-      <q-item-side @click="$refs.basicModal.toggle()" :avatar="proxy(avatar)" class="bz_avatar">
+      <q-item-side @click.native="opened=!opened" :avatar="proxy(avatar)" class="bz_avatar">
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
@@ -42,7 +43,6 @@
       </a>
       <a @mouseleave="anki_color='#767676'" @mousemove="anki_color='#57ADE3'" @click="anki" :class="{'hover-show-bz':!message.anki}">
         <svg class="anki-bz" viewBox="51 -272 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
           <desc>Created with Sketch.</desc>
           <defs>
             <rect id="path-1" x="0" y="1.2" width="13.9658778" height="14.8427295" rx="3"></rect>
@@ -111,6 +111,7 @@
     },
     data: function() {
       return {
+        opened: false, // god 信息是否弹出
         anki_color: '#B3B3B3' // #57ADE3
       }
     },
@@ -175,7 +176,7 @@
       getGodInfo: function() {
         if (this.god_info.id === 0) {
           this.$store.dispatch('getGod', {
-            god_name: this.message.godname_,
+            god_name: this.message.god_name,
             loading: true
           })
         }
