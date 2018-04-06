@@ -4,10 +4,10 @@
     <img :src="proxy(oauth_info.avatar)" class="avatar" />
     <q-popover ref="popover">
       <q-list item-separator link>
-        <q-item @click="$router.push('/UserSet'), $refs.popover.close()">
+        <q-item @click.native="$router.push('/UserSet'), $refs.popover.close()">
           {{ $t("设置") }}
         </q-item>
-        <q-item @click="logout(), $refs.popover.close()">
+        <q-item @click.native="logout(), $refs.popover.close()">
           {{ $t("退出") }}
         </q-item>
       </q-list>

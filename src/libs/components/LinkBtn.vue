@@ -46,9 +46,9 @@
 </script>
 
 <style lang="stylus" scoped>
-a 
-  color inherit
-  text-decoration none
-  .q-btn
-    margin .5rem
+  a
+    color inherit
+    text-decoration none
+    .q-btn
+      margin .5rem
 </style>

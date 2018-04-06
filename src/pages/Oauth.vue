@@ -1,10 +1,12 @@
 <template>
-  <div class="box">
+  <div class="box absolute-center">
     <div class="center-box">
       <img class="logo-img" src="../statics/assets/logo_word.png">
-<p class="discription">发现更广阔的世界</p>
+      <p class="discription">发现更广阔的世界</p>
       <Oauth/>
-        <p class="sub">没有社交帐号? <router-link to="/">随意逛逛</router-link></p>
+      <p class="sub">没有社交帐号?
+        <router-link to="/">随意逛逛</router-link>
+      </p>
     </div>
   </div>
 </template>
@@ -12,29 +14,20 @@
 <script>
   import Oauth from '../libs/components/Oauth'
   export default {
-    props: [],
     components: {
       Oauth
     },
-    computed: {},
-    data: function() {
-      return {}
-    },
-    mounted: function() {
-      this.$nextTick(function() {
-        // code that assumes this.$el is in-document
-      })
-    },
-    methods: {},
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        // 通过 `vm` 访问组件实例
-        console.log('hideRight')
-        vm.$store.state.layout.hideRight()
+        vm.$store.commit('show_right', false)
+        vm.$store.commit('show_header', false)
       })
     },
     beforeRouteLeave(to, from, next) {
-      this.$store.state.layout.showRight()
+      if (!this.$q.platform.is.mobile) {
+        this.$store.commit('show_right', true)
+      }
+      this.$store.commit('show_header', true)
       next()
     }
   }
@@ -53,7 +46,6 @@
     align-items: center;
   img
     width 15rem
-    
   .box
     min-height calc(100vh - 306px)
     width 100%

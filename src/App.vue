@@ -1,7 +1,7 @@
 <template>
   <div id="q-app">
     <q-layout view="hhh LpR lfr">
-      <q-layout-header>
+      <q-layout-header v-model="show_header">
         <BarOne/>
         <BarTwo/>
       </q-layout-header>
@@ -39,6 +39,14 @@
       BarTwo
     },
     computed: {
+      show_header: {
+        get: function() {
+          return this.$store.state.main.show_header
+        },
+        set: function(show_header) {
+          this.$store.commit('show_header', show_header)
+        }
+      },
       show_right: {
         get: function() {
           return this.$store.state.main.show_right

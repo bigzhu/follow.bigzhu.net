@@ -30,7 +30,6 @@
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        // vm.$store.state.layout.hideRight()
         vm.$store.commit('show_right', false)
       })
     },
@@ -39,8 +38,7 @@
         this.$store.commit('show_right', true)
       }
       next()
-    },
-    methods: {}
+    }
   }
 </script>
 
