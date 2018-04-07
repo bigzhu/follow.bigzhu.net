@@ -6,11 +6,13 @@ import user from './user'
 import main from './main'
 import message from './message'
 import god from './god'
+import anki from './anki'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
+    anki,
     god,
     message,
     main,

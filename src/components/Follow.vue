@@ -1,5 +1,5 @@
 <template>
-  <q-btn outline :class="{'followed': value}" @click="toggleFollow" :color="color">
+  <q-btn outline @click="toggleFollow" :color="color">
     <q-icon name="add" v-show="value==0" />{{desc}}
   </q-btn>
 </template>

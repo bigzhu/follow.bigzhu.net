@@ -12,12 +12,12 @@
     },
     methods: {
       login: function(user_name, password) {
-        this.$store.commit('lib/SET_LOADING', true)
+        this.$store.commit('lib/loading', true)
         this.$store.dispatch('lib/login', {
           user_name: user_name,
           password: password
         }).then((data) => {
-          this.$store.commit('lib/SET_LOADING', false)
+          this.$store.commit('lib/loading', false)
           this.$router.push('/')
         }).catch((error) => {
           this.$q.notify(error.response.data)

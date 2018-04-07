@@ -1,8 +1,8 @@
 <template>
-  <div class="layout-padding">
+  <q-page padding >
     <messages type="god"></messages>
     <Top></Top>
-  </div>
+  </q-page>
 </template>
 
 <script>

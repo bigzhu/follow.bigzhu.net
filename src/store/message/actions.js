@@ -27,9 +27,7 @@ export const getNoTypes = (state) => {
   return axios.get('/api_no_types')
     .then((response) => {
       state.no_types = response.data
-    })
-    .catch(function(error) {
-      console.log(error)
+      return response.data
     })
 }
 
@@ -339,11 +337,4 @@ export const getTheMessage = ({
     commit('the_message', response.data)
     return response.data
   })
-}
-export const postAnki = ({
-  state,
-  commit,
-  dispatch
-}, params) => {
-  return axios.post('/api_anki', params)
 }

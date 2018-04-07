@@ -2,12 +2,12 @@
   <!-- 右上角的用户登录的头像 -->
   <q-btn v-show="is_login" flat ref="target">
     <img :src="proxy(oauth_info.avatar)" class="avatar" />
-    <q-popover ref="popover">
+    <q-popover>
       <q-list item-separator link>
-        <q-item @click.native="$router.push('/UserSet'), $refs.popover.close()">
+        <q-item @click.native="$router.push('/UserSet')">
           {{ $t("设置") }}
         </q-item>
-        <q-item @click.native="logout(), $refs.popover.close()">
+        <q-item @click.native="logout">
           {{ $t("退出") }}
         </q-item>
       </q-list>

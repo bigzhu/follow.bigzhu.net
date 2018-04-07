@@ -12,10 +12,7 @@ export const state = {
   hide_params: { // 为了 scroll 效率, 只部分显示 messages
     padding_top: 0 // 记录隐藏了 message 以后, 要加对应多少的 padding-top
   },
-  anki: {
-    user_name: null,
-    password: null
-  },
+
   last_scroll_top: 0, //
   nav_bar_height: 0,
   showBar: true, // top bar是否显示
@@ -189,31 +186,8 @@ export const actions = {
         console.log(error)
       })
   },
-  getAnki({
-    state,
-    commit,
-    dispatch
-  }) {
-    return dispatch('get', {
-      url: '/api_anki',
-      loading: true
-    }).then(function(data) {
-      if (data.anki !== null) {
-        state.anki = data.anki
-      }
-    })
-  },
-  loginAnki({
-    state,
-    commit,
-    dispatch
-  }, anki) {
-    return dispatch('post', {
-      url: '/api_login_anki',
-      body: anki,
-      loading: true
-    })
-  },
+
+
 
 
   addRemark({
