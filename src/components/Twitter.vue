@@ -2,17 +2,14 @@
   <div :class="{'center-container-bz':$q.platform.is.mobile}">
     <div class="description" v-html="text">
     </div>
-
-    <a v-for="(image,index) in message.images" :key="'image-'+index" v-if="message.type==='photo'" @click="openImg(image)" href='javascript:void(0)'>
-        <img :src="image" class="responsive" v-show="image!='error'">
+    <a v-for="(src,index) in message.medias" v-if="message.media_type==='photo'" :key="'image-'+index" @click="openImg(src)" href='javascript:void(0)'>
+        <img :src="src" class="responsive">
     </a>
-
-    <div v-for="(media,index) in medias" :key="'media'+index">
-      <video v-for="(video,index) in media.videos" :key="index" :loop="media.type==='gif'" :autoplay="media.type==='gif'" :controls="media.type!='gif'" type='video/mp4'>
-        <source :src="proxy(video.url)">
-      </video>
-    </div>
+    <video v-for="(url,index) in message.medias" v-if="message.media_type==='gif' || message.media_type==='video'" :key="index" :loop="message.media_type==='gif'" :autoplay="message.media_type==='gif'" :controls="message.media_type!='gif'" type='video/mp4'>
+        <source :src="proxy(url)">
+    </video>
   </div>
+
 </template>
 
 <script>

@@ -19,6 +19,9 @@
       })
     },
     methods: {
+      changeImgURL: function (img_url) {
+        return img_url.replace('s18.postimg.org', 's18.postimg.cc')
+      },
       proxy: function (url) {
         if (!url) {
           return ''

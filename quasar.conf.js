@@ -44,8 +44,8 @@ module.exports = function (ctx) {
           target: 'https://follow.center',
           changeOrigin: true
         },
-        '/api_': {
-          target: 'http://127.0.0.1:5000',
+        '/API': {
+          target: 'http://127.0.0.1:8080',
           changeOrigin: true
         }
       }

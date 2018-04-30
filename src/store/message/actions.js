@@ -51,11 +51,14 @@ export const getNew = ({
     god_name: god_name,
     searchKey: searchKey
   }
-  return axios.get('/api_new', {
+  return axios.get('/APINewMessages', {
       params: params
     })
     .then(function(response) {
       let data = response.data
+      console.log(data.length)
+      commit('new_messages', data)
+      /*
       commit('unread_message_count', data.unread_message_count)
       if (data.messages.length === 0) { // 没有取到数
         state.followed_god_count = data.followed_god_count
@@ -74,14 +77,14 @@ export const getNew = ({
             messages: data.messages
           })
         } else if (explore) { // explore
-          commit('SET_EXPLORE_new_messages', data.messages)
+          commit('set_explore_new_messages', data.messages)
         } else if (searchKey) { // search
-          commit('SET_NEW_SEARCH_MESSAGES', data.messages)
+          commit('set_new_search_messages', data.messages)
         } else { // main
           commit('new_messages', data.messages)
-          // commit('REFRESH_UNREAD_MESSAGE_COUNT')
         }
       }
+      */
       commit('new_loading', false)
       // commit('reflash_time_len')
       return data

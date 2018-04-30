@@ -7,6 +7,8 @@ var year = month * 12
 
 export default function (time, lang = 'cn') {
   var now = Date.now()
+  console.log(now)
+  console.log(time)
   var interval = now - time
   if (lang === 'en') {
     return enDesc(interval)

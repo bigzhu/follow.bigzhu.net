@@ -8,17 +8,17 @@
     </q-modal>
 
     <q-item>
-      <q-item-side @click.native="opened=!opened" :avatar="proxy(avatar)" class="bz_avatar">
+      <q-item-side @click.native="opened=!opened" :avatar="message.influencer_social.avatar" class="bz_avatar">
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
           <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
-            {{message.name}}
+            {{message.influencer_social.influencer_name}}
           </router-link>
         </q-item-tile>
         <q-item-tile sublabel>
-          <router-link :to="{ name: 'Recommand', params: { cat: message.cat }}" class="stamp">
-            {{message.cat}}
+          <router-link :to="{ name: 'Recommand', params: { cat: message.influencer_social.influencer.cat }}" class="stamp">
+            {{message.influencer_social.influencer.cat}}
           </router-link>
         </q-item-tile>
       </q-item-main>
@@ -31,7 +31,10 @@
     </q-item>
 
     <q-card-main class="green-bz">
+      <Twitter class="content-bz" :message="message"/>
+      <!--
       <component class="content-bz" :is="message.m_type" :message="message"></component>
+      -->
     </q-card-main>
 
     <q-card-actions align="end" class="card-actions bz">
