@@ -151,17 +151,13 @@
     methods: {
       onScroll: function(position) {
         if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
-
         let hideP = this.$store.state.main.hide_params
         let overTop = position - 500
         if (overTop > hideP.paddingTop) {
           let message = this.no_types_messages[0]
           if (!message) return
-
           let messageHeight = message.el.offsetHeight
-
           if (overTop - hideP.paddingTop < messageHeight) return
-
           this.$set(message, 'top_hide', true)
           this.$set(message, 'height', messageHeight)
           hideP.paddingTop += messageHeight
@@ -170,11 +166,8 @@
           while (overTop < hideP.paddingTop) {
             if (hideP.paddingTop === 0) return
             if (this.hide_messages.length === 0) return
-
             let message = this.hide_messages[this.hide_messages.length - 1]
-
             if (hideP.paddingTop - overTop < message.height) return
-
             hideP.paddingTop -= message.height
             message.top_hide = false
             // console.log('show message')
@@ -230,12 +223,10 @@
         let after = null
         if (this.messages.length > 0) {
           after = this.messages[this.messages.length - 1].out_created_at
-          // toast('recordLastMessage')
-          this.$store.dispatch('recordLastMessage', after)
+          // this.$store.dispatch('recordLastMessage', after)
         }
         return this.$store.dispatch('getNew', {
-          after: after,
-          limit: limit
+          after: after
         })
       }
     }

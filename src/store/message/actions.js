@@ -56,7 +56,6 @@ export const getNew = ({
     })
     .then(function(response) {
       let data = response.data
-      console.log(data.length)
       commit('new_messages', data)
       /*
       commit('unread_message_count', data.unread_message_count)
@@ -100,9 +99,6 @@ export const recordLastMessage = ({
   commit,
   dispatch
 }, time) => {
-  // if (state.last_time > parseInt(time, 10)) {
-  //   return
-  // }
   return axios.put('/api_last', {
       last: time
     })

@@ -46,11 +46,9 @@
   } from 'quasar'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
-  import GodItemBase from './GodItemBase'
   import godData from '../datas/god'
 
   export default {
-    mixins: [GodItemBase],
     props: ['god_name'],
     watch: {
       'god_name': function() {

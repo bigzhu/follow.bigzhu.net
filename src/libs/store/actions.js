@@ -26,7 +26,7 @@ export const login = ({
   let params = {}
   params.user_name = user_name
   params.password = password
-  return axios.post('/api_login', params)
+  return axios.post('/APILogin', params)
     .then(function(response) {
       return response.data
     })

@@ -1,24 +1,24 @@
 <template>
   <q-card class="the-hover-bz">
-    <q-modal v-model="opened" @show="getGodInfo" position="left" :content-css="{padding: '0px'}">
+    <q-modal v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
       </q-inner-loading>
-      <GodItem :god="god_info" :key="god_info.id" style="width: 100%" />
+      <GodItem :god="influencer" :key="influencer.id" style="width: 100%" />
     </q-modal>
 
     <q-item>
-      <q-item-side @click.native="opened=!opened" :avatar="message.influencer_social.avatar" class="bz_avatar">
+      <q-item-side @click.native="opened=!opened" :avatar="avatar" class="bz_avatar">
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
-          <router-link :to="{ name: 'God', params: { god_name: message.god_name }}">
-            {{message.influencer_social.influencer_name}}
+          <router-link :to="{ name: 'God', params: { god_name: influencer.name }}">
+            {{influencer.name}}
           </router-link>
         </q-item-tile>
         <q-item-tile sublabel>
-          <router-link :to="{ name: 'Recommand', params: { cat: message.influencer_social.influencer.cat }}" class="stamp">
-            {{message.influencer_social.influencer.cat}}
+          <router-link :to="{ name: 'Recommand', params: { cat: influencer.cat||'all' }}" class="stamp">
+            {{influencer.cat}}
           </router-link>
         </q-item-tile>
       </q-item-main>
@@ -31,7 +31,7 @@
     </q-item>
 
     <q-card-main class="green-bz">
-      <Twitter class="content-bz" :message="message"/>
+      <Twitter class="content-bz" :message="message" />
       <!--
       <component class="content-bz" :is="message.m_type" :message="message"></component>
       -->
@@ -69,14 +69,7 @@
     mixins: [Proxy],
     props: {
       message: {
-        type: Object,
-        default: function() {
-          return {
-            avatar: '',
-            name: 'loading',
-            id: 0
-          }
-        }
+        type: Object
       }
     },
     components: {
@@ -101,6 +94,12 @@
       })
     },
     computed: {
+      influencer_social() {
+        return this.message.influencer_social
+      },
+      influencer() {
+        return this.influencer_social.influencer
+      },
       loading() {
         return this.$store.state.lib.loading
       },
@@ -113,18 +112,8 @@
         }
         return this.message.href
       },
-      god_info: function() {
-        let god_info = this.$store.state.god.god_infos[this.message.god_name]
-        if (god_info) {
-          return god_info
-        }
-        return {
-          id: 0,
-          name: 'bigzhu'
-        }
-      },
       avatar: function() {
-        return this.message.avatar
+        return this.influencer_social.avatar
       }
     },
     methods: {
@@ -150,14 +139,6 @@
         } else {
           message.collect = 1
           this.$store.dispatch('collect', message.id)
-        }
-      },
-      getGodInfo: function() {
-        if (this.god_info.id === 0) {
-          this.$store.dispatch('getGod', {
-            god_name: this.message.god_name,
-            loading: true
-          })
         }
       }
     }

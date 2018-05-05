@@ -1,7 +1,7 @@
 <template>
   <q-card class="the-hover-bz">
     <q-card-media overlay-position="top">
-      <img :src="avatar||'/statics/assets/avatar.svg'">
+      <img :src="god.avatar||'/statics/assets/avatar.svg'">
       <q-card-title slot="overlay">
         {{god.name}}
         <span slot="subtitle">{{god.cat}}</span>
@@ -9,7 +9,7 @@
     </q-card-media>
 
     <q-card-main>
-      <p v-html="description"></p>
+      <p v-html="god.bio"></p>
       <GodRemark v-model="remark" :god_id="god.id" class="green-bz remark"></GodRemark>
       <q-field icon="fab fa-instagram" helper="" error-label="We got an error">
         <q-input v-model="god.instagram.name" :disable="disable_edit" float-label="Instagram" />
@@ -44,10 +44,7 @@
   import GodRemark from './GodRemark'
   import Follow from './Follow'
   import godData from '../datas/god'
-  // import default_avatar from '../assets/avatar.svg'
-  import GodItemBase from './GodItemBase'
   export default {
-    mixins: [GodItemBase],
     components: {
       GodRemark,
       Follow
