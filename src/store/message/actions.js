@@ -5,23 +5,6 @@ export const someAction = (state) => {
 }
 */
 
-// 用户信息
-export const getOauthInfo = (state) => {
-  return axios.get('/api_oauth_info')
-    .then(function(response) {
-      let data = response.data
-      if (!data.error) {
-        state.oauth_info = data
-        return data
-      } else {
-        console.log(response)
-      }
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
-}
-
 // 获取用户不看的社交类型
 export const getNoTypes = (state) => {
   return axios.get('/api_no_types')

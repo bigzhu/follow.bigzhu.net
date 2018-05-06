@@ -25,7 +25,7 @@
       <q-item-side>
         <a target="_blank" :href="href">
           <TimeLen :date_time="message.out_created_at" :lang="lang"></TimeLen>
-          <q-icon :name="'fab fa-'+message.m_type" />
+          <q-icon :name="'fab fa-'+message.social" />
         </a>
       </q-item-side>
     </q-item>

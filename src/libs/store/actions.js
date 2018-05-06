@@ -9,7 +9,7 @@ export const getOauthInfo = ({
   commit,
   dispatch
 }) => {
-  axios.get('/api_oauth_info')
+  axios.get('/APIUserInfo')
     .then(function(response) {
       commit('SET_OAUTH_INFO', response.data)
       return response.data

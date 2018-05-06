@@ -42,7 +42,7 @@
         }
       },
       is_login: function() {
-        return this.$store.state.lib.oauth_info.name
+        return this.$store.state.lib.oauth_info.user_name
       }
     },
     mounted: function() {

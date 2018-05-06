@@ -15,7 +15,7 @@
     components: {},
     computed: {
       is_login() {
-        return this.$store.state.lib.oauth_info.name
+        return this.$store.state.lib.oauth_info.user_name
       }
     },
     data: function() {
