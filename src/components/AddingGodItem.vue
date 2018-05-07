@@ -5,7 +5,7 @@
 
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-        <q-item-side :avatar="now_avatar||max_social.avatar||'/statics/assets/avatar.svg'" />
+        <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
         <router-link :to="{ name: 'God', params: { god_name: god.name }}">
@@ -19,22 +19,19 @@
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge @click.native="setNow(god.twitter)" v-show="showBadge(god.twitter)" type="twitter" :info="god.twitter"></social-badge>
-        <social-badge @click.native="setNow(god.github)" v-show="showBadge(god.github)" type="github" :info="god.github"></social-badge>
-        <social-badge @click.native="setNow(god.tumblr)" v-show="showBadge(god.tumblr)" type="tumblr" :info="god.tumblr"></social-badge>
-        <social-badge @click.native="setNow(god.instagram)" v-show="showBadge(god.instagram)" type="instagram" :info="god.instagram"></social-badge>
-        <social-badge @click.native="setNow(god.facebook)" v-show="showBadge(god.facebook)" type="facebook" :info="god.facebook"></social-badge>
+        <social-badge @click.native="setNow(god.twitter)" v-show="haveSocial('twitter')" type="twitter" :info="god.twitter"/>
+        <social-badge @click.native="setNow(god.github)" v-show="haveSocial('github')" type="github" :info="god.github"/>
+        <social-badge @click.native="setNow(god.tumblr)" v-show="haveSocial('tumblr')" type="tumblr" :info="god.tumblr"/>
+        <social-badge @click.native="setNow(god.instagram)" v-show="haveSocial('instagram')" type="instagram" :info="god.instagram"/>
+        <social-badge @click.native="setNow(god.facebook)" v-show="haveSocial('facebook')" type="facebook" :info="god.facebook"/>
       </div>
     </q-card-title>
 
     <q-card-main class="card-content green-bz">
-      <p v-html="description"></p>
-      <GodRemark v-model="remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
+      <p v-html="bio"></p>
+      <GodRemark v-model="god.remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
     </q-card-main>
     <q-card-actions align="end">
-      <!--
-      <Follow v-model="god.followed" :god_id="god.id" class="follow"></Follow>
-      -->
     </q-card-actions>
   </q-card>
 </template>
@@ -45,10 +42,11 @@
     QSpinnerPuff
   } from 'quasar'
   import Follow from './Follow'
+  import GodItem from './GodItem'
   import SocialBadge from './SocialBadge'
-  import godData from '../datas/god'
 
   export default {
+    mixins: [GodItem],
     props: ['god_name'],
     watch: {
       'god_name': function() {
@@ -67,7 +65,6 @@
     },
     data: function() {
       return {
-        god: godData,
         loading: false,
         twitter_loading: false,
         github_loading: false,
@@ -83,6 +80,10 @@
     },
     mounted() {},
     methods: {
+      // 是否有这个社交类型
+      haveSocial: function (social) {
+        return true
+      },
       getIcon: function() {
         if (this.twitter_loading) return 'fa-twitter'
         if (this.github_loading) return 'fa-github'
@@ -92,7 +93,6 @@
         return ''
       },
       init: function() {
-        this.god = godData
         this.god.name = this.god_name
       },
       showAddGodInput: function() {
@@ -175,14 +175,6 @@
           this.setInfo(info, 'tumblr')
         }
         this.allDone()
-        // let self = this
-        // this.$store.dispatch('checkSocial', {
-        //   name: this.god_name,
-        //   type: 'facebook'
-        // }).then(function(data) {
-        //   self.facebookDone(data)
-        // })
-        // this.facebook_loading = true
       },
       facebookDone: function(info) {
         this.facebook_loading = false

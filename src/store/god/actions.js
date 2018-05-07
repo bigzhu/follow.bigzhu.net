@@ -17,7 +17,7 @@ export const getMyGods = ({
   if (gods && gods.length > 0) {
     params.before = gods[gods.length - 1].created_at
   }
-  return axios.get('/api_gods', {
+  return axios.get('/APIFollowedInfluencer', {
       params: params
     })
     .then(function(response) {
@@ -98,7 +98,7 @@ export const getCat = ({
       is_my: is_my
     }
   }
-  return axios.get('/api_cat', {
+  return axios.get('/APIFollowedCats', {
       params: params
     })
     .then(function(response) {

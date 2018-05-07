@@ -1,6 +1,6 @@
 <template>
   <q-list class="list">
-    <QItem item v-for="cat in cats" :key="cat.id" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat.cat}" :to="{'name': route_name, params: {'cat': cat.cat}}">
+    <QItem item v-for="cat in cats" :key="cat.cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat.cat}" :to="{'name': route_name, params: {'cat': cat.cat}}">
       <q-item-side :icon="getIcon(cat.cat)" />
       <q-item-main>
         <q-item-tile label>{{cat.cat}}</q-item-tile>
