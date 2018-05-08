@@ -1,14 +1,11 @@
 <template>
   <q-page padding>
-    <NotYetFollow v-show="ordered_myGods.length===0 && get_done && !cat"></NotYetFollow>
-
-    <q-infinite-scroll :offset="1000" :handler="loadMore">
-      <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="addDone">
-      </AddingGodItem>
-      <GodItem v-for="god in ordered_myGods" :god="god" :key="god.id" class="god-item">
-      </GodItem>
-      <SpinnerBz :show="loading"></SpinnerBz>
-    </q-infinite-scroll>
+    <NotYetFollow v-show="ordered_influencers.length===0 && get_done && !cat"></NotYetFollow>
+    <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="addDone">
+    </AddingGodItem>
+    <GodItem v-for="god in ordered_influencers" :god="god" :key="god.id" class="god-item">
+    </GodItem>
+    <SpinnerBz :show="loading"></SpinnerBz>
     <AddGodButton v-on:add="add"></AddGodButton>
     <Top></Top>
   </q-page>
@@ -25,19 +22,18 @@
   import AddGod from '../components/AddGod'
   export default {
     events: {
-      'unfollow': function (god_id) { // 监听unfollow事件，移除已经unfollow的god
+      'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god
         this.$store.commit('DELETE_MY_GOD', god_id)
       }
     },
     watch: {
       '$route.params': {
-        handler: function () {
-          this.$store.dispatch('getMyGods', this.cat)
+        handler: function() {
+          this.$store.dispatch('getInfluencers')
         },
         deep: true
       }
     },
-    props: [],
     components: {
       Top,
       NotYetFollow,
@@ -51,53 +47,51 @@
       loading() {
         return this.$store.state.lib.loading
       },
-      cat: function () {
+      cat: function() {
         return this.$route.params.cat
       },
-      filtered_myGods: function () {
-        var self = this
-        return self.myGods.filter(function (myGod) {
-          return myGod.name.indexOf(self.key) !== -1
+      // 过滤不是已经关注的网红
+      filtered_my: function() {
+        return this.filter_cat.filter((o) => {
+          return o.following !== 0
         })
       },
-      ordered_myGods: function () {
-        return _.orderBy(this.filtered_myGods, 'followed_at', 'desc').filter((o) => {
+      // 按照关注时间排序
+      ordered_influencers: function() {
+        return _.orderBy(this.filtered_my, 'followed_at', 'desc').filter((o) => {
           return o.name !== this.god_name
         })
       },
-      myGods() {
-        if (this.$store.state.god.cat_my_gods[this.cat]) {
-          return this.$store.state.god.cat_my_gods[this.cat]
-        } else {
-          return []
-        }
+      filter_cat() {
+        return this.influencers.filter((o) => {
+          return o.cat === this.cat
+        })
+      },
+      influencers() {
+        return this.$store.state.god.influencers
       }
     },
-    data: function () {
+    data: function() {
       return {
         get_done: false,
         god_name: '',
         key: ''
       }
     },
-    mounted() {},
+    mounted() {
+      this.$store.dispatch('getInfluencers')
+    },
     methods: {
       addDone() {
         this.god_name = ''
         this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
-      loadMore: function (index, done) {
-        this.$store.dispatch('getMyGods', this.cat).then(() => {
-          setTimeout(done, 1000)
-        })
-      },
-      add: function (god_name) {
+      add: function(god_name) {
         this.god_name = god_name
       }
     }
   }
-
 </script>
 
 <style lang="stylus" scoped>

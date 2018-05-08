@@ -4,30 +4,18 @@ export const someAction = (state) => {
 }
 */
 
-export const getMyGods = ({
+export const getInfluencers = ({
   state,
   commit,
   dispatch
-}, cat) => {
-  let params = {
-    cat: cat,
-    followed: true
-  }
-  let gods = state.cat_my_gods[cat]
-  if (gods && gods.length > 0) {
-    params.before = gods[gods.length - 1].created_at
-  }
-  return axios.get('/APIFollowedInfluencer', {
-      params: params
-    })
+}) => {
+  return axios.get('/APIGetInfluencers')
     .then(function(response) {
-      commit('cat_my_gods', {
-        cat: cat,
-        gods: response.data
-      })
+      commit('influencers', response.data)
       return response.data
     })
 }
+
 export const getGod = ({
   state,
   commit,
