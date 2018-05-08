@@ -143,7 +143,7 @@ export const postGod = ({
     name: name,
     cat: cat
   }
-  return axios.post('/api_god', params)
+  return axios.post('/APIAddInfluencer', params)
     .then(function(response) {
       return response.data
     })
