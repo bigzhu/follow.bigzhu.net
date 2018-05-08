@@ -95,10 +95,10 @@
     },
     computed: {
       influencer_social() {
-        return this.message.influencer_social
+        return this.$store.state.god.map_influencer_socials[this.message.influencer_id.toString()][this.message.social]
       },
       influencer() {
-        return this.influencer_social.influencer
+        return this.$store.state.god.map_influencers[this.message.influencer_id.toString()]
       },
       loading() {
         return this.$store.state.lib.loading

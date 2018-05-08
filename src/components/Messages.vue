@@ -37,8 +37,6 @@
   import Message from './Message.vue'
   import checkLogin from '../libs/functions/checkLogin'
   import isInList from '../libs/functions/isInList'
-  // import toast from '../libs/functions/toast'
-
   export default {
     directives: {
       Scroll
@@ -57,9 +55,6 @@
         default: 'main'
       }
     },
-    // watch: {
-    //   '$route': 'fetchData'
-    // },
     events: {
       'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god的message
         this.$store.dispatch('removeFromMessages', god_id)
@@ -131,6 +126,8 @@
       }
     },
     mounted() {
+      this.$store.dispatch('getInfluencerSocials')
+      this.$store.dispatch('getInfluencers')
       if (!this.messages || this.messages.length === 0) {
         if (this.type === 'god') {
           this.$store.commit('filter_god_messages', this.god_name)

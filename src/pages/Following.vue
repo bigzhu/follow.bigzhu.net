@@ -76,7 +76,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getInfluencerSocial')
+      this.$store.dispatch('getInfluencerSocials')
       this.$store.dispatch('getInfluencers')
     },
     methods: {

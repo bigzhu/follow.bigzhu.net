@@ -3,12 +3,12 @@ import axios from 'axios'
 export const someAction = (state) => {
 }
 */
-export const getInfluencerSocial = ({
+export const getInfluencerSocials = ({
   state,
   commit,
   dispatch
 }) => {
-  return axios.get('/APIGetInfluencerSocial')
+  return axios.get('/APIGetInfluencerSocials')
     .then(function(response) {
       commit('influencer_socials', response.data)
       return response.data

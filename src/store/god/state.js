@@ -1,5 +1,7 @@
 export default {
-  map_influencer_socials: {},
+  map_influencer_socials: {}, // 所有网红社交帐号
+  influencer_socials: [],
+  map_influencers: {}, // 所有网红, id 做 key
   influencers: [], // 所有网红
   god_info: {},
   my_cats: [], // god 我的类别
