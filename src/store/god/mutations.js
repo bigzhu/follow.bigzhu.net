@@ -10,6 +10,17 @@ function initCatGod(state, type, cat) {
     Vue.set(state[type], cat, [])
   }
 }
+// 所有的社交类型重新组合存储 {id: {'twitter':{}}} 的格式
+// 为了便于检索和对应
+export const influencer_socials = (state, influencer_socials) => {
+  _.map(influencer_socials, (o) => {
+    if (state.map_influencer_socials[o.influencer_id.toString()] === undefined) {
+      state.map_influencer_socials[o.influencer_id.toString()] = {}
+    }
+    state.map_influencer_socials[o.influencer_id.toString()][o.social] = o
+  })
+  state.influencer_socials = influencer_socials
+}
 export const influencers = (state, influencers) => {
   state.influencers = influencers
 }

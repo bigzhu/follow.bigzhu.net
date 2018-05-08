@@ -1,4 +1,5 @@
 export default {
+  map_influencer_socials: {},
   influencers: [], // 所有网红
   god_info: {},
   my_cats: [], // god 我的类别

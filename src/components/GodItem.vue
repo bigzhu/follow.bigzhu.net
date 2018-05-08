@@ -2,7 +2,7 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { god_name: god.name }}">
-        <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'"/>
+        <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
         <router-link :to="{ name: 'God', params: { god_name: god.name }}">
@@ -16,11 +16,7 @@
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge @click.native="setNow(god.twitter)" v-show="haveSocial('twitter')" type="twitter" :info="god.twitter"/>
-        <social-badge @click.native="setNow(god.github)" v-show="haveSocial('github')" type="github" :info="god.github"/>
-        <social-badge @click.native="setNow(god.tumblr)" v-show="haveSocial('tumblr')" type="tumblr" :info="god.tumblr"/>
-        <social-badge @click.native="setNow(god.instagram)" v-show="haveSocial('instagram')" type="instagram" :info="god.instagram"/>
-        <social-badge @click.native="setNow(god.facebook)" v-show="haveSocial('facebook')" type="facebook" :info="god.facebook"/>
+        <social-badge v-for="social in Object.keys(influencer_social)" :key="social" @click.native="setNow(influencer_social[social])" :type="influencer_social[social].social" :info="influencer_social[social]" />
       </div>
     </q-card-title>
 
@@ -65,16 +61,19 @@
       }
     },
     computed: {
-      bio: function() {
+      influencer_social() {
+        return this.$store.state.god.map_influencer_socials[this.god.id.toString()]
+      },
+      bio() {
         return myautolinker(this.god.bio, this.god.social)
       },
-      god_id: function() {
+      god_id() {
         return this.god.god_id
       }
     },
     methods: {
       // 是否有这个社交类型
-      haveSocial: function (social) {
+      haveSocial: function(social) {
         return true
       },
       block: function(god) {
