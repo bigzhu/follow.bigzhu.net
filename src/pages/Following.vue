@@ -5,7 +5,6 @@
     </AddingGodItem>
     <GodItem v-for="god in ordered_influencers" :god="god" :key="god.id" class="god-item">
     </GodItem>
-    <SpinnerBz :show="loading"></SpinnerBz>
     <AddGodButton v-on:add="add"></AddGodButton>
     <Top></Top>
   </q-page>
@@ -14,7 +13,6 @@
 <script>
   import Top from '../components/Top'
   import NotYetFollow from '../components/NotYetFollow'
-  import SpinnerBz from '../components/SpinnerBz'
   import AddingGodItem from '../components/AddingGodItem'
   import AddGodButton from '../components/AddGodButton'
   import _ from 'lodash'
@@ -37,7 +35,6 @@
     components: {
       Top,
       NotYetFollow,
-      SpinnerBz,
       AddingGodItem,
       AddGodButton,
       AddGod,
@@ -64,7 +61,7 @@
       },
       filter_cat() {
         return this.influencers.filter((o) => {
-          return o.cat === this.cat
+          return o.cat === this.cat || !this.cat
         })
       },
       influencers() {
