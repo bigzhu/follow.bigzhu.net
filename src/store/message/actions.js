@@ -251,7 +251,7 @@ export const getOld = ({
     limit: limit,
     before: before
   }
-  return axios.get('/api_old', {
+  return axios.get('/APIOldMessages', {
       params: params
     })
     .then(function(response) {
