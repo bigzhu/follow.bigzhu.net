@@ -126,26 +126,30 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getInfluencerSocials')
-      this.$store.dispatch('getInfluencers')
-      if (!this.messages || this.messages.length === 0) {
-        if (this.type === 'god') {
-          this.$store.commit('filter_god_messages', this.god_name)
-          if (this.messages.length === 0) { // 没有过滤值时
-            this.$store.dispatch('oldMessage', {
-              god_name: this.god_name,
-              limit: 10
-            })
-          }
-        } else {
-          this.loadMessages()
-        }
-      }
+      this.$store.dispatch('getInfluencerSocials').then(() => {
+        this.$store.dispatch('getInfluencers')
+        this.initLoadMessages()
+      })
       this.$nextTick(function() {
         this.showNoLogin()
       })
     },
     methods: {
+      initLoadMessages: function() {
+        if (!this.messages || this.messages.length === 0) {
+          if (this.type === 'god') {
+            this.$store.commit('filter_god_messages', this.god_name)
+            if (this.messages.length === 0) { // 没有过滤值时
+              this.$store.dispatch('oldMessage', {
+                god_name: this.god_name,
+                limit: 10
+              })
+            }
+          } else {
+            this.loadMessages()
+          }
+        }
+      },
       onScroll: function(position) {
         if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
         let hideP = this.$store.state.main.hide_params
