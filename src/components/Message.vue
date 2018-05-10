@@ -127,7 +127,6 @@
             message_id: this.message.id
           })
           .then(function() {
-            // self.message.anki = 1
           }).catch((error) => {
             this.$q.notify(error.response.data)
           })

@@ -141,8 +141,7 @@
             this.$store.commit('filter_god_messages', this.god_name)
             if (this.messages.length === 0) { // 没有过滤值时
               this.$store.dispatch('oldMessage', {
-                god_name: this.god_name,
-                limit: 10
+                influencer_name: this.god_name
               })
             }
           } else {

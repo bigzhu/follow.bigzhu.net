@@ -202,14 +202,13 @@ export const oldMessage = ({
   commit,
   dispatch
 }, {
-  god_name,
-  searchKey,
-  limit
+  influencer_name,
+  searchKey
 }) => {
   let messages = null
   let before = null
-  if (god_name) {
-    messages = state.gods_messages[god_name]
+  if (influencer_name) {
+    messages = state.gods_messages[influencer_name]
   } else if (searchKey) {
     messages = state.search_messages
   } else {
@@ -222,14 +221,10 @@ export const oldMessage = ({
     // before = (new Date()).toISOString()
     before = (new Date()).toJSON()
   }
-  if (!limit) {
-    limit = 10
-  }
   return dispatch('getOld', {
-    god_name: god_name,
+    influencer_name: influencer_name,
     searchKey: searchKey,
-    before: before,
-    limit: limit
+    before: before
   })
 }
 
@@ -238,17 +233,15 @@ export const getOld = ({
   commit,
   dispatch
 }, {
-  god_name,
+  influencer_name,
   searchKey,
-  before,
-  limit
+  before
 }) => {
   commit('old_loading', true)
   var params = {
     not: state.no_types,
-    god_name: god_name,
+    influencer_name: influencer_name,
     searchKey: searchKey,
-    limit: limit,
     before: before
   }
   return axios.get('/APIOldMessages', {
@@ -257,7 +250,7 @@ export const getOld = ({
     .then(function(response) {
       let messages = response.data
       if (messages.length === 0) { // 没有取到数
-        if (god_name) {
+        if (influencer_name) {
           // toastr.info(god_name + '没有更多的历史消息可以看了')
         } else if (searchKey) {
           // toastr.info('没有更多的历史了')
@@ -275,9 +268,9 @@ export const getOld = ({
           }
         }
       } else {
-        if (god_name) {
+        if (influencer_name) {
           commit('god_old_messages', {
-            god_name: god_name,
+            god_name: influencer_name,
             messages: messages
           })
         } else if (searchKey) { // search

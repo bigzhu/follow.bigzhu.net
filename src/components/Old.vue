@@ -28,9 +28,8 @@
     methods: {
       old: function() {
         this.$store.dispatch('oldMessage', {
-          god_name: this.god_name,
-          search_key: this.search_key,
-          limit: 10
+          influencer_name: this.god_name,
+          search_key: this.search_key
         })
       }
     }

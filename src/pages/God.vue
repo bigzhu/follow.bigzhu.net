@@ -15,10 +15,6 @@
       Messages,
       GodInfo
     },
-    watch: {},
-    data() {
-      return {}
-    },
     computed: {
       god_info() {
         let god_info = this.$store.state.god_infos[this.god_name]
@@ -32,9 +28,7 @@
     },
     mounted() {
       this.$store.dispatch('getGod', this.god_name)
-      this.$nextTick(function() {})
-    },
-    methods: {}
+    }
   }
 </script>
 
