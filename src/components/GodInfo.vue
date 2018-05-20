@@ -1,6 +1,6 @@
 <template>
   <q-card class="the-hover-bz" v-if="influencer">
-    <q-card-media overlay-position="top" >
+    <q-card-media overlay-position="top">
       <img :src="influencer.avatar||'/statics/assets/avatar.svg'">
       <q-card-title slot="overlay">
         {{influencer.name}}
@@ -11,8 +11,8 @@
     <q-card-main>
       <p v-html="influencer.bio"></p>
       <GodRemark v-model="remark" :god_id="influencer.id" class="green-bz remark"></GodRemark>
-      <q-field v-for="s in social_types" :key="s" :icon="'fab fa-'+s">
-        <q-input v-model="(influencer_social[s]||{}).social_name" :disable="disable_edit" :float-label="s" />
+      <q-field v-for="s in social_types" :key="s.social_type" :icon="'fab fa-'+s.social_type">
+        <q-input v-model="influencer_social[s.social_type].social_name" @input="s.is_edit=true" :disable="disable_edit" :float-label="s.social_type" />
       </q-field>
     </q-card-main>
     <q-card-actions align="around">
@@ -77,15 +77,17 @@
           this.disable_edit = false
         } else {
           this.disable_edit = true
-          var god = {
-            name: this.god.name,
-            twitter: this.god.twitter,
-            github: this.god.github,
-            instagram: this.god.instagram,
-            tumblr: this.god.tumblr,
-            facebook: this.god.facebook
+          let modify_influencer_social = {
+            influencer_id: this.influencer_id
           }
-          this.$store.dispatch('putGod', god)
+          // 筛出做了修改的社交
+          this.social_types.map((o) => {
+            if (o.is_edit) {
+              modify_influencer_social[o.social_type] = this.influencer_social[o.social_type].social_name
+              o.is_edit = false
+            }
+          })
+          this.$store.dispatch('putInfluencerSocial', modify_influencer_social)
         }
       }
     }

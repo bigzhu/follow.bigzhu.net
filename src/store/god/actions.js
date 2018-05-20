@@ -77,13 +77,12 @@ export const getPublicGods = ({
       return response.data
     })
 }
-export const putGod = ({
+export const putInfluencerSocial = ({
   dispatch,
   state,
   actions
-}, god) => {
-  var params = god
-  return axios.put('/api_god', params)
+}, modify_influencer_social) => {
+  return axios.put('/APIUpdateInfluencerSocial', modify_influencer_social)
 }
 export const getCat = ({
   state,

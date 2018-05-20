@@ -16,7 +16,7 @@
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge v-for="social in Object.keys(influencer_social)" :key="social" @click.native="setNow(influencer_social[social])" :type="influencer_social[social].social" :info="influencer_social[social]" />
+        <social-badge v-for="social in Object.keys(influencer_social)" :key="social" v-show="influencer_social[social].social_name!=''" @click.native="setNow(influencer_social[social])" :type="influencer_social[social].social" :info="influencer_social[social]" />
       </div>
     </q-card-title>
 

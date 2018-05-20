@@ -31,10 +31,7 @@
     </q-item>
 
     <q-card-main class="green-bz">
-      <Twitter class="content-bz" :message="message" />
-      <!--
-      <component class="content-bz" :is="message.m_type" :message="message"></component>
-      -->
+      <MessageContent class="content-bz" :message="message" />
     </q-card-main>
 
     <q-card-actions align="end" class="card-actions bz">
@@ -46,20 +43,14 @@
       </a>
       <a @click="anki" :class="{'hover-show-bz':!message.anki}" class="anki">
         <q-icon :class="{'anki-light': message.anki}" name="stars"></q-icon>
-        <!--
-        <anki class="anki-bz" :light="message.anki" :anki_color="anki_color"/>
-        -->
       </a>
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
-  import Twitter from './Twitter'
+  import MessageContent from './MessageContent'
   import Github from './Github'
-  import Instagram from './Instagram'
-  import Tumblr from './Tumblr'
-  import Facebook from './Facebook'
   import TimeLen from '../libs/components/TimeLen'
   import Vue from 'vue'
   import Proxy from './Proxy'
@@ -75,11 +66,8 @@
     components: {
       GodItem,
       TimeLen,
-      Facebook,
-      Twitter,
-      Github,
-      Instagram,
-      Tumblr
+      MessageContent,
+      Github
     },
     data: function() {
       return {

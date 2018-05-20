@@ -17,6 +17,10 @@ export const influencer_socials = (state, influencer_socials) => {
     if (state.map_influencer_socials[o.influencer_id.toString()] === undefined) {
       state.map_influencer_socials[o.influencer_id.toString()] = {}
     }
+    // 如果有同步错误, 名字设置为空
+    if (o.error_info !== '') {
+      o.social_name = ''
+    }
     state.map_influencer_socials[o.influencer_id.toString()][o.social] = o
   })
   state.influencer_socials = influencer_socials

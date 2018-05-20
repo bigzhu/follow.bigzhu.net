@@ -59,7 +59,7 @@
         }
       },
       text: function() {
-        return myautolinker(this.message.text, 'twitter')
+        return myautolinker(this.message.text, this.message.social)
       }
     },
     methods: {
