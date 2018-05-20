@@ -24,6 +24,7 @@ export const influencer_socials = (state, influencer_socials) => {
 // 和上面不一样, 这里铺平
 export const influencers = (state, influencers) => {
   _.map(influencers, (o) => {
+    state.influencer_name_ids[o.name] = o.id.toString() // 根据 name 快速索引 id
     state.map_influencers[o.id.toString()] = o
   })
   state.influencers = influencers

@@ -1,6 +1,6 @@
 <template>
   <div id="q-app">
-    <q-layout view="hhh LpR lfr">
+    <q-layout view="hhh LpR lfr" v-if="influencers_done && influencer_socials_done">
       <q-layout-header v-model="show_header">
         <BarOne/>
         <BarTwo/>
@@ -31,7 +31,21 @@
   import store from './store'
   export default {
     store,
+    data: function() {
+      return {
+        influencers_done: false,
+        influencer_socials_done: false
+      }
+    },
     name: 'App',
+    beforeCreate() {
+      this.$store.dispatch('getInfluencerSocials').then(() => {
+        this.influencer_socials_done = true
+      })
+      this.$store.dispatch('getInfluencers').then(() => {
+        this.influencers_done = true
+      })
+    },
     components: {
       RightMenu,
       LeftMenu,

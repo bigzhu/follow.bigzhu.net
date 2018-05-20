@@ -1,33 +1,20 @@
 <template>
-  <q-card class="the-hover-bz">
-    <q-card-media overlay-position="top">
-      <img :src="god.avatar||'/statics/assets/avatar.svg'">
+  <q-card class="the-hover-bz" v-if="influencer">
+    <q-card-media overlay-position="top" >
+      <img :src="influencer.avatar||'/statics/assets/avatar.svg'">
       <q-card-title slot="overlay">
-        {{god.name}}
-        <span slot="subtitle">{{god.cat}}</span>
+        {{influencer.name}}
+        <span slot="subtitle">{{influencer.cat}}</span>
       </q-card-title>
     </q-card-media>
 
     <q-card-main>
-      <p v-html="god.bio"></p>
-      <GodRemark v-model="remark" :god_id="god.id" class="green-bz remark"></GodRemark>
-      <q-field icon="fab fa-instagram" helper="" error-label="We got an error">
-        <q-input v-model="god.instagram.name" :disable="disable_edit" float-label="Instagram" />
-      </q-field>
-      <q-field icon="fab fa-twitter" helper="" error-label="We got an error">
-        <q-input v-model="god.twitter.name" :disable="disable_edit" float-label="Twitter" />
-      </q-field>
-      <q-field icon="fab fa-github" helper="" error-label="We got an error">
-        <q-input v-model="god.github.name" :disable="disable_edit" float-label="Github" />
-      </q-field>
-      <q-field icon="fab fa-tumblr" helper="" error-label="We got an error">
-        <q-input v-model="god.tumblr.name" :disable="disable_edit" float-label="Tumblr" />
-      </q-field>
-      <q-field icon="fab fa-facebook" helper="" error-label="We got an error">
-        <q-input v-model="god.facebook.name" :disable="disable_edit" float-label="Facebook" />
+      <p v-html="influencer.bio"></p>
+      <GodRemark v-model="remark" :god_id="influencer.id" class="green-bz remark"></GodRemark>
+      <q-field v-for="s in social_types" :key="s" :icon="'fab fa-'+s">
+        <q-input v-model="(influencer_social[s]||{}).social_name" :disable="disable_edit" :float-label="s" />
       </q-field>
     </q-card-main>
-
     <q-card-actions align="around">
       <q-btn v-show="disable_edit" @click="save" class="light">
         {{ $t("编辑") }}
@@ -35,7 +22,7 @@
       <q-btn color="secondary" v-show="!disable_edit" @click="save">
         {{ $t("保存") }}
       </q-btn>
-      <Follow v-model="god.followed" :god_id="god.id"></Follow>
+      <Follow v-model="influencer.followed" :god_id="influencer.id"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -43,33 +30,32 @@
 <script>
   import GodRemark from './GodRemark'
   import Follow from './Follow'
-  import godData from '../datas/god'
+  import social_types from '../datas/social_types'
   export default {
     components: {
       GodRemark,
       Follow
     },
-    directives: {},
-    props: {
-      god: {
-        type: Object,
-        default: function() {
-          return godData
-        },
-        required: true
-      }
-    },
     computed: {
+      influencer_id() {
+        return this.$store.state.god.influencer_name_ids[this.influencer_name]
+      },
+      influencer() {
+        return this.$store.state.god.map_influencers[this.influencer_id]
+      },
+      influencer_social() {
+        return this.$store.state.god.map_influencer_socials[this.influencer_id]
+      },
+      influencer_name() {
+        return this.$route.params.god_name
+      },
       remark: function() {
-        if (this.god.remark) {
-          return this.god.remark
-        }
-        return this.god.admin_remark
+        return this.influencer.remark || this.influencer.admin_remark
       }
     },
-    mounted() {},
     data: function() {
       return {
+        social_types: social_types,
         av: '',
         desc: '',
         loading: false,
@@ -98,8 +84,6 @@
             instagram: this.god.instagram,
             tumblr: this.god.tumblr,
             facebook: this.god.facebook
-            // bio: this.god.bio
-            // avatar: this.god.avatar
           }
           this.$store.dispatch('putGod', god)
         }

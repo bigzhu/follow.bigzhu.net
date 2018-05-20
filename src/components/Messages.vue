@@ -126,10 +126,10 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getInfluencerSocials').then(() => {
-        this.$store.dispatch('getInfluencers')
-        this.initLoadMessages()
-      })
+      // this.$store.dispatch('getInfluencerSocials').then(() => {
+      //  this.$store.dispatch('getInfluencers')
+      // })
+      this.initLoadMessages()
       this.$nextTick(function() {
         this.showNoLogin()
       })
