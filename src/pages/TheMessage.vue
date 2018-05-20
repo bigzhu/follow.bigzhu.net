@@ -1,8 +1,7 @@
 <template>
   <div class="layout-padding">
     <div class="blank-padding"></div>
-    <Message :message='the_message'>
-    </Message>
+    <Message :message='the_message'/>
   </div>
 </template>
 
@@ -12,9 +11,6 @@
   export default {
     components: {
       Message
-    },
-    data: function() {
-      return {}
     },
     computed: {
       the_message() {

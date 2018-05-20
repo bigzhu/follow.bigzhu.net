@@ -40,12 +40,18 @@
   }
 </script>
 
-<style scoped>
-  video, img.responsive {
-    padding-top: 1em
-  }
-  video {
-    max-width: 100%;
-    max-height: 40rem;
-  }
+<style lang="stylus">
+// description 的内容是后来渲染的, 无法应用 scoped 特性
+  .description
+    a
+      display inherit // 避免 url 撑开 message, 导致手机屏幕左右滑动
+</style>
+
+<style lang="stylus" scoped>
+
+  video, img.responsive
+    padding-top 1em
+  video
+    max-width 100%
+    max-height 40rem
 </style>
