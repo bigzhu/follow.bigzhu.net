@@ -44,7 +44,9 @@
 // description 的内容是后来渲染的, 无法应用 scoped 特性
   .description
     a
-      display inherit // 避免 url 撑开 message, 导致手机屏幕左右滑动
+      // 避免 url 撑开 message, 导致手机屏幕左右滑动
+      word-wrap break-word
+      word-break break-all
 </style>
 
 <style lang="stylus" scoped>
