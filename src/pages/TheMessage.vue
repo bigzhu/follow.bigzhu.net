@@ -1,7 +1,7 @@
 <template>
   <div class="layout-padding">
     <div class="blank-padding"></div>
-    <Message :message='the_message'/>
+    <Message v-if="done" :message='the_message' />
   </div>
 </template>
 
@@ -12,6 +12,11 @@
     components: {
       Message
     },
+    data: function() {
+      return {
+        done: false
+      }
+    },
     computed: {
       the_message() {
         return this.$store.state.message.the_message
@@ -21,7 +26,9 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getTheMessage', this.id)
+      this.$store.dispatch('getTheMessage', this.id).then(() => {
+        this.done = true
+      })
       this.$nextTick(function() {})
     },
     beforeRouteEnter(to, from, next) {
