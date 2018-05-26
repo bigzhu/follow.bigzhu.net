@@ -22,6 +22,8 @@ export const getInfluencers = ({
   return axios.get('/APIGetInfluencers')
     .then(function(response) {
       commit('influencers', response.data)
+      commit('countCat', response.data)
+      commit('countFollowedCat', response.data)
       return response.data
     })
 }
@@ -84,37 +86,14 @@ export const putInfluencerSocial = ({
 }, modify_influencer_social) => {
   return axios.put('/APIUpdateInfluencerSocial', modify_influencer_social)
 }
-export const getCat = ({
-  state,
-  commit,
-  dispatch
-}, is_my) => {
-  let params = {}
-  if (is_my !== 0) {
-    params = {
-      is_my: is_my
-    }
-  }
-  return axios.get('/APIFollowedCats', {
-      params: params
-    })
-    .then(function(response) {
-      if (is_my) {
-        commit('my_cats', response.data)
-      } else {
-        commit('cats', response.data)
-      }
-      return response.data
-    })
-}
 export const unfollow = ({
   state,
   commit,
   dispatch
-}, god_id) => {
-  return axios.delete('/api_follow', {
+}, influencer_id) => {
+  return axios.delete('/APIUnFollow', {
     params: {
-      god_id: god_id
+      influencer_id: influencer_id
     }
   })
 }
@@ -122,11 +101,11 @@ export const follow = ({
   state,
   commit,
   dispatch
-}, god_id) => {
+}, influencer_id) => {
   let params = {
-    god_id: god_id
+      influencer_id: influencer_id
   }
-  return axios.post('/api_follow', params)
+  return axios.post('/APIFollow', params)
 }
 export const postGod = ({
   state,

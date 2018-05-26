@@ -1,9 +1,9 @@
 <template>
   <q-list class="list">
-    <QItem item v-for="cat in cats" :key="cat.cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat.cat}" :to="{'name': route_name, params: {'cat': cat.cat}}">
-      <q-item-side :icon="getIcon(cat.cat)" />
+    <QItem item v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': route_name, params: {'cat': cat}}">
+      <q-item-side :icon="getIcon(cat)" />
       <q-item-main>
-        <q-item-tile label>{{cat.cat}}</q-item-tile>
+        <q-item-tile label>{{cat}}</q-item-tile>
         <q-item-tile sublabel>{{getSublabel(cat)}}</q-item-tile>
       </q-item-main>
     </QItem>
@@ -13,11 +13,6 @@
 <script>
   export default {
     components: {
-    },
-    watch: {
-      'the_route': function() {
-        this.$store.dispatch('getCat', this.just_my)
-      }
     },
     props: {
       just_my: {
@@ -142,15 +137,12 @@
         add_cat_input_stat: false
       }
     },
-    mounted() {
-      this.$store.dispatch('getCat', this.just_my)
-    },
     methods: {
       getSublabel: function(cat) {
         if (this.just_my) {
-          return `关注${cat.count}人`
+          return `关注${this.cats[cat]}人`
         } else {
-          return `收录${cat.count}人`
+          return `收录${this.cats[cat]}人`
         }
       },
       getIcon: function(cat) {

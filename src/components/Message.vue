@@ -2,7 +2,7 @@
   <q-card class="the-hover-bz">
     <q-modal v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
-        <q-spinner-gears size="3rem" color="secondary"></q-spinner-gears>
+        <q-spinner-gears size="3rem" color="secondary"/>
       </q-inner-loading>
       <GodItem :god="influencer" :key="influencer.id" style="width: 100%" />
     </q-modal>
@@ -24,7 +24,7 @@
       </q-item-main>
       <q-item-side>
         <a target="_blank" :href="href">
-          <TimeLen :date_time="message.out_created_at" :lang="lang"></TimeLen>
+          <TimeLen :date_time="message.out_created_at" :lang="lang"/>
           <q-icon :name="'fab fa-'+message.social" />
         </a>
       </q-item-side>
@@ -36,13 +36,13 @@
 
     <q-card-actions align="end" class="card-actions bz">
       <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show-bz">
-        <q-icon name="more_horiz"></q-icon>
+        <q-icon name="more_horiz"/>
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.collect}" class="bookmark">
-        <q-icon :class="{'bookmark-light': message.collect}" name="bookmark_border"></q-icon>
+        <q-icon :class="{'bookmark-light': message.collect}" name="bookmark_border"/>
       </a>
       <a @click="anki" :class="{'hover-show-bz':!message.anki}" class="anki">
-        <q-icon :class="{'anki-light': message.anki}" name="stars"></q-icon>
+        <q-icon :class="{'anki-light': message.anki}" name="stars"/>
       </a>
     </q-card-actions>
   </q-card>

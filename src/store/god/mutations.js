@@ -47,11 +47,28 @@ export const cat_gods = (state, {
   })
   state.cat_gods[cat] = uniqGods
 }
-export const cats = (state, cats) => {
-  state.cats = cats
+export const countCat = (state, influencers) => {
+  state.cats = {}
+  influencers.map((o) => {
+    if (!state.cats[o.cat]) {
+      state.cats[o.cat] = 1
+    } else {
+      state.cats[o.cat] += 1
+    }
+  })
 }
-export const my_cats = (state, my_cats) => {
-  state.my_cats = my_cats
+// 过滤统计我关注的网红的分类和数目
+export const countFollowedCat = (state, influencers) => {
+  state.my_cats = {}
+  influencers.map((o) => {
+    if (o.following === 0) return
+    if (!state.my_cats[o.cat]) {
+      state.my_cats[o.cat] = 1
+    } else {
+      console.log('add count')
+      state.my_cats[o.cat] += 1
+    }
+  })
 }
 export const unshift_my_god = (state, {
   cat,
