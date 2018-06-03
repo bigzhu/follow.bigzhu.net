@@ -47,7 +47,6 @@
 </template>
 
 <script>
-  import CountUp from 'bz-count-up'
   import Follow from './Follow'
   import SocialBadge from './SocialBadge'
   import Proxy from './Proxy'
@@ -56,7 +55,6 @@
     mixins: [Proxy],
     components: {
       SocialBadge,
-      CountUp,
       Follow
     },
     data: function() {

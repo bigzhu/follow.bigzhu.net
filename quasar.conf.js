@@ -12,23 +12,19 @@ module.exports = function (ctx) {
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons',
+      'material-icons' // optional, you are not bound to it
       // 'ionicons',
       // 'mdi',
-      'fontawesome'
+      // 'fontawesome'
     ],
     supportIE: false,
-    vendor: {
-      add: [],
-      remove: []
-    },
     build: {
       scopeHoisting: true,
       vueRouterMode: 'history',
+      // vueCompiler: true,
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      // useNotifier: false,
       extendWebpack (cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
@@ -40,30 +36,20 @@ module.exports = function (ctx) {
     },
     devServer: {
       proxy: {
-        '/p': {
-          target: 'https://follow.center',
-          changeOrigin: true
-        },
         '/API': {
           target: 'http://127.0.0.1:8080',
           changeOrigin: true
         }
-      }
+      },
       // https: true,
       // port: 8080,
-      // open: true // opens browser window automatically
+      open: true // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
     framework: 'all',
     /*
     framework: {
       components: [
-        'QTab',
-        'QTabs',
-        'QRouteTab',
-        'CloseOverlay',
-        'QPopover',
-        'QAjaxBar',
         'QLayout',
         'QLayoutHeader',
         'QLayoutDrawer',
@@ -86,13 +72,16 @@ module.exports = function (ctx) {
       plugins: [
         'Notify'
       ]
+      // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
+      // i18n: 'de' // Quasar language
     },
     */
     // animations: 'all' --- includes all animations
     animations: [
     ],
     pwa: {
-      cacheExt: 'js,html,css,ttf,eot,otf,woff,woff2,json,svg,gif,jpg,jpeg,png,wav,ogg,webm,flac,aac,mp4,mp3',
+      // workboxPluginMode: 'InjectManifest',
+      // workboxOptions: {},
       manifest: {
         // name: 'Quasar App',
         // short_name: 'Quasar-PWA',
@@ -134,10 +123,13 @@ module.exports = function (ctx) {
       // id: 'org.cordova.quasar.app'
     },
     electron: {
+      // bundler: 'builder', // or 'packager'
       extendWebpack (cfg) {
-        // do something with cfg
+        // do something with Electron process Webpack cfg
       },
       packager: {
+        // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
+
         // OS X / Mac App Store
         // appBundleId: '',
         // appCategoryType: '',
@@ -146,10 +138,12 @@ module.exports = function (ctx) {
 
         // Window only
         // win32metadata: { ... }
-      }
-    },
+      },
+      builder: {
+        // https://www.electron.build/configuration/configuration
 
-    // leave this here for Quasar CLI
-    starterKit: '1.0.2'
+        // appId: 'quasar-app'
+      }
+    }
   }
 }
