@@ -3,29 +3,33 @@ import axios from 'axios'
 export const someAction = (state) => {
 }
 */
+import {
+  get,
+  del,
+  post,
+  put
+} from 'bz-q-lib/src/functions/http'
 export const getInfluencerSocials = ({
   state,
   commit,
   dispatch
 }) => {
-  return axios.get('/APIGetInfluencerSocials')
-    .then(function(response) {
-      commit('influencer_socials', response.data)
-      return response.data
-    })
+  return get('/APIGetInfluencerSocials', {}).then((data) => {
+    commit('influencer_socials', data)
+    return data
+  })
 }
 export const getInfluencers = ({
   state,
   commit,
   dispatch
 }) => {
-  return axios.get('/APIGetInfluencers')
-    .then(function(response) {
-      commit('influencers', response.data)
-      commit('countCat', response.data)
-      commit('countFollowedCat', response.data)
-      return response.data
-    })
+  return get('/APIGetInfluencers', {}).then((data) => {
+    commit('influencers', data)
+    commit('countCat', data)
+    commit('countFollowedCat', data)
+    return data
+  })
 }
 
 export const getGod = ({
@@ -43,17 +47,12 @@ export const getGod = ({
   if (state.god_infos[god_name]) {
     return
   }
-  return axios.get('/api_god', {
-      params: {
-        god_name: god_name
-      }
+  return get('/api_god', {
+      god_name: god_name
     })
-    .then(function(response) {
-      commit('god_infos', response.data)
-      return response.data
-    })
-    .catch(function(error) {
-      console.log(error)
+    .then((data) => {
+      commit('god_infos', data)
+      return data
     })
 }
 export const getPublicGods = ({
@@ -84,17 +83,15 @@ export const putInfluencerSocial = ({
   state,
   actions
 }, modify_influencer_social) => {
-  return axios.put('/APIUpdateInfluencerSocial', modify_influencer_social)
+  return put('/APIUpdateInfluencerSocial', modify_influencer_social)
 }
 export const unfollow = ({
   state,
   commit,
   dispatch
 }, influencer_id) => {
-  return axios.delete('/APIUnFollow', {
-    params: {
-      influencer_id: influencer_id
-    }
+  return del('/APIUnFollow', {
+    influencer_id: influencer_id
   })
 }
 export const follow = ({
@@ -103,9 +100,9 @@ export const follow = ({
   dispatch
 }, influencer_id) => {
   let params = {
-      influencer_id: influencer_id
+    influencer_id: influencer_id
   }
-  return axios.post('/APIFollow', params)
+  return post('/APIFollow', params)
 }
 export const postGod = ({
   state,
@@ -119,10 +116,7 @@ export const postGod = ({
     name: name,
     cat: cat
   }
-  return axios.post('/APIAddInfluencer', params)
-    .then(function(response) {
-      return response.data
-    })
+  return post('/APIAddInfluencer', params)
 }
 export const checkSocial = ({
   state,

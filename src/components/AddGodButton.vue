@@ -1,5 +1,5 @@
 <template>
-  <QPageSticky corner="bottom-right" :offset="[-286, 28]" class="bz">
+  <QPageSticky position="bottom" :offset="[18, 18]" class="bz">
     <q-btn @click="dialog" round color="" icon="add"></q-btn>
   </QPageSticky>
 </template>
