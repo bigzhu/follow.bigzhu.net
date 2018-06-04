@@ -118,6 +118,7 @@ export const postGod = ({
   }
   return post('/APIAddInfluencer', params)
 }
+
 export const checkSocial = ({
   state,
   commit,
@@ -136,4 +137,12 @@ export const checkSocial = ({
     .then((response) => {
       return response.data
     })
+}
+
+export const UpdateRemark = ({
+  state,
+  commit,
+  dispatch
+}, params) => {
+  return put('/API' + 'UpdateRemark', params)
 }
