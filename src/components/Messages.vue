@@ -35,8 +35,8 @@
   var getCount = 10
   import Old from './Old.vue'
   import Message from './Message.vue'
-  import checkLogin from '../libs/functions/checkLogin'
-  import isInList from '../libs/functions/isInList'
+  import checkLogin from 'bz-q-lib/src/functions/checkLogin'
+  import isInList from 'bz-q-lib/src/functions/isInList'
   export default {
     directives: {
       Scroll

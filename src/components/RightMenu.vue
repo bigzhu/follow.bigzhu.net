@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import isInList from '../libs/functions/isInList.js'
+  import isInList from 'bz-q-lib/src/functions/isInList.js'
   import GodInfo from './GodInfo'
   import Cat from './Cat'
   import RightInfo from './RightInfo'

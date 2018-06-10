@@ -1345,8 +1345,8 @@ bytes@3.0.0:
   resolved "http://registry.npm.taobao.org/bytes/download/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
 
 "bz-q-lib@https://github.com/bigzhu/bz-q-lib":
-  version "1.0.0"
-  resolved "https://github.com/bigzhu/bz-q-lib#b514609179156bf0994f5354f280a26c3fed48b5"
+  version "1.0.1"
+  resolved "https://github.com/bigzhu/bz-q-lib#9547fe35e964a8eb2037c4b066be959063cab564"
   dependencies:
     axios "^0.18.0"
     countup.js "^1.9.3"

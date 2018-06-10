@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Proxy from '../libs/components/Proxy'
+  import Proxy from 'bz-q-lib/src/components/Proxy'
   export default {
     mixins: [Proxy],
     props: [],

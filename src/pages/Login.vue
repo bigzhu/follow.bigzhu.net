@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import Login from '../libs/components/Login'
+  import Login from 'bz-q-lib/src/components/Login'
   export default {
     components: {
       Login
@@ -20,7 +20,7 @@
           this.$store.commit('lib/loading', false)
           this.$router.push('/')
         }).catch((error) => {
-          this.$q.notify(error.response.data)
+          this.$q.notify(error.response.data.error)
         })
       }
     },

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import lib from '../libs/store'
+import lib from 'bz-q-lib/src/store'
 import user from './user'
 import main from './main'
 import message from './message'

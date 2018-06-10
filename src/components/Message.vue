@@ -51,7 +51,7 @@
 <script>
   import MessageContent from './MessageContent'
   import Github from './Github'
-  import TimeLen from '../libs/components/TimeLen'
+  import TimeLen from 'bz-q-lib/src/components/TimeLen'
   import Vue from 'vue'
   import Proxy from './Proxy'
   import GodItem from './GodItem'

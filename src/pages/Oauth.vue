@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import Oauth from '../libs/components/Oauth'
+  import Oauth from 'bz-q-lib/src/components/Oauth'
   export default {
     components: {
       Oauth
