@@ -13,7 +13,7 @@
       <span slot="subtitle">Follow your dream</span>
     </q-toolbar-title>
     <!--login-->
-    <q-btn v-show="!is_login" @click="login" flat small icon="fa-sign-in">
+    <q-btn v-show="!is_login" @click="login" flat small icon="ion-log-in">
       {{ $t("登录") }}
     </q-btn>
     <!--userInfo-->
