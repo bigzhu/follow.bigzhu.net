@@ -14,7 +14,7 @@ export const getInfluencerSocials = ({
   commit,
   dispatch
 }) => {
-  return get('/APIGetInfluencerSocials', {}).then((data) => {
+  return get('/api/GetInfluencerSocials', {}).then((data) => {
     commit('influencer_socials', data)
     return data
   })
@@ -24,7 +24,7 @@ export const getInfluencers = ({
   commit,
   dispatch
 }) => {
-  return get('/APIGetInfluencers', {}).then((data) => {
+  return get('/api/GetInfluencers', {}).then((data) => {
     commit('influencers', data)
     commit('countCat', data)
     commit('countFollowedCat', data)
@@ -83,14 +83,14 @@ export const putInfluencerSocial = ({
   state,
   actions
 }, modify_influencer_social) => {
-  return put('/APIUpdateInfluencerSocial', modify_influencer_social)
+  return put('/api/UpdateInfluencerSocial', modify_influencer_social)
 }
 export const unfollow = ({
   state,
   commit,
   dispatch
 }, influencer_id) => {
-  return del('/APIUnFollow', {
+  return del('/api/UnFollow', {
     influencer_id: influencer_id
   })
 }
@@ -102,7 +102,7 @@ export const follow = ({
   let params = {
     influencer_id: influencer_id
   }
-  return post('/APIFollow', params)
+  return post('/api/Follow', params)
 }
 export const postGod = ({
   state,
@@ -116,7 +116,7 @@ export const postGod = ({
     name: name,
     cat: cat
   }
-  return post('/APIAddInfluencer', params)
+  return post('/api/AddInfluencer', params)
 }
 
 export const checkSocial = ({
@@ -144,5 +144,5 @@ export const UpdateRemark = ({
   commit,
   dispatch
 }, params) => {
-  return put('/API' + 'UpdateRemark', params)
+  return put('/api/' + 'UpdateRemark', params)
 }

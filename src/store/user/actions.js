@@ -5,7 +5,7 @@ export const someAction = (state) => {
 */
 
 export const getOauthInfo = (state) => {
-  return axios.get('/APIUserInfo')
+  return axios.get('/api/UserInfo')
     .then(function(response) {
       let data = response.data
       if (!data.error) {

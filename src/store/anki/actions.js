@@ -8,7 +8,7 @@ export const postAnki = ({
   commit,
   dispatch
 }, params) => {
-  return axios.post('/APIAddCardAnki', params)
+  return axios.post('/api/AddCardAnki', params)
 }
 export const getAnki = ({
   state,

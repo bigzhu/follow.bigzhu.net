@@ -34,7 +34,7 @@ export const getNew = ({
     god_name: god_name,
     searchKey: searchKey
   }
-  return axios.get('/APINewMessages', {
+  return axios.get('/api/NewMessages', {
       params: params
     })
     .then(function(response) {
@@ -244,7 +244,7 @@ export const getOld = ({
     searchKey: searchKey,
     before: before
   }
-  return axios.get('/APIOldMessages', {
+  return axios.get('/api/OldMessages', {
       params: params
     })
     .then(function(response) {
