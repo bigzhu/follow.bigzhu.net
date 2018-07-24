@@ -1,23 +1,20 @@
 import axios from 'axios'
-/*
-export const someAction = (state) => {
-}
-*/
+import {
+  // del,
+  // post,
+  // put,
+  get
+} from 'bz-q-lib/src/functions/http'
 
-export const getOauthInfo = (state) => {
-  return axios.get('/api/UserInfo')
-    .then(function(response) {
-      let data = response.data
-      if (!data.error) {
-        state.oauth_info = data
-        return data
-      } else {
-        console.log(response)
-      }
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
+export const getOauthInfo = ({
+  state,
+  commit,
+  dispatch
+}) => {
+  return get('/api/OauthInfo').then((data) => {
+    commit('oauth_info', data)
+    return data
+  })
 }
 
 export const getNoTypes = ({

@@ -42,15 +42,13 @@
         }
       },
       is_login: function() {
-        return this.$store.state.lib.oauth_info.user_name
+        return this.$store.state.lib.oauth_info.name
       }
     },
     mounted: function() {
       if (this.is_login === '') {
         // 取用户信息
-        this.$store.dispatch('lib/getOauthInfo').catch((error) => {
-          this.$q.notify(error.response.data)
-        })
+        this.$store.dispatch('lib/getOauthInfo')
         // 取用户不关注社交类型
         this.$store.dispatch('getNoTypes')
       }

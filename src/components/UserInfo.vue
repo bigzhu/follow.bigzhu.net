@@ -1,7 +1,7 @@
 <template>
   <!-- 右上角的用户登录的头像 -->
   <q-btn v-show="is_login" flat ref="target">
-    <img :src="proxy(oauth_info.avatar)" class="avatar" />
+    <img :src="oauth_info.picture" class="avatar" />
     <q-popover>
       <q-list item-separator link>
         <q-item @click.native="$router.push('/UserSet')">
