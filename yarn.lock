@@ -1346,7 +1346,7 @@ bytes@3.0.0:
 
 "bz-q-lib@https://github.com/bigzhu/bz-q-lib":
   version "1.0.1"
-  resolved "https://github.com/bigzhu/bz-q-lib#145d9bcff2d419e0f0dd1eb43541ea484219017a"
+  resolved "https://github.com/bigzhu/bz-q-lib#7e72962355b195e645116a0cca6c73f7df12532b"
   dependencies:
     axios "^0.18.0"
     countup.js "^1.9.3"
