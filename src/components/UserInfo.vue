@@ -1,6 +1,6 @@
 <template>
   <!-- 右上角的用户登录的头像 -->
-  <q-btn v-show="is_login" flat ref="target">
+  <q-btn flat>
     <img :src="oauth_info.picture" class="avatar" />
     <q-popover>
       <q-list item-separator link>
@@ -16,15 +16,10 @@
 </template>
 
 <script>
-  import Proxy from 'bz-q-lib/src/components/Proxy'
   export default {
-    mixins: [Proxy],
     props: [],
     components: {},
     computed: {
-      is_login() {
-        return this.$store.state.lib.oauth_info.user_name
-      },
       oauth_info() {
         return this.$store.state.lib.oauth_info
       }
@@ -39,7 +34,7 @@
     },
     methods: {
       logout: function() {
-        window.location = '/api_logout'
+        window.location = '/api/Logout'
       }
     }
   }
