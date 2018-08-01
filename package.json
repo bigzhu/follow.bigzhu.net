@@ -1,8 +1,8 @@
 {
   "name": "dev",
-  "version": "1.0.0",
-  "description": "dev",
-  "productName": "dev",
+  "version": "1.0.1",
+  "description": "Follow Your Dream",
+  "productName": "Follow Center",
   "cordovaId": "org.cordova.quasar.app",
   "author": "bigzhu <vermiliondun@gmail.com>",
   "private": true,
@@ -17,6 +17,7 @@
     "countup.js": "^1.9.3",
     "lib": "https://github.com/bigzhu/bz-q-lib",
     "marked": "^0.4.0",
+    "npm": "^6.2.0",
     "vue-i18n": "^7.3.3"
   },
   "devDependencies": {
@@ -30,7 +31,8 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.3.0",
-    "quasar-cli": "^0.16.0"
+    "quasar-cli": "^0.17.5",
+    "strip-ansi": "=3.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",
