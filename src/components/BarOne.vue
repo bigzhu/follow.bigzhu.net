@@ -50,7 +50,7 @@
         // 取用户信息
         this.$store.dispatch('lib/getOauthInfo')
         // 取用户不关注社交类型
-        this.$store.dispatch('getNoTypes')
+        // this.$store.dispatch('getNoTypes')
       }
       this.$nextTick(function() {
         // code that assumes this.$el is in-document

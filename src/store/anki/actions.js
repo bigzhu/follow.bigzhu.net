@@ -15,7 +15,7 @@ export const getAnki = ({
   commit,
   dispatch
 }) => {
-  return axios.get('/api_anki')
+  return axios.get('/api/anki')
     .then((response) => {
       if (response.data !== null) {
         commit('anki', response.data)

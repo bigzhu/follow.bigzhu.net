@@ -13,12 +13,15 @@ export default {
   '传记': 'Biography',
   '寻他': 'What to follow',
   '保存': 'Saved',
+  '密码': 'Password',
+  '邮箱': 'Email',
   '关注': 'Follow',
   '人关注': 'Followers',
   '您还没有关注任何人，从': 'From',
   '里面寻找您感兴趣的人吧!': 'to find what you like!',
   '已跟踪': 'Following',
   '历史消息': 'History',
+  '关于 Follow Center': 'About Follow Center',
   '跟踪': 'no follow'
   /*
    '添加要跟踪的新目标':'Add what you want to follow',
@@ -39,7 +42,7 @@ export default {
      title: 'Follow your dreams':'Follow your dreams',
      withoutsns: 'No social media? ',
      hangout: '随意逛逛':'Walk up',
-     about: '关于Follow Center':'About Follow Center',
+     about: '关于 Follow Center':'About Follow Center',
      phone: '手机客户端下载':'App',
      andriod: '安卓手机端下载':'Andriod App'
      login: '登录':'Login',

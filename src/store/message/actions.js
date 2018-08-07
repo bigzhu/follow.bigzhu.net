@@ -5,15 +5,6 @@ export const someAction = (state) => {
 }
 */
 
-// 获取用户不看的社交类型
-export const getNoTypes = (state) => {
-  return axios.get('/api_no_types')
-    .then((response) => {
-      state.no_types = response.data
-      return response.data
-    })
-}
-
 // 获取新信息
 export const getNew = ({
   state,
