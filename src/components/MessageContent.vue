@@ -3,10 +3,10 @@
     <div class="description" v-html="text">
     </div>
     <a v-for="(src,index) in message.medias" v-if="message.media_type==='photo'" :key="'image-'+index" @click="openImg(src)" href='javascript:void(0)'>
-        <img :src="src" class="responsive">
+        <img :src="encodeFile(src)" class="responsive">
     </a>
     <video v-for="(url,index) in message.medias" v-if="message.media_type==='gif' || message.media_type==='video'" :key="index" :loop="message.media_type==='gif'" :autoplay="message.media_type==='gif'" :controls="message.media_type!='gif'" type='video/mp4'>
-        <source :src="url">
+        <source :src="encodeFile(url)">
     </video>
   </div>
 

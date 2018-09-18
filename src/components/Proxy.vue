@@ -31,6 +31,14 @@
         // return '/p?url=' + encodeURIComponent(url)
         return '/p/' + url
       }
+      encodeFile: function (url) {
+        var filename = url.substring(url.lastIndexOf('/')+1)
+        // 下载时候保存的用户名可能带着 url 参数, 比如 medias/DanBilzerian/twitter/q0uzbK2fm6a2UQsb.mp4?tag=5
+				// 传递到 nginx 时候 ?tag=5 会被忽略, 所以需要编码
+        filename =encodeURI(filename)
+        var path = url.substring(0, url.lastIndexOf("/"));
+				return path+'/'+filename
+      }
     }
   }
 </script>
