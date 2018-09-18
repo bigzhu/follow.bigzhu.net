@@ -6,7 +6,7 @@
         <img :src="src" class="responsive">
     </a>
     <video v-for="(url,index) in message.medias" v-if="message.media_type==='gif' || message.media_type==='video'" :key="index" :loop="message.media_type==='gif'" :autoplay="message.media_type==='gif'" :controls="message.media_type!='gif'" type='video/mp4'>
-        <source :src="proxy(url)">
+        <source :src="url">
     </video>
   </div>
 
