@@ -193,13 +193,13 @@ export const oldMessage = ({
   commit,
   dispatch
 }, {
-  influencer_name,
+  star_name,
   searchKey
 }) => {
   let messages = null
   let before = null
-  if (influencer_name) {
-    messages = state.gods_messages[influencer_name]
+  if (star_name) {
+    messages = state.gods_messages[star_name]
   } else if (searchKey) {
     messages = state.search_messages
   } else {
@@ -213,7 +213,7 @@ export const oldMessage = ({
     before = (new Date()).toJSON()
   }
   return dispatch('getOld', {
-    influencer_name: influencer_name,
+    star_name: star_name,
     searchKey: searchKey,
     before: before
   })
@@ -224,14 +224,14 @@ export const getOld = ({
   commit,
   dispatch
 }, {
-  influencer_name,
+  star_name,
   searchKey,
   before
 }) => {
   commit('old_loading', true)
   var params = {
     not: state.no_types,
-    influencer_name: influencer_name,
+    star_name: star_name,
     searchKey: searchKey,
     before: before
   }
@@ -241,7 +241,7 @@ export const getOld = ({
     .then(function(response) {
       let messages = response.data
       if (messages.length === 0) { // 没有取到数
-        if (influencer_name) {
+        if (star_name) {
           // toastr.info(god_name + '没有更多的历史消息可以看了')
         } else if (searchKey) {
           // toastr.info('没有更多的历史了')
@@ -259,9 +259,9 @@ export const getOld = ({
           }
         }
       } else {
-        if (influencer_name) {
+        if (star_name) {
           commit('god_old_messages', {
-            god_name: influencer_name,
+            god_name: star_name,
             messages: messages
           })
         } else if (searchKey) { // search

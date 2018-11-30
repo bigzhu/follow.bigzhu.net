@@ -29,13 +29,13 @@
       },
       god_info() {
         console.log(this.god_name)
-        console.log(this.$store.state.god.influencer_name_ids)
-        console.log(this.$store.state.god.influencer_name_ids['ruanyf'])
-        let id_str = this.$store.state.god.influencer_name_ids[this.god_name]
+        console.log(this.$store.state.god.star_name_ids)
+        console.log(this.$store.state.god.star_name_ids['ruanyf'])
+        let id_str = this.$store.state.god.star_name_ids[this.god_name]
         console.log(id_str)
-        let influencer = this.$store.state.god.map_influencers[id_str]
-        console.log(influencer)
-        return influencer
+        let star = this.$store.state.god.map_stars[id_str]
+        console.log(star)
+        return star
       },
       god_name() {
         return this.$route.params.god_name

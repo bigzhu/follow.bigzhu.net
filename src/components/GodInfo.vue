@@ -1,18 +1,18 @@
 <template>
-  <q-card class="the-hover-bz" v-if="influencer">
+  <q-card class="the-hover-bz" v-if="star">
     <q-card-media overlay-position="top">
-      <img :src="influencer.avatar||'/statics/assets/avatar.svg'">
+      <img :src="star.avatar||'/statics/assets/avatar.svg'">
       <q-card-title slot="overlay">
-        {{influencer.name}}
-        <span slot="subtitle">{{influencer.cat}}</span>
+        {{star.name}}
+        <span slot="subtitle">{{star.cat}}</span>
       </q-card-title>
     </q-card-media>
 
     <q-card-main>
-      <p v-html="influencer.bio"></p>
-      <GodRemark v-model="remark" :god_id="influencer.id" class="green-bz remark"></GodRemark>
+      <p v-html="star.bio"></p>
+      <GodRemark v-model="remark" :god_id="star.id" class="green-bz remark"></GodRemark>
       <q-field v-for="s in social_types" :key="s.social_type" :icon="'fab fa-'+s.social_type">
-        <q-input v-model="influencer_social[s.social_type].social_name" @input="s.is_edit=true" :disable="disable_edit" :float-label="s.social_type" />
+        <q-input v-model="star_social[s.social_type].social_name" @input="s.is_edit=true" :disable="disable_edit" :float-label="s.social_type" />
       </q-field>
     </q-card-main>
     <q-card-actions align="around">
@@ -22,7 +22,7 @@
       <q-btn color="secondary" v-show="!disable_edit" @click="save">
         {{ $t("保存") }}
       </q-btn>
-      <Follow v-model="influencer.followed" :god_id="influencer.id"></Follow>
+      <Follow v-model="star.followed" :god_id="star.id"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -37,20 +37,20 @@
       Follow
     },
     computed: {
-      influencer_id() {
-        return this.$store.state.god.influencer_name_ids[this.influencer_name]
+      star_id() {
+        return this.$store.state.god.star_name_ids[this.star_name]
       },
-      influencer() {
-        return this.$store.state.god.map_influencers[this.influencer_id]
+      star() {
+        return this.$store.state.god.map_stars[this.star_id]
       },
-      influencer_social() {
-        return this.$store.state.god.map_influencer_socials[this.influencer_id]
+      star_social() {
+        return this.$store.state.god.map_star_socials[this.star_id]
       },
-      influencer_name() {
+      star_name() {
         return this.$route.params.god_name
       },
       remark: function() {
-        return this.influencer.remark || this.influencer.admin_remark
+        return this.star.remark || this.star.admin_remark
       }
     },
     data: function() {
@@ -77,17 +77,17 @@
           this.disable_edit = false
         } else {
           this.disable_edit = true
-          let modify_influencer_social = {
-            influencer_id: this.influencer_id
+          let modify_star_social = {
+            star_id: this.star_id
           }
           // 筛出做了修改的社交
           this.social_types.map((o) => {
             if (o.is_edit) {
-              modify_influencer_social[o.social_type] = this.influencer_social[o.social_type].social_name
+              modify_star_social[o.social_type] = this.star_social[o.social_type].social_name
               o.is_edit = false
             }
           })
-          this.$store.dispatch('putInfluencerSocial', modify_influencer_social)
+          this.$store.dispatch('putStarSocial', modify_star_social)
         }
       }
     }

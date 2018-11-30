@@ -10,28 +10,28 @@ function initCatGod(state, type, cat) {
     Vue.set(state[type], cat, [])
   }
 }
-// 所有的社交类型重新组合存储 {influencer_id: {'twitter':{}}} 的格式
+// 所有的社交类型重新组合存储 {star_id: {'twitter':{}}} 的格式
 // 为了便于检索和对应
-export const influencer_socials = (state, influencer_socials) => {
-  _.map(influencer_socials, (o) => {
-    if (state.map_influencer_socials[o.influencer_id.toString()] === undefined) {
-      state.map_influencer_socials[o.influencer_id.toString()] = {}
+export const star_socials = (state, star_socials) => {
+  _.map(star_socials, (o) => {
+    if (state.map_star_socials[o.star_id.toString()] === undefined) {
+      state.map_star_socials[o.star_id.toString()] = {}
     }
     // 如果有同步错误, 名字设置为空
     if (o.error_info !== '') {
       o.social_name = ''
     }
-    state.map_influencer_socials[o.influencer_id.toString()][o.social] = o
+    state.map_star_socials[o.star_id.toString()][o.social] = o
   })
-  state.influencer_socials = influencer_socials
+  state.star_socials = star_socials
 }
 // 和上面不一样, 这里铺平
-export const influencers = (state, influencers) => {
-  _.map(influencers, (o) => {
-    state.influencer_name_ids[o.name] = o.id.toString() // 根据 name 快速索引 id
-    state.map_influencers[o.id.toString()] = o
+export const stars = (state, stars) => {
+  _.map(stars, (o) => {
+    state.star_name_ids[o.name] = o.id.toString() // 根据 name 快速索引 id
+    state.map_stars[o.id.toString()] = o
   })
-  state.influencers = influencers
+  state.stars = stars
 }
 export const god_infos = (state, god_info) => {
   Vue.set(state.god_infos, god_info.name, god_info)
@@ -47,9 +47,9 @@ export const cat_gods = (state, {
   })
   state.cat_gods[cat] = uniqGods
 }
-export const countCat = (state, influencers) => {
+export const countCat = (state, stars) => {
   state.cats = {}
-  influencers.map((o) => {
+  stars.map((o) => {
     if (!state.cats[o.cat]) {
       state.cats[o.cat] = 1
     } else {
@@ -58,9 +58,9 @@ export const countCat = (state, influencers) => {
   })
 }
 // 过滤统计我关注的网红的分类和数目
-export const countFollowedCat = (state, influencers) => {
+export const countFollowedCat = (state, stars) => {
   state.my_cats = {}
-  influencers.map((o) => {
+  stars.map((o) => {
     if (o.following === 0) return
     if (!state.my_cats[o.cat]) {
       state.my_cats[o.cat] = 1

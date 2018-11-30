@@ -126,8 +126,8 @@
       }
     },
     mounted() {
-      // this.$store.dispatch('getInfluencerSocials').then(() => {
-      //  this.$store.dispatch('getInfluencers')
+      // this.$store.dispatch('getStarSocials').then(() => {
+      //  this.$store.dispatch('getStars')
       // })
       this.initLoadMessages()
       this.$nextTick(function() {
@@ -141,7 +141,7 @@
             this.$store.commit('filter_god_messages', this.god_name)
             if (this.messages.length === 0) { // 没有过滤值时
               this.$store.dispatch('oldMessage', {
-                influencer_name: this.god_name
+                star_name: this.god_name
               })
             }
           } else {

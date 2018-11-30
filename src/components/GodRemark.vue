@@ -57,7 +57,7 @@
       save: function() {
         this.remark = this.$el.getElementsByClassName('remark-edit-content')[0].innerHTML
         this.$store.dispatch('UpdateRemark', {
-          influencer_id: this.god_id,
+          star_id: this.god_id,
           remark: this.remark
         })
         this.is_edit = false

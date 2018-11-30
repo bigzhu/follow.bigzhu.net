@@ -4,7 +4,7 @@
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary"/>
       </q-inner-loading>
-      <GodItem :god="influencer" :key="influencer.id" style="width: 100%" />
+      <GodItem :god="star" :key="star.id" style="width: 100%" />
     </q-modal>
 
     <q-item>
@@ -12,13 +12,13 @@
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
-          <router-link :to="{ name: 'God', params: { god_name: influencer.name }}">
-            {{influencer.name}}
+          <router-link :to="{ name: 'God', params: { god_name: star.name }}">
+            {{star.name}}
           </router-link>
         </q-item-tile>
         <q-item-tile sublabel>
-          <router-link :to="{ name: 'Recommand', params: { cat: influencer.cat||'all' }}" class="stamp">
-            {{influencer.cat}}
+          <router-link :to="{ name: 'Recommand', params: { cat: star.cat||'all' }}" class="stamp">
+            {{star.cat}}
           </router-link>
         </q-item-tile>
       </q-item-main>
@@ -82,11 +82,11 @@
       })
     },
     computed: {
-      influencer_social() {
-        return this.$store.state.god.map_influencer_socials[this.message.influencer_id.toString()][this.message.social]
+      star_social() {
+        return this.$store.state.god.map_star_socials[this.message.star_id.toString()][this.message.social]
       },
-      influencer() {
-        return this.$store.state.god.map_influencers[this.message.influencer_id.toString()]
+      star() {
+        return this.$store.state.god.map_stars[this.message.star_id.toString()]
       },
       loading() {
         return this.$store.state.lib.loading
@@ -101,7 +101,7 @@
         return this.message.href
       },
       avatar: function() {
-        return this.influencer_social.avatar
+        return this.star_social.avatar
       }
     },
     methods: {

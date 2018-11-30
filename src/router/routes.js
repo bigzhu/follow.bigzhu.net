@@ -1,11 +1,4 @@
- var importByName = (name) => {
-   return {
-     path: '/' + name,
-     name: name,
-     component: () =>
-       import('pages/' + name)
-   }
- }
+import importByName from 'bz-q-lib/src/functions/importByName'
  export default [
    /*
    {

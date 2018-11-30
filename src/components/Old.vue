@@ -28,7 +28,7 @@
     methods: {
       old: function() {
         this.$store.dispatch('oldMessage', {
-          influencer_name: this.god_name,
+          star_name: this.god_name,
           search_key: this.search_key
         })
       }

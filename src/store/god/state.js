@@ -1,9 +1,9 @@
 export default {
-  map_influencer_socials: {}, // 所有网红社交帐号
-  influencer_socials: [],
-  map_influencers: {}, // 所有网红, id 做 key
-  influencer_name_ids: {}, // 根据 influencer name 快速索引 id
-  influencers: [], // 所有网红
+  map_star_socials: {}, // 所有网红社交帐号
+  star_socials: [],
+  map_stars: {}, // 所有网红, id 做 key
+  star_name_ids: {}, // 根据 star name 快速索引 id
+  stars: [], // 所有网红
   god_info: {},
   my_cats: {}, // god 我的类别
   followed_god_count: -1, // 关注的god数

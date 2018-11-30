@@ -8,14 +8,14 @@ export const postAnki = ({
   commit,
   dispatch
 }, params) => {
-  return axios.post('/api/AddCardAnki', params)
+  return axios.post('/api/ankis', params)
 }
 export const getAnki = ({
   state,
   commit,
   dispatch
 }) => {
-  return axios.get('/api/anki')
+  return axios.get('/api/ankis')
     .then((response) => {
       if (response.data !== null) {
         commit('anki', response.data)

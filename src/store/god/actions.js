@@ -9,23 +9,23 @@ import {
   post,
   put
 } from 'bz-q-lib/src/functions/http'
-export const getInfluencerSocials = ({
+export const getStarSocials = ({
   state,
   commit,
   dispatch
 }) => {
-  return get('/api/GetInfluencerSocials', {}).then((data) => {
-    commit('influencer_socials', data)
+  return get('/api/star_socials', {}).then((data) => {
+    commit('star_socials', data)
     return data
   })
 }
-export const getInfluencers = ({
+export const getStars = ({
   state,
   commit,
   dispatch
 }) => {
-  return get('/api/GetInfluencers', {}).then((data) => {
-    commit('influencers', data)
+  return get('/api/GetStars', {}).then((data) => {
+    commit('stars', data)
     commit('countCat', data)
     commit('countFollowedCat', data)
     return data
@@ -78,29 +78,29 @@ export const getPublicGods = ({
       return response.data
     })
 }
-export const putInfluencerSocial = ({
+export const putStarSocial = ({
   dispatch,
   state,
   actions
-}, modify_influencer_social) => {
-  return put('/api/UpdateInfluencerSocial', modify_influencer_social)
+}, modify_star_social) => {
+  return put('/api/UpdateStarSocial', modify_star_social)
 }
 export const unfollow = ({
   state,
   commit,
   dispatch
-}, influencer_id) => {
+}, star_id) => {
   return del('/api/UnFollow', {
-    influencer_id: influencer_id
+    star_id: star_id
   })
 }
 export const follow = ({
   state,
   commit,
   dispatch
-}, influencer_id) => {
+}, star_id) => {
   let params = {
-    influencer_id: influencer_id
+    star_id: star_id
   }
   return post('/api/Follow', params)
 }
@@ -116,7 +116,7 @@ export const postGod = ({
     name: name,
     cat: cat
   }
-  return post('/api/AddInfluencer', params)
+  return post('/api/AddStar', params)
 }
 
 export const checkSocial = ({

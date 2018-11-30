@@ -16,7 +16,7 @@
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge v-for="social in Object.keys(influencer_social)" :key="social" v-show="influencer_social[social].social_name!=''" @click.native="setNow(influencer_social[social])" :type="influencer_social[social].social" :info="influencer_social[social]" />
+        <social-badge v-for="social in Object.keys(star_social)" :key="social" v-show="star_social[social].social_name!=''" @click.native="setNow(star_social[social])" :type="star_social[social].social" :info="star_social[social]" />
       </div>
     </q-card-title>
 
@@ -61,8 +61,8 @@
       }
     },
     computed: {
-      influencer_social() {
-        return this.$store.state.god.map_influencer_socials[this.god.id.toString()]
+      star_social() {
+        return this.$store.state.god.map_star_socials[this.god.id.toString()]
       },
       bio() {
         return myautolinker(this.god.bio, this.god.social)

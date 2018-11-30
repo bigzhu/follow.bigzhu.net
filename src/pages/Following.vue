@@ -1,9 +1,9 @@
 <template>
   <q-page padding>
-    <NotYetFollow v-show="ordered_influencers.length===0 && get_done && !cat"></NotYetFollow>
+    <NotYetFollow v-show="ordered_stars.length===0 && get_done && !cat"></NotYetFollow>
     <AddingGodItem v-show="god_name!==''" :god_name="god_name" @add_done="addDone">
     </AddingGodItem>
-    <GodItem v-for="god in ordered_influencers" :god="god" :key="god.id" class="god-item">
+    <GodItem v-for="god in ordered_stars" :god="god" :key="god.id" class="god-item">
     </GodItem>
     <AddGodButton v-on:add="add"></AddGodButton>
     <Top></Top>
@@ -27,7 +27,7 @@
     watch: {
       '$route.params': {
         handler: function() {
-          this.$store.dispatch('getInfluencers')
+          this.$store.dispatch('getStars')
         },
         deep: true
       }
@@ -54,18 +54,18 @@
         })
       },
       // 按照关注时间排序
-      ordered_influencers: function() {
+      ordered_stars: function() {
         return _.orderBy(this.filtered_my, 'followed_at', 'desc').filter((o) => {
           return o.name !== this.god_name
         })
       },
       filter_cat() {
-        return this.influencers.filter((o) => {
+        return this.stars.filter((o) => {
           return o.cat === this.cat || !this.cat
         })
       },
-      influencers() {
-        return this.$store.state.god.influencers
+      stars() {
+        return this.$store.state.god.stars
       }
     },
     data: function() {
@@ -76,8 +76,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getInfluencerSocials')
-      this.$store.dispatch('getInfluencers')
+      this.$store.dispatch('getStarSocials')
+      this.$store.dispatch('getStars')
     },
     methods: {
       addDone() {
