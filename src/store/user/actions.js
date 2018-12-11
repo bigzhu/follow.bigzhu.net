@@ -3,19 +3,8 @@ import {
   // del,
   // post,
   // put,
-  get
+  // get
 } from 'bz-q-lib/src/functions/http'
-
-export const getOauthInfo = ({
-  state,
-  commit,
-  dispatch
-}) => {
-  return get('/api/OauthInfo').then((data) => {
-    commit('oauth_info', data)
-    return data
-  })
-}
 
 export const getNoTypes = ({
   state,

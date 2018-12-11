@@ -24,7 +24,7 @@ export const getStars = ({
   commit,
   dispatch
 }) => {
-  return get('/api/GetStars', {}).then((data) => {
+  return get('/api/stars', {}).then((data) => {
     commit('stars', data)
     commit('countCat', data)
     commit('countFollowedCat', data)
@@ -83,14 +83,14 @@ export const putStarSocial = ({
   state,
   actions
 }, modify_star_social) => {
-  return put('/api/UpdateStarSocial', modify_star_social)
+  return put('/api/star_socials', modify_star_social)
 }
 export const unfollow = ({
   state,
   commit,
   dispatch
 }, star_id) => {
-  return del('/api/UnFollow', {
+  return del('/api/followers', {
     star_id: star_id
   })
 }
@@ -102,7 +102,7 @@ export const follow = ({
   let params = {
     star_id: star_id
   }
-  return post('/api/Follow', params)
+  return post('/api/followers', params)
 }
 export const postGod = ({
   state,
@@ -116,7 +116,7 @@ export const postGod = ({
     name: name,
     cat: cat
   }
-  return post('/api/AddStar', params)
+  return post('/api/stars', params)
 }
 
 export const checkSocial = ({
@@ -131,7 +131,7 @@ export const checkSocial = ({
     name: name,
     type: type
   }
-  return axios.get('/api_social', {
+  return axios.get('/socials', {
       params: params
     })
     .then((response) => {
@@ -144,5 +144,5 @@ export const UpdateRemark = ({
   commit,
   dispatch
 }, params) => {
-  return put('/api/' + 'UpdateRemark', params)
+  return put('/api/' + 'remarks', params)
 }
