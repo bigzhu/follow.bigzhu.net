@@ -68,7 +68,6 @@
       }
     },
     mounted: function() {
-      this.$store.dispatch('getRegisteredCount')
       this.$nextTick(function() {
         // $(this.$el).find('.ui.dropdown').dropdown()
         // code that assumes this.$el is in-document

@@ -56,7 +56,6 @@ export default {
   mounted: function () {
     let self = this
 
-    this.$store.dispatch('getRegisteredCount')
     if (this.anki.user_name == null) {
       this.$store.dispatch('getAnki').then(function (data) {
         if (self.anki.user_name !== null) {

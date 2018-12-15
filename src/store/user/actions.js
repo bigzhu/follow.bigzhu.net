@@ -20,15 +20,3 @@ export const getNoTypes = ({
       console.log(error)
     })
 }
-
-export const getRegisteredCount = ({
-  state,
-  commit,
-  dispatch
-}, status) => {
-  return axios.get('/api_registered')
-    .then(function(response) {
-      commit('registered_count', response.data.registered_count)
-      return response.data.registered_count
-    })
-}
