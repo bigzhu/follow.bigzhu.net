@@ -55,7 +55,7 @@
       },
       // 按照关注时间排序
       ordered_stars: function() {
-        return _.orderBy(this.filtered_my, 'followed_at', 'desc').filter((o) => {
+        return _.orderBy(this.filtered_my, 'following_at', 'desc').filter((o) => {
           return o.name !== this.god_name
         })
       },

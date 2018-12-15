@@ -12,7 +12,7 @@
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
-          {{god.followed_count||1}} {{ $t("人关注") }}
+          {{god.following_count||1}} {{ $t("人关注") }}
         </q-item-tile>
       </q-item-main>
     </q-item>
@@ -187,8 +187,8 @@
       allDone: function(info) {
         this.loading = false
         // Object.assign(this.god_info, this.god)
-        this.god.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
-        this.god.followed = 1
+        this.god.following_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.god.following = 1
         this.$store.commit('unshift_my_god', {
           cat: this.cat,
           god: this.god

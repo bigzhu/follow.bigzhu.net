@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Old :god_name="god_name" :show="!(followed_god_count===0)"></Old>
-    <NotYetFollow v-show="followed_god_count===0 && is_login"></NotYetFollow>
+    <Old :god_name="god_name" :show="!(following_god_count===0)"></Old>
+    <NotYetFollow v-show="following_god_count===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
         <img src="../statics/assets/no-message.svg">
@@ -14,7 +14,7 @@
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${paddingTop}px;`">
       <message ref="messages" v-for='message in no_types_messages' :message='message' :key="message.id">
       </message>
-      <div v-show="followed_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
+      <div v-show="following_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("没有更多内容了, 看看") }}
           <router-link :to="{'name': 'Recommand'}">{{ $t("寻他") }}&gt;</router-link>
         </p>
@@ -78,8 +78,8 @@
       unread_message_count() {
         return this.$store.state.unread_message_count
       },
-      followed_god_count() {
-        return this.$store.state.followed_god_count
+      following_god_count() {
+        return this.$store.state.following_god_count
       },
       god_name() {
         if (this.$route.params.god_name) return this.$route.params.god_name

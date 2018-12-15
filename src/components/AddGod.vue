@@ -38,7 +38,7 @@
               {{ $t("AddGod.follownumber") }}
             </a>
           <div class="god-discription-bz" v-html="description"></div>
-          <follow :class="{'disabled': disabled}" v-model="god_info.followed" :god_id="0" class="button-to-follow-bz"></follow>
+          <follow :class="{'disabled': disabled}" v-model="god_info.following" :god_id="0" class="button-to-follow-bz"></follow>
         </div>
       </div>
     </div>
@@ -259,7 +259,7 @@ export default {
       this.setGodSocial('tumblr')
       this.setGodSocial('instagram')
       this.setGodSocial('facebook')
-      this.god_info.followed_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+      this.god_info.following_at = window.Date.now() // 当前时间做为follow时间,才会排前面
     },
     setGodInfo: function (god_info) {
       this.god_info = god_info

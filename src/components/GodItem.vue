@@ -9,7 +9,7 @@
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
-          {{god.followed_count||1}} {{ $t("人关注") }}
+          {{god.following_count||1}} {{ $t("人关注") }}
         </q-item-tile>
       </q-item-main>
     </q-item>
@@ -83,7 +83,7 @@
           self.$store.commit('REMOVE_THIS_GOD_cat_my_gods', god.god_id)
           self.loading = false
         })
-        if (god.followed === 1) {
+        if (god.following === 1) {
           self.$store.dispatch('unfollow', god.god_id)
         }
       }

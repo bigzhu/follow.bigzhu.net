@@ -22,7 +22,7 @@
       <q-btn color="secondary" v-show="!disable_edit" @click="save">
         {{ $t("保存") }}
       </q-btn>
-      <Follow v-model="star.followed" :god_id="star.id"></Follow>
+      <Follow v-model="star.following" :god_id="star.id"></Follow>
     </q-card-actions>
   </q-card>
 </template>

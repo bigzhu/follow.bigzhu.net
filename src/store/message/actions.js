@@ -34,7 +34,7 @@ export const getNew = ({
       /*
       commit('unread_message_count', data.unread_message_count)
       if (data.messages.length === 0) { // 没有取到数
-        state.followed_god_count = data.followed_god_count
+        state.following_god_count = data.following_god_count
         if (searchKey && state.search_messages.length === 0) {
           // oldMessage({ dispatch, state }, {searchKey: searchKey})
         } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
@@ -43,7 +43,7 @@ export const getNew = ({
           // oldMessage({ dispatch, state }, {limit: 2})
         }
       } else {
-        // state.followed_god_count = -1
+        // state.following_god_count = -1
         if (god_name) { // 查god的new
           commit('god_new_messages', {
             god_name: god_name,

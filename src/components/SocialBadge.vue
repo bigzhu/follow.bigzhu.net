@@ -35,7 +35,7 @@
     },
     computed: {
       count: function() {
-        return this.info.followed_count || 0
+        return this.info.following_count || 0
       },
       href: function() {
         if (this.type === 'twitter') {
