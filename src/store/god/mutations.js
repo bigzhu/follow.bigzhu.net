@@ -17,10 +17,9 @@ export const star_socials = (state, star_socials) => {
     if (state.map_star_socials[o.star_id.toString()] === undefined) {
       state.map_star_socials[o.star_id.toString()] = {}
     }
-    // 如果有同步错误, 名字设置为空
-    if (o.error_info !== '') {
-      o.social_name = ''
-    }
+    // if (o.error_info !== '') {
+    //   o.social_name = ''
+    // }
     state.map_star_socials[o.star_id.toString()][o.social] = o
   })
   state.star_socials = star_socials
