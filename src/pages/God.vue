@@ -6,28 +6,12 @@
 </template>
 
 <script>
-  import GodInfo from '../components/GodInfo'
   import Messages from '../components/Messages'
   import Top from '../components/Top'
   export default {
     components: {
       Top,
-      Messages,
-      GodInfo
-    },
-    computed: {
-      god_info() {
-        let god_info = this.$store.state.god_infos[this.star_name]
-        if (god_info) {
-          return god_info
-        }
-      },
-      star_name() {
-        return this.$route.params.star_name
-      }
-    },
-    mounted() {
-      this.$store.dispatch('getGod', this.star_name)
+      Messages
     }
   }
 </script>

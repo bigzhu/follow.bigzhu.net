@@ -28,13 +28,8 @@
         return this.$route.name
       },
       god_info() {
-        console.log(this.star_name)
-        console.log(this.$store.state.god.star_name_ids)
-        console.log(this.$store.state.god.star_name_ids['ruanyf'])
         let id_str = this.$store.state.god.star_name_ids[this.star_name]
-        console.log(id_str)
         let star = this.$store.state.god.map_stars[id_str]
-        console.log(star)
         return star
       },
       star_name() {

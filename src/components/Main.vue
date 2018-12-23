@@ -10,15 +10,15 @@
   import Messages from './Messages'
   import Top from './Top'
   import UnRead from './UnRead'
-  import GodInfo from './GodInfo'
-  import RightInfo from './RightInfo'
+  // import GodInfo from './GodInfo'
+  // import RightInfo from './RightInfo'
   export default {
     components: {
       UnRead,
       Top,
-      Messages,
-      GodInfo,
-      RightInfo
+      Messages
+      // GodInfo,
+      // RightInfo
     },
     data() {
       return {}
