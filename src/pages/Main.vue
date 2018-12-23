@@ -24,8 +24,8 @@
       return {}
     },
     computed: {
-      god_name() {
-        if (this.$route.params.god_name) return this.$route.params.god_name
+      star_name() {
+        if (this.$route.params.star_name) return this.$route.params.star_name
       }
     },
     mounted() {
@@ -36,8 +36,8 @@
     },
     methods: {
       getGodInfo: function() {
-        if (this.god_name) {
-          this.$store.dispatch('getGod', this.god_name)
+        if (this.star_name) {
+          this.$store.dispatch('getGod', this.star_name)
         }
       }
     }

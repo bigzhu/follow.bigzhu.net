@@ -5,9 +5,9 @@ export const someMutation = (state) => {
 import _ from 'lodash'
 import Vue from 'vue'
 
-function initGodMessage(state, god_name) {
-  if (state.gods_messages[god_name] === undefined) {
-    Vue.set(state.gods_messages, god_name, [])
+function initGodMessage(state, star_name) {
+  if (state.gods_messages[star_name] === undefined) {
+    Vue.set(state.gods_messages, star_name, [])
   }
 }
 
@@ -29,33 +29,33 @@ export const collect_messages = (state, collect_messages) => {
   // 收藏要翻过来排序, 后藏的,显示在最前面
   state.collect_messages = _.reverse(collect_messages)
 }
-export const filter_god_messages = (state, god_name) => { // 从主线messages中把god message 过滤出来，避免页面空白
-  initGodMessage(state, god_name)
-  if (state.messages.length !== 0 && state.gods_messages[god_name].length === 0) {
+export const filter_god_messages = (state, star_name) => { // 从主线messages中把god message 过滤出来，避免页面空白
+  initGodMessage(state, star_name)
+  if (state.messages.length !== 0 && state.gods_messages[star_name].length === 0) {
     let godMessages = _.filter(state.messages, (d) => {
-      return d.god_name === god_name
+      return d.star_name === star_name
     })
-    state.gods_messages[god_name] = godMessages
+    state.gods_messages[star_name] = godMessages
   }
 }
 export const god_new_messages = (state, {
-  god_name,
+  star_name,
   messages
 }) => {
-  initGodMessage(state, god_name)
-  let mergeMessages = state.gods_messages[god_name].concat(messages)
+  initGodMessage(state, star_name)
+  let mergeMessages = state.gods_messages[star_name].concat(messages)
   let uniqMessages = _.uniqBy(mergeMessages, function(d) {
     return d.id
   })
-  state.gods_messages[god_name] = uniqMessages
+  state.gods_messages[star_name] = uniqMessages
 }
 export const god_old_messages = (state, {
-  god_name,
+  star_name,
   messages
 }) => {
-  initGodMessage(state, god_name)
-  state.gods_messages[god_name] = _.uniq(
-    messages.reverse().concat(state.gods_messages[god_name]), false,
+  initGodMessage(state, star_name)
+  state.gods_messages[star_name] = _.uniq(
+    messages.reverse().concat(state.gods_messages[star_name]), false,
     function(item, key, a) {
       return item.id
     }

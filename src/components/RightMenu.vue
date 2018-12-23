@@ -3,7 +3,7 @@
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
     <Cat v-if="name==='Recommand'" route_name="Recommand"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
-    <GodInfo v-show="god_name"/>
+    <GodInfo v-show="star_name"/>
     <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])"/>
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
   </q-scroll-area>
@@ -28,17 +28,17 @@
         return this.$route.name
       },
       god_info() {
-        console.log(this.god_name)
+        console.log(this.star_name)
         console.log(this.$store.state.god.star_name_ids)
         console.log(this.$store.state.god.star_name_ids['ruanyf'])
-        let id_str = this.$store.state.god.star_name_ids[this.god_name]
+        let id_str = this.$store.state.god.star_name_ids[this.star_name]
         console.log(id_str)
         let star = this.$store.state.god.map_stars[id_str]
         console.log(star)
         return star
       },
-      god_name() {
-        return this.$route.params.god_name
+      star_name() {
+        return this.$route.params.star_name
       }
     },
     data: function() {

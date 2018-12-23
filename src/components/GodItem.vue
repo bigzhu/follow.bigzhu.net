@@ -1,11 +1,11 @@
 <template>
   <q-card class="the-hover-bz" inline>
     <q-item>
-      <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+      <router-link :to="{ name: 'God', params: { star_name: god.name }}">
         <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
-        <router-link :to="{ name: 'God', params: { god_name: god.name }}">
+        <router-link :to="{ name: 'God', params: { star_name: god.name }}">
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>

@@ -17,7 +17,7 @@
     <div class="ui stackable grid">
       <div class="six wide column">
         <div class="god-avatar-bz">
-          <router-link :to="{ name: 'God', params: { god_name: god_name }}" class="header god-name-bz user-name-a">
+          <router-link :to="{ name: 'God', params: { star_name: star_name }}" class="header god-name-bz user-name-a">
             <img :src="proxy(avatar)" class="avatar-img-bz">
           </router-link>
         </div>
@@ -31,8 +31,8 @@
             <social-badge :loading="tumblr_loading" :info="tumblr_info"></social-badge>
             <social-badge :loading="facebook_loading" :info="facebook_info"></social-badge>
           </div>
-          <router-link :to="{ name: 'God', params: { god_name: god_name }}" class="header newgod-name user-name-a">
-            <h3>{{god_name}}</h3>
+          <router-link :to="{ name: 'God', params: { star_name: star_name }}" class="header newgod-name user-name-a">
+            <h3>{{star_name}}</h3>
           </router-link>
           <a class="followers-number-bz">
               {{ $t("AddGod.follownumber") }}
@@ -59,7 +59,7 @@ export default {
   },
   data: function () {
     return {
-      god_name: '',
+      star_name: '',
       input_name: '',
       stat: 'button',
       god_info: {},
@@ -143,13 +143,13 @@ export default {
     },
     add: function () {
       this.init()
-      this.god_name = this.input_name.trim()
+      this.star_name = this.input_name.trim()
       this.stat = 'adding'
       let self = this
       this.adding = true
-      // this.addGod(this.god_name, this.$route.params.cat, this.startCheck)
+      // this.addGod(this.star_name, this.$route.params.cat, this.startCheck)
       this.$store.dispatch('postGod', {
-        name: this.god_name,
+        name: this.star_name,
         cat: this.$route.params.cat
       }).then(function (data) {
         self.startCheck(data.god_info)
@@ -161,7 +161,7 @@ export default {
       this.twitter_loading = true
       let self = this
       this.$store.dispatch('checkSocial', {
-        name: this.god_name,
+        name: this.star_name,
         type: 'twitter'
       }).then(function (data) {
         self.twitterDone(data.info)
@@ -175,7 +175,7 @@ export default {
       }
       let self = this
       this.$store.dispatch('checkSocial', {
-        name: this.god_name,
+        name: this.star_name,
         type: 'github'
       }).then(function (data) {
         self.githubDone(data.info)
@@ -190,7 +190,7 @@ export default {
       }
       let self = this
       this.$store.dispatch('checkSocial', {
-        name: this.god_name,
+        name: this.star_name,
         type: 'instagram'
       }).then(function (data) {
         self.instagramDone(data.info)
@@ -205,7 +205,7 @@ export default {
       }
       let self = this
       this.$store.dispatch('checkSocial', {
-        name: this.god_name,
+        name: this.star_name,
         type: 'tumblr'
       }).then(function (data) {
         self.tumblrDone(data.info)
@@ -220,7 +220,7 @@ export default {
       }
       let self = this
       this.$store.dispatch('checkSocial', {
-        name: this.god_name,
+        name: this.star_name,
         type: 'facebook'
       }).then(function (data) {
         self.facebookDone(data.info)
@@ -249,7 +249,7 @@ export default {
     },
     setGodSocial: function (type) {
       if (this[type + '_info'].count !== -4) {
-        this.god_info[type] = this.god_name
+        this.god_info[type] = this.star_name
         this.god_info[type + '_user'] = this[type + '_info']
       }
     },

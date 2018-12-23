@@ -6,7 +6,7 @@ export default {
   unread_message_count: 0,
   the_message: {
     avatar: '',
-    god_name: 'bigzhu',
+    star_name: 'bigzhu',
     id: 0
   }, // 显示某个message
   local_unread_message_count: 0, // 取过来还未读的信息

@@ -17,17 +17,17 @@
     },
     computed: {
       god_info() {
-        let god_info = this.$store.state.god_infos[this.god_name]
+        let god_info = this.$store.state.god_infos[this.star_name]
         if (god_info) {
           return god_info
         }
       },
-      god_name() {
-        return this.$route.params.god_name
+      star_name() {
+        return this.$route.params.star_name
       }
     },
     mounted() {
-      this.$store.dispatch('getGod', this.god_name)
+      this.$store.dispatch('getGod', this.star_name)
     }
   }
 </script>

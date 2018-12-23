@@ -20,7 +20,7 @@ import importByName from 'bz-q-lib/src/functions/importByName'
    }, // Default
 
    {
-     path: '/God/:god_name',
+     path: '/God/:star_name',
      name: 'God',
      component: () =>
        import('pages/God')

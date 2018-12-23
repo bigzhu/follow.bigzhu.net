@@ -11,7 +11,7 @@ export const getNew = ({
   commit,
   dispatch
 }, {
-  god_name,
+  star_name,
   searchKey,
   after,
   limit,
@@ -22,7 +22,7 @@ export const getNew = ({
     not: state.no_types,
     limit: limit,
     after: after,
-    god_name: god_name,
+    star_name: star_name,
     searchKey: searchKey
   }
   return axios.get('/api/messages/new', {
@@ -37,16 +37,16 @@ export const getNew = ({
         state.following_god_count = data.following_god_count
         if (searchKey && state.search_messages.length === 0) {
           // oldMessage({ dispatch, state }, {searchKey: searchKey})
-        } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
-          // oldMessage({ dispatch, state }, {god_name: god_name})
+        } else if (star_name && state.gods_messages[star_name].length === 0) { // 没数就查出old
+          // oldMessage({ dispatch, state }, {star_name: star_name})
         } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
           // oldMessage({ dispatch, state }, {limit: 2})
         }
       } else {
         // state.following_god_count = -1
-        if (god_name) { // 查god的new
+        if (star_name) { // 查god的new
           commit('god_new_messages', {
-            god_name: god_name,
+            star_name: star_name,
             messages: data.messages
           })
         } else if (explore) { // explore
@@ -151,15 +151,15 @@ export const newMessage = ({
   commit,
   dispatch
 }, {
-  god_name,
+  star_name,
   searchKey,
   limit,
   explore
 }) => {
   let messages = null
   let after = null
-  if (god_name) {
-    messages = state.gods_messages[god_name]
+  if (star_name) {
+    messages = state.gods_messages[star_name]
   } else if (explore) {
     messages = state.explore_messages
   } else if (searchKey) {
@@ -173,7 +173,7 @@ export const newMessage = ({
     let dt = new Date()
     dt.setDate(dt.getDate() - 2)
     after = dt.getTime()
-    if (god_name) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
+    if (star_name) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
       after = null
     }
   }
@@ -181,7 +181,7 @@ export const newMessage = ({
     limit = 10
   }
   return dispatch('getNew', {
-    god_name: god_name,
+    star_name: star_name,
     searchKey: searchKey,
     after: after,
     limit: limit,
@@ -242,7 +242,7 @@ export const getOld = ({
       let messages = response.data
       if (messages.length === 0) { // 没有取到数
         if (star_name) {
-          // toastr.info(god_name + '没有更多的历史消息可以看了')
+          // toastr.info(star_name + '没有更多的历史消息可以看了')
         } else if (searchKey) {
           // toastr.info('没有更多的历史了')
         } else {
@@ -261,7 +261,7 @@ export const getOld = ({
       } else {
         if (star_name) {
           commit('god_old_messages', {
-            god_name: star_name,
+            star_name: star_name,
             messages: messages
           })
         } else if (searchKey) { // search
@@ -284,8 +284,8 @@ export const getTheMessage = ({
   })
   // 在god message里再找找
   if (!message) {
-    for (var god_name in state.gods_messages) {
-      message = _.find(state.gods_messages[god_name], function(d) {
+    for (var star_name in state.gods_messages) {
+      message = _.find(state.gods_messages[star_name], function(d) {
         return d.id === parseInt(id, 10)
       })
     }

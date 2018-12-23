@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :god_name="god_name" :show="!(following_god_count===0)"></Old>
+    <Old :star_name="star_name" :show="!(following_god_count===0)"></Old>
     <NotYetFollow v-show="following_god_count===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
@@ -81,8 +81,8 @@
       following_god_count() {
         return this.$store.state.following_god_count
       },
-      god_name() {
-        if (this.$route.params.god_name) return this.$route.params.god_name
+      star_name() {
+        if (this.$route.params.star_name) return this.$route.params.star_name
       },
       new_loading() {
         return this.$store.state.message.new_loading
@@ -109,7 +109,7 @@
         switch (this.type) {
           case 'god':
             {
-              return this.$store.state.message.gods_messages[this.god_name] || []
+              return this.$store.state.message.gods_messages[this.star_name] || []
             }
           case 'collect':
             {
@@ -138,10 +138,10 @@
       initLoadMessages: function() {
         if (!this.messages || this.messages.length === 0) {
           if (this.type === 'god') {
-            this.$store.commit('filter_god_messages', this.god_name)
+            this.$store.commit('filter_god_messages', this.star_name)
             if (this.messages.length === 0) { // 没有过滤值时
               this.$store.dispatch('oldMessage', {
-                star_name: this.god_name
+                star_name: this.star_name
               })
             }
           } else {
@@ -215,7 +215,7 @@
       },
       newGodMessage: function() {
         return this.$store.dispatch('newMessage', {
-          god_name: this.god_name,
+          star_name: this.star_name,
           limit: getCount
         })
       },

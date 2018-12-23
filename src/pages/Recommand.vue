@@ -31,7 +31,7 @@
     computed: {
       ordered_stars: function() {
         return _.orderBy(this.filter_cat, 'following_at', 'desc').filter((o) => {
-          return o.name !== this.god_name
+          return o.name !== this.star_name
         })
       }
     },

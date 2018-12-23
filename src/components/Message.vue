@@ -12,7 +12,7 @@
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
-          <router-link :to="{ name: 'God', params: { god_name: star.name }}">
+          <router-link :to="{ name: 'God', params: { star_name: star.name }}">
             {{star.name}}
           </router-link>
         </q-item-tile>

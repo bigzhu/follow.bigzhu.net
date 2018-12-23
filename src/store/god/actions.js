@@ -37,18 +37,18 @@ export const getGod = ({
   commit,
   dispatch
 }, val) => {
-  let god_name
+  let star_name
   if (typeof val === 'string') {
-    god_name = val
+    star_name = val
   } else {
-    god_name = val.god_name
+    star_name = val.star_name
     // loading = val.loading
   }
-  if (state.god_infos[god_name]) {
+  if (state.god_infos[star_name]) {
     return
   }
   return get('/api_god', {
-      god_name: god_name
+      star_name: star_name
     })
     .then((data) => {
       commit('god_infos', data)

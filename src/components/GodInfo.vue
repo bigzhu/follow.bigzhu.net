@@ -47,7 +47,7 @@
         return this.$store.state.god.map_star_socials[this.star_id]
       },
       star_name() {
-        return this.$route.params.god_name
+        return this.$route.params.star_name
       },
       remark: function() {
         return this.star.remark || this.star.admin_remark

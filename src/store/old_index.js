@@ -96,13 +96,13 @@ export const mutations = {
     })[0]
     state.local_unread_message_count = unreadMessages.length
   },
-  filter_god_messages(state, god_name) { // 从主线messages中把god message 过滤出来，避免页面空白
-    initGodMessage(state, god_name)
-    if (state.messages.length !== 0 && state.gods_messages[god_name].length === 0) {
+  filter_god_messages(state, star_name) { // 从主线messages中把god message 过滤出来，避免页面空白
+    initGodMessage(state, star_name)
+    if (state.messages.length !== 0 && state.gods_messages[star_name].length === 0) {
       let godMessages = _.filter(state.messages, (d) => {
-        return d.god_name === god_name
+        return d.star_name === star_name
       })
-      state.gods_messages[god_name] = godMessages
+      state.gods_messages[star_name] = godMessages
     }
   },
   FILTER_SEARCH_MESSAGES(state, searchKey) { // 从主线messages中把查找的信息过滤出来，避免页面空白
@@ -121,7 +121,7 @@ export const mutations = {
       })
     }
   },
-  SET_EXPLORE_new_messages(state, god_name, messages) {
+  SET_EXPLORE_new_messages(state, star_name, messages) {
     state.explore_messages = _.uniq(
       state.explore_messages.concat(messages), false,
       function(item, key, a) {
@@ -240,7 +240,7 @@ export const actions = {
     commit,
     dispatch
   }, {
-    god_name,
+    star_name,
     searchKey,
     after,
     limit,
@@ -251,7 +251,7 @@ export const actions = {
       not: state.no_types,
       limit: limit,
       after: after,
-      god_name: god_name,
+      star_name: star_name,
       searchKey: searchKey
     }
     return axios.get('/api_new', {
@@ -264,16 +264,16 @@ export const actions = {
           state.following_god_count = data.following_god_count
           if (searchKey && state.search_messages.length === 0) {
             // oldMessage({ dispatch, state }, {searchKey: searchKey})
-          } else if (god_name && state.gods_messages[god_name].length === 0) { // 没数就查出old
-            // oldMessage({ dispatch, state }, {god_name: god_name})
+          } else if (star_name && state.gods_messages[star_name].length === 0) { // 没数就查出old
+            // oldMessage({ dispatch, state }, {star_name: star_name})
           } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
             // oldMessage({ dispatch, state }, {limit: 2})
           }
         } else {
           // state.following_god_count = -1
-          if (god_name) { // 查god的new
+          if (star_name) { // 查god的new
             commit('god_new_messages', {
-              god_name: god_name,
+              star_name: star_name,
               messages: data.messages
             })
           } else if (explore) { // explore
@@ -335,19 +335,19 @@ export const actions = {
     commit,
     dispatch
   }, val) {
-    let god_name
+    let star_name
     if (typeof val === 'string') {
-      god_name = val
+      star_name = val
     } else {
-      god_name = val.god_name
+      star_name = val.star_name
       // loading = val.loading
     }
-    if (state.god_infos[god_name]) {
+    if (state.god_infos[star_name]) {
       return
     }
     return axios.get('/api_god', {
         params: {
-          god_name: god_name
+          star_name: star_name
         }
       })
       .then(function(response) {
