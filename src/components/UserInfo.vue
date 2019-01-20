@@ -19,7 +19,7 @@ export default {
   components: { OauthInfo },
   methods: {
     logout: function () {
-      window.location = '/api/Logout'
+      window.location = '/api/logout'
     }
   }
 }

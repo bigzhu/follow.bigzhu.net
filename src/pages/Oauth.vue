@@ -22,7 +22,11 @@ export default {
       oauths: [
         {
           type: 'google',
-          url: '/api/Google'
+          url: '/api/google'
+          },
+        {
+          type: 'github',
+          url: '/api/github'
           }
           ]
     }

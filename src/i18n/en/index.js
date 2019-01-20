@@ -6,7 +6,7 @@ export default {
   '没有更多内容了, 看看': '',
   '登录后能看到更广阔的世界哟!': 'You will find a colorful and wide world!',
   '登录': 'Login',
-  '退出': 'Logout',
+  '退出': 'logout',
   '首页': 'Main',
   '设置': 'Setting',
   '收藏': 'Saved',
@@ -66,7 +66,7 @@ export default {
      settings: '设置':'Settings',
      search: '搜索资讯':'Search',
      mine: '我发布的':'Mine',
-     logout: '退出登录':'Logout',
+     logout: '退出登录':'logout',
      collect: '收藏':'Saved',
      loading: '加载中':'Loading'
      id: '我的账号':'My ID',

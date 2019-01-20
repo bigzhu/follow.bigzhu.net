@@ -80,7 +80,7 @@ export default {
     settings: 'Settings',
     search: 'Search',
     mine: 'Mine',
-    logout: 'Logout',
+    logout: 'logout',
     login: 'Login',
     whattofollow: 'What to follow',
     following: 'Following',
@@ -93,7 +93,7 @@ export default {
   UserSet: {
     id: 'My ID',
     change_id: 'Change ID to login',
-    logout: 'Logout',
+    logout: 'logout',
     anki_id: 'My Anki',
     username: 'Username',
     password: 'Password',
