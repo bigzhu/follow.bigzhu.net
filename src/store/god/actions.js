@@ -90,9 +90,7 @@ export const unfollow = ({
   commit,
   dispatch
 }, star_id) => {
-  return del('/api/followers', {
-    star_id: star_id
-  })
+  return del('/api/followers/' + star_id)
 }
 export const follow = ({
   state,
