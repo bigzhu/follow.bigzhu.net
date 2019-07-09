@@ -24,20 +24,22 @@
       return {}
     },
     computed: {
-      god_info() {
-        if (!this.star_name) return
-        let god_info = this.$store.state.god_infos[this.star_name]
-        if (god_info) {
-          return god_info
+      godInfo() {
+        if (!this.starName) return
+        let godInfo = this.$store.state.godInfos[this.starName]
+        if (godInfo) {
+          return godInfo
         }
+        return null
       },
-      star_name() {
-        if (this.$route.params.star_name) return this.$route.params.star_name
+      starName() {
+        if (this.$route.params.starName) return this.$route.params.starName
+        return ''
       }
     },
     mounted() {
-      if (this.star_name) {
-        this.$store.dispatch('getGod', this.star_name)
+      if (this.starName) {
+        this.$store.dispatch('getGod', this.starName)
       }
       // $('body').visibility()
     },
@@ -45,9 +47,9 @@
       '$route': 'getGodInfo'
     },
     methods: {
-      getGodInfo: function() {
-        if (this.star_name) {
-          this.$store.dispatch('getGod', this.star_name)
+      getGodInfo: function () {
+        if (this.starName) {
+          this.$store.dispatch('getGod', this.starName)
         }
       }
     },
@@ -59,4 +61,5 @@
 </script>
 
 <style scoped>
+
 </style>

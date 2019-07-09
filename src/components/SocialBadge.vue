@@ -6,7 +6,7 @@
       separator : ',',
       decimal : '.',
       prefix : '',
-      suffix : ''}"/>
+      suffix : ''}" />
   </a>
 </template>
 
@@ -34,10 +34,10 @@
       BzCountUp
     },
     computed: {
-      count: function() {
+      count: function () {
         return this.info.following_count || 0
       },
-      href: function() {
+      href: function () {
         if (this.type === 'twitter') {
           return 'https://twitter.com/' + this.info.name
         } else if (this.type === 'tumblr') {
@@ -47,12 +47,13 @@
         } else if (this.type === 'facebook') {
           return 'https://facebook.com/' + this.info.name
         }
+        return ''
       },
-      the_class: function() {
+      the_class: function () {
         return `fab fa-${this.type}`
       }
     },
-    data: function() {
+    data: function () {
       return {}
     },
     mounted() {},

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Old :star_name="star_name" :show="!(following_god_count===0)"></Old>
-    <NotYetFollow v-show="following_god_count===0 && is_login"></NotYetFollow>
+    <Old :starName="starName" :show="!(followingGodCount===0)"></Old>
+    <NotYetFollow v-show="followingGodCount===0 && is_login"></NotYetFollow>
     <q-slide-transition v-show="!is_login">
       <div v-show="show_no_login" class="no-login">
         <img src="../statics/assets/no-message.svg">
@@ -12,14 +12,14 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${paddingTop}px;`">
-      <message ref="messages" v-for='message in no_types_messages' :message='message' :key="message.id">
+      <message ref="messages" v-for='message in noTypes_messages' :message='message' :key="message.id">
       </message>
-      <div v-show="following_god_count>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
+      <div v-show="followingGodCount>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("没有更多内容了, 看看") }}
           <router-link :to="{'name': 'Recommand'}">{{ $t("寻他") }}&gt;</router-link>
         </p>
       </div>
-      <SpinnerBz :show="new_loading"></SpinnerBz>
+      <SpinnerBz :show="newLoading"></SpinnerBz>
     </q-infinite-scroll>
   </div>
 </template>
@@ -56,11 +56,11 @@
       }
     },
     events: {
-      'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god的message
-        this.$store.dispatch('removeFromMessages', god_id)
+      'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god的message
+        this.$store.dispatch('removeFromMessages', godID)
       }
     },
-    data: function() {
+    data: function () {
       return {
         position: 0, // 用来判断是往上滚动还是往下滚
         show_no_login: false
@@ -73,75 +73,76 @@
       },
       is_login() {
         return checkLogin()
-        // return this.$store.state.p.oauth_info.name
+        // return this.$store.state.p.oauthInfo.name
       },
       unread_message_count() {
         return this.$store.state.unread_message_count
       },
-      following_god_count() {
-        return this.$store.state.following_god_count
+      followingGodCount() {
+        return this.$store.state.followingGodCount
       },
-      star_name() {
-        if (this.$route.params.star_name) return this.$route.params.star_name
+      starName() {
+        if (this.$route.params.starName) return this.$route.params.starName
+        return ''
       },
-      new_loading() {
-        return this.$store.state.message.new_loading
+      newLoading() {
+        return this.$store.state.message.newLoading
       },
       old_loading() {
         return this.$store.state.old_loading
       },
       hide_messages() {
-        return this.messages.filter(function(d) {
+        return this.messages.filter(function (d) {
           return d.top_hide
         })
       },
       show_messages() {
-        return this.messages.filter(function(d) {
+        return this.messages.filter(function (d) {
           return !d.top_hide
         })
       },
-      no_types_messages() {
+      noTypes_messages() {
         return this.show_messages.filter((d) => {
-          return !isInList(d.m_type, this.no_types)
+          return !isInList(d.m_type, this.noTypes)
         })
       },
       messages() {
         switch (this.type) {
-          case 'god':
-            {
-              return this.$store.state.message.gods_messages[this.star_name] || []
-            }
-          case 'collect':
-            {
-              return this.$store.state.message.collect_messages
-            }
-          default:
-            {
-              return this.$store.state.message.messages
-            }
+        case 'god':
+          {
+            return this.$store.state.message.godsMessages[this.starName] || []
+          }
+        case 'collect':
+          {
+            return this.$store.state.message.collect_messages
+          }
+        default:
+          {
+            return this.$store.state.message.messages
+          }
         }
       },
-      no_types() {
-        return this.$store.state.user.no_types
+      noTypes() {
+        return this.$store.state.user.noTypes
       }
     },
     mounted() {
-      // this.$store.dispatch('getStarSocials').then(() => {
+      // this.$store.dispatch('getStarSocials').then(()=> {
       //  this.$store.dispatch('getStars')
       // })
       this.initLoadMessages()
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         this.showNoLogin()
       })
     },
     methods: {
-      initLoadMessages: function() {
+      initLoadMessages: function () {
         if (!this.messages || this.messages.length === 0) {
           if (this.type === 'god') {
-            this.$store.commit('filter_god_messages', this.star_name)
+            this.$store.commit('filter_god_messages', this.starName)
             if (this.messages.length === 0) { // 没有过滤值时
               this.$store.dispatch('oldMessage', {
-                star_name: this.star_name
+                starName: this.starName
               })
             }
           } else {
@@ -149,12 +150,12 @@
           }
         }
       },
-      onScroll: function(position) {
+      onScroll: function (position) {
         if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
         let hideP = this.$store.state.main.hide_params
         let overTop = position - 500
         if (overTop > hideP.paddingTop) {
-          let message = this.no_types_messages[0]
+          let message = this.noTypes_messages[0]
           if (!message) return
           let messageHeight = message.el.offsetHeight
           if (overTop - hideP.paddingTop < messageHeight) return
@@ -174,52 +175,52 @@
           }
         }
       },
-      showNoLogin: function() {
+      showNoLogin: function () {
         if (!this.is_login) {
           let self = this
-          setTimeout(function() {
+          setTimeout(function () {
             self.show_no_login = true
           }, 1500)
-          setTimeout(function() {
+          setTimeout(function () {
             self.show_no_login = false
           }, 5000)
         }
       },
-      loadMore: function(index, done) {
+      loadMore: function (index, done) {
         if (this.old_loading) {
           done()
           return
         }
-        this.loadMessages().then(function() {
+        this.loadMessages().then(function () {
           setTimeout(done, 3000)
         })
       },
-      loadMessages: function() { // 根据类型, 加载 Message
+      loadMessages: function () { // 根据类型, 加载 Message
         switch (this.type) {
-          case 'god':
-            {
-              return this.newGodMessage()
-            }
-          case 'collect':
-            {
-              return this.newCollectMessage()
-            }
-          default:
-            {
-              return this.newMessage(getCount)
-            }
+        case 'god':
+          {
+            return this.newGodMessage()
+          }
+        case 'collect':
+          {
+            return this.newCollectMessage()
+          }
+        default:
+          {
+            return this.newMessage(getCount)
+          }
         }
       },
-      newCollectMessage: function() {
+      newCollectMessage: function () {
         return this.$store.dispatch('getCollect')
       },
-      newGodMessage: function() {
+      newGodMessage: function () {
         return this.$store.dispatch('newMessage', {
-          star_name: this.star_name,
+          starName: this.starName,
           limit: getCount
         })
       },
-      newMessage: function(limit = null) {
+      newMessage: function (limit = null) {
         let after = null
         if (this.messages.length > 0) {
           after = this.messages[this.messages.length - 1].out_created_at

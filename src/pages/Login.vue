@@ -11,10 +11,10 @@
       Login
     },
     methods: {
-      login: function(user_name, password) {
+      login: function(userName, password) {
         this.$store.commit('lib/loading', true)
         this.$store.dispatch('lib/login', {
-          user_name: user_name,
+          userName: userName,
           password: password
         }).then((data) => {
           this.$store.commit('lib/loading', false)
@@ -26,15 +26,15 @@
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        vm.$store.commit('show_right', false)
-        vm.$store.commit('show_header', false)
+        vm.$store.commit('showRight', false)
+        vm.$store.commit('showHeader', false)
       })
     },
     beforeRouteLeave(to, from, next) {
       if (!this.$q.platform.is.mobile) {
-        this.$store.commit('show_right', true)
+        this.$store.commit('showRight', true)
       }
-      this.$store.commit('show_header', true)
+      this.$store.commit('showHeader', true)
       next()
     }
   }

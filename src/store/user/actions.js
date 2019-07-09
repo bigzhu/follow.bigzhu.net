@@ -11,12 +11,12 @@ export const getNoTypes = ({
   commit,
   dispatch
 }) => {
-  return axios.get('/api_no_types')
+  return axios.get('/api_noTypes')
     .then((response) => {
-      commit('no_types', response.data)
+      commit('noTypes', response.data)
       return response.data
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error)
     })
 }

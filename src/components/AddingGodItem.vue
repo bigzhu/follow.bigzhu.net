@@ -4,11 +4,11 @@
     <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
     <q-item>
-      <router-link :to="{ name: 'God', params: { star_name: god.name }}">
+      <router-link :to="{ name: 'God', params: { starName: god.name }}">
         <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
-        <router-link :to="{ name: 'God', params: { star_name: god.name }}">
+        <router-link :to="{ name: 'God', params: { starName: god.name }}">
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
@@ -19,17 +19,17 @@
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge @click.native="setNow(god.twitter)" v-show="haveSocial('twitter')" type="twitter" :info="god.twitter"/>
-        <social-badge @click.native="setNow(god.github)" v-show="haveSocial('github')" type="github" :info="god.github"/>
-        <social-badge @click.native="setNow(god.tumblr)" v-show="haveSocial('tumblr')" type="tumblr" :info="god.tumblr"/>
-        <social-badge @click.native="setNow(god.instagram)" v-show="haveSocial('instagram')" type="instagram" :info="god.instagram"/>
-        <social-badge @click.native="setNow(god.facebook)" v-show="haveSocial('facebook')" type="facebook" :info="god.facebook"/>
+        <social-badge @click.native="setNow(god.twitter)" v-show="haveSocial('twitter')" type="twitter" :info="god.twitter" />
+        <social-badge @click.native="setNow(god.github)" v-show="haveSocial('github')" type="github" :info="god.github" />
+        <social-badge @click.native="setNow(god.tumblr)" v-show="haveSocial('tumblr')" type="tumblr" :info="god.tumblr" />
+        <social-badge @click.native="setNow(god.instagram)" v-show="haveSocial('instagram')" type="instagram" :info="god.instagram" />
+        <social-badge @click.native="setNow(god.facebook)" v-show="haveSocial('facebook')" type="facebook" :info="god.facebook" />
       </div>
     </q-card-title>
 
     <q-card-main class="card-content green-bz">
       <p v-html="bio"></p>
-      <GodRemark v-model="god.remark" :god_id="god.id" class="card-content green-bz remark"></GodRemark>
+      <GodRemark v-model="god.remark" :godID="god.id" class="card-content green-bz remark"></GodRemark>
     </q-card-main>
     <q-card-actions align="end">
     </q-card-actions>
@@ -41,16 +41,15 @@
     QIcon,
     QSpinnerPuff
   } from 'quasar'
-  import Follow from './Follow'
   import GodItem from './GodItem'
   import SocialBadge from './SocialBadge'
 
   export default {
     mixins: [GodItem],
-    props: ['star_name'],
+    props: ['starName'],
     watch: {
-      'star_name': function() {
-        if (this.star_name === '') {
+      'starName': function () {
+        if (this.starName === '') {
           return
         }
         this.init()
@@ -60,10 +59,9 @@
     components: {
       QIcon,
       QSpinnerPuff,
-      SocialBadge,
-      Follow
+      SocialBadge
     },
-    data: function() {
+    data: function () {
       return {
         loading: false,
         twitter_loading: false,
@@ -74,7 +72,7 @@
       }
     },
     computed: {
-      cat: function() {
+      cat: function () {
         return this.$route.params.cat
       }
     },
@@ -84,7 +82,7 @@
       haveSocial: function (social) {
         return true
       },
-      getIcon: function() {
+      getIcon: function () {
         if (this.twitter_loading) return 'fa-twitter'
         if (this.github_loading) return 'fa-github'
         if (this.instagram_loading) return 'fa-instagram'
@@ -92,38 +90,38 @@
         if (this.facebook_loading) return 'fa-facebook'
         return ''
       },
-      init: function() {
-        this.god.name = this.star_name
+      init: function () {
+        this.god.name = this.starName
       },
-      showAddGodInput: function() {
+      showAddGodInput: function () {
         this.input_name = '' // 清空上次的输入
         this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
         // this.queryNotMyGods(this.$route.params.cat)
       },
-      getGodInfo: function() {
+      getGodInfo: function () {
         this.loading = true
         this.$store.dispatch('postGod', {
-          name: this.star_name,
+          name: this.starName,
           cat: this.cat
-        }).then((god_info) => {
-          this.startCheck(god_info)
+        }).then((godInfo) => {
+          this.startCheck(godInfo)
         })
       },
-      startCheck: function(god_info) {
-        this.setGodInfo(god_info)
+      startCheck: function (godInfo) {
+        this.setGodInfo(godInfo)
         this.adding = false
         this.twitter_loading = true
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.star_name,
+          name: this.starName,
           type: 'twitter'
-        }).then(function(data) {
+        }).then(function (data) {
           self.twitterDone(data)
         })
       },
-      twitterDone: function(info) {
+      twitterDone: function (info) {
         this.twitter_loading = false
         if (info) {
           this.god.twitter = info
@@ -131,14 +129,14 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.star_name,
+          name: this.starName,
           type: 'github'
-        }).then(function(data) {
+        }).then(function (data) {
           self.githubDone(data)
         })
         this.github_loading = true
       },
-      githubDone: function(info) {
+      githubDone: function (info) {
         this.github_loading = false
         if (info) {
           this.god.github = info
@@ -146,14 +144,14 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.star_name,
+          name: this.starName,
           type: 'instagram'
-        }).then(function(data) {
+        }).then(function (data) {
           self.instagramDone(data)
         })
         this.instagram_loading = true
       },
-      instagramDone: function(info) {
+      instagramDone: function (info) {
         this.instagram_loading = false
         if (info) {
           this.god.instagram = info
@@ -161,14 +159,14 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.star_name,
+          name: this.starName,
           type: 'tumblr'
-        }).then(function(data) {
+        }).then(function (data) {
           self.tumblrDone(data)
         })
         this.tumblr_loading = true
       },
-      tumblrDone: function(info) {
+      tumblrDone: function (info) {
         this.tumblr_loading = false
         if (info) {
           this.god.tumblr = info
@@ -176,7 +174,7 @@
         }
         this.allDone()
       },
-      facebookDone: function(info) {
+      facebookDone: function (info) {
         this.facebook_loading = false
         if (info) {
           this.god.facebook = info
@@ -184,22 +182,22 @@
         }
         this.allDone()
       },
-      allDone: function(info) {
+      allDone: function (info) {
         this.loading = false
-        // Object.assign(this.god_info, this.god)
+        // Object.assign(this.godInfo, this.god)
         this.god.following_at = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.following = 1
-        this.$store.commit('unshift_my_god', {
+        this.$store.commit('unshiftMyGod', {
           cat: this.cat,
           god: this.god
         })
         this.$emit('add_done', this.god)
         this.init()
       },
-      setGodInfo: function(god) {
+      setGodInfo: function (god) {
         this.god = god
       },
-      setInfo: function(info, type) {
+      setInfo: function (info, type) {
         if (info.avatar) {
           this.now_avatar = info.avatar
         }

@@ -1,18 +1,10 @@
 <template>
   <QPageSticky v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 80]" class="bz">
-    <q-btn round color="" icon="keyboard_arrow_up" />
+    <q-btn v-back-to-top round color="" icon="keyboard_arrow_up" />
   </QPageSticky>
 </template>
 
 <script>
-  import {
-    BackToTop
-  } from 'quasar'
-  export default {
-    directives: {
-      BackToTop
-    }
-  }
 </script>
 
 <style lang="stylus" scoped>

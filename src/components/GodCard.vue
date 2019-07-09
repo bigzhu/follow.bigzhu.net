@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'popup': popup, 'transition': popup, 'centered': !popup }" class="ui card column card-radius">
-    <div v-show="god.god_id === 0" class="ui active inverted dimmer">
+    <div v-show="god.godID === 0" class="ui active inverted dimmer">
       <div class="ui text loader">{{$t('Loading.loading')}}</div>
     </div>
     <div v-show="god.name==''" class="ui active inverted dimmer">
@@ -20,10 +20,10 @@
       <social-badge v-show="god.twitter_user" :call_back="setGodInfo" :info="god.twitter_user"></social-badge>
       <social-badge v-show="god.github_user" :call_back="setGodInfo" :info="god.github_user"></social-badge>
       <social-badge v-show="god.tumblr_user" :call_back="setGodInfo" :info="god.tumblr_user"></social-badge>
-      <social-badge v-show="god.instagram_user" :call_back="setGodInfo" :info="god.instagram_user" ></social-badge>
+      <social-badge v-show="god.instagram_user" :call_back="setGodInfo" :info="god.instagram_user"></social-badge>
       <social-badge v-show="god.facebook_user" :call_back="setGodInfo" :info="god.facebook_user"></social-badge>
     </div>
-    <follow class="attached" v-model="god.following" :god_id="god.god_id"></follow>
+    <follow class="attached" v-model="god.following" :godID="god.godID"></follow>
   </div>
 </template>
 
@@ -40,7 +40,7 @@
         deep: true
       }
     },
-    mounted () {
+    mounted() {
       this.setGodInfo()
     },
     computed: {
@@ -80,8 +80,8 @@
           }
         }
       },
-      go: function (star_name) {
-        this.$router.push({name: 'God', params: {star_name: star_name}})
+      go: function (starName) {
+        this.$router.push({ name: 'God', params: { starName: starName } })
       }
     }
   }
@@ -90,39 +90,49 @@
 <style>
   .ui.cards>.card>.image>.avatar-bz,
   .ui.card>.image>.avatar-bz {
-    width:auto;
-    max-width:100%;
+    width: auto;
+    max-width: 100%;
   }
-  .ui.card>.extra.god-icon-bz a:not(.ui):hover, .ui.cards>.card>.extra.god-icon-bz a:not(.ui):hover {
+
+  .ui.card>.extra.god-icon-bz a:not(.ui):hover,
+  .ui.cards>.card>.extra.god-icon-bz a:not(.ui):hover {
     color: #999999;
+
     i.icon.icon-hover-twitter {
       color: #41ABE1;
       transition: color 0.3s linear;
     }
+
     i.icon.icon-hover-github {
       color: rgba(0, 0, 0, 0.8);
       transition: color 0.3s linear;
     }
+
     i.icon.icon-hover-instagram {
       color: #7E4532;
       transition: color 0.3s linear;
     }
+
     i.icon.icon-hover-tumblr {
       color: #205081;
       transition: color 0.3s linear;
     }
+
     i.icon.icon-hover-facebook {
       color: #3B5998;
       transition: color 0.3s linear;
     }
   }
+
   .ui.card.card-radius {
     border-radius: 0.06em 0.06em 0.3em 0.3em;
   }
+
   .ui.card>.content.delete-border {
     border-top: none;
   }
+
   .ui.card>.extra.delete-border {
-    border-top: none!important;
+    border-top: none !important;
   }
 </style>

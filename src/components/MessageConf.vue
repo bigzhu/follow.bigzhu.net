@@ -20,32 +20,32 @@
       QOptionGroup
     },
     computed: {
-      no_types() {
-        return this.$store.state.no_types
+      noTypes() {
+        return this.$store.state.noTypes
       },
       showTypes: {
         get() {
-          return _.difference(this.types, this.no_types)
+          return _.difference(this.types, this.noTypes)
         },
         set(showTypes) {
           this.$store.state.showTypes = showTypes
         }
       }
     },
-    data: function() {
+    data: function () {
       return {
         types: ['twitter', 'instagram', 'tumblr', 'github']
       }
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },
     methods: {
       change() {
-        let no_types = _.difference(this.types, this.showTypes)
-        this.$store.dispatch('setNoTypes', no_types)
+        let noTypes = _.difference(this.types, this.showTypes)
+        this.$store.dispatch('setNoTypes', noTypes)
       }
     }
   }

@@ -2,13 +2,13 @@
 export const someMutation = (state) => {
 }
 */
-export const registered_count = (state, registered_count) => {
-  state.registered_count = registered_count
+export const registeredCount = (state, registeredCount) => {
+  state.registeredCount = registeredCount
 }
 
-export const no_types = (state, no_types) => {
-  state.someMutation = no_types
+export const noTypes = (state, noTypes) => {
+  state.someMutation = noTypes
 }
-export const oauth_info = (state, data) => {
-  state.oauth_info = data
+export const oauthInfo = (state, data) => {
+  state.oauthInfo = data
 }

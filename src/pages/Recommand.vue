@@ -16,9 +16,9 @@
     props: {
       message: {
         type: Object,
-        default: function() {
+        default: function () {
           return {
-            user_name: '',
+            userName: '',
             id: 0
           }
         }
@@ -29,14 +29,13 @@
       GodItem
     },
     computed: {
-      ordered_stars: function() {
+      ordered_stars: function () {
         return _.orderBy(this.filter_cat, 'following_at', 'desc').filter((o) => {
-          return o.name !== this.star_name
+          return o.name !== this.starName
         })
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 

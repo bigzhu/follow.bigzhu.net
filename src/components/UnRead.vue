@@ -15,10 +15,7 @@
     QTooltip,
     QFab,
     QFabAction,
-    QCard,
-    QBtn,
-    QPageSticky,
-    QModal
+    QPageSticky
   } from 'quasar'
   export default {
     props: [],
@@ -26,28 +23,25 @@
       QTooltip,
       QFab,
       QFabAction,
-      QCard,
-      QBtn,
-      QPageSticky,
-      QModal
+      QPageSticky
     },
     computed: {
       unread_message_count() {
         return this.$store.state.unread_message_count
       }
     },
-    data: function() {
+    data: function () {
       return {}
     },
     mounted() {
       // $(this.$el).popup()
     },
     methods: {
-      updateLast: function() {
+      updateLast: function () {
         let now = (new Date()).setHours(0, 0, 0, 0)
-        this.$store.dispatch('recordLastMessage', now).then(function(data) {
+        this.$store.dispatch('recordLastMessage', now).then(function (data) {
           // toast('已清空, 只保留今天的未读')
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.reload()
           }, 3000)
         })

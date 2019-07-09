@@ -9,7 +9,7 @@
             <div v-html="bio.text">
             </div>
           </div>
-          <god-item :god='god_info' is_my="true" class="bio-god-card"></god-item>
+          <god-item :god='godInfo' is_my="true" class="bio-god-card"></god-item>
         </div>
       </div>
 
@@ -35,34 +35,33 @@
     },
     data () {
       return {
-        star_name: this.$route.params.star_name
+        starName: this.$route.params.starName
       }
     },
-    props: {
-    },
+    props: {},
     mounted () {
-      this.$store.dispatch('getGod', this.star_name)
+      this.$store.dispatch('getGod', this.starName)
       this.getBio()
     },
     computed: {
-      god_info () {
-        let god_info = this.$store.state.god_infos[this.star_name]
-        if (god_info) {
-          return god_info
+      godInfo () {
+        let godInfo = this.$store.state.godInfos[this.starName]
+        if (godInfo) {
+          return godInfo
         }
-        return {id: 0, name: ''}
+        return { id: 0, name: '' }
       },
       bio () {
         let self = this
-        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.star_name })
+        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.starName })
         if (bio) return bio
-        else return {title_img: ''}
+        else return { title_img: '' }
       }
     },
     methods: {
       getDetail: function () {
         let self = this
-        this.$store.dispatch('getRichText', {key: this.star_name}).then(function (data) {
+        this.$store.dispatch('getRichText', { key: this.starName }).then(function (data) {
           self.bio.text = data.rich_text[0].text
         })
       },
@@ -86,14 +85,16 @@
 <style scoped>
   .ui.segment.bio-background {
     border-radius: 0.06em;
-    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);
+    box-shadow: .5px 1px 1px 1px rgba(0, 0, 0, 0.1);
     position: relative;
     border: none;
     background-color: #fff;
   }
+
   .bio-article {
     padding: 1.5rem;
   }
+
   .bio-god-card.ui.segment.recommand-god-bz {
     box-shadow: none;
     border-top: 1px solid #E6E6E6;

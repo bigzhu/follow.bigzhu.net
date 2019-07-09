@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 // state
 export const state = {
-  no_types: ['github'],
+  noTypes: ['github'],
   show_types: ['twitter', 'instagram', 'tumblr'],
   layout: null,
   hide_params: { // 为了 scroll 效率, 只部分显示 messages
@@ -16,11 +16,11 @@ export const state = {
   last_scroll_top: 0, //
   nav_bar_height: 0,
   showBar: true, // top bar是否显示
-  registered_count: -1,
+  registeredCount: -1,
   last_reflash_oper: 0,
-  last_time: 0,
+  lastTime: 0,
   old_loading: false,
-  new_loading: false,
+  newLoading: false,
   info: {
     header: '',
     info: ''
@@ -29,28 +29,28 @@ export const state = {
 }
 // mutations
 export const mutations = {
-  REMOVE_THIS_GOD_cat_my_gods(state, god_id) {
-    for (var property in state.cat_my_gods) {
-      if (state.cat_my_gods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.cat_my_gods[property], function(d) {
-          return d.god_id === god_id
+  REMOVE_THIS_GOD_catMyGods(state, godID) {
+    for (var property in state.catMyGods) {
+      if (state.catMyGods.hasOwnProperty(property)) {
+        let index = _.findIndex(state.catMyGods[property], function(d) {
+          return d.godID === godID
         })
-        state.cat_my_gods[property].splice(index, 1)
+        state.catMyGods[property].splice(index, 1)
       }
     }
 
-    for (property in state.cat_gods) {
-      if (state.cat_gods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.cat_gods[property], function(d) {
-          return d.god_id === god_id
+    for (property in state.catGods) {
+      if (state.catGods.hasOwnProperty(property)) {
+        let index = _.findIndex(state.catGods[property], function(d) {
+          return d.godID === godID
         })
-        state.cat_gods[property].splice(index, 1)
+        state.catGods[property].splice(index, 1)
       }
     }
   },
-  REMOVE_THIS_GOD_MESSAGE(state, god_id) {
+  REMOVE_THIS_GOD_MESSAGE(state, godID) {
     state.messages = _.filter(state.messages, function(d) {
-      return d.god_id !== god_id
+      return d.godID !== godID
     })
   },
   CHECK_BAR(state, scrollTarget) {
@@ -72,37 +72,37 @@ export const mutations = {
   },
 
   SET_MY_CATS(state, cats) {
-    state.my_cats = cats
+    state.myCats = cats
   },
   SET_GOD_IS_EXISTS(state, isExists) {
-    state.god_is_exists = isExists
+    state.godIsExists = isExists
   },
-  REMOVE_FROM_MY_MESSAGES(state, god_id) { // 移除这个god
+  REMOVE_FROM_MY_MESSAGES(state, godID) { // 移除这个god
     state.messages = _.without(state.messages, _.findWhere(state.messages, {
-      god_id: god_id
+      godID: godID
     }))
   },
-  DELETE_MY_GOD(state, god_id) { // 移除这个god
+  DELETE_MY_GOD(state, godID) { // 移除这个god
     state.myGods = _.without(state.myGods, _.findWhere(state.myGods, {
-      id: god_id
+      id: godID
     }))
   },
   SET_BIG_GODS(state, gods) {
-    state.big_gods = gods
+    state.bigGods = gods
   },
   REFRESH_LOCAL_UNREAD_MESSAGE_COUNT(state) {
     let unreadMessages = _.partition(state.messages, (d) => {
-      return d.out_created_at > state.last_time
+      return d.out_created_at > state.lastTime
     })[0]
     state.local_unread_message_count = unreadMessages.length
   },
-  filter_god_messages(state, star_name) { // 从主线messages中把god message 过滤出来，避免页面空白
-    initGodMessage(state, star_name)
-    if (state.messages.length !== 0 && state.gods_messages[star_name].length === 0) {
+  filter_god_messages(state, starName) { // 从主线messages中把god message 过滤出来，避免页面空白
+    initGodMessage(state, starName)
+    if (state.messages.length !== 0 && state.godsMessages[starName].length === 0) {
       let godMessages = _.filter(state.messages, (d) => {
-        return d.star_name === star_name
+        return d.starName === starName
       })
-      state.gods_messages[star_name] = godMessages
+      state.godsMessages[starName] = godMessages
     }
   },
   FILTER_SEARCH_MESSAGES(state, searchKey) { // 从主线messages中把查找的信息过滤出来，避免页面空白
@@ -121,7 +121,7 @@ export const mutations = {
       })
     }
   },
-  SET_EXPLORE_new_messages(state, star_name, messages) {
+  SET_EXPLORE_new_messages(state, starName, messages) {
     state.explore_messages = _.uniq(
       state.explore_messages.concat(messages), false,
       function(item, key, a) {
@@ -130,8 +130,8 @@ export const mutations = {
     )
   },
 
-  SET_GOD_INFO(state, god_info) {
-    state.god_info = god_info
+  SET_GOD_INFO(state, godInfo) {
+    state.godInfo = godInfo
   },
 
   old_loading(state, loading) {
@@ -166,9 +166,9 @@ export const actions = {
     commit,
     dispatch
   }) {
-    return axios.get('/api_no_types')
+    return axios.get('/api_noTypes')
       .then((response) => {
-        state.no_types = response.data
+        state.noTypes = response.data
       })
       .catch(function(error) {
         console.log(error)
@@ -178,9 +178,9 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, no_types) {
-    state.no_types = no_types
-    return axios.put('/api_no_types', no_types)
+  }, noTypes) {
+    state.noTypes = noTypes
+    return axios.put('/api_noTypes', noTypes)
       .then((response) => {})
       .catch(function(error) {
         console.log(error)
@@ -219,9 +219,9 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, god_id) {
+  }, godID) {
     let parm = {
-      god_id: god_id
+      godID: godID
     }
     return dispatch('post', {
       url: '/api_block',
@@ -240,18 +240,18 @@ export const actions = {
     commit,
     dispatch
   }, {
-    star_name,
+    starName,
     searchKey,
     after,
     limit,
     explore
   }) {
-    commit('new_loading', true)
+    commit('newLoading', true)
     var params = {
-      not: state.no_types,
+      not: state.noTypes,
       limit: limit,
       after: after,
-      star_name: star_name,
+      starName: starName,
       searchKey: searchKey
     }
     return axios.get('/api_new', {
@@ -261,19 +261,19 @@ export const actions = {
         let data = response.data
         state.unread_message_count = data.unread_message_count
         if (data.messages.length === 0) { // 没有取到数
-          state.following_god_count = data.following_god_count
+          state.followingGodCount = data.followingGodCount
           if (searchKey && state.search_messages.length === 0) {
             // oldMessage({ dispatch, state }, {searchKey: searchKey})
-          } else if (star_name && state.gods_messages[star_name].length === 0) { // 没数就查出old
-            // oldMessage({ dispatch, state }, {star_name: star_name})
+          } else if (starName && state.godsMessages[starName].length === 0) { // 没数就查出old
+            // oldMessage({ dispatch, state }, {starName: starName})
           } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
             // oldMessage({ dispatch, state }, {limit: 2})
           }
         } else {
-          // state.following_god_count = -1
-          if (star_name) { // 查god的new
+          // state.followingGodCount = -1
+          if (starName) { // 查god的new
             commit('god_new_messages', {
-              star_name: star_name,
+              starName: starName,
               messages: data.messages
             })
           } else if (explore) { // explore
@@ -285,7 +285,7 @@ export const actions = {
             // commit('REFRESH_UNREAD_MESSAGE_COUNT')
           }
         }
-        commit('new_loading', false)
+        commit('newLoading', false)
         // commit('reflash_time_len')
         return data
       })
@@ -303,7 +303,7 @@ export const actions = {
       cat: cat,
       following: true
     }
-    let gods = state.cat_my_gods[cat]
+    let gods = state.catMyGods[cat]
     if (gods && gods.length > 0) {
       params.before = gods[gods.length - 1].created_at
     }
@@ -311,7 +311,7 @@ export const actions = {
         params: params
       })
       .then(function(response) {
-        commit('SET_cat_my_gods', {
+        commit('SET_catMyGods', {
           cat: cat,
           gods: response.data
         })
@@ -335,23 +335,23 @@ export const actions = {
     commit,
     dispatch
   }, val) {
-    let star_name
+    let starName
     if (typeof val === 'string') {
-      star_name = val
+      starName = val
     } else {
-      star_name = val.star_name
+      starName = val.starName
       // loading = val.loading
     }
-    if (state.god_infos[star_name]) {
+    if (state.godInfos[starName]) {
       return
     }
     return axios.get('/api_god', {
         params: {
-          star_name: star_name
+          starName: starName
         }
       })
       .then(function(response) {
-        commit('god_infos', response.data)
+        commit('godInfos', response.data)
         return response.data
       })
       .catch(function(error) {

@@ -10,9 +10,9 @@
 
     <q-card-main>
       <p v-html="star.bio"></p>
-      <GodRemark v-model="remark" :god_id="star.id" class="green-bz remark"></GodRemark>
-      <q-field v-for="s in social_types" :key="s.social_type" :icon="'fab fa-'+s.social_type">
-        <q-input v-model="star_social[s.social_type].social_name" @input="s.is_edit=true" :disable="disable_edit" :float-label="s.social_type" />
+      <GodRemark v-model="remark" :godID="star.id" class="green-bz remark"></GodRemark>
+      <q-field v-for="s in socialTypes" :key="s.social_type" :icon="'fab fa-'+s.social_type">
+        <q-input v-model="star_social[s.social_type].socialName" @input="s.is_edit=true" :disable="disable_edit" :float-label="s.social_type" />
       </q-field>
     </q-card-main>
     <q-card-actions align="around">
@@ -22,7 +22,7 @@
       <q-btn color="secondary" v-show="!disable_edit" @click="save">
         {{ $t("保存") }}
       </q-btn>
-      <Follow v-model="star.following" :god_id="star.id"></Follow>
+      <Follow v-model="star.following" :godID="star.id"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -30,32 +30,32 @@
 <script>
   import GodRemark from './GodRemark'
   import Follow from './Follow'
-  import social_types from '../datas/social_types'
+  import socialTypes from '../datas/socialTypes'
   export default {
     components: {
       GodRemark,
       Follow
     },
     computed: {
-      star_id() {
-        return this.$store.state.god.star_name_ids[this.star_name]
+      starID() {
+        return this.$store.state.god.starNameIDS[this.starName]
       },
       star() {
-        return this.$store.state.god.map_stars[this.star_id]
+        return this.$store.state.god.mapStars[this.starID]
       },
       star_social() {
-        return this.$store.state.god.map_star_socials[this.star_id]
+        return this.$store.state.god.mapStarSocials[this.starID]
       },
-      star_name() {
-        return this.$route.params.star_name
+      starName() {
+        return this.$route.params.starName
       },
-      remark: function() {
+      remark: function () {
         return this.star.remark || this.star.admin_remark
       }
     },
-    data: function() {
+    data: function () {
       return {
-        social_types: social_types,
+        socialTypes: socialTypes,
         av: '',
         desc: '',
         loading: false,
@@ -64,7 +64,7 @@
       }
     },
     methods: {
-      autoInsert: function(key, scheme) {
+      autoInsert: function (key, scheme) {
         if (key === 'blog') {
           scheme = 'http://'
         }
@@ -72,22 +72,22 @@
           this.god[key] = scheme
         }
       },
-      save: function() {
+      save: function () {
         if (this.disable_edit) {
           this.disable_edit = false
         } else {
           this.disable_edit = true
-          let modify_star_social = {
-            star_id: this.star_id
+          let modifyStarSocial = {
+            starID: this.starID
           }
           // 筛出做了修改的社交
-          this.social_types.map((o) => {
+          this.socialTypes.map((o) => {
             if (o.is_edit) {
-              modify_star_social[o.social_type] = this.star_social[o.social_type].social_name
+              modifyStarSocial[o.social_type] = this.star_social[o.social_type].socialName
               o.is_edit = false
             }
           })
-          this.$store.dispatch('putStarSocial', modify_star_social)
+          this.$store.dispatch('putStarSocial', modifyStarSocial)
         }
       }
     }

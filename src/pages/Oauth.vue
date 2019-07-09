@@ -1,50 +1,50 @@
 <template>
-<div class="box absolute-center">
-  <div class="center-box">
-    <img class="logo-img" src="../statics/assets/logo_word.png">
-    <p class="discription">发现更广阔的世界</p>
-    <Oauth :oauths="oauths" />
-    <p class="sub">没有社交帐号?
-      <router-link to="/">随意逛逛</router-link>
-    </p>
+  <div class="box absolute-center">
+    <div class="center-box">
+      <img class="logo-img" src="../statics/assets/logo_word.png">
+      <p class="discription">发现更广阔的世界</p>
+      <Oauth :oauths="oauths" />
+      <p class="sub">没有社交帐号?
+        <router-link to="/">随意逛逛</router-link>
+      </p>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import Oauth from 'bz-q-lib/src/components/Oauth'
-export default {
-  components: {
-    Oauth
-  },
-  data: function () {
-    return {
-      oauths: [
-        {
-          type: 'google',
-          url: '/api/google'
+  import Oauth from 'bz-q-lib/src/components/Oauth'
+  export default {
+    components: {
+      Oauth
+    },
+    data: function () {
+      return {
+        oauths: [
+          {
+            type: 'google',
+            url: '/api/google'
           },
-        {
-          type: 'github',
-          url: '/api/github'
+          {
+            type: 'github',
+            url: '/api/github'
           }
           ]
+      }
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        vm.$store.commit('showRight', false)
+        vm.$store.commit('showHeader', false)
+      })
+    },
+    beforeRouteLeave(to, from, next) {
+      if (!this.$q.platform.is.mobile) {
+        this.$store.commit('showRight', true)
+      }
+      this.$store.commit('showHeader', true)
+      next()
     }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.$store.commit('show_right', false)
-      vm.$store.commit('show_header', false)
-    })
-  },
-  beforeRouteLeave(to, from, next) {
-    if (!this.$q.platform.is.mobile) {
-      this.$store.commit('show_right', true)
-    }
-    this.$store.commit('show_header', true)
-    next()
   }
-}
 </script>
 
 <style lang="stylus" scoped>

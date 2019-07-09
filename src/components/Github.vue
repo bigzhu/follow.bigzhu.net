@@ -30,40 +30,40 @@
           })
         }
       },
-      repo_url: function() {
+      repo_url: function () {
         return this.message.content.repo.url.replace('api.github.com/repos', 'github.com')
       },
-      repo_name: function() {
+      repo_name: function () {
         return this.message.content.repo.name
       },
-      repo_link: function() {
+      repo_link: function () {
         return '<a href="' + this.repo_url + '" target="_blank">' + this.repo_name + '</a>'
       },
-      type: function() {
+      type: function () {
         return this.message.content.type
       },
-      payload: function() {
+      payload: function () {
         return this.message.content.payload
       },
-      action: function() {
+      action: function () {
         return this.payload.action
       },
-      commits: function() {
+      commits: function () {
         return this.payload.commits
       },
-      issue: function() {
+      issue: function () {
         if (_.has(this.payload, 'issue')) {
           return this.payload.issue
         }
       },
-      issueLink: function() {
+      issueLink: function () {
         var issueLink
         if (this.issue) {
           issueLink = '<a target="_blank" href="' + this.issue.html_url + '" >' + this.issue.title + '</a>'
           return issueLink
         }
       },
-      issue_content: function() {
+      issue_content: function () {
         var content
         content = ''
         if (this.action) {
@@ -71,7 +71,7 @@
           return content
         }
       },
-      issueCommentLink: function() {
+      issueCommentLink: function () {
         var issueCommentLink, issueCommentURL
         if (this.issue) {
           if (!this.payload.comment) {
@@ -82,7 +82,7 @@
           return issueCommentLink
         }
       },
-      issue_comment_body: function() {
+      issue_comment_body: function () {
         if (_.has(this.payload, 'comment')) {
           return this.payload['comment']['body']
         }

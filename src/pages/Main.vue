@@ -10,22 +10,19 @@
   import Messages from '../components/Messages'
   import Top from '../components/Top'
   import UnRead from '../components/UnRead'
-  import GodInfo from '../components/GodInfo'
-  import RightInfo from '../components/RightInfo'
   export default {
     components: {
       UnRead,
       Top,
-      Messages,
-      GodInfo,
-      RightInfo
+      Messages
     },
     data() {
       return {}
     },
     computed: {
-      star_name() {
-        if (this.$route.params.star_name) return this.$route.params.star_name
+      starName() {
+        if (this.$route.params.starName) return this.$route.params.starName
+        return ''
       }
     },
     mounted() {
@@ -35,9 +32,9 @@
       '$route': 'getGodInfo'
     },
     methods: {
-      getGodInfo: function() {
-        if (this.star_name) {
-          this.$store.dispatch('getGod', this.star_name)
+      getGodInfo: function () {
+        if (this.starName) {
+          this.$store.dispatch('getGod', this.starName)
         }
       }
     }
@@ -45,4 +42,5 @@
 </script>
 
 <style scoped>
+
 </style>

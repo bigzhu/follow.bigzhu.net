@@ -19,7 +19,7 @@
     <!--userInfo-->
     <UserInfo v-show="is_login" />
     <!--点击呼出右侧菜单-->
-    <q-btn flat @click="$store.commit('show_right', !show_right)">
+    <q-btn flat @click="$store.commit('showRight', !showRight)">
       <q-icon name="menu" />
     </q-btn>
   </q-toolbar>
@@ -33,31 +33,31 @@
       UserInfo
     },
     computed: {
-      show_right: {
-        get: function() {
-          return this.$store.state.main.show_right
+      showRight: {
+        get: function () {
+          return this.$store.state.main.showRight
         },
-        set: function(show_right) {
-          this.$store.commit('show_right', show_right)
+        set: function (showRight) {
+          this.$store.commit('showRight', showRight)
         }
       },
-      is_login: function() {
-        return this.$store.state.lib.oauth_info.name
+      is_login: function () {
+        return this.$store.state.lib.oauthInfo.name
       }
     },
-    mounted: function() {
+    mounted: function () {
       if (this.is_login === '') {
         // 取用户信息
         this.$store.dispatch('lib/getOauthInfo')
         // 取用户不关注社交类型
         // this.$store.dispatch('getNoTypes')
       }
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },
     methods: {
-      login: function() {
+      login: function () {
         this.$router.push({
           name: 'Oauth'
         })

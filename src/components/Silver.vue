@@ -35,15 +35,12 @@
 </template>
 
 <script>
-  
   import Gold from './Gold'
   export default {
     mixins: [Gold],
     props: [],
-    components: {
-    },
-    computed: {
-    },
+    components: {},
+    computed: {},
     data: function () {
       return {
         type: 'silver'
@@ -54,8 +51,7 @@
         // code that assumes this.$el is in-document
       })
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 

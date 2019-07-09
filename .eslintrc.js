@@ -32,6 +32,8 @@ module.exports = {
   // add your custom rules here
   rules: {
     "indent": 0,
+    "space-before-function-paren": [2, { "anonymous": "ignore", "named": "ignore", "asyncArrow": "ignore" }],
+
     // allow async-await
     'generator-star-spacing': 'off',
     // allow paren-less arrow functions

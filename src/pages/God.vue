@@ -1,5 +1,5 @@
 <template>
-  <q-page padding >
+  <q-page padding>
     <messages type="god"></messages>
     <Top></Top>
   </q-page>

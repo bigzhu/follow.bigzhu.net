@@ -14,20 +14,20 @@
     props: [],
     components: {},
     computed: {
-      is_login() {
-        return this.$store.state.lib.oauth_info.name
+      isLogin () {
+        return this.$store.state.lib.oauthInfo.name
       }
     },
-    data: function() {
+    data: function () {
       return {}
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },
     methods: {
-      open(url) {
+      open (url) {
         var win = window.open(url, '_blank')
         win.focus()
       }

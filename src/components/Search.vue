@@ -1,4 +1,3 @@
-
 <template>
   <div class="ui main container">
     <div class="ui stackable grid">
@@ -22,22 +21,20 @@
       Top,
       Messages
     },
-    data () {
-      return {
-      }
+    data() {
+      return {}
     },
-    computed: {
+    computed: {},
+    mounted() {
+      this.$nextTick(function () {})
     },
-    mounted () {
-      this.$nextTick(function () {
-      })
-    },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style>
- /* 查找的高亮*/
-  .highlight { background-color: #FDFD95 }
+  /* 查找的高亮*/
+  .highlight {
+    background-color: #FDFD95
+  }
 </style>

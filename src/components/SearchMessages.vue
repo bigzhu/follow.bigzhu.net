@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class='ui center aligned basic segment'>
-      <old :star_name="star_name" :search_key="search_key"></old>
+      <old :starName="starName" :search_key="search_key"></old>
     </div>
     <q-infinite-scroll :offset="1000" :handler="call_back">
       <message v-for="message in messages" :message='message' :key="message.id">
@@ -9,7 +9,7 @@
       <SpinnerBz :show="loading"></SpinnerBz>
     </q-infinite-scroll>
 
-    <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !new_loading}"></div>
+    <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !newLoading}"></div>
   </div>
 </template>
 
@@ -36,15 +36,14 @@
       }
     },
     data: function () {
-      return {
-      }
+      return {}
     },
     computed: {
-      messages () {
+      messages() {
         return this.$store.state.search_messages
       }
     },
-    mounted () {
+    mounted() {
       this.search()
     },
     methods: {
@@ -66,13 +65,13 @@
       },
       searcOld: function () {
         let self = this
-        this.$store.dispatch('oldMessage', {search_key: self.search_key, limit: 10}).then(function (data) {
+        this.$store.dispatch('oldMessage', { search_key: self.search_key, limit: 10 }).then(function (data) {
           self.mark()
         })
       },
       searchNew: function () {
         let self = this
-        return this.$store.dispatch('newMessage', {search_key: this.search_key}).then(function (data) {
+        return this.$store.dispatch('newMessage', { search_key: this.search_key }).then(function (data) {
           if (self.messages.length !== 0) {
             self.mark()
           }
@@ -92,11 +91,14 @@
 
 <style >
   /*隐藏占位*/
-.invisible_bz {
-  visibility:hidden;
-};
-mark{
-  background: #FDFD95;
-  color: black;
-}
+  .invisible_bz {
+    visibility: hidden;
+  }
+
+  ;
+
+  mark {
+    background: #FDFD95;
+    color: black;
+  }
 </style>

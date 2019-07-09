@@ -1,11 +1,11 @@
 <template>
   <q-card class="the-hover-bz" inline>
     <q-item>
-      <router-link :to="{ name: 'God', params: { star_name: god.name }}">
+      <router-link :to="{ name: 'God', params: { starName: god.name }}">
         <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-main>
-        <router-link :to="{ name: 'God', params: { star_name: god.name }}">
+        <router-link :to="{ name: 'God', params: { starName: god.name }}">
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
@@ -16,16 +16,16 @@
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge v-for="social in Object.keys(star_social)" :key="social" v-show="star_social[social].social_name!=''" @click.native="setNow(star_social[social])" :type="star_social[social].social" :info="star_social[social]" />
+        <social-badge v-for="social in Object.keys(star_social)" :key="social" v-show="star_social[social].socialName!=''" @click.native="setNow(star_social[social])" :type="star_social[social].social" :info="star_social[social]" />
       </div>
     </q-card-title>
 
     <q-card-main class="green-bz">
       <p v-html="bio"></p>
-      <GodRemark v-model="god.remark" :god_id="god.id" class="green-bz remark"></GodRemark>
+      <GodRemark v-model="god.remark" :godID="god.id" class="green-bz remark"></GodRemark>
     </q-card-main>
     <q-card-actions align="end">
-      <Follow v-model="god.following" :god_id="god.id" class="follow"></Follow>
+      <Follow v-model="god.following" :godID="god.id" class="follow"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -42,7 +42,7 @@
     props: {
       god: {
         type: Object,
-        default: function() {
+        default: function () {
           return godData
         }
       },
@@ -55,36 +55,36 @@
     },
     mounted() {},
     directives: {},
-    data: function() {
+    data: function () {
       return {
         loading: false
       }
     },
     computed: {
       star_social() {
-        return this.$store.state.god.map_star_socials[this.god.id.toString()]
+        return this.$store.state.god.mapStarSocials[this.god.id.toString()]
       },
       bio() {
         return myautolinker(this.god.bio, this.god.social)
       },
-      god_id() {
-        return this.god.god_id
+      godID() {
+        return this.god.godID
       }
     },
     methods: {
       // 是否有这个社交类型
-      haveSocial: function(social) {
+      haveSocial: function (social) {
         return true
       },
-      block: function(god) {
+      block: function (god) {
         this.loading = true
         let self = this
-        this.$store.dispatch('postBlock', god.god_id).then(function(data) {
-          self.$store.commit('REMOVE_THIS_GOD_cat_my_gods', god.god_id)
+        this.$store.dispatch('postBlock', god.godID).then(function (data) {
+          self.$store.commit('REMOVE_THIS_GOD_catMyGods', god.godID)
           self.loading = false
         })
         if (god.following === 1) {
-          self.$store.dispatch('unfollow', god.god_id)
+          self.$store.dispatch('unfollow', god.godID)
         }
       }
     }

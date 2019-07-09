@@ -1,7 +1,7 @@
 <template>
   <div class="ui container">
     <router-link :to="{name:'BioEditorNew'}" class="ui button">New</router-link>
-    <div v-for="rich in rich_list" class="ui items">
+    <div v-for="rich in richList" class="ui items">
       <div @click="go(rich.id)" class="item">
         <div class="image">
           <img :src="rich.title_img">
@@ -25,26 +25,26 @@
 <script>
   export default {
     props: [],
-    components: {
-    },
+    components: {},
     computed: {
-      rich_list: function () {
-        return this.$store.state.p.rich_list
+      richList: function () {
+        return this.$store.state.p.richList
       }
     },
     data: function () {
-      return {
-      }
+      return {}
     },
     mounted () {
       this.$store.dispatch('getRichList')
     },
     methods: {
       go: function (id) {
-        this.$router.push({name: 'BioEditor', params: {id: id}})
+        this.$router.push({ name: 'BioEditor', params: { id: id } })
       }
     }
   }
 </script>
+
 <style>
+
 </style>

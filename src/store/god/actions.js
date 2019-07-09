@@ -14,8 +14,8 @@ export const getStarSocials = ({
   commit,
   dispatch
 }) => {
-  return get('/api/star_socials', {}).then((data) => {
-    commit('star_socials', data)
+  return get('/api/starSocials', {}).then((data) => {
+    commit('starSocials', data)
     return data
   })
 }
@@ -37,21 +37,21 @@ export const getGod = ({
   commit,
   dispatch
 }, val) => {
-  let star_name
+  let starName
   if (typeof val === 'string') {
-    star_name = val
+    starName = val
   } else {
-    star_name = val.star_name
+    starName = val.starName
     // loading = val.loading
   }
-  if (state.god_infos[star_name]) {
+  if (state.godInfos[starName]) {
     return
   }
   return get('/api_god', {
-      star_name: star_name
+      starName: starName
     })
     .then((data) => {
-      commit('god_infos', data)
+      commit('godInfos', data)
       return data
     })
 }
@@ -63,7 +63,7 @@ export const getPublicGods = ({
   let params = {
     cat: cat
   }
-  let gods = state.cat_gods[cat]
+  let gods = state.catGods[cat]
   if (gods) {
     params.before = gods[gods.length - 1].created_at
   }
@@ -71,7 +71,7 @@ export const getPublicGods = ({
       params: params
     })
     .then(function(response) {
-      commit('cat_gods', {
+      commit('catGods', {
         cat: cat,
         gods: response.data
       })
@@ -82,23 +82,23 @@ export const putStarSocial = ({
   dispatch,
   state,
   actions
-}, modify_star_social) => {
-  return put('/api/star_socials', modify_star_social)
+}, modifyStarSocial) => {
+  return put('/api/starSocials', modifyStarSocial)
 }
 export const unfollow = ({
   state,
   commit,
   dispatch
-}, star_id) => {
-  return del('/api/followers/' + star_id)
+}, starID) => {
+  return del('/api/followers/' + starID)
 }
 export const follow = ({
   state,
   commit,
   dispatch
-}, star_id) => {
+}, starID) => {
   let params = {
-    star_id: star_id
+    starID: starID
   }
   return post('/api/followers', params)
 }

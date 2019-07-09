@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <NotYetFollow v-show="ordered_stars.length===0 && get_done && !cat"></NotYetFollow>
-    <AddingGodItem v-show="star_name!==''" :star_name="star_name" @add_done="addDone">
+    <AddingGodItem v-show="starName!==''" :starName="starName" @add_done="addDone">
     </AddingGodItem>
     <GodItem v-for="god in ordered_stars" :god="god" :key="god.id" class="god-item">
     </GodItem>
@@ -17,16 +17,15 @@
   import AddGodButton from '../components/AddGodButton'
   import _ from 'lodash'
   import GodItem from '../components/GodItem'
-  import AddGod from '../components/AddGod'
   export default {
     events: {
-      'unfollow': function(god_id) { // 监听unfollow事件，移除已经unfollow的god
-        this.$store.commit('DELETE_MY_GOD', god_id)
+      'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
+        this.$store.commit('DELETE_MY_GOD', godID)
       }
     },
     watch: {
       '$route.params': {
-        handler: function() {
+        handler: function () {
           this.$store.dispatch('getStars')
         },
         deep: true
@@ -37,26 +36,25 @@
       NotYetFollow,
       AddingGodItem,
       AddGodButton,
-      AddGod,
       GodItem
     },
     computed: {
       loading() {
         return this.$store.state.lib.loading
       },
-      cat: function() {
+      cat: function () {
         return this.$route.params.cat
       },
       // 过滤不是已经关注的网红
-      filtered_my: function() {
+      filtered_my: function () {
         return this.filter_cat.filter((o) => {
           return o.following !== 0
         })
       },
       // 按照关注时间排序
-      ordered_stars: function() {
+      ordered_stars: function () {
         return _.orderBy(this.filtered_my, 'following_at', 'desc').filter((o) => {
-          return o.name !== this.star_name
+          return o.name !== this.starName
         })
       },
       filter_cat() {
@@ -68,10 +66,10 @@
         return this.$store.state.god.stars
       }
     },
-    data: function() {
+    data: function () {
       return {
         get_done: false,
-        star_name: '',
+        starName: '',
         key: ''
       }
     },
@@ -81,12 +79,12 @@
     },
     methods: {
       addDone() {
-        this.star_name = ''
+        this.starName = ''
         this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
-      add: function(star_name) {
-        this.star_name = star_name
+      add: function (starName) {
+        this.starName = starName
       }
     }
   }

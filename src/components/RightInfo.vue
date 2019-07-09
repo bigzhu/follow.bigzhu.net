@@ -20,7 +20,7 @@
       </div>
 
       <div class="footer">
-        <span class="footer-element">{{ $t("注册人数") }}: {{registered_count}}</span>
+        <span class="footer-element">{{ $t("注册人数") }}: {{registeredCount}}</span>
         <span>© 2017 Follow Center</span>
       </div>
       <q-select type="list" v-model="lang" :options="lang_options">
@@ -31,30 +31,28 @@
 
 <script>
   import {
-    QCard,
     QSelect
   } from 'quasar'
   export default {
     props: [],
     components: {
-      QCard,
       QSelect
     },
     computed: {
       lang: {
-        get: function() {
+        get: function () {
           return this.$i18n.locale
         },
-        set: function(v) {
+        set: function (v) {
           this.$i18n.locale = v
           window.localStorage.setItem('lang', v)
         }
       },
-      registered_count() {
-        return this.$store.state.user.registered_count
+      registeredCount () {
+        return this.$store.state.user.registeredCount
       }
     },
-    data: function() {
+    data: function () {
       return {
         lang_options: [{
             label: 'English',
@@ -67,18 +65,18 @@
         ]
       }
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // $(this.$el).find('.ui.dropdown').dropdown()
         // code that assumes this.$el is in-document
       })
     },
     methods: {
-      whichLang: function() {
+      whichLang: function () {
         if (this.lang === 'cn') return '中文'
         if (this.lang === 'en') return 'English'
       },
-      setLang: function(lang) {
+      setLang: function (lang) {
         window.localStorage.setItem('lang', lang)
       }
     }

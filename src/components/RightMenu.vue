@@ -3,8 +3,8 @@
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
     <Cat v-if="name==='Recommand'" route_name="Recommand"></Cat>
     <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
-    <GodInfo v-show="star_name"/>
-    <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])"/>
+    <GodInfo v-show="starName" />
+    <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])" />
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
   </q-scroll-area>
 </template>
@@ -27,20 +27,20 @@
       name() {
         return this.$route.name
       },
-      god_info() {
-        let id_str = this.$store.state.god.star_name_ids[this.star_name]
-        let star = this.$store.state.god.map_stars[id_str]
+      godInfo() {
+        let idStr = this.$store.state.god.starNameIDS[this.starName]
+        let star = this.$store.state.god.mapStars[idStr]
         return star
       },
-      star_name() {
-        return this.$route.params.star_name
+      starName() {
+        return this.$route.params.starName
       }
     },
-    data: function() {
+    data: function () {
       return {}
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },

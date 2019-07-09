@@ -2,14 +2,15 @@
   <div :class="{'center-container-bz':$q.platform.is.mobile}">
     <div class="description" v-html="text">
     </div>
-    <a v-for="(src,index) in message.medias" v-if="message.media_type==='photo'" :key="'image-'+index" @click="openImg(src)" href='javascript:void(0)'>
+    <template v-for="(src,index) in message.medias">
+      <a v-if="message.media_type==='photo'" :key="'image-'+index" @click="openImg(src)" href='javascript:void(0)'>
         <img :src="encodeFile(src)" class="responsive">
-    </a>
-    <video v-for="(url,index) in message.medias" v-if="message.media_type==='gif' || message.media_type==='video'" :key="index" :loop="message.media_type==='gif'" :autoplay="message.media_type==='gif'" :controls="message.media_type!='gif'" type='video/mp4'>
-        <source :src="encodeFile(url)">
-    </video>
+      </a>
+      <video v-if="message.media_type==='gif' || message.media_type==='video'" :key="index" :loop="message.media_type==='gif'" :autoplay="message.media_type==='gif'" :controls="message.media_type!='gif'" type='video/mp4'>
+        <source :src="encodeFile(src)">
+      </video>
+    </template>
   </div>
-
 </template>
 
 <script>
@@ -19,14 +20,14 @@
     mixins: [Proxy],
     props: ['message'],
     computed: {
-      text: function() {
+      text: function () {
         return myautolinker(this.message.text, this.message.social)
       }
     },
     methods: {
-      openImg: function(img_url) {
+      openImg: function (imgURL) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(img_url, '_blank')
+          window.open(imgURL, '_blank')
         } else {
           this.$router.push({
             name: 'TheMessage',
@@ -47,13 +48,4 @@
       // 避免 url 撑开 message, 导致手机屏幕左右滑动
       word-wrap break-word
       word-break break-all
-</style>
-
-<style lang="stylus" scoped>
-
-  video, img.responsive
-    padding-top 1em
-  video
-    max-width 100%
-    max-height 40rem
 </style>

@@ -23,12 +23,12 @@
         return this.$store.state.message.old_loading
       }
     },
-    props: ['show', 'star_name', 'search_key'],
+    props: ['show', 'starName', 'search_key'],
     mounted() {},
     methods: {
-      old: function() {
+      old: function () {
         this.$store.dispatch('oldMessage', {
-          star_name: this.star_name,
+          starName: this.starName,
           search_key: this.search_key
         })
       }

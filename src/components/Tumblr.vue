@@ -7,11 +7,11 @@
     <template v-for="(media, index) in medias" :media="media">
       <div class="description" v-html="media.caption" :key="'description-'+index"></div>
       <a @click="openImg(proxy(media.img_url))" :key="'a-'+index">
-        <img :src="proxy(media.img_url)" class="responsive" >
+        <img :src="proxy(media.img_url)" class="responsive">
       </a>
       <br :key="'br-'+index">
     </template>
-    <video v-if="video"  :controls="true" type='video/mp4'>
+    <video v-if="video" :controls="true" type='video/mp4'>
       <source :src="proxy(video)">
     </video>
   </div>
@@ -29,7 +29,8 @@
       medias: function () {
         if (this.message.extended_entities && this.message.type === 'photo') {
           return _.map(
-            this.message.extended_entities, function (d) {
+            this.message.extended_entities,
+            function (d) {
               // var caption, height, img_height, img_url, img_width, t
               var img_url = d.original_size.url
               // img_url = d.original_size.url
@@ -65,7 +66,7 @@
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
           window.open(img_url, '_blank')
         } else {
-          this.$router.push({name: 'TheMessage', params: {id: this.message.id}})
+          this.$router.push({ name: 'TheMessage', params: { id: this.message.id } })
         }
       }
     }
@@ -73,9 +74,11 @@
 </script>
 
 <style scoped>
-  video, img.responsive {
+  video,
+  img.responsive {
     padding-top: 1rem
   }
+
   video {
     max-width: 100%;
     max-height: 40rem;

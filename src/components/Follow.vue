@@ -12,12 +12,12 @@
         // type: Number,
         default: 0
       },
-      god_id: {
+      godID: {
         required: true,
         type: Number
       }
     },
-    data: function() {
+    data: function () {
       return {
         color: '',
         loading: true,
@@ -25,46 +25,46 @@
       }
     },
     watch: {
-      value: function() {
+      value: function () {
         this.checkStatus()
       }
     },
     mounted() {
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         this.checkStatus()
       })
     },
     methods: {
-      checkStatus: function() {
+      checkStatus: function () {
         if (this.value === 0 || this.value === null) {
           this.showUnfollow()
         } else {
           this.showFollow()
         }
       },
-      showFollow: function() {
+      showFollow: function () {
         this.$emit('input', 1)
         this.loading = false
         this.desc = this.$t('已跟踪')
         this.color = 'light'
       },
-      showUnfollow: function() {
+      showUnfollow: function () {
         this.$emit('input', 0)
         this.loading = false
         this.desc = this.$t('跟踪')
         this.color = 'secondary'
       },
-      toggleFollow: function() {
+      toggleFollow: function () {
         let self = this
         this.loading = true
         if (this.value === 1) {
-          this.$store.dispatch('unfollow', this.god_id).then(function(data) {
+          this.$store.dispatch('unfollow', this.godID).then(function (data) {
             self.showUnfollow()
           }).catch((error) => {
             this.$q.notify(error.response.data)
           })
         } else {
-          this.$store.dispatch('follow', this.god_id).then(function(data) {
+          this.$store.dispatch('follow', this.godID).then(function (data) {
             self.showFollow()
           }).catch((error) => {
             if (error.response.data === "'user_id'") {

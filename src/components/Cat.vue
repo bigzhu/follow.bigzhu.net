@@ -29,7 +29,7 @@
       },
       cats: function() {
         if (this.just_my) {
-          return this.$store.state.god.my_cats
+          return this.$store.state.god.myCats
         } else {
           return this.$store.state.god.cats
         }

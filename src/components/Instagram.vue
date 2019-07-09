@@ -27,13 +27,14 @@
     mixins: [Proxy],
     props: ['message'],
     computed: {
-      type: function() {
+      type: function () {
         return this.message.type
       },
-      video: function() {
+      video: function () {
         if (this.message.extended_entities && this.message.type === 'video') {
           return this.message.extended_entities.video_url
         }
+        return ''
       },
       // height: function () {
       //   var img_height, img_width, real_height
@@ -42,14 +43,14 @@
       //   real_height = getFitHeightForSemantic(img_height, img_width)
       //   return real_height
       // },
-      description: function() {
+      description: function () {
         return myautolinker(this.message.text, 'instagram')
       }
     },
     methods: {
-      openImg: function(img_url) {
+      openImg: function (imgURL) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(img_url, '_blank')
+          window.open(imgURL, '_blank')
         } else {
           this.$router.push({
             name: 'TheMessage',
@@ -64,9 +65,11 @@
 </script>
 
 <style scoped>
-  video, img.responsive {
+  video,
+  img.responsive {
     padding-top: 1rem
   }
+
   video {
     max-width: 100%;
     max-height: 40rem;

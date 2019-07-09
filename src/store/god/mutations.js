@@ -10,41 +10,41 @@ function initCatGod(state, type, cat) {
     Vue.set(state[type], cat, [])
   }
 }
-// 所有的社交类型重新组合存储 {star_id: {'twitter':{}}} 的格式
+// 所有的社交类型重新组合存储 {starID: {'twitter':{}}} 的格式
 // 为了便于检索和对应
-export const star_socials = (state, star_socials) => {
-  _.map(star_socials, (o) => {
-    if (state.map_star_socials[o.star_id.toString()] === undefined) {
-      state.map_star_socials[o.star_id.toString()] = {}
+export const starSocials = (state, starSocials) => {
+  _.map(starSocials, (o) => {
+    if (state.mapStarSocials[o.starID.toString()] === undefined) {
+      state.mapStarSocials[o.starID.toString()] = {}
     }
     // if (o.error_info !== '') {
-    //   o.social_name = ''
+    //   o.socialName = ''
     // }
-    state.map_star_socials[o.star_id.toString()][o.social] = o
+    state.mapStarSocials[o.starID.toString()][o.social] = o
   })
-  state.star_socials = star_socials
+  state.starSocials = starSocials
 }
 // 和上面不一样, 这里铺平
 export const stars = (state, stars) => {
   _.map(stars, (o) => {
-    state.star_name_ids[o.name] = o.id.toString() // 根据 name 快速索引 id
-    state.map_stars[o.id.toString()] = o
+    state.starNameIDS[o.name] = o.id.toString() // 根据 name 快速索引 id
+    state.mapStars[o.id.toString()] = o
   })
   state.stars = stars
 }
-export const god_infos = (state, god_info) => {
-  Vue.set(state.god_infos, god_info.name, god_info)
+export const godInfos = (state, godInfo) => {
+  Vue.set(state.godInfos, godInfo.name, godInfo)
 }
-export const cat_gods = (state, {
+export const catGods = (state, {
   cat,
   gods
 }) => {
-  initCatGod(state, 'cat_gods', cat)
-  let mergeGods = state.cat_gods[cat].concat(gods)
+  initCatGod(state, 'catGods', cat)
+  let mergeGods = state.catGods[cat].concat(gods)
   let uniqGods = _.uniqBy(mergeGods, function(d) {
     return d.id
   })
-  state.cat_gods[cat] = uniqGods
+  state.catGods[cat] = uniqGods
 }
 export const countCat = (state, stars) => {
   state.cats = {}
@@ -58,20 +58,20 @@ export const countCat = (state, stars) => {
 }
 // 过滤统计我关注的网红的分类和数目
 export const countFollowedCat = (state, stars) => {
-  state.my_cats = {}
+  state.myCats = {}
   stars.map((o) => {
     if (o.following === 0) return
-    if (!state.my_cats[o.cat]) {
-      state.my_cats[o.cat] = 1
+    if (!state.myCats[o.cat]) {
+      state.myCats[o.cat] = 1
     } else {
       console.log('add count')
-      state.my_cats[o.cat] += 1
+      state.myCats[o.cat] += 1
     }
   })
 }
-export const unshift_my_god = (state, {
+export const unshiftMyGod = (state, {
   cat,
   god
 }) => {
-  state.cat_my_gods[cat].unshift(god)
+  state.catMyGods[cat].unshift(god)
 }

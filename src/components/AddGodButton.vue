@@ -7,7 +7,7 @@
 <script>
   export default {
     methods: {
-      dialog: function() {
+      dialog: function () {
         this.$q.dialog({
           title: this.$t('添加'),
           message: this.$t('帐号名, 比如: bigzhu'),

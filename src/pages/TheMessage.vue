@@ -12,7 +12,7 @@
     components: {
       Message
     },
-    data: function() {
+    data: function () {
       return {
         done: false
       }
@@ -29,16 +29,16 @@
       this.$store.dispatch('getTheMessage', this.id).then(() => {
         this.done = true
       })
-      this.$nextTick(function() {})
+      this.$nextTick(function () {})
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        vm.$store.commit('show_right', false)
+        vm.$store.commit('showRight', false)
       })
     },
     beforeRouteLeave(to, from, next) {
       if (!this.$q.platform.is.mobile) {
-        this.$store.commit('show_right', true)
+        this.$store.commit('showRight', true)
       }
       next()
     }

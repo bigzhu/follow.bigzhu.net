@@ -1,16 +1,16 @@
 <template>
   <div id="q-app">
-    <q-layout view="hhh LpR lfr" v-if="stars_done && star_socials_done">
-      <q-layout-header v-model="show_header">
+    <q-layout view="hhh LpR lfr" v-if="stars_done && starSocials_done">
+      <q-layout-header v-model="showHeader">
         <BarOne/>
         <BarTwo/>
       </q-layout-header>
       <!-- 左菜单 -->
-      <q-layout-drawer side="left" v-model="show_left">
+      <q-layout-drawer side="left" v-model="showLeft">
         <LeftMenu/>
       </q-layout-drawer>
       <!-- 右菜单 -->
-      <q-layout-drawer side="right" v-model="show_right">
+      <q-layout-drawer side="right" v-model="showRight">
         <RightMenu/>
       </q-layout-drawer>
       <q-page-container>
@@ -34,13 +34,13 @@
     data: function() {
       return {
         stars_done: false,
-        star_socials_done: false
+        starSocials_done: false
       }
     },
     name: 'App',
     beforeCreate() {
       this.$store.dispatch('getStarSocials').then(() => {
-        this.star_socials_done = true
+        this.starSocials_done = true
       })
       this.$store.dispatch('getStars').then(() => {
         this.stars_done = true
@@ -53,28 +53,28 @@
       BarTwo
     },
     computed: {
-      show_header: {
+      showHeader: {
         get: function() {
-          return this.$store.state.main.show_header
+          return this.$store.state.main.showHeader
         },
-        set: function(show_header) {
-          this.$store.commit('show_header', show_header)
+        set: function(showHeader) {
+          this.$store.commit('showHeader', showHeader)
         }
       },
-      show_right: {
+      showRight: {
         get: function() {
-          return this.$store.state.main.show_right
+          return this.$store.state.main.showRight
         },
-        set: function(show_right) {
-          this.$store.commit('show_right', show_right)
+        set: function(showRight) {
+          this.$store.commit('showRight', showRight)
         }
       },
-      show_left: {
+      showLeft: {
         get: function() {
-          return this.$store.state.main.show_left
+          return this.$store.state.main.showLeft
         },
         set: function() {
-          this.$store.commit('show_left', true)
+          this.$store.commit('showLeft', true)
         }
       }
     }

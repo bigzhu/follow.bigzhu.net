@@ -1,6 +1,6 @@
 export default {
   anki: {
-    user_name: null,
+    userName: null,
     password: null
   }
 }
