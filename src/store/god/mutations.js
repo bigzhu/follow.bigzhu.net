@@ -14,26 +14,26 @@ function initCatGod(state, type, cat) {
 // 为了便于检索和对应
 export const starSocials = (state, starSocials) => {
   _.map(starSocials, (o) => {
-    if (state.mapStarSocials[o.starID.toString()] === undefined) {
-      state.mapStarSocials[o.starID.toString()] = {}
+    if (state.mapStarSocials[o.StarID.toString()] === undefined) {
+      state.mapStarSocials[o.StarID.toString()] = {}
     }
     // if (o.error_info !== '') {
     //   o.socialName = ''
     // }
-    state.mapStarSocials[o.starID.toString()][o.social] = o
+    state.mapStarSocials[o.StarID.toString()][o.social] = o
   })
   state.starSocials = starSocials
 }
 // 和上面不一样, 这里铺平
 export const stars = (state, stars) => {
   _.map(stars, (o) => {
-    state.starNameIDS[o.name] = o.id.toString() // 根据 name 快速索引 id
-    state.mapStars[o.id.toString()] = o
+    state.starNameIDS[o.Name] = o.ID.toString() // 根据 name 快速索引 id
+    state.mapStars[o.ID.toString()] = o
   })
   state.stars = stars
 }
 export const godInfos = (state, godInfo) => {
-  Vue.set(state.godInfos, godInfo.name, godInfo)
+  Vue.set(state.godInfos, godInfo.Name, godInfo)
 }
 export const catGods = (state, {
   cat,
