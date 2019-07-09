@@ -1,24 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import lib from 'bz-q-lib/src/store/lib'
-import user from './user'
-import main from './main'
-import message from './message'
-import god from './god'
-import anki from './anki'
+// import example from './module-example'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
-  modules: {
-    anki,
-    god,
-    message,
-    main,
-    user,
-    lib
-  }
-})
+/*
+ * If not building with SSR mode, you can
+ * directly export the Store instantiation
+ */
 
-export default store
+export default function (/* { ssrContext } */) {
+  const Store = new Vuex.Store({
+    modules: {
+      // example
+    },
+
+    // enable strict mode (adds overhead!)
+    // for dev mode only
+    strict: process.env.DEV
+  })
+
+  return Store
+}

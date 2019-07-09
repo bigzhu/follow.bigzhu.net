@@ -1,26 +1,68 @@
 // Configuration for your app
+// https://quasar.dev/quasar-cli/quasar-conf-js
 
 module.exports = function (ctx) {
   return {
-    // app plugins (/src/plugins)
-    plugins: [
+    // app boot file (/src/boot)
+    // --> boot files are part of "main.js"
+    boot: [
       'i18n',
       'axios'
     ],
+
     css: [
       'app.styl'
     ],
+
     extras: [
-      ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons', // optional, you are not bound to it
-      'ionicons'
-      // 'mdi',
-      // 'fontawesome'
+      // 'ionicons-v4',
+      // 'mdi-v3',
+      // 'fontawesome-v5',
+      // 'eva-icons',
+      // 'themify',
+      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
+
+      'roboto-font', // optional, you are not bound to it
+      'material-icons' // optional, you are not bound to it
     ],
+
+    framework: {
+      // iconSet: 'ionicons-v4',
+      // lang: 'de', // Quasar language
+
+      // all: true, // --- includes everything; for dev only!
+
+      components: [
+        'QLayout',
+        'QHeader',
+        'QDrawer',
+        'QPageContainer',
+        'QPage',
+        'QToolbar',
+        'QToolbarTitle',
+        'QBtn',
+        'QIcon',
+        'QList',
+        'QItem',
+        'QItemSection',
+        'QItemLabel'
+      ],
+
+      directives: [
+        'Ripple'
+      ],
+
+      // Quasar plugins
+      plugins: [
+        'Notify'
+      ]
+    },
+
     supportIE: false,
+
     build: {
       scopeHoisting: true,
-      vueRouterMode: 'history',
+      // vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -30,62 +72,34 @@ module.exports = function (ctx) {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules|quasar)/
+          exclude: /node_modules/,
+          options: {
+            formatter: require('eslint').CLIEngine.getFormatter('stylish')
+          }
         })
       }
     },
+
     devServer: {
-      proxy: {
-        '/api': {
-          target: 'http://127.0.0.1:3003',
-          changeOrigin: true
-        }
-      },
       // https: true,
-      port: 8080,
+      // port: 8080,
       open: true // opens browser window automatically
     },
-    // framework: 'all' --- includes everything; for dev only!
-    framework: 'all',
-    /*
-    framework: {
-      components: [
-        'QLayout',
-        'QLayoutHeader',
-        'QLayoutDrawer',
-        'QPageContainer',
-        'QPage',
-        'QToolbar',
-        'QToolbarTitle',
-        'QBtn',
-        'QIcon',
-        'QList',
-        'QListHeader',
-        'QItem',
-        'QItemMain',
-        'QItemSide'
-      ],
-      directives: [
-        'Ripple'
-      ],
-      // Quasar plugins
-      plugins: [
-        'Notify'
-      ]
-      // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
-      // i18n: 'de' // Quasar language
+
+    // animations: 'all', // --- includes all animations
+    animations: [],
+
+    ssr: {
+      pwa: false
     },
-    */
-    // animations: 'all' --- includes all animations
-    animations: [
-    ],
+
     pwa: {
       // workboxPluginMode: 'InjectManifest',
-      // workboxOptions: {},
+      // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar-PWA',
-        // description: 'Best PWA App in town!',
+        // name: 'Follow Center',
+        // short_name: 'Follow Center',
+        // description: 'Follow Your Dream',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -119,14 +133,20 @@ module.exports = function (ctx) {
         ]
       }
     },
+
     cordova: {
-      // id: 'org.cordova.quasar.app'
+      // id: 'org.cordova.quasar.app',
+      // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
     },
+
     electron: {
       // bundler: 'builder', // or 'packager'
+
       extendWebpack (cfg) {
-        // do something with Electron process Webpack cfg
+        // do something with Electron main process Webpack cfg
+        // chainWebpack also available besides this extendWebpack
       },
+
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
 
@@ -136,13 +156,14 @@ module.exports = function (ctx) {
         // osxSign: '',
         // protocol: 'myapp://path',
 
-        // Window only
+        // Windows only
         // win32metadata: { ... }
       },
+
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        // appId: 'quasar-app'
+        // appId: 'follow.bigzhu.net'
       }
     }
   }

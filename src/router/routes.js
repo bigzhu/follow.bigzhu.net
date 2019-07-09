@@ -1,52 +1,20 @@
-import importByName from 'bz-q-lib/src/functions/importByName'
- export default [
-   /*
-   {
-     path: '/',
-     component: () => import('layouts/default'),
-     children: [
-       { path: '', component: () => import('pages/index') }
-     ]
-   },
-   */
-   importByName('UserSet'),
-   importByName('Oauth'),
-   importByName('Login'),
-   {
-     path: '/',
-     name: 'Main',
-     component: () =>
-       import('pages/Main')
-   }, // Default
 
-   {
-     path: '/God/:star_name',
-     name: 'God',
-     component: () =>
-       import('pages/God')
-   },
-   {
-     path: '/Recommand/:cat*',
-     name: 'Recommand',
-     component: () =>
-       import('pages/Recommand')
-   },
-   {
-     path: '/Following/:cat*',
-     name: 'Following',
-     component: () =>
-       import('pages/Following')
-   },
-   {
-     path: '/TheMessage/:id',
-     name: 'TheMessage',
-     component: () =>
-       import('pages/TheMessage')
-   },
-   importByName('Collect'),
-   { // Always leave this as last one
-     path: '*',
-     component: () =>
-       import('pages/404')
-   }
- ]
+const routes = [
+  {
+    path: '/',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Index.vue') }
+    ]
+  }
+]
+
+// Always leave this as last one
+if (process.env.MODE !== 'ssr') {
+  routes.push({
+    path: '*',
+    component: () => import('pages/Error404.vue')
+  })
+}
+
+export default routes
