@@ -1,7 +1,7 @@
 <template>
   <div class="box absolute-center">
     <div class="center-box">
-      <img class="logo-img" src="../statics/assets/logoWord.png">
+      <img class="logo-img" src="../statics/assets/logo_word.png">
       <p class="discription">发现更广阔的世界</p>
       <Oauth :oauths="oauths" />
       <p class="sub">没有社交帐号?

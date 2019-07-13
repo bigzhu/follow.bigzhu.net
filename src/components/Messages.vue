@@ -132,7 +132,7 @@
       // })
       this.initLoadMessages()
       this.$nextTick(function () {
-        this.showNoLogin()
+        this.checkShowNoLogin()
       })
     },
     methods: {
@@ -175,7 +175,7 @@
           }
         }
       },
-      showNoLogin: function () {
+      checkShowNoLogin: function () {
         if (!this.isLogin) {
           let self = this
           setTimeout(function () {
