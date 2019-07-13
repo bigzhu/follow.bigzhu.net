@@ -8,13 +8,13 @@
       </q-card-title>
     </q-card-media>
 
-    <q-card-main>
+    <q-card>
       <p v-html="star.bio"></p>
       <GodRemark v-model="remark" :godID="star.id" class="green-bz remark"></GodRemark>
       <q-field v-for="s in socialTypes" :key="s.socialType" :icon="'fab fa-'+s.socialType">
         <q-input v-model="starSocial[s.socialType].socialName" @input="s.isEdit=true" :disable="disableEdit" :float-label="s.socialType" />
       </q-field>
-    </q-card-main>
+    </q-card>
     <q-card-actions align="around">
       <q-btn v-show="disableEdit" @click="save" class="light">
         {{ $t("编辑") }}

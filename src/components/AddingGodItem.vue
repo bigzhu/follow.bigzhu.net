@@ -5,16 +5,16 @@
 
     <q-item>
       <router-link :to="{ name: 'God', params: { starName: god.name }}">
-        <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
+        <q-item-section :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
-      <q-item-main>
+      <q-item-label>
         <router-link :to="{ name: 'God', params: { starName: god.name }}">
-          <q-item-tile label>{{god.name}}</q-item-tile>
+          <q-item-section label>{{god.name}}</q-item-section>
         </router-link>
-        <q-item-tile sublabel>
+        <q-item-section sublabel>
           {{god.followingCount||1}} {{ $t("人关注") }}
-        </q-item-tile>
-      </q-item-main>
+        </q-item-section>
+      </q-item-label>
     </q-item>
 
     <q-card-title>
@@ -27,10 +27,10 @@
       </div>
     </q-card-title>
 
-    <q-card-main class="card-content green-bz">
+    <q-card class="card-content green-bz">
       <p v-html="bio"></p>
       <GodRemark v-model="god.remark" :godID="god.id" class="card-content green-bz remark"></GodRemark>
-    </q-card-main>
+    </q-card>
     <q-card-actions align="end">
     </q-card-actions>
   </q-card>
@@ -220,7 +220,7 @@
     min-height: 20.9rem
     @media (max-width: 920px)
       min-width 100%
-  .q-item-side img // 改大小
+  .q-item-section img // 改大小
     width 6rem
     height 6rem
     margin-right 1rem

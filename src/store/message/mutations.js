@@ -14,7 +14,7 @@ function initGodMessage (state, starName) {
 export const newMessages = (state, messages) => {
   let mergeMessages = state.messages.concat(messages)
   let uniqMessages = _.uniqBy(mergeMessages, function (d) {
-    return d.id
+    return d.ID
   })
   state.messages = uniqMessages
 }
@@ -33,7 +33,7 @@ export const filterGodMessages = (state, starName) => { // 从主线messages中�
   initGodMessage(state, starName)
   if (state.messages.length !== 0 && state.godsMessages[starName].length === 0) {
     let godMessages = _.filter(state.messages, (d) => {
-      return d.starName === starName
+      return d.StarName === starName
     })
     state.godsMessages[starName] = godMessages
   }
@@ -45,7 +45,7 @@ export const godNewMessages = (state, {
   initGodMessage(state, starName)
   let mergeMessages = state.godsMessages[starName].concat(messages)
   let uniqMessages = _.uniqBy(mergeMessages, function (d) {
-    return d.id
+    return d.ID
   })
   state.godsMessages[starName] = uniqMessages
 }
@@ -65,7 +65,7 @@ export const reflashTimeLen = (state) => { // 更新时间隔
   if (state.lastReflashOper) {
     _.map(state.messages,
       (d) => {
-        d.createdAt = d.createdAt + 1
+        d.CreatedAt = d.CreatedAt + 1
         return d
       }
     )
@@ -73,7 +73,7 @@ export const reflashTimeLen = (state) => { // 更新时间隔
   } else {
     _.map(state.messages,
       (d) => {
-        d.createdAt = d.createdAt - 1
+        d.CreatedAt = d.CreatedAt - 1
         return d
       }
     )

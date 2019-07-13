@@ -2,11 +2,11 @@
   <div :class="{'center-container-bz':$q.platform.is.mobile}">
     <div class="description" v-html="text">
     </div>
-    <template v-for="(src,index) in message.medias">
-      <a v-if="message.mediaType==='photo'" :key="'image-'+index" @click="openImg(src)" href='javascript:void(0)'>
+    <template v-for="(src,index) in message.Medias">
+      <a v-if="message.MediaType==='photo'" :key="'image-'+index" @click="openImg(src)" href='javascript:void(0)'>
         <img :src="encodeFile(src)" class="responsive">
       </a>
-      <video v-if="message.mediaType==='gif' || message.mediaType==='video'" :key="index" :loop="message.mediaType==='gif'" :autoplay="message.mediaType==='gif'" :controls="message.mediaType!='gif'" type='video/mp4'>
+      <video v-if="message.MediaType==='gif' || message.MediaType==='video'" :key="index" :loop="message.MediaType==='gif'" :autoplay="message.MediaType==='gif'" :controls="message.MediaType!='gif'" type='video/mp4'>
         <source :src="encodeFile(src)">
       </video>
     </template>
@@ -21,7 +21,7 @@
     props: ['message'],
     computed: {
       text: function () {
-        return myautolinker(this.message.text, this.message.social)
+        return myautolinker(this.message.Text, this.message.Social)
       }
     },
     methods: {
@@ -32,7 +32,7 @@
           this.$router.push({
             name: 'TheMessage',
             params: {
-              id: this.message.id
+              id: this.message.ID
             }
           })
         }

@@ -1,48 +1,48 @@
 <template>
   <q-card class="the-hover-bz">
-    <q-modal v-model="opened" position="left" :content-css="{padding: '0px'}">
+    <q-dialog v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
       </q-inner-loading>
       <GodItem :god="star" :key="star.id" style="width: 100%" />
-    </q-modal>
+    </q-dialog>
 
     <q-item>
-      <q-item-side @click.native="opened=!opened" :avatar="avatar" class="bzAvatar">
-      </q-item-side>
-      <q-item-main>
-        <q-item-tile label>
+      <q-item-section @click.native="opened=!opened" :avatar="avatar" class="bzAvatar">
+      </q-item-section>
+      <q-item-label>
+        <q-item-section label>
           <router-link :to="{ name: 'God', params: { starName: star.name }}">
             {{star.name}}
           </router-link>
-        </q-item-tile>
-        <q-item-tile sublabel>
+        </q-item-section>
+        <q-item-section sublabel>
           <router-link :to="{ name: 'Recommand', params: { cat: star.cat||'all' }}" class="stamp">
             {{star.cat}}
           </router-link>
-        </q-item-tile>
-      </q-item-main>
-      <q-item-side>
+        </q-item-section>
+      </q-item-label>
+      <q-item-section>
         <a target="_blank" :href="href">
-          <TimeLen :dateTime="message.outCreatedAt" :lang="lang" />
-          <q-icon :name="'fab fa-'+message.social" />
+          <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
+          <q-icon :name="'fab fa-'+message.Social" />
         </a>
-      </q-item-side>
+      </q-item-section>
     </q-item>
 
-    <q-card-main class="green-bz">
+    <q-card class="green-bz">
       <MessageContent class="content-bz" :message="message" />
-    </q-card-main>
+    </q-card>
 
-    <q-card-actions align="end" class="card-actions bz">
-      <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show-bz">
+    <q-card-actions align="right" class="card-actions bz">
+      <router-link :to="{ name:'TheMessage', params: {id:message.ID}}" class="more-infor-bz hover-show-bz">
         <q-icon name="moreHoriz" />
       </router-link>
-      <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.collect}" class="bookmark">
-        <q-icon :class="{'bookmark-light': message.collect}" name="bookmarkBorder" />
+      <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.Collect}" class="bookmark">
+        <q-icon :class="{'bookmark-light': message.Collect}" name="bookmarkBorder" />
       </a>
-      <a @click="anki" :class="{'hover-show-bz':!message.anki}" class="anki">
-        <q-icon :class="{'anki-light': message.anki}" name="stars" />
+      <a @click="anki" :class="{'hover-show-bz':!message.Anki}" class="anki">
+        <q-icon :class="{'anki-light': message.Anki}" name="stars" />
       </a>
     </q-card-actions>
   </q-card>
@@ -81,10 +81,10 @@
     },
     computed: {
       starSocial() {
-        return this.$store.state.god.mapStarSocials[this.message.starID.toString()][this.message.social]
+        return this.$store.state.god.mapStarSocials[this.message.StarID.toString()][this.message.Social]
       },
       star() {
-        return this.$store.state.god.mapStars[this.message.starID.toString()]
+        return this.$store.state.god.mapStars[this.message.StarID.toString()]
       },
       loading() {
         return this.$store.state.lib.loading
@@ -96,7 +96,7 @@
         if (this.message.mType === 'github') {
           return `https://github.com/${this.message.name}`
         }
-        return this.message.href
+        return this.message.Href
       },
       avatar: function () {
         return this.starSocial.avatar
@@ -104,25 +104,25 @@
     },
     methods: {
       anki: function () {
-        if (this.message.anki) return
-        this.message.anki = 1
+        if (this.message.Anki) return
+        this.message.Anki = 1
         let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
         this.$store
           .dispatch('postAnki', {
             front: front,
-            messageId: this.message.id
+            messageId: this.message.ID
           })
           .then(function () {}).catch((error) => {
             this.$q.notify(error.response.data)
           })
       },
       toggleCollect: function (message) {
-        if (message.collect) {
-          message.collect = 0
-          this.$store.dispatch('uncollect', message.id)
+        if (message.Collect) {
+          message.Collect = 0
+          this.$store.dispatch('uncollect', message.ID)
         } else {
           message.collect = 1
-          this.$store.dispatch('collect', message.id)
+          this.$store.dispatch('collect', message.ID)
         }
       }
     }

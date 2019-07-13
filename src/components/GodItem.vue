@@ -2,16 +2,16 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { starName: god.name }}">
-        <q-item-side :avatar="god.avatar||'/statics/assets/avatar.svg'" />
+        <q-item-section :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
-      <q-item-main>
+      <q-item-label>
         <router-link :to="{ name: 'God', params: { starName: god.name }}">
-          <q-item-tile label>{{god.name}}</q-item-tile>
+          <q-item-section label>{{god.name}}</q-item-section>
         </router-link>
-        <q-item-tile sublabel>
+        <q-item-section sublabel>
           {{god.followingCount||1}} {{ $t("人关注") }}
-        </q-item-tile>
-      </q-item-main>
+        </q-item-section>
+      </q-item-label>
     </q-item>
 
     <q-card-title>
@@ -20,10 +20,10 @@
       </div>
     </q-card-title>
 
-    <q-card-main class="green-bz">
+    <q-card class="green-bz">
       <p v-html="bio"></p>
       <GodRemark v-model="god.remark" :godID="god.id" class="green-bz remark"></GodRemark>
-    </q-card-main>
+    </q-card>
     <q-card-actions align="end">
       <Follow v-model="god.following" :godID="god.id" class="follow"></Follow>
     </q-card-actions>
@@ -62,7 +62,7 @@
     },
     computed: {
       starSocial() {
-        return this.$store.state.god.mapStarSocials[this.god.id.toString()]
+        return this.$store.state.god.mapStarSocials[this.god.ID.toString()]
       },
       bio() {
         return myautolinker(this.god.bio, this.god.social)
@@ -97,7 +97,7 @@
     @media (max-width: 920px)
       min-width 100%
     overflow-wrap: break-word // 让 a 换行
-  .q-item-side >>> .q-item-avatar // 改大小, 用 >>> 来深入改 component 里面的东西
+  .q-item-section >>> .q-item-avatar // 改大小, 用 >>> 来深入改 component 里面的东西
     width 6rem
     height 6rem
     margin-right 1rem

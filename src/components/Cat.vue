@@ -1,11 +1,11 @@
 <template>
   <q-list class="list">
     <QItem item v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': routeName, params: {'cat': cat}}">
-      <q-item-side :icon="getIcon(cat)" />
-      <q-item-main>
-        <q-item-tile label>{{cat}}</q-item-tile>
-        <q-item-tile sublabel>{{getSublabel(cat)}}</q-item-tile>
-      </q-item-main>
+      <q-item-section :icon="getIcon(cat)" />
+      <q-item-label>
+        <q-item-section label>{{cat}}</q-item-section>
+        <q-item-section sublabel>{{getSublabel(cat)}}</q-item-section>
+      </q-item-label>
     </QItem>
   </q-list>
 </template>

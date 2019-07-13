@@ -20,7 +20,7 @@ export const starSocials = (state, starSocials) => {
     // if (o.errorInfo !== '') {
     //   o.socialName = ''
     // }
-    state.mapStarSocials[o.StarID.toString()][o.social] = o
+    state.mapStarSocials[o.StarID.toString()][o.Social] = o
   })
   state.starSocials = starSocials
 }

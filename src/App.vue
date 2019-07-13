@@ -6,13 +6,13 @@
         <BarTwo/>
       </q-header>
       <!-- 左菜单 -->
-      <q-layout-drawer side="left" v-model="showLeft">
+      <q-drawer side="left" v-model="showLeft">
         <LeftMenu/>
-      </q-layout-drawer>
+      </q-drawer>
       <!-- 右菜单 -->
-      <q-layout-drawer side="right" v-model="showRight">
+      <q-drawer side="right" v-model="showRight">
         <RightMenu/>
-      </q-layout-drawer>
+      </q-drawer>
       <q-page-container>
         <router-view />
       </q-page-container>
