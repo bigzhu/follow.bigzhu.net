@@ -33,7 +33,6 @@ module.exports = function (ctx) {
        all: true, // --- includes everything; for dev only!
 
       components: [
-        'QLayoutHeader',
         'QModal',
         'QLayout',
         'QHeader',

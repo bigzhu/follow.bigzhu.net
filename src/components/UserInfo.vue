@@ -1,6 +1,6 @@
 <template>
   <OauthInfo>
-    <q-popover>
+    <q-menu>
       <q-list item-separator link>
         <q-item @click.native="$router.push('/UserSet')">
           {{ $t("设置") }}
@@ -9,7 +9,7 @@
           {{ $t("退出") }}
         </q-item>
       </q-list>
-    </q-popover>
+    </q-menu>
   </OauthInfo>
 </template>
 

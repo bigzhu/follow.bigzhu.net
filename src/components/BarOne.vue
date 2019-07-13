@@ -13,11 +13,11 @@
       <span slot="subtitle">Follow your dream</span>
     </q-toolbar-title>
     <!--login-->
-    <q-btn v-show="!is_login" @click="login" flat small icon="ion-log-in">
+    <q-btn v-show="!isLogin" @click="login" flat small icon="ion-log-in">
       {{ $t("登录") }}
     </q-btn>
     <!--userInfo-->
-    <UserInfo v-show="is_login" />
+    <UserInfo v-show="isLogin" />
     <!--点击呼出右侧菜单-->
     <q-btn flat @click="$store.commit('showRight', !showRight)">
       <q-icon name="menu" />
@@ -41,12 +41,12 @@
           this.$store.commit('showRight', showRight)
         }
       },
-      is_login: function () {
-        return this.$store.state.lib.oauthInfo.name
+      isLogin: function () {
+        return this.$store.state.lib.oauth_info.name
       }
     },
     mounted: function () {
-      if (this.is_login === '') {
+      if (this.isLogin === '') {
         // 取用户信息
         this.$store.dispatch('lib/getOauthInfo')
         // 取用户不关注社交类型

@@ -1,10 +1,10 @@
 <template>
   <div id="q-app">
     <q-layout view="hhh LpR lfr" v-if="stars_done && starSocials_done">
-      <q-layout-header v-model="showHeader">
+      <q-header v-model="showHeader">
         <BarOne/>
         <BarTwo/>
-      </q-layout-header>
+      </q-header>
       <!-- 左菜单 -->
       <q-layout-drawer side="left" v-model="showLeft">
         <LeftMenu/>

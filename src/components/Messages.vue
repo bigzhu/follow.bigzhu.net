@@ -1,8 +1,8 @@
 <template>
   <div>
     <Old :starName="starName" :show="!(followingGodCount===0)"></Old>
-    <NotYetFollow v-show="followingGodCount===0 && is_login"></NotYetFollow>
-    <q-slide-transition v-show="!is_login">
+    <NotYetFollow v-show="followingGodCount===0 && isLogin"></NotYetFollow>
+    <q-slide-transition v-show="!isLogin">
       <div v-show="show_no_login" class="no-login">
         <img src="../statics/assets/no-message.svg">
         <p>
@@ -71,7 +71,7 @@
         if (this.type === 'main') return this.$store.state.main.hide_params.paddingTop
         else return 0
       },
-      is_login() {
+      isLogin() {
         return checkLogin()
         // return this.$store.state.p.oauthInfo.name
       },
@@ -176,7 +176,7 @@
         }
       },
       showNoLogin: function () {
-        if (!this.is_login) {
+        if (!this.isLogin) {
           let self = this
           setTimeout(function () {
             self.show_no_login = true
