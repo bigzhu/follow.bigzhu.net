@@ -28,5 +28,5 @@ export const loginAnki = ({
   commit,
   dispatch
 }, anki) => {
-  return axios.post('/api_login_anki', anki)
+  return axios.post('/apiLoginAnki', anki)
 }

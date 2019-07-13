@@ -9,14 +9,14 @@
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
-          {{god.following_count||1}} {{ $t("人关注") }}
+          {{god.followingCount||1}} {{ $t("人关注") }}
         </q-item-tile>
       </q-item-main>
     </q-item>
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge v-for="social in Object.keys(star_social)" :key="social" v-show="star_social[social].socialName!=''" @click.native="setNow(star_social[social])" :type="star_social[social].social" :info="star_social[social]" />
+        <social-badge v-for="social in Object.keys(starSocial)" :key="social" v-show="starSocial[social].socialName!=''" @click.native="setNow(starSocial[social])" :type="starSocial[social].social" :info="starSocial[social]" />
       </div>
     </q-card-title>
 
@@ -46,7 +46,7 @@
           return godData
         }
       },
-      is_my: {}
+      isMy: {}
     },
     components: {
       SocialBadge,
@@ -61,7 +61,7 @@
       }
     },
     computed: {
-      star_social() {
+      starSocial() {
         return this.$store.state.god.mapStarSocials[this.god.id.toString()]
       },
       bio() {

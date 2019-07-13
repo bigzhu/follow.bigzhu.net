@@ -12,7 +12,7 @@
           <q-item-tile label>{{god.name}}</q-item-tile>
         </router-link>
         <q-item-tile sublabel>
-          {{god.following_count||1}} {{ $t("人关注") }}
+          {{god.followingCount||1}} {{ $t("人关注") }}
         </q-item-tile>
       </q-item-main>
     </q-item>
@@ -64,11 +64,11 @@
     data: function () {
       return {
         loading: false,
-        twitter_loading: false,
-        github_loading: false,
-        instagram_loading: false,
-        tumblr_loading: false,
-        facebook_loading: false
+        twitterLoading: false,
+        githubLoading: false,
+        instagramLoading: false,
+        tumblrLoading: false,
+        facebookLoading: false
       }
     },
     computed: {
@@ -83,18 +83,18 @@
         return true
       },
       getIcon: function () {
-        if (this.twitter_loading) return 'fa-twitter'
-        if (this.github_loading) return 'fa-github'
-        if (this.instagram_loading) return 'fa-instagram'
-        if (this.tumblr_loading) return 'fa-tumblr'
-        if (this.facebook_loading) return 'fa-facebook'
+        if (this.twitterLoading) return 'fa-twitter'
+        if (this.githubLoading) return 'fa-github'
+        if (this.instagramLoading) return 'fa-instagram'
+        if (this.tumblrLoading) return 'fa-tumblr'
+        if (this.facebookLoading) return 'fa-facebook'
         return ''
       },
       init: function () {
         this.god.name = this.starName
       },
       showAddGodInput: function () {
-        this.input_name = '' // 清空上次的输入
+        this.inputName = '' // 清空上次的输入
         this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
@@ -112,7 +112,7 @@
       startCheck: function (godInfo) {
         this.setGodInfo(godInfo)
         this.adding = false
-        this.twitter_loading = true
+        this.twitterLoading = true
         let self = this
         this.$store.dispatch('checkSocial', {
           name: this.starName,
@@ -122,7 +122,7 @@
         })
       },
       twitterDone: function (info) {
-        this.twitter_loading = false
+        this.twitterLoading = false
         if (info) {
           this.god.twitter = info
           this.setInfo(info, 'twitter')
@@ -134,10 +134,10 @@
         }).then(function (data) {
           self.githubDone(data)
         })
-        this.github_loading = true
+        this.githubLoading = true
       },
       githubDone: function (info) {
-        this.github_loading = false
+        this.githubLoading = false
         if (info) {
           this.god.github = info
           this.setInfo(info, 'github')
@@ -149,10 +149,10 @@
         }).then(function (data) {
           self.instagramDone(data)
         })
-        this.instagram_loading = true
+        this.instagramLoading = true
       },
       instagramDone: function (info) {
-        this.instagram_loading = false
+        this.instagramLoading = false
         if (info) {
           this.god.instagram = info
           this.setInfo(info, 'instagram')
@@ -164,10 +164,10 @@
         }).then(function (data) {
           self.tumblrDone(data)
         })
-        this.tumblr_loading = true
+        this.tumblrLoading = true
       },
       tumblrDone: function (info) {
-        this.tumblr_loading = false
+        this.tumblrLoading = false
         if (info) {
           this.god.tumblr = info
           this.setInfo(info, 'tumblr')
@@ -175,7 +175,7 @@
         this.allDone()
       },
       facebookDone: function (info) {
-        this.facebook_loading = false
+        this.facebookLoading = false
         if (info) {
           this.god.facebook = info
           this.setInfo(info, 'facebook')
@@ -185,13 +185,13 @@
       allDone: function (info) {
         this.loading = false
         // Object.assign(this.godInfo, this.god)
-        this.god.following_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.god.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.following = 1
         this.$store.commit('unshiftMyGod', {
           cat: this.cat,
           god: this.god
         })
-        this.$emit('add_done', this.god)
+        this.$emit('addDone', this.god)
         this.init()
       },
       setGodInfo: function (god) {
@@ -199,12 +199,12 @@
       },
       setInfo: function (info, type) {
         if (info.avatar) {
-          this.now_avatar = info.avatar
+          this.nowAvatar = info.avatar
         }
         if (info.description) {
-          this.now_description = info.description
+          this.nowDescription = info.description
         }
-        this.now_type = type
+        this.nowType = type
       }
     }
   }

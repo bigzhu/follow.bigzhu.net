@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <img v-show="showHowToUseCollect" class="width-5of5 responsive" src="../statics/assets/how_to_use_collection.jpg">
+    <img v-show="showHowToUseCollect" class="width-5of5 responsive" src="../statics/assets/howToUseCollection.jpg">
     <messages type="collect"></messages>
     <Top></Top>
   </q-page>

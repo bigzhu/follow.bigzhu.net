@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class='ui center aligned basic segment'>
-      <old :starName="starName" :search_key="search_key"></old>
+      <old :starName="starName" :searchKey="searchKey"></old>
     </div>
-    <q-infinite-scroll :offset="1000" :handler="call_back">
+    <q-infinite-scroll :offset="1000" :handler="callBack">
       <message v-for="message in messages" :message='message' :key="message.id">
       </message>
       <SpinnerBz :show="loading"></SpinnerBz>
     </q-infinite-scroll>
 
-    <div class='ui active centered inline loader' v-bind:class="{ 'invisible_bz': !newLoading}"></div>
+    <div class='ui active centered inline loader' v-bind:class="{ 'invisibleBz': !newLoading}"></div>
   </div>
 </template>
 
@@ -25,12 +25,12 @@
       Message
     },
     watch: {
-      'search_key': function (val, oldVal) {
+      'searchKey': function (val, oldVal) {
         this.search()
       }
     },
     props: {
-      search_key: {
+      searchKey: {
         type: String,
         required: true
       }
@@ -40,21 +40,21 @@
     },
     computed: {
       messages() {
-        return this.$store.state.search_messages
+        return this.$store.state.searchMessages
       }
     },
     mounted() {
       this.search()
     },
     methods: {
-      call_back: function () {
+      callBack: function () {
         this.searchNew()
       },
       search: function () {
         let self = this
-        this.$store.commit('FILTER_SEARCH_MESSAGES', this.search_key)
+        this.$store.commit('FILTER_SEARCH_MESSAGES', this.searchKey)
         if (this.messages.length !== 0) {
-          this.show_old = true
+          this.showOld = true
           this.mark()
         }
         this.searchNew().then(function (data) {
@@ -65,24 +65,24 @@
       },
       searcOld: function () {
         let self = this
-        this.$store.dispatch('oldMessage', { search_key: self.search_key, limit: 10 }).then(function (data) {
+        this.$store.dispatch('oldMessage', { searchKey: self.searchKey, limit: 10 }).then(function (data) {
           self.mark()
         })
       },
       searchNew: function () {
         let self = this
-        return this.$store.dispatch('newMessage', { search_key: this.search_key }).then(function (data) {
+        return this.$store.dispatch('newMessage', { searchKey: this.searchKey }).then(function (data) {
           if (self.messages.length !== 0) {
             self.mark()
           }
         })
       },
       mark: function () {
-        this.show_old = true
+        this.showOld = true
         // 高亮查找的key
         this.$nextTick(function () {
           var instance = new window.Mark(this.$el)
-          instance.mark(this.search_key)
+          instance.mark(this.searchKey)
         })
       }
     }
@@ -91,7 +91,7 @@
 
 <style >
   /*隐藏占位*/
-  .invisible_bz {
+  .invisibleBz {
     visibility: hidden;
   }
 

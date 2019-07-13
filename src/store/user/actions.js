@@ -11,7 +11,7 @@ export const getNoTypes = ({
   commit,
   dispatch
 }) => {
-  return axios.get('/api_noTypes')
+  return axios.get('/apiNoTypes')
     .then((response) => {
       commit('noTypes', response.data)
       return response.data

@@ -17,11 +17,11 @@
       <div class="description" v-html="desc"></div>
     </div>
     <div class="extra content god-icon-bz delete-border">
-      <social-badge v-show="god.twitter_user" :call_back="setGodInfo" :info="god.twitter_user"></social-badge>
-      <social-badge v-show="god.github_user" :call_back="setGodInfo" :info="god.github_user"></social-badge>
-      <social-badge v-show="god.tumblr_user" :call_back="setGodInfo" :info="god.tumblr_user"></social-badge>
-      <social-badge v-show="god.instagram_user" :call_back="setGodInfo" :info="god.instagram_user"></social-badge>
-      <social-badge v-show="god.facebook_user" :call_back="setGodInfo" :info="god.facebook_user"></social-badge>
+      <social-badge v-show="god.twitterUser" :callBack="setGodInfo" :info="god.twitterUser"></social-badge>
+      <social-badge v-show="god.githubUser" :callBack="setGodInfo" :info="god.githubUser"></social-badge>
+      <social-badge v-show="god.tumblrUser" :callBack="setGodInfo" :info="god.tumblrUser"></social-badge>
+      <social-badge v-show="god.instagramUser" :callBack="setGodInfo" :info="god.instagramUser"></social-badge>
+      <social-badge v-show="god.facebookUser" :callBack="setGodInfo" :info="god.facebookUser"></social-badge>
     </div>
     <follow class="attached" v-model="god.following" :godID="god.godID"></follow>
   </div>
@@ -67,15 +67,15 @@
           this.av = this.god[type + '_user'].avatar
           this.desc = this.god[type + '_user'].description
         } else {
-          if (this.god.twitter_user) {
+          if (this.god.twitterUser) {
             this.setGodInfo('twitter')
-          } else if (this.god.github_user) {
+          } else if (this.god.githubUser) {
             this.setGodInfo('github')
-          } else if (this.god.tumblr_user) {
+          } else if (this.god.tumblrUser) {
             this.setGodInfo('tumblr')
-          } else if (this.god.instagram_user) {
+          } else if (this.god.instagramUser) {
             this.setGodInfo('instagram')
-          } else if (this.god.facebook_user) {
+          } else if (this.god.facebookUser) {
             this.setGodInfo('facebook')
           }
         }

@@ -3,7 +3,7 @@
     <Old :starName="starName" :show="!(followingGodCount===0)"></Old>
     <NotYetFollow v-show="followingGodCount===0 && isLogin"></NotYetFollow>
     <q-slide-transition v-show="!isLogin">
-      <div v-show="show_no_login" class="no-login">
+      <div v-show="showNoLogin" class="no-login">
         <img src="../statics/assets/no-message.svg">
         <p>
           <a href="/login.html">{{ $t("登录") }}</a>{{ $t("登录后能看到更广阔的世界哟!") }}
@@ -12,9 +12,9 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${paddingTop}px;`">
-      <message ref="messages" v-for='message in noTypes_messages' :message='message' :key="message.id">
+      <message ref="messages" v-for='message in noTypesMessages' :message='message' :key="message.id">
       </message>
-      <div v-show="followingGodCount>0 && unread_message_count===0 && type==='main'" class="center-container-bz">
+      <div v-show="followingGodCount>0 && unreadMessageCount===0 && type==='main'" class="center-container-bz">
         <p>{{ $t("没有更多内容了, 看看") }}
           <router-link :to="{'name': 'Recommand'}">{{ $t("寻他") }}&gt;</router-link>
         </p>
@@ -63,20 +63,20 @@
     data: function () {
       return {
         position: 0, // 用来判断是往上滚动还是往下滚
-        show_no_login: false
+        showNoLogin: false
       }
     },
     computed: {
       paddingTop() {
-        if (this.type === 'main') return this.$store.state.main.hide_params.paddingTop
+        if (this.type === 'main') return this.$store.state.main.hideParams.paddingTop
         else return 0
       },
       isLogin() {
         return checkLogin()
         // return this.$store.state.p.oauthInfo.name
       },
-      unread_message_count() {
-        return this.$store.state.unread_message_count
+      unreadMessageCount() {
+        return this.$store.state.unreadMessageCount
       },
       followingGodCount() {
         return this.$store.state.followingGodCount
@@ -88,22 +88,22 @@
       newLoading() {
         return this.$store.state.message.newLoading
       },
-      old_loading() {
-        return this.$store.state.old_loading
+      oldLoading() {
+        return this.$store.state.oldLoading
       },
-      hide_messages() {
+      hideMessages() {
         return this.messages.filter(function (d) {
-          return d.top_hide
+          return d.topHide
         })
       },
-      show_messages() {
+      showMessages() {
         return this.messages.filter(function (d) {
-          return !d.top_hide
+          return !d.topHide
         })
       },
-      noTypes_messages() {
-        return this.show_messages.filter((d) => {
-          return !isInList(d.m_type, this.noTypes)
+      noTypesMessages() {
+        return this.showMessages.filter((d) => {
+          return !isInList(d.mType, this.noTypes)
         })
       },
       messages() {
@@ -114,7 +114,7 @@
           }
         case 'collect':
           {
-            return this.$store.state.message.collect_messages
+            return this.$store.state.message.collectMessages
           }
         default:
           {
@@ -139,7 +139,7 @@
       initLoadMessages: function () {
         if (!this.messages || this.messages.length === 0) {
           if (this.type === 'god') {
-            this.$store.commit('filter_god_messages', this.starName)
+            this.$store.commit('filterGodMessages', this.starName)
             if (this.messages.length === 0) { // 没有过滤值时
               this.$store.dispatch('oldMessage', {
                 starName: this.starName
@@ -152,25 +152,25 @@
       },
       onScroll: function (position) {
         if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
-        let hideP = this.$store.state.main.hide_params
+        let hideP = this.$store.state.main.hideParams
         let overTop = position - 500
         if (overTop > hideP.paddingTop) {
-          let message = this.noTypes_messages[0]
+          let message = this.noTypesMessages[0]
           if (!message) return
           let messageHeight = message.el.offsetHeight
           if (overTop - hideP.paddingTop < messageHeight) return
-          this.$set(message, 'top_hide', true)
+          this.$set(message, 'topHide', true)
           this.$set(message, 'height', messageHeight)
           hideP.paddingTop += messageHeight
           console.log('hide message')
         } else {
           while (overTop < hideP.paddingTop) {
             if (hideP.paddingTop === 0) return
-            if (this.hide_messages.length === 0) return
-            let message = this.hide_messages[this.hide_messages.length - 1]
+            if (this.hideMessages.length === 0) return
+            let message = this.hideMessages[this.hideMessages.length - 1]
             if (hideP.paddingTop - overTop < message.height) return
             hideP.paddingTop -= message.height
-            message.top_hide = false
+            message.topHide = false
             // console.log('show message')
           }
         }
@@ -179,15 +179,15 @@
         if (!this.isLogin) {
           let self = this
           setTimeout(function () {
-            self.show_no_login = true
+            self.showNoLogin = true
           }, 1500)
           setTimeout(function () {
-            self.show_no_login = false
+            self.showNoLogin = false
           }, 5000)
         }
       },
       loadMore: function (index, done) {
-        if (this.old_loading) {
+        if (this.oldLoading) {
           done()
           return
         }
@@ -223,7 +223,7 @@
       newMessage: function (limit = null) {
         let after = null
         if (this.messages.length > 0) {
-          after = this.messages[this.messages.length - 1].out_created_at
+          after = this.messages[this.messages.length - 1].outCreatedAt
           // this.$store.dispatch('recordLastMessage', after)
         }
         return this.$store.dispatch('getNew', {

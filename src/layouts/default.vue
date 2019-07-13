@@ -29,7 +29,7 @@
           <q-item-main label="Discord Chat Channel" sublabel="https://discord.gg/5TDhbDg" />
         </q-item>
         <q-item @click.native="openURL('http://forum.quasar-framework.org')">
-          <q-item-side icon="record_voice_over" />
+          <q-item-side icon="recordVoiceOver" />
           <q-item-main label="Forum" sublabel="forum.quasar-framework.org" />
         </q-item>
         <q-item @click.native="openURL('https://twitter.com/quasarframework')">

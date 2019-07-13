@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <GodItem v-for="god in ordered_stars" :god="god" :key="god.id" class="god-item">
+    <GodItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
     </GodItem>
     <Top></Top>
   </q-page>
@@ -29,8 +29,8 @@
       GodItem
     },
     computed: {
-      ordered_stars: function () {
-        return _.orderBy(this.filter_cat, 'following_at', 'desc').filter((o) => {
+      orderedStars: function () {
+        return _.orderBy(this.filterCat, 'followingAt', 'desc').filter((o) => {
           return o.name !== this.starName
         })
       }

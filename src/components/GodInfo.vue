@@ -11,15 +11,15 @@
     <q-card-main>
       <p v-html="star.bio"></p>
       <GodRemark v-model="remark" :godID="star.id" class="green-bz remark"></GodRemark>
-      <q-field v-for="s in socialTypes" :key="s.social_type" :icon="'fab fa-'+s.social_type">
-        <q-input v-model="star_social[s.social_type].socialName" @input="s.is_edit=true" :disable="disable_edit" :float-label="s.social_type" />
+      <q-field v-for="s in socialTypes" :key="s.socialType" :icon="'fab fa-'+s.socialType">
+        <q-input v-model="starSocial[s.socialType].socialName" @input="s.isEdit=true" :disable="disableEdit" :float-label="s.socialType" />
       </q-field>
     </q-card-main>
     <q-card-actions align="around">
-      <q-btn v-show="disable_edit" @click="save" class="light">
+      <q-btn v-show="disableEdit" @click="save" class="light">
         {{ $t("编辑") }}
       </q-btn>
-      <q-btn color="secondary" v-show="!disable_edit" @click="save">
+      <q-btn color="secondary" v-show="!disableEdit" @click="save">
         {{ $t("保存") }}
       </q-btn>
       <Follow v-model="star.following" :godID="star.id"></Follow>
@@ -43,14 +43,14 @@
       star() {
         return this.$store.state.god.mapStars[this.starID]
       },
-      star_social() {
+      starSocial() {
         return this.$store.state.god.mapStarSocials[this.starID]
       },
       starName() {
         return this.$route.params.starName
       },
       remark: function () {
-        return this.star.remark || this.star.admin_remark
+        return this.star.remark || this.star.adminRemark
       }
     },
     data: function () {
@@ -59,8 +59,8 @@
         av: '',
         desc: '',
         loading: false,
-        disable_edit: true,
-        button_text: '修改资料'
+        disableEdit: true,
+        buttonText: '修改资料'
       }
     },
     methods: {
@@ -73,18 +73,18 @@
         }
       },
       save: function () {
-        if (this.disable_edit) {
-          this.disable_edit = false
+        if (this.disableEdit) {
+          this.disableEdit = false
         } else {
-          this.disable_edit = true
+          this.disableEdit = true
           let modifyStarSocial = {
             starID: this.starID
           }
           // 筛出做了修改的社交
           this.socialTypes.map((o) => {
-            if (o.is_edit) {
-              modifyStarSocial[o.social_type] = this.star_social[o.social_type].socialName
-              o.is_edit = false
+            if (o.isEdit) {
+              modifyStarSocial[o.socialType] = this.starSocial[o.socialType].socialName
+              o.isEdit = false
             }
           })
           this.$store.dispatch('putStarSocial', modifyStarSocial)

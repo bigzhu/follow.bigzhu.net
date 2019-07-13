@@ -27,7 +27,7 @@ export const showHowToUseCollect = (state, show) => {
 
 export const collectMessages = (state, collectMessages) => {
   // 收藏要翻过来排序, 后藏的,显示在最前面
-  state.collect_messages = _.reverse(collectMessages)
+  state.collectMessages = _.reverse(collectMessages)
 }
 export const filterGodMessages = (state, starName) => { // 从主线messages中把god message 过滤出来，避免页面空白
   initGodMessage(state, starName)
@@ -62,22 +62,22 @@ export const godOldmessages = (state, {
   )
 }
 export const reflashTimeLen = (state) => { // 更新时间隔
-  if (state.last_reflash_oper) {
+  if (state.lastReflashOper) {
     _.map(state.messages,
       (d) => {
-        d.created_at = d.created_at + 1
+        d.createdAt = d.createdAt + 1
         return d
       }
     )
-    state.last_reflash_oper = 0
+    state.lastReflashOper = 0
   } else {
     _.map(state.messages,
       (d) => {
-        d.created_at = d.created_at - 1
+        d.createdAt = d.createdAt - 1
         return d
       }
     )
-    state.last_reflash_oper = 1
+    state.lastReflashOper = 1
   }
 }
 export const oldMessages = (state, messages) => {
@@ -92,11 +92,11 @@ export const newLoading = (state, loading) => {
   state.newLoading = loading
 }
 export const oldLoading = (state, loading) => {
-  state.old_loading = loading
+  state.oldLoading = loading
 }
 export const unreadMessageCount = (state, unreadMessageCount) => {
-  state.unread_message_count = unreadMessageCount
+  state.unreadMessageCount = unreadMessageCount
 }
 export const theMessage = (state, theMessage) => {
-  state.the_message = theMessage
+  state.theMessage = theMessage
 }

@@ -1,8 +1,8 @@
 <template>
   <div :class="{ 'invisible': !show}" class="row flex-center">
-    <q-spinner v-show="old_loading" :size="14" name="tail"></q-spinner>
+    <q-spinner v-show="oldLoading" :size="14" name="tail"></q-spinner>
     <a @click.Native='old' href='javascript:void(0)'>
-      <q-icon name="history" v-show="!old_loading"></q-icon>
+      <q-icon name="history" v-show="!oldLoading"></q-icon>
       {{ $t("历史消息") }}
     </a>
   </div>
@@ -19,17 +19,17 @@
       QSpinner
     },
     computed: {
-      old_loading() {
-        return this.$store.state.message.old_loading
+      oldLoading() {
+        return this.$store.state.message.oldLoading
       }
     },
-    props: ['show', 'starName', 'search_key'],
+    props: ['show', 'starName', 'searchKey'],
     mounted() {},
     methods: {
       old: function () {
         this.$store.dispatch('oldMessage', {
           starName: this.starName,
-          search_key: this.search_key
+          searchKey: this.searchKey
         })
       }
     }

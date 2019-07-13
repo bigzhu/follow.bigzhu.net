@@ -7,11 +7,11 @@
     </a>
 
     <!--
-    <a v-for="(image, index) in message.extended_entities" :key="index" v-if="type==='images'" @click="openImg(proxy(image.url))">
+    <a v-for="(image, index) in message.extendedEntities" :key="index" v-if="type==='images'" @click="openImg(proxy(image.url))">
       <img :src="proxy(image.url)" class="responsive">
     </a>
-    <a v-if="type==='image'" @click="openImg(proxy(message.extended_entities.url))">
-      <img :src="proxy(message.extended_entities.url)" class="responsive">
+    <a v-if="type==='image'" @click="openImg(proxy(message.extendedEntities.url))">
+      <img :src="proxy(message.extendedEntities.url)" class="responsive">
     </a>
     -->
     <video v-if="type==='video'" :controls="true" type='video/mp4'>
@@ -31,17 +31,17 @@
         return this.message.type
       },
       video: function () {
-        if (this.message.extended_entities && this.message.type === 'video') {
-          return this.message.extended_entities.video_url
+        if (this.message.extendedEntities && this.message.type === 'video') {
+          return this.message.extendedEntities.videoUrl
         }
         return ''
       },
       // height: function () {
-      //   var img_height, img_width, real_height
-      //   img_height = this.message.extended_entities.height
-      //   img_width = this.message.extended_entities.width
-      //   real_height = getFitHeightForSemantic(img_height, img_width)
-      //   return real_height
+      //   var imgHeight, imgWidth, realHeight
+      //   imgHeight = this.message.extendedEntities.height
+      //   imgWidth = this.message.extendedEntities.width
+      //   realHeight = getFitHeightForSemantic(imgHeight, imgWidth)
+      //   return realHeight
       // },
       description: function () {
         return myautolinker(this.message.text, 'instagram')

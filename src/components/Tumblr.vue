@@ -6,8 +6,8 @@
     <div class="description" v-html="text"></div>
     <template v-for="(media, index) in medias" :media="media">
       <div class="description" v-html="media.caption" :key="'description-'+index"></div>
-      <a @click="openImg(proxy(media.img_url))" :key="'a-'+index">
-        <img :src="proxy(media.img_url)" class="responsive">
+      <a @click="openImg(proxy(media.imgUrl))" :key="'a-'+index">
+        <img :src="proxy(media.imgUrl)" class="responsive">
       </a>
       <br :key="'br-'+index">
     </template>
@@ -27,18 +27,18 @@
     props: ['message'],
     computed: {
       medias: function () {
-        if (this.message.extended_entities && this.message.type === 'photo') {
+        if (this.message.extendedEntities && this.message.type === 'photo') {
           return _.map(
-            this.message.extended_entities,
+            this.message.extendedEntities,
             function (d) {
-              // var caption, height, img_height, img_url, img_width, t
-              var img_url = d.original_size.url
-              // img_url = d.original_size.url
-              // img_height = d.original_size.height
-              // img_width = d.original_size.width
-              // height = getFitHeightForSemantic(img_height, img_width)
+              // var caption, height, imgHeight, imgUrl, imgWidth, t
+              var imgUrl = d.originalSize.url
+              // imgUrl = d.originalSize.url
+              // imgHeight = d.originalSize.height
+              // imgWidth = d.originalSize.width
+              // height = getFitHeightForSemantic(imgHeight, imgWidth)
               var t = {
-                img_url: img_url,
+                imgUrl: imgUrl,
                 // height: height,
                 caption: d.caption
               }
@@ -56,15 +56,15 @@
         }
       },
       video: function () {
-        if (this.message.extended_entities && this.message.type === 'video') {
-          return this.message.extended_entities.video_url
+        if (this.message.extendedEntities && this.message.type === 'video') {
+          return this.message.extendedEntities.videoUrl
         }
       }
     },
     methods: {
-      openImg: function (img_url) {
+      openImg: function (imgUrl) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(img_url, '_blank')
+          window.open(imgUrl, '_blank')
         } else {
           this.$router.push({ name: 'TheMessage', params: { id: this.message.id } })
         }

@@ -47,7 +47,7 @@ export const getGod = ({
   if (state.godInfos[starName]) {
     return
   }
-  return get('/api_god', {
+  return get('/apiGod', {
       starName: starName
     })
     .then((data) => {
@@ -65,9 +65,9 @@ export const getPublicGods = ({
   }
   let gods = state.catGods[cat]
   if (gods) {
-    params.before = gods[gods.length - 1].created_at
+    params.before = gods[gods.length - 1].createdAt
   }
-  return axios.get('/api_gods', {
+  return axios.get('/apiGods', {
       params: params
     })
     .then(function(response) {

@@ -67,7 +67,7 @@
           this.$store.dispatch('follow', this.godID).then(function (data) {
             self.showFollow()
           }).catch((error) => {
-            if (error.response.data === "'user_id'") {
+            if (error.response.data === "'userId'") {
               this.$router.push({
                 name: 'Oauth'
               })

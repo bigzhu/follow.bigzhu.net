@@ -5,7 +5,7 @@
       <div class="info">
         <i class="wechat icon"></i>{{ $t("微信") }}
       </div>
-      <img src="../statics/assets/by_me.png" class="qr-bz">
+      <img src="../statics/assets/byMe.png" class="qr-bz">
       <div class="info">
         <i class="qq icon"></i>{{ $t("QQ") }}
       </div>
@@ -23,7 +23,7 @@
         <span class="footer-element">{{ $t("注册人数") }}: {{registeredCount}}</span>
         <span>© 2017 Follow Center</span>
       </div>
-      <q-select type="list" v-model="lang" :options="lang_options">
+      <q-select type="list" v-model="lang" :options="langOptions">
       </q-select>
     </div>
   </div>
@@ -54,7 +54,7 @@
     },
     data: function () {
       return {
-        lang_options: [{
+        langOptions: [{
             label: 'English',
             value: 'en'
           },

@@ -1,23 +1,23 @@
 export default [{
-    social_type: 'twitter',
-    is_edit: false
+    socialType: 'twitter',
+    isEdit: false
   },
   {
-    social_type: 'instagram',
-    is_edit: false
+    socialType: 'instagram',
+    isEdit: false
   },
   {
-    social_type: 'tumblr',
-    is_edit: false
+    socialType: 'tumblr',
+    isEdit: false
   }
   /*
   {
-    social_type: 'facebook',
-    is_edit: false
+    socialType: 'facebook',
+    isEdit: false
   },
   {
-    social_type: 'github',
-    is_edit: false
+    socialType: 'github',
+    isEdit: false
   }
   */
 ]

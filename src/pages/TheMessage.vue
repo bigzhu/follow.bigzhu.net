@@ -1,7 +1,7 @@
 <template>
   <div class="layout-padding">
     <div class="blank-padding"></div>
-    <Message v-if="done" :message='the_message' />
+    <Message v-if="done" :message='theMessage' />
   </div>
 </template>
 
@@ -18,8 +18,8 @@
       }
     },
     computed: {
-      the_message() {
-        return this.$store.state.message.the_message
+      theMessage() {
+        return this.$store.state.message.theMessage
       },
       id() {
         return this.$route.params.id

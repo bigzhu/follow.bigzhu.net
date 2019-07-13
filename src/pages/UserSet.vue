@@ -14,7 +14,7 @@
     </q-btn>
 
     <!--
-    <q-field icon="perm_media" :label="$t('关注的社交')">
+    <q-field icon="permMedia" :label="$t('关注的社交')">
       <MessageConf/>
     </q-field>
     -->
@@ -46,8 +46,8 @@
     },
     data() {
       return {
-        block_count: 0,
-        show_anki_input: true
+        blockCount: 0,
+        showAnkiInput: true
       }
     },
     mounted: function () {
@@ -56,16 +56,16 @@
       if (this.anki.userName == null) {
         this.$store.dispatch('getAnki').then(function (data) {
           if (self.anki.userName !== null) {
-            self.show_anki_input = false
+            self.showAnkiInput = false
           }
         })
       } else {
-        this.show_anki_input = false
+        this.showAnkiInput = false
       }
       this.$store.dispatch('getBlock', {
         count: true
       }).then(function (data) {
-        self.block_count = data.count
+        self.blockCount = data.count
       })
       this.$nextTick(function () {
         // code that assumes this.$el is in-document
@@ -81,7 +81,7 @@
           throw new Error('请填入anki密码')
         }
         this.$store.dispatch('loginAnki', this.anki).then(function (data) {
-          self.show_anki_input = false
+          self.showAnkiInput = false
         })
       }
     },

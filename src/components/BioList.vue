@@ -4,7 +4,7 @@
     <div v-for="rich in richList" class="ui items">
       <div @click="go(rich.id)" class="item">
         <div class="image">
-          <img :src="rich.title_img">
+          <img :src="rich.titleImg">
         </div>
         <div class="content">
           <a class="header">{{rich.title}}</a>

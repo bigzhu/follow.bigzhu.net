@@ -5,9 +5,9 @@
     </a>
     <div v-show="stat==='input'" class="ui action input row">
       <div class="floating-label">
-        <input @keyup.13="add" v-model="input_name" required class="">
+        <input @keyup.13="add" v-model="inputName" required class="">
         <label>{{$t('AddGod.example')}}</label>
-        <a @click="add" href="javascript:;">{{ $t("AddGod.add") }}<i>keyboard_arrow_right</i></a>
+        <a @click="add" href="javascript:;">{{ $t("AddGod.add") }}<i>keyboardArrowRight</i></a>
       </div>
     </div>
     <div v-show="stat==='adding'" class="ui segment newgod-info recommand-god-bz god-item">
@@ -25,11 +25,11 @@
         <div class="ten wide column">
           <div class="god-detail-bz">
             <div class="god-icon-bz">
-              <social-badge :loading="twitter_loading" :info="twitter_info"></social-badge>
-              <social-badge :loading="github_loading" :info="github_info"></social-badge>
-              <social-badge :loading="instagram_loading" :info="instagram_info"></social-badge>
-              <social-badge :loading="tumblr_loading" :info="tumblr_info"></social-badge>
-              <social-badge :loading="facebook_loading" :info="facebook_info"></social-badge>
+              <social-badge :loading="twitterLoading" :info="twitterInfo"></social-badge>
+              <social-badge :loading="githubLoading" :info="githubInfo"></social-badge>
+              <social-badge :loading="instagramLoading" :info="instagramInfo"></social-badge>
+              <social-badge :loading="tumblrLoading" :info="tumblrInfo"></social-badge>
+              <social-badge :loading="facebookLoading" :info="facebookInfo"></social-badge>
             </div>
             <router-link :to="{ name: 'God', params: { starName: starName }}" class="header newgod-name user-name-a">
               <h3>{{starName}}</h3>
@@ -60,26 +60,26 @@
     data: function () {
       return {
         starName: '',
-        input_name: '',
+        inputName: '',
         stat: 'button',
         godInfo: {},
-        twitter_info: {
+        twitterInfo: {
           type: 'twitter',
           count: -4
         },
-        github_info: {
+        githubInfo: {
           type: 'github',
           count: -4
         },
-        tumblr_info: {
+        tumblrInfo: {
           type: 'tumblr',
           count: -4
         },
-        instagram_info: {
+        instagramInfo: {
           type: 'instagram',
           count: -4
         },
-        facebook_info: {
+        facebookInfo: {
           type: 'facebook',
           count: -4
         },
@@ -88,11 +88,11 @@
         adding: false,
         description: '',
         avatar: '',
-        twitter_loading: false,
-        github_loading: false,
-        instagram_loading: false,
-        tumblr_loading: false,
-        facebook_loading: false
+        twitterLoading: false,
+        githubLoading: false,
+        instagramLoading: false,
+        tumblrLoading: false,
+        facebookLoading: false
       }
     },
     computed: {
@@ -103,7 +103,7 @@
     mounted() {},
     methods: {
       showAddGodInput: function () {
-        this.input_name = '' // 清空上次的输入
+        this.inputName = '' // 清空上次的输入
         this.stat = 'input'
         this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
@@ -111,23 +111,23 @@
         // this.queryNotMyGods(this.$route.params.cat)
       },
       init: function () {
-        this.twitter_info = {
+        this.twitterInfo = {
           type: 'twitter',
           count: -4
         }
-        this.github_info = {
+        this.githubInfo = {
           type: 'github',
           count: -4
         }
-        this.tumblr_info = {
+        this.tumblrInfo = {
           type: 'tumblr',
           count: -4
         }
-        this.instagram_info = {
+        this.instagramInfo = {
           type: 'instagram',
           count: -4
         }
-        this.facebook_info = {
+        this.facebookInfo = {
           type: 'facebook',
           count: -4
         }
@@ -135,15 +135,15 @@
         this.adding = false
         this.description = ''
         this.avatar = ''
-        this.twitter_loading = false
-        this.github_loading = false
-        this.instagram_loading = false
-        this.tumblr_loading = false
-        this.facebook_loading = false
+        this.twitterLoading = false
+        this.githubLoading = false
+        this.instagramLoading = false
+        this.tumblrLoading = false
+        this.facebookLoading = false
       },
       add: function () {
         this.init()
-        this.starName = this.input_name.trim()
+        this.starName = this.inputName.trim()
         this.stat = 'adding'
         let self = this
         this.adding = true
@@ -158,7 +158,7 @@
       startCheck: function (godInfo) {
         this.setGodInfo(godInfo)
         this.adding = false
-        this.twitter_loading = true
+        this.twitterLoading = true
         let self = this
         this.$store.dispatch('checkSocial', {
           name: this.starName,
@@ -168,9 +168,9 @@
         })
       },
       twitterDone: function (info) {
-        this.twitter_loading = false
+        this.twitterLoading = false
         if (info) {
-          this.twitter_info = info
+          this.twitterInfo = info
           this.setInfo(info)
         }
         let self = this
@@ -180,12 +180,12 @@
         }).then(function (data) {
           self.githubDone(data.info)
         })
-        this.github_loading = true
+        this.githubLoading = true
       },
       githubDone: function (info) {
-        this.github_loading = false
+        this.githubLoading = false
         if (info) {
-          this.github_info = info
+          this.githubInfo = info
           this.setInfo(info)
         }
         let self = this
@@ -195,12 +195,12 @@
         }).then(function (data) {
           self.instagramDone(data.info)
         })
-        this.instagram_loading = true
+        this.instagramLoading = true
       },
       instagramDone: function (info) {
-        this.instagram_loading = false
+        this.instagramLoading = false
         if (info) {
-          this.instagram_info = info
+          this.instagramInfo = info
           this.setInfo(info)
         }
         let self = this
@@ -210,12 +210,12 @@
         }).then(function (data) {
           self.tumblrDone(data.info)
         })
-        this.tumblr_loading = true
+        this.tumblrLoading = true
       },
       tumblrDone: function (info) {
-        this.tumblr_loading = false
+        this.tumblrLoading = false
         if (info) {
-          this.tumblr_info = info
+          this.tumblrInfo = info
           this.setInfo(info)
         }
         let self = this
@@ -225,12 +225,12 @@
         }).then(function (data) {
           self.facebookDone(data.info)
         })
-        this.facebook_loading = true
+        this.facebookLoading = true
       },
       facebookDone: function (info) {
-        this.facebook_loading = false
+        this.facebookLoading = false
         if (info) {
-          this.facebook_info = info
+          this.facebookInfo = info
           this.setInfo(info)
         }
         this.allDone()
@@ -244,7 +244,7 @@
         })
         // this.$store.dispatch('queryCat')
         this.stat = 'button'
-        this.$emit('add_done', this.godInfo)
+        this.$emit('addDone', this.godInfo)
         this.godInfo = {}
       },
       setGodSocial: function (type) {
@@ -259,7 +259,7 @@
         this.setGodSocial('tumblr')
         this.setGodSocial('instagram')
         this.setGodSocial('facebook')
-        this.godInfo.following_at = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.godInfo.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
       setGodInfo: function (godInfo) {
         this.godInfo = godInfo

@@ -1,6 +1,6 @@
 <template>
   <div id="q-app">
-    <q-layout view="hhh LpR lfr" v-if="stars_done && starSocials_done">
+    <q-layout view="hhh LpR lfr" v-if="starsDone && starSocialsDone">
       <q-header v-model="showHeader">
         <BarOne/>
         <BarTwo/>
@@ -33,17 +33,17 @@
     store,
     data: function() {
       return {
-        stars_done: false,
-        starSocials_done: false
+        starsDone: false,
+        starSocialsDone: false
       }
     },
     name: 'App',
     beforeCreate() {
       this.$store.dispatch('getStarSocials').then(() => {
-        this.starSocials_done = true
+        this.starSocialsDone = true
       })
       this.$store.dispatch('getStars').then(() => {
-        this.stars_done = true
+        this.starsDone = true
       })
     },
     components: {

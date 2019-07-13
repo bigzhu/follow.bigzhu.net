@@ -3,13 +3,13 @@
     <div class="row gutter sm-column">
       <div class="width-5of5 no-top-padding-bz">
         <div class="ui segment bio-background">
-          <img class="responsive" :src='bio.title_img'>
+          <img class="responsive" :src='bio.titleImg'>
           <div class="bio-article">
             <h3>{{bio.title}}</h3>
             <div v-html="bio.text">
             </div>
           </div>
-          <god-item :god='godInfo' is_my="true" class="bio-god-card"></god-item>
+          <god-item :god='godInfo' isMy="true" class="bio-god-card"></god-item>
         </div>
       </div>
 
@@ -53,21 +53,21 @@
       },
       bio () {
         let self = this
-        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.starName })
+        let bio = _.find(this.$store.state.p.richList, function (d) { return d.key === self.starName })
         if (bio) return bio
-        else return { title_img: '' }
+        else return { titleImg: '' }
       }
     },
     methods: {
       getDetail: function () {
         let self = this
         this.$store.dispatch('getRichText', { key: this.starName }).then(function (data) {
-          self.bio.text = data.rich_text[0].text
+          self.bio.text = data.richText[0].text
         })
       },
       getBio: function () {
         let self = this
-        if (this.bio.title_img !== '') {
+        if (this.bio.titleImg !== '') {
           if (!this.bio.text) { // 没有详情，取之
             this.getDetail()
           }

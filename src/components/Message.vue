@@ -8,7 +8,7 @@
     </q-modal>
 
     <q-item>
-      <q-item-side @click.native="opened=!opened" :avatar="avatar" class="bz_avatar">
+      <q-item-side @click.native="opened=!opened" :avatar="avatar" class="bzAvatar">
       </q-item-side>
       <q-item-main>
         <q-item-tile label>
@@ -24,7 +24,7 @@
       </q-item-main>
       <q-item-side>
         <a target="_blank" :href="href">
-          <TimeLen :date_time="message.out_created_at" :lang="lang" />
+          <TimeLen :dateTime="message.outCreatedAt" :lang="lang" />
           <q-icon :name="'fab fa-'+message.social" />
         </a>
       </q-item-side>
@@ -36,10 +36,10 @@
 
     <q-card-actions align="end" class="card-actions bz">
       <router-link :to="{ name:'TheMessage', params: {id:message.id}}" class="more-infor-bz hover-show-bz">
-        <q-icon name="more_horiz" />
+        <q-icon name="moreHoriz" />
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.collect}" class="bookmark">
-        <q-icon :class="{'bookmark-light': message.collect}" name="bookmark_border" />
+        <q-icon :class="{'bookmark-light': message.collect}" name="bookmarkBorder" />
       </a>
       <a @click="anki" :class="{'hover-show-bz':!message.anki}" class="anki">
         <q-icon :class="{'anki-light': message.anki}" name="stars" />
@@ -70,7 +70,7 @@
     data: function () {
       return {
         opened: false, // god 信息是否弹出
-        anki_color: '#B3B3B3' // #57ADE3
+        ankiColor: '#B3B3B3' // #57ADE3
       }
     },
     mounted() {
@@ -80,7 +80,7 @@
       })
     },
     computed: {
-      star_social() {
+      starSocial() {
         return this.$store.state.god.mapStarSocials[this.message.starID.toString()][this.message.social]
       },
       star() {
@@ -93,13 +93,13 @@
         return Vue.config.lang
       },
       href: function () {
-        if (this.message.m_type === 'github') {
+        if (this.message.mType === 'github') {
           return `https://github.com/${this.message.name}`
         }
         return this.message.href
       },
       avatar: function () {
-        return this.star_social.avatar
+        return this.starSocial.avatar
       }
     },
     methods: {
@@ -110,7 +110,7 @@
         this.$store
           .dispatch('postAnki', {
             front: front,
-            message_id: this.message.id
+            messageId: this.message.id
           })
           .then(function () {}).catch((error) => {
             this.$q.notify(error.response.data)

@@ -1,8 +1,8 @@
 <template>
   <q-scroll-area style="width: 100%; height: 100%">
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
-    <Cat v-if="name==='Recommand'" route_name="Recommand"></Cat>
-    <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
+    <Cat v-if="name==='Recommand'" routeName="Recommand"></Cat>
+    <Cat v-if="name==='Following'" routeName="Following" :justMy="1"></Cat>
     <GodInfo v-show="starName" />
     <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])" />
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>

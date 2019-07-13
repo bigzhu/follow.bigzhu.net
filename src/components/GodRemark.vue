@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-html="remark" v-show="!is_edit && remark" class="remark-bz"></div>
-    <p v-show="is_edit" v-html="remark" @blur="save" contenteditable="true" class="remark-edit-content"></p>
-    <q-btn v-show="is_edit" @click="save" color="secondary" small>{{ $t("保存") }}</q-btn>
-    <a v-show="!is_edit" @click="edit" href="javascript:void(0)" class="hover-show-bz">
+    <div v-html="remark" v-show="!isEdit && remark" class="remark-bz"></div>
+    <p v-show="isEdit" v-html="remark" @blur="save" contenteditable="true" class="remark-edit-content"></p>
+    <q-btn v-show="isEdit" @click="save" color="secondary" small>{{ $t("保存") }}</q-btn>
+    <a v-show="!isEdit" @click="edit" href="javascript:void(0)" class="hover-show-bz">
       <q-icon name="edit" />
     </a>
   </div>
@@ -37,14 +37,14 @@
     computed: {},
     data: function () {
       return {
-        is_edit: false,
+        isEdit: false,
         remark: myautolinker(this.value, 'twitter')
       }
     },
     mounted() {},
     methods: {
       edit: function () {
-        this.is_edit = true
+        this.isEdit = true
         let self = this
         this.$nextTick(
           function () {
@@ -58,7 +58,7 @@
           starID: this.godID,
           remark: this.remark
         })
-        this.is_edit = false
+        this.isEdit = false
         this.$emit('input', this.remark)
       }
     }

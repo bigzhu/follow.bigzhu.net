@@ -17,7 +17,7 @@ export const starSocials = (state, starSocials) => {
     if (state.mapStarSocials[o.StarID.toString()] === undefined) {
       state.mapStarSocials[o.StarID.toString()] = {}
     }
-    // if (o.error_info !== '') {
+    // if (o.errorInfo !== '') {
     //   o.socialName = ''
     // }
     state.mapStarSocials[o.StarID.toString()][o.social] = o

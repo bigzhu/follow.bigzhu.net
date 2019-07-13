@@ -1,9 +1,9 @@
 <template>
   <q-page padding>
-    <NotYetFollow v-show="ordered_stars.length===0 && get_done && !cat"></NotYetFollow>
-    <AddingGodItem v-show="starName!==''" :starName="starName" @add_done="addDone">
+    <NotYetFollow v-show="orderedStars.length===0 && getDone && !cat"></NotYetFollow>
+    <AddingGodItem v-show="starName!==''" :starName="starName" @addDone="addDone">
     </AddingGodItem>
-    <GodItem v-for="god in ordered_stars" :god="god" :key="god.id" class="god-item">
+    <GodItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
     </GodItem>
     <AddGodButton v-on:add="add"></AddGodButton>
     <Top></Top>
@@ -46,18 +46,18 @@
         return this.$route.params.cat
       },
       // 过滤不是已经关注的网红
-      filtered_my: function () {
-        return this.filter_cat.filter((o) => {
+      filteredMy: function () {
+        return this.filterCat.filter((o) => {
           return o.following !== 0
         })
       },
       // 按照关注时间排序
-      ordered_stars: function () {
-        return _.orderBy(this.filtered_my, 'following_at', 'desc').filter((o) => {
+      orderedStars: function () {
+        return _.orderBy(this.filteredMy, 'followingAt', 'desc').filter((o) => {
           return o.name !== this.starName
         })
       },
-      filter_cat() {
+      filterCat() {
         return this.stars.filter((o) => {
           return o.cat === this.cat || !this.cat
         })
@@ -68,7 +68,7 @@
     },
     data: function () {
       return {
-        get_done: false,
+        getDone: false,
         starName: '',
         key: ''
       }

@@ -1,6 +1,6 @@
 <template>
   <a href='javascript:;'>
-    <q-icon :name="the_class" />
+    <q-icon :name="theClass" />
     <BzCountUp v-show="count!=-4" :end="count" :duration="2.5" :options="{useEasing : true,
       useGrouping : true,
       separator : ',',
@@ -35,7 +35,7 @@
     },
     computed: {
       count: function () {
-        return this.info.following_count || 0
+        return this.info.followingCount || 0
       },
       href: function () {
         if (this.type === 'twitter') {
@@ -49,7 +49,7 @@
         }
         return ''
       },
-      the_class: function () {
+      theClass: function () {
         return `fab fa-${this.type}`
       }
     },

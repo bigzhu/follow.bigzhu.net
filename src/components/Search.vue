@@ -3,7 +3,7 @@
     <div class="ui stackable grid">
       <div class="row">
         <div class="eleven wide column no-padding-bz">
-          <messages :search_key="$route.params.key"></messages>
+          <messages :searchKey="$route.params.key"></messages>
         </div>
         <div class="five wide column computer only ">
         </div>

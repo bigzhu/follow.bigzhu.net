@@ -23,8 +23,8 @@
         if (!url) {
           return ''
         }
-        // let p_url = window.btoa(window.btoa(url))
-        // return '/api_sp/' + p_url
+        // let pUrl = window.btoa(window.btoa(url))
+        // return '/apiSp/' + pUrl
         // return '/p?url=' + encodeURIComponent(url)
         return '/p/' + url
       },
