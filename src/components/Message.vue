@@ -4,21 +4,24 @@
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
       </q-inner-loading>
-      <GodItem :god="star" :key="star.id" style="width: 100%" />
+      <GodItem :god="star" :key="star.ID" style="width: 100%" />
     </q-dialog>
 
     <q-item>
-      <q-item-section @click.native="opened=!opened" :avatar="avatar" class="bzAvatar">
+      <q-item-section @click.native="opened=!opened" class="bzAvatar" avatar>
+        <q-avatar>
+          <img :src="avatar">
+        </q-avatar>
       </q-item-section>
       <q-item-label>
         <q-item-section label>
-          <router-link :to="{ name: 'God', params: { starName: star.name }}">
-            {{star.name}}
+          <router-link :to="{ name: 'God', params: { starName: star.Name }}">
+            {{star.Name}}
           </router-link>
         </q-item-section>
         <q-item-section sublabel>
-          <router-link :to="{ name: 'Recommand', params: { cat: star.cat||'all' }}" class="stamp">
-            {{star.cat}}
+          <router-link :to="{ name: 'Recommand', params: { cat: star.Cat||'all' }}" class="stamp">
+            {{star.Cat}}
           </router-link>
         </q-item-section>
       </q-item-label>
@@ -99,7 +102,7 @@
         return this.message.Href
       },
       avatar: function () {
-        return this.starSocial.avatar
+        return this.starSocial.Avatar
       }
     },
     methods: {

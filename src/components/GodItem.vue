@@ -2,14 +2,14 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <router-link :to="{ name: 'God', params: { starName: god.name }}">
-        <q-item-section :avatar="god.avatar||'/statics/assets/avatar.svg'" />
+        <q-item-section :avatar="god.Avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-label>
         <router-link :to="{ name: 'God', params: { starName: god.name }}">
-          <q-item-section label>{{god.name}}</q-item-section>
+          <q-item-section label>{{god.Name}}</q-item-section>
         </router-link>
         <q-item-section sublabel>
-          {{god.followingCount||1}} {{ $t("人关注") }}
+          {{god.FollowingCount||1}} {{ $t("人关注") }}
         </q-item-section>
       </q-item-label>
     </q-item>
@@ -22,10 +22,10 @@
 
     <q-card class="green-bz">
       <p v-html="bio"></p>
-      <GodRemark v-model="god.remark" :godID="god.id" class="green-bz remark"></GodRemark>
+      <GodRemark v-model="god.Remark" :godID="god.ID" class="green-bz remark"></GodRemark>
     </q-card>
     <q-card-actions align="end">
-      <Follow v-model="god.following" :godID="god.id" class="follow"></Follow>
+      <Follow v-model="god.Following" :godID="god.ID" class="follow"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -65,10 +65,10 @@
         return this.$store.state.god.mapStarSocials[this.god.ID.toString()]
       },
       bio() {
-        return myautolinker(this.god.bio, this.god.social)
+        return myautolinker(this.god.Bio, this.god.Social)
       },
       godID() {
-        return this.god.godID
+        return this.god.GodID
       }
     },
     methods: {
@@ -79,12 +79,12 @@
       block: function (god) {
         this.loading = true
         let self = this
-        this.$store.dispatch('postBlock', god.godID).then(function (data) {
-          self.$store.commit('REMOVE_THIS_GOD_catMyGods', god.godID)
+        this.$store.dispatch('postBlock', god.GodID).then(function (data) {
+          self.$store.commit('REMOVE_THIS_GOD_catMyGods', god.GodID)
           self.loading = false
         })
-        if (god.following === 1) {
-          self.$store.dispatch('unfollow', god.godID)
+        if (god.Following === 1) {
+          self.$store.dispatch('unfollow', god.GodID)
         }
       }
     }
