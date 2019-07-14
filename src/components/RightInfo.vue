@@ -23,7 +23,7 @@
         <span class="footer-element">{{ $t("注册人数") }}: {{registeredCount}}</span>
         <span>© 2017 Follow Center</span>
       </div>
-      <q-select type="list" v-model="lang" :options="langOptions">
+      <q-select v-model="lang" :options="langOptions">
       </q-select>
     </div>
   </div>
@@ -41,14 +41,25 @@
     computed: {
       lang: {
         get: function () {
-          return this.$i18n.locale
+          // return this.$i18n.locale
+          if (this.$i18n.locale === 'cn') {
+            return {
+              label: '中文',
+              value: 'cn'
+            }
+          } else {
+            return {
+            label: 'English',
+            value: 'en'
+          }
+          }
         },
         set: function (v) {
-          this.$i18n.locale = v
-          window.localStorage.setItem('lang', v)
+          this.$i18n.locale = v.value
+          window.localStorage.setItem('lang', v.value)
         }
       },
-      registeredCount () {
+      registeredCount() {
         return this.$store.state.user.registeredCount
       }
     },
