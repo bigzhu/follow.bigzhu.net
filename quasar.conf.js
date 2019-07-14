@@ -15,7 +15,7 @@ module.exports = function (ctx) {
     ],
 
     extras: [
-      // 'ionicons-v4',
+      'ionicons-v4',
       // 'mdi-v3',
       'fontawesome-v5',
       // 'eva-icons',
@@ -86,6 +86,10 @@ module.exports = function (ctx) {
       proxy: {
         '/api': {
           target: 'http://127.0.0.1:3003',
+          changeOrigin: true
+        },
+        '/medias': {
+          target: 'https://follow.bigzhu.net',
           changeOrigin: true
         }
       },

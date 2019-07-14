@@ -1,7 +1,7 @@
 <template>
   <div id="q-app">
     <q-layout view="hhh LpR lfr" v-if="starsDone && starSocialsDone">
-      <q-header v-model="showHeader">
+      <q-header v-model="showHeader" class="bg-white">
         <BarOne/>
         <BarTwo/>
       </q-header>

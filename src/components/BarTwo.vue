@@ -1,12 +1,14 @@
 <template>
   <!-- 第二栏标题 -->
-  <q-tabs color="black" inverted>
-    <q-route-tab slot="title" :to="{'name': 'Main'}" replace :label="$t('首页')" />
-    <q-route-tab slot="title" :to="{'name': 'Recommand'}" replace :label="$t('寻他')" />
-    <q-route-tab slot="title" :to="{ name:'Following'}" replace :label="$t('跟踪')" v-show="isLogin" />
-    <q-route-tab slot="title" :to="{ name:'Collect'}" replace :label="$t('收藏')" v-show="isLogin" />
-    <q-tab slot="title" @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('传记')" />
-  </q-tabs>
+  <q-toolbar>
+    <q-tabs class="text-black" shrink stretch>
+      <q-route-tab  :to="{'name': 'Main'}" replace :label="$t('首页')" />
+      <q-route-tab  :to="{'name': 'Recommand'}" replace :label="$t('寻他')" />
+      <q-route-tab  :to="{ name:'Following'}" replace :label="$t('跟踪')" v-show="isLogin" />
+      <q-route-tab  :to="{ name:'Collect'}" replace :label="$t('收藏')" v-show="isLogin" />
+      <q-tab @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('传记')" />
+    </q-tabs>
+  </q-toolbar>
 </template>
 
 <script>
@@ -14,7 +16,7 @@
     props: [],
     components: {},
     computed: {
-      isLogin () {
+      isLogin() {
         return this.$store.state.lib.oauthInfo.name
       }
     },
@@ -27,7 +29,7 @@
       })
     },
     methods: {
-      open (url) {
+      open(url) {
         var win = window.open(url, '_blank')
         win.focus()
       }

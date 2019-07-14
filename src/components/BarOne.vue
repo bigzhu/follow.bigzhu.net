@@ -1,6 +1,6 @@
 <template>
   <!-- 第一栏标题 -->
-  <q-toolbar color="primary" inverted>
+  <q-toolbar class="text-black">
     <!--logo-->
     <router-link :to="{name: 'Main'}">
       <img class="logo-img" src="../statics/assets/logo.svg">
@@ -67,8 +67,7 @@
 </script>
 
 <style lang="stylus" scoped>
-  .logo-img {
-    vertical-align: middle;
-    width: 2.5rem;
-  }
+  .logo-img
+    vertical-align: middle
+    width: 2.5rem
 </style>
