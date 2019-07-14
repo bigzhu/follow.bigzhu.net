@@ -1,5 +1,6 @@
 <template>
   <q-card class="the-hover-bz">
+
     <q-dialog v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
@@ -8,29 +9,35 @@
     </q-dialog>
 
     <q-item>
-      <q-item-section @click.native="opened=!opened" class="bzAvatar" avatar>
+      <q-item-section @click.native="opened=!opened" avatar>
         <q-avatar>
           <img :src="avatar">
         </q-avatar>
       </q-item-section>
-      <q-item-label>
-        <q-item-section label>
+
+      <q-item-section>
+        <q-item-label>
           <router-link :to="{ name: 'God', params: { starName: star.Name }}">
             {{star.Name}}
           </router-link>
-        </q-item-section>
-        <q-item-section sublabel>
+        </q-item-label>
+        <q-item-label caption>
           <router-link :to="{ name: 'Recommand', params: { cat: star.Cat||'all' }}" class="stamp">
             {{star.Cat}}
           </router-link>
-        </q-item-section>
-      </q-item-label>
-      <q-item-section>
-        <a target="_blank" :href="href">
-          <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
-          <q-icon :name="'fab fa-'+message.Social" />
-        </a>
+        </q-item-label>
       </q-item-section>
+
+      <q-item-section side top>
+        <q-item-label caption>
+          <a target="_blank" :href="href">
+            {{message.Social}}
+            <q-icon :name="'fab fa-'+message.Social" />
+          </a>
+        </q-item-label>
+        <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
+      </q-item-section>
+
     </q-item>
 
     <q-card class="green-bz">
