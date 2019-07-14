@@ -36,10 +36,10 @@
 
     <q-card-actions align="right" class="card-actions bz">
       <router-link :to="{ name:'TheMessage', params: {id:message.ID}}" class="more-infor-bz hover-show-bz">
-        <q-icon name="moreHoriz" />
+        <q-icon name="more_horiz" />
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.Collect}" class="bookmark">
-        <q-icon :class="{'bookmark-light': message.Collect}" name="bookmarkBorder" />
+        <q-icon :class="{'bookmark-light': message.Collect}" name="bookmark_border" />
       </a>
       <a @click="anki" :class="{'hover-show-bz':!message.Anki}" class="anki">
         <q-icon :class="{'anki-light': message.Anki}" name="stars" />
