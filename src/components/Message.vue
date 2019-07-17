@@ -1,6 +1,5 @@
 <template>
   <q-card class="the-hover-bz">
-
     <q-dialog v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
@@ -37,7 +36,6 @@
         </q-item-label>
         <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
       </q-item-section>
-
     </q-item>
 
     <q-card class="green-bz">
@@ -140,7 +138,8 @@
 </script>
 
 <style>
-  /* 取消原本设定的图片大小 */
+  /*
+取消原本设定的图片大小
   .q-item-avatar {
     width: inherit;
     height: inherit;
@@ -156,7 +155,7 @@
     word-wrap: break-word;
   }
 
-  /* 图片最多也就 100% */
+    图片最多也就 100%
   .q-card img {
     max-width: 100%;
   }
@@ -207,4 +206,5 @@
     padding-top: 0.84rem;
     font-size: 1rem;
   }
+  */
 </style>

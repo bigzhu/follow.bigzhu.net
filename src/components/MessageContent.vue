@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'center-container-bz':$q.platform.is.mobile}">
+  <q-card-section :class="{'center-container-bz':$q.platform.is.mobile}">
     <div class="description" v-html="text">
     </div>
     <template v-for="(src,index) in message.Medias">
@@ -10,7 +10,7 @@
         <source :src="encodeFile(src)">
       </video>
     </template>
-  </div>
+  </q-card-section>
 </template>
 
 <script>
