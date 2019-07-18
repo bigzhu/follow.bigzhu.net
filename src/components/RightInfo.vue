@@ -12,20 +12,19 @@
     </q-card>
     -->
 
-    <div class="info">
-      <div class="about">
-        <a class="footer-element" href="http://bigzhu.lorstone.com/follow%20center%20%E6%98%AF%E4%BB%80%E4%B9%88.html">{{ $t("关于") }}</a>
-        <a class="footer-element" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
-        <a class="footer-element" href="http://bigzhu.lorstone.com/follow%20center.html">Change Log</a>
-      </div>
-
-      <div class="footer">
-        <span class="footer-element">{{ $t("注册人数") }}: {{registeredCount}}</span>
-        <span>© 2017 Follow Center</span>
-      </div>
-      <q-select v-model="lang" :options="langOptions">
-      </q-select>
+    <div class="row">
+      <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/follow%20center%20%E6%98%AF%E4%BB%80%E4%B9%88.html">{{ $t("关于") }}</a>
+      <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
+      <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/follow%20center.html">Change Log</a>
     </div>
+    <br>
+    <div class="row">
+      <span class="col col-md-6">{{ $t("注册人数") }}: {{registeredCount}}</span>
+      <span class="col col-md-6">© 2019 Follow Center</span>
+    </div>
+    <br>
+    <q-select v-model="lang" :options="langOptions">
+    </q-select>
   </div>
 </template>
 
@@ -49,9 +48,9 @@
             }
           } else {
             return {
-            label: 'English',
-            value: 'en'
-          }
+              label: 'English',
+              value: 'en'
+            }
           }
         },
         set: function (v) {
@@ -95,6 +94,7 @@
 </script>
 
 <style lang="stylus" scoped>
+/*
   // 微信框那里不要显示边框
   .q-card
     box-shadow none
@@ -133,4 +133,5 @@
     align-items center
     img
       width 10rem
+      */
 </style>

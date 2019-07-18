@@ -21,8 +21,10 @@ export default {
   '里面寻找您感兴趣的人吧!': 'to find what you like!',
   '已跟踪': 'Following',
   '历史消息': 'History',
-  '关于 Follow Center': 'About Follow Center',
-  '跟踪': 'no follow'
+  '关于': 'About',
+  '使用教程': 'Guide',
+  '跟踪': 'no follow',
+  '注册人数': 'Users'
   /*
    '添加要跟踪的新目标':'Add what you want to follow',
      example: '帐号名, 比如 bigzhu':'ID, for example: bigzhu',

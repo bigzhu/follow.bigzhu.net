@@ -59,7 +59,7 @@
 <script>
   import MessageContent from './MessageContent'
   import TimeLen from 'bz-q-lib/src/components/TimeLen'
-  import Vue from 'vue'
+  // import Vue from 'vue'
   import Proxy from './Proxy'
   import GodItem from './GodItem'
 
@@ -98,7 +98,8 @@
         return this.$store.state.lib.loading
       },
       lang() {
-        return Vue.config.lang
+        // return Vue.config.lang
+        return this.$i18n.locale
       },
       href: function () {
         if (this.message.mType === 'github') {
