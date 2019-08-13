@@ -36,7 +36,8 @@
         return star
       },
       starName() {
-        return this.$route.params.starName
+        // return this.$route.params.starName
+        return this.$store.state.god.nowStar.name
       }
     },
     data: function () {

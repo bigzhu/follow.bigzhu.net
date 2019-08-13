@@ -58,7 +58,7 @@
         let self = this
         this.loading = true
         if (this.value === 1) {
-          this.$store.dispatch('unfollow', this.godID).then(function (data) {
+          this.$store.dispatch('unfollow', this.godID).then((data) => {
             self.showUnfollow()
           }).catch((error) => {
             this.$q.notify(error.response.data)

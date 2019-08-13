@@ -1,5 +1,5 @@
 <template>
-  <q-card class="the-hover-bz">
+  <q-card v-view="setStar" class="the-hover-bz">
     <q-dialog v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
@@ -62,6 +62,9 @@
   // import Vue from 'vue'
   import Proxy from './Proxy'
   import GodItem from './GodItem'
+  import Vue from 'vue'
+  import checkView from 'vue-check-view'
+  Vue.use(checkView)
 
   export default {
     mixins: [Proxy],
@@ -88,6 +91,9 @@
       })
     },
     computed: {
+      nowStar() {
+        return this.$store.state.god.nowStar
+      },
       starSocial() {
         return this.$store.state.god.mapStarSocials[this.message.StarID.toString()][this.message.Social]
       },
@@ -112,6 +118,12 @@
       }
     },
     methods: {
+      setStar: function (e) {
+        // if (this.star.Name === 'natgeo') console.log(e)
+        // if (e.percentInView > 0.5) console.log(this.star.Name + ' percentInView=' + e.percentInView)
+        this.$store.commit('setNowStar', { name: this.star.Name, percentCenter: e.percentCenter })
+        console.log(this.nowStar.name)
+      },
       anki: function () {
         if (this.message.Anki) return
         this.message.Anki = 1
@@ -138,7 +150,10 @@
   }
 </script>
 
-<style>
+<style lang="stylus" scoped>
+.q-card.the-hover-bz
+  box-shadow none
+  border-bottom 1px solid #eee
   /*
 取消原本设定的图片大小
   .q-item-avatar {

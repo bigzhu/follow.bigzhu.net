@@ -15,7 +15,7 @@
     <div class="row">
       <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/follow%20center%20%E6%98%AF%E4%BB%80%E4%B9%88.html">{{ $t("关于") }}</a>
       <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
-      <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/follow%20center.html">Change Log</a>
+      <a class="col-6 col-md-4" href="http://bigzhu.lorstone.com/follow%20center.html">{{$t("演变")}}</a>
     </div>
     <br>
     <div class="row">

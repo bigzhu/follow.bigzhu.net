@@ -1,16 +1,16 @@
 <template>
   <q-card class="the-hover-bz" v-if="star">
     <q-card-media overlay-position="top">
-      <img :src="star.avatar||'/statics/assets/avatar.svg'">
+      <img :src="star.Avatar||'/statics/assets/avatar.svg'">
       <q-card-title slot="overlay">
-        {{star.name}}
-        <span slot="subtitle">{{star.cat}}</span>
+        {{star.Name}}
+        <span slot="subtitle">{{star.Cat}}</span>
       </q-card-title>
     </q-card-media>
 
     <q-card>
-      <p v-html="star.bio"></p>
-      <GodRemark v-model="remark" :godID="star.id" class="green-bz remark"></GodRemark>
+      <p v-html="star.Bio"></p>
+      <GodRemark v-model="remark" :godID="star.ID" class="green-bz remark"></GodRemark>
       <q-field v-for="s in socialTypes" :key="s.socialType" :icon="'fab fa-'+s.socialType">
         <q-input v-model="starSocial[s.socialType].socialName" @input="s.isEdit=true" :disable="disableEdit" :float-label="s.socialType" />
       </q-field>
@@ -22,7 +22,7 @@
       <q-btn color="secondary" v-show="!disableEdit" @click="save">
         {{ $t("保存") }}
       </q-btn>
-      <Follow v-model="star.following" :godID="star.id"></Follow>
+      <Follow v-model="star.Following" :godID="star.ID"></Follow>
     </q-card-actions>
   </q-card>
 </template>
@@ -47,7 +47,8 @@
         return this.$store.state.god.mapStarSocials[this.starID]
       },
       starName() {
-        return this.$route.params.starName
+        // return this.$route.params.starName
+        return this.$store.state.god.nowStar.name
       },
       remark: function () {
         return this.star.remark || this.star.adminRemark

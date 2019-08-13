@@ -10,6 +10,14 @@ function initCatGod(state, type, cat) {
     Vue.set(state[type], cat, [])
   }
 }
+export const setNowStar = (state, nowStar) => {
+  if (nowStar.percentCenter < 0) nowStar.percentCenter = 100
+  if (state.nowStar.name === nowStar.name) state.nowStar.percentCenter = nowStar.percentCenter
+  if (state.nowStar.percentCenter > nowStar.percentCenter) {
+    state.nowStar.name = nowStar.name
+    state.nowStar.percentCenter = nowStar.percentCenter
+  }
+}
 // 所有的社交类型重新组合存储 {starID: {'twitter':{}}} 的格式
 // 为了便于检索和对应
 export const starSocials = (state, starSocials) => {

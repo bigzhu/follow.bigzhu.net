@@ -24,6 +24,7 @@ export default {
   '关于': 'About',
   '使用教程': 'Guide',
   '跟踪': 'no follow',
+  '演变': 'Change',
   '注册人数': 'Users'
   /*
    '添加要跟踪的新目标':'Add what you want to follow',
