@@ -3,11 +3,12 @@
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
     <Cat v-if="name==='Recommand'" routeName="Recommand"></Cat>
     <Cat v-if="name==='Following'" routeName="Following" :justMy="1"></Cat>
-    <GodInfo v-show="starName" />
+    <GodInfo class='god-info' v-show="starName" />
     <!--
     <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])" />
       <br>
     -->
+    <br>
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
   </q-scroll-area>
 </template>
@@ -55,6 +56,9 @@
 </script>
 
 <style lang="stylus" scoped>
+// god info card 的下缘阴影线不要显示出来
+.god-info
+  box-shadow none
 /*
   .blank-padding-20
     padding-top 48px // 字体高度不可知, 我这里是 20px, 只有先写死 20px+2*1rem = 48px

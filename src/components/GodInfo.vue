@@ -1,5 +1,5 @@
 <template>
-  <q-card class="the-hover-bz" v-if="star">
+  <q-card v-if="star">
     <q-img :src="star.Avatar||'/statics/assets/avatar.svg'">
       <div class="absolute-bottom text-center">
         <div class="text-h6">{{star.Name}}</div>
