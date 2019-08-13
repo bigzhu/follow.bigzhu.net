@@ -1,19 +1,20 @@
 <template>
   <q-list class="list">
-    <QItem item v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': routeName, params: {'cat': cat}}">
-      <q-item-section :icon="getIcon(cat)" />
-      <q-item-label>
-        <q-item-section label>{{cat}}</q-item-section>
-        <q-item-section sublabel>{{getSublabel(cat)}}</q-item-section>
-      </q-item-label>
-    </QItem>
+    <q-item clickable v-ripple v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': routeName, params: {'cat': cat}}">
+      <q-item-section avatar>
+        <q-icon color="" :name="getIcon(cat)" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{cat}}</q-item-label>
+        <q-item-label caption>{{getSublabel(cat)}}</q-item-label>
+      </q-item-section>
+    </q-item>
   </q-list>
 </template>
 
 <script>
   export default {
-    components: {
-    },
+    components: {},
     props: {
       justMy: {
         type: Number,
@@ -24,17 +25,17 @@
       }
     },
     computed: {
-      theRoute () {
+      theRoute() {
         return this.$route.name
       },
-      cats: function() {
+      cats: function () {
         if (this.justMy) {
           return this.$store.state.god.myCats
         } else {
           return this.$store.state.god.cats
         }
       },
-      link: function() {
+      link: function () {
         if (this.justMy) {
           return 'MyGods'
         } else {
@@ -42,23 +43,63 @@
         }
       }
     },
-    data: function() {
+    data: function () {
       return {
         iconMap: [{
-            name: '有趣',
-            icon: 'thumbUp'
+            name: 'Fun',
+            icon: 'thumb_up'
           },
           {
-            name: '动漫',
+            name: 'ACG',
             icon: 'palette'
           },
           {
-            name: '投资',
-            icon: 'attachMoney'
+            name: 'ProgrammingLanguage',
+            icon: 'fa fa-python'
           },
           {
-            name: '旅游',
-            icon: 'cardTravel'
+            name: 'Immigrant',
+            icon: 'fa fa-suitcase-rolling'
+          },
+          {
+            name: 'NSFW',
+            icon: 'fa fa-grin-hearts'
+          },
+          {
+            name: 'Blockchain',
+            icon: 'fa fa-link'
+          },
+          {
+            name: '',
+            icon: 'fa fa-question'
+          },
+          {
+            name: 'Model',
+            icon: 'fa fa-heart'
+          },
+          {
+            name: 'IT',
+            icon: 'fa fa-info'
+          },
+          {
+            name: 'Star',
+            icon: 'fa fa-star'
+          },
+          {
+            name: 'Fitness',
+            icon: 'fa fa-dumbbell'
+          },
+          {
+            name: 'Rich',
+            icon: 'attach_money'
+          },
+          {
+            name: 'World',
+            icon: 'fa fa-globe-asia'
+          },
+          {
+            name: 'Photographer',
+            icon: 'photo_camera'
           },
           {
             name: '游戏',
@@ -117,7 +158,7 @@
             icon: 'photoCamera'
           },
           {
-            name: '程序员',
+            name: 'Programmer',
             icon: 'code'
           },
           {
@@ -129,7 +170,7 @@
             icon: 'book'
           },
           {
-            name: '互联网',
+            name: 'IT',
             icon: 'language'
           }
         ],
@@ -138,15 +179,15 @@
       }
     },
     methods: {
-      getSublabel: function(cat) {
+      getSublabel: function (cat) {
         if (this.justMy) {
           return `关注${this.cats[cat]}人`
         } else {
           return `收录${this.cats[cat]}人`
         }
       },
-      getIcon: function(cat) {
-        let iconObj = this.iconMap.filter(function(d) {
+      getIcon: function (cat) {
+        let iconObj = this.iconMap.filter(function (d) {
           return d.name === cat
         })
         if (iconObj.length) {
@@ -154,12 +195,12 @@
         }
         return 'labelOutline'
       },
-      showAddCatInput: function() {
+      showAddCatInput: function () {
         this.addCatInputStat = true
         this.inputCat = '' // 清空上次的输入
         this.$nextTick()
       },
-      addCat: function() {
+      addCat: function () {
         // window.alert(this.inputCat)
         this.cats.splice(0, 0, {
           cat: this.inputCat
@@ -172,7 +213,7 @@
           }
         })
       },
-      selectCat: function() {
+      selectCat: function () {
         this.$router.push({
           name: this.routeName,
           params: {

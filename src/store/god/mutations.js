@@ -57,10 +57,10 @@ export const catGods = (state, {
 export const countCat = (state, stars) => {
   state.cats = {}
   stars.map((o) => {
-    if (!state.cats[o.cat]) {
-      state.cats[o.cat] = 1
+    if (!state.cats[o.Cat]) {
+      state.cats[o.Cat] = 1
     } else {
-      state.cats[o.cat] += 1
+      state.cats[o.Cat] += 1
     }
   })
 }

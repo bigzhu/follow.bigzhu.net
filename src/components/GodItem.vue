@@ -2,7 +2,7 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <q-item-section avatar>
-        <router-link :to="{ name: 'God', params: { starName: god.name }}">
+        <router-link :to="{ name: 'God', params: { starName: god.Name }}">
           <q-avatar>
             <img :src="god.Avatar||'/statics/assets/avatar.svg'">
           </q-avatar>
@@ -17,18 +17,15 @@
       </q-item-section>
     </q-item>
 
-    <q-card-title>
-      <div slot="subtitle">
-        <social-badge v-for="social in Object.keys(starSocial)" :key="social" v-show="starSocial[social].socialName!=''" @click.native="setNow(starSocial[social])" :type="starSocial[social].social" :info="starSocial[social]" />
-      </div>
-    </q-card-title>
-
+    <q-card-section>
+      <social-badge v-for="social in Object.keys(starSocial)" :key="social" v-show="starSocial[social].SocialName!=''" @click.native="setNow(starSocial[social])" :type="starSocial[social].Social" :info="starSocial[social]" />
+    </q-card-section>
     <q-card-section class="green-bz">
       <p v-html="bio"></p>
       <GodRemark v-model="god.Remark" :godID="god.ID" class="green-bz remark"></GodRemark>
     </q-card-section>
 
-    <q-card-actions align="end">
+    <q-card-actions align="around">
       <Follow v-model="god.Following" :godID="god.ID" class="follow"></Follow>
     </q-card-actions>
   </q-card>
