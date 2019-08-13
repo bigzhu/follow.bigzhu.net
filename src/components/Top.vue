@@ -1,13 +1,14 @@
 <template>
-  <QPageSticky v-back-to-top.animate="{offset: 500, duration: 200}" corner="bottom-right" :offset="[-286, 80]" class="bz">
-    <q-btn v-back-to-top round color="" icon="keyboardArrowUp" />
-  </QPageSticky>
+  <q-page-scroller position="bottom-right" :offset="[18, 18]">
+    <q-btn outline round color="secondary" icon="keyboard_arrow_up" />
+  </q-page-scroller>
 </template>
 
 <script>
 </script>
 
 <style lang="stylus" scoped>
-  .fixed-bottom-right
-    z-index 9999
+  .q-btn
+    background-color white !important
+    opacity 0.5
 </style>

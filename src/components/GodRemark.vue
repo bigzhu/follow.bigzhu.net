@@ -1,15 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <div class="col">
-        <div v-html="remark" v-show="!isEdit && remark" class="remark-bz"></div>
-        <p v-show="isEdit" v-html="remark" @blur="save" contenteditable="true" class="remark-edit-content"></p>
-      </div>
-      <div class="col">
-        <a v-show="!isEdit" @click="edit" href="javascript:void(0)" class="hover-show-bz">
-          <q-icon name="edit" />
-        </a>
-      </div>
+      <div v-html="remark" v-show="!isEdit && remark" class="remark-bz"></div>
+      <p v-show="isEdit" v-html="remark" @blur="save" contenteditable="true" class="remark-edit-content"></p>
+      <a v-show="!isEdit" @click="edit" href="javascript:void(0)" class="hover-show-bz">
+        <q-icon name="edit" />
+      </a>
     </div>
     <q-btn outline v-show="isEdit" @click="save" color="secondary">{{ $t("保存") }}</q-btn>
   </div>
