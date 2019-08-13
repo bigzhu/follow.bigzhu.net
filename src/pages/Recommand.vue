@@ -1,7 +1,9 @@
 <template>
   <q-page padding>
-    <GodItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
-    </GodItem>
+    <div class="row">
+      <GodItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item self-center">
+      </GodItem>
+    </div>
     <Top></Top>
   </q-page>
 </template>

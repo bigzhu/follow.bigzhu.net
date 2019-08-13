@@ -1,5 +1,5 @@
 <template>
-  <q-card v-if="star">
+  <q-card>
     <q-img :src="star.Avatar||'/statics/assets/avatar.svg'">
       <div class="absolute-bottom text-center">
         <div class="text-h6">{{star.Name}}</div>

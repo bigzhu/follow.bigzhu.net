@@ -1,17 +1,20 @@
 <template>
   <q-card class="the-hover-bz" inline>
     <q-item>
-      <router-link :to="{ name: 'God', params: { starName: god.name }}">
-        <q-item-section :avatar="god.Avatar||'/statics/assets/avatar.svg'" />
-      </router-link>
-      <q-item-label>
+      <q-item-section avatar>
         <router-link :to="{ name: 'God', params: { starName: god.name }}">
-          <q-item-section label>{{god.Name}}</q-item-section>
+          <q-avatar>
+            <img :src="god.Avatar||'/statics/assets/avatar.svg'">
+          </q-avatar>
         </router-link>
-        <q-item-section sublabel>
-          {{god.FollowingCount||1}} {{ $t("人关注") }}
-        </q-item-section>
-      </q-item-label>
+      </q-item-section>
+
+      <q-item-section>
+        <router-link :to="{ name: 'God', params: { starName: god.Name }}">
+          <q-item-label>{{god.Name}}</q-item-label>
+        </router-link>
+        <q-item-label caption>{{god.FollowingCount||1}} {{ $t("人关注") }}</q-item-label>
+      </q-item-section>
     </q-item>
 
     <q-card-title>
@@ -20,10 +23,11 @@
       </div>
     </q-card-title>
 
-    <q-card class="green-bz">
+    <q-card-section class="green-bz">
       <p v-html="bio"></p>
       <GodRemark v-model="god.Remark" :godID="god.ID" class="green-bz remark"></GodRemark>
-    </q-card>
+    </q-card-section>
+
     <q-card-actions align="end">
       <Follow v-model="god.Following" :godID="god.ID" class="follow"></Follow>
     </q-card-actions>
