@@ -119,10 +119,7 @@
     },
     methods: {
       setStar: function (e) {
-        // if (this.star.Name === 'natgeo') console.log(e)
-        // if (e.percentInView > 0.5) console.log(this.star.Name + ' percentInView=' + e.percentInView)
         this.$store.commit('setNowStar', { name: this.star.Name, percentCenter: e.percentCenter })
-        console.log(this.nowStar.name)
       },
       anki: function () {
         if (this.message.Anki) return

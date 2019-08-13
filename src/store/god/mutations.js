@@ -72,7 +72,6 @@ export const countFollowedCat = (state, stars) => {
     if (!state.myCats[o.cat]) {
       state.myCats[o.cat] = 1
     } else {
-      console.log('add count')
       state.myCats[o.cat] += 1
     }
   })

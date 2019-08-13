@@ -11,7 +11,7 @@
       </div>
     </q-slide-transition>
 
-    <q-infinite-scroll v-scroll="onScroll" :offset="2000" :handler="loadMore" :style="`padding-top:${paddingTop}px;`">
+    <q-infinite-scroll v-scroll="onScroll" :offset="2000" @load="loadMore" :style="`padding-top:${paddingTop}px;`">
       <message ref="messages" v-for='message in noTypesMessages' :message='message' :key="message.id">
       </message>
       <div v-show="followingGodCount>0 && unreadMessageCount===0 && type==='main'" class="center-container-bz">
@@ -187,6 +187,7 @@
         }
       },
       loadMore: function (index, done) {
+        console.log('loadMore')
         if (this.oldLoading) {
           done()
           return
@@ -222,10 +223,7 @@
       },
       newMessage: function (limit = null) {
         let after = null
-        if (this.messages.length > 0) {
-          after = this.messages[this.messages.length - 1].outCreatedAt
-          // this.$store.dispatch('recordLastMessage', after)
-        }
+        if (this.messages.length > 0) after = this.messages[this.messages.length - 1].OutCreatedAt
         return this.$store.dispatch('getNew', {
           after: after
         })
