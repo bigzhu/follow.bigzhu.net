@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :starName="starName" :show="!(followingGodCount===0)"></Old>
+    <Old :starName="starName" :show="!(followingGodCount===0)"/>
     <NotYetFollow v-show="followingGodCount===0 && isLogin"></NotYetFollow>
     <q-slide-transition v-show="!isLogin">
       <div v-show="showNoLogin" class="no-login">

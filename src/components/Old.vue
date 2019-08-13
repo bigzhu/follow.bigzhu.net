@@ -9,14 +9,8 @@
 </template>
 
 <script>
-  import {
-    QSpinner,
-    QIcon
-  } from 'quasar'
   export default {
     components: {
-      QIcon,
-      QSpinner
     },
     computed: {
       oldLoading() {

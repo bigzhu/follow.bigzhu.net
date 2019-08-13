@@ -206,7 +206,7 @@ export const oldMessage = ({
     messages = state.messages
   }
   if (messages.length > 0) {
-    before = messages[0].outCreatedAt
+    before = messages[0].OutCreatedAt
   } else { // 第一次, 找当前以前的
     // before = new Date().getTime()
     // before = (new Date()).toISOString()
