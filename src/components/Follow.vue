@@ -1,6 +1,6 @@
 <template>
-  <q-btn outline @click="toggleFollow" :color="color">
-    <q-icon name="add" v-show="value==0" />{{desc}}
+  <q-btn outline @click="toggleFollow" :color="color" :icon="value==0?'add':''">
+    {{desc}}
   </q-btn>
 </template>
 
@@ -46,7 +46,7 @@
         this.$emit('input', 1)
         this.loading = false
         this.desc = this.$t('已跟踪')
-        this.color = 'light'
+        this.color = 'grey'
       },
       showUnfollow: function () {
         this.$emit('input', 0)
@@ -82,6 +82,8 @@
 </script>
 
 <style lang="stylus" scoped>
+/*
   .q-btn
     margin 0.5rem
+    */
 </style>
