@@ -20,8 +20,8 @@
       return {}
     },
     computed: {
-      starName() {
-        if (this.$route.params.starName) return this.$route.params.starName
+      StarName() {
+        if (this.$route.params.StarName) return this.$route.params.StarName
         return ''
       }
     },
@@ -33,8 +33,8 @@
     },
     methods: {
       getGodInfo: function () {
-        if (this.starName) {
-          this.$store.dispatch('getGod', this.starName)
+        if (this.StarName) {
+          this.$store.dispatch('getGod', this.StarName)
         }
       }
     }

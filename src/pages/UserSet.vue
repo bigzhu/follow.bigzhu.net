@@ -63,7 +63,7 @@
         this.showAnkiInput = false
       }
       this.$store.dispatch('getBlock', {
-        count: true
+        Count: true
       }).then(function (data) {
         self.blockCount = data.count
       })

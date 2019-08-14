@@ -37,18 +37,18 @@ export const getGod = ({
   commit,
   dispatch
 }, val) => {
-  let starName
+  let StarName
   if (typeof val === 'string') {
-    starName = val
+    StarName = val
   } else {
-    starName = val.starName
+    StarName = val.StarName
     // loading = val.loading
   }
-  if (state.godInfos[starName]) {
+  if (state.godInfos[StarName]) {
     return
   }
   return get('/apiGod', {
-      starName: starName
+      StarName: StarName
     })
     .then((data) => {
       commit('godInfos', data)
@@ -65,7 +65,7 @@ export const getPublicGods = ({
   }
   let gods = state.catGods[cat]
   if (gods) {
-    params.before = gods[gods.length - 1].createdAt
+    params.before = gods[gods.length - 1].CreatedAt
   }
   return axios.get('/apiGods', {
       params: params
@@ -89,16 +89,16 @@ export const unfollow = ({
   state,
   commit,
   dispatch
-}, starID) => {
-  return del('/api/followers/' + starID)
+}, StarID) => {
+  return del('/api/followers/' + StarID)
 }
 export const follow = ({
   state,
   commit,
   dispatch
-}, starID) => {
+}, StarID) => {
   let params = {
-    starID: starID
+    StarID: StarID
   }
   return post('/api/followers', params)
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :starName="starName" :show="!(followingGodCount===0)"/>
+    <Old :StarName="StarName" :show="!(followingGodCount===0)"/>
     <NotYetFollow v-show="followingGodCount===0 && isLogin"></NotYetFollow>
     <q-slide-transition v-show="!isLogin">
       <div v-show="showNoLogin" class="no-login">
@@ -25,11 +25,6 @@
 </template>
 
 <script>
-  import {
-    Scroll,
-    QSlideTransition,
-    QInfiniteScroll
-  } from 'quasar'
   import NotYetFollow from './NotYetFollow'
   import SpinnerBz from './SpinnerBz'
   var getCount = 10
@@ -39,11 +34,8 @@
   import isInList from 'bz-q-lib/src/functions/isInList'
   export default {
     directives: {
-      Scroll
     },
     components: {
-      QSlideTransition,
-      QInfiniteScroll,
       NotYetFollow,
       SpinnerBz,
       Old,
@@ -81,8 +73,8 @@
       followingGodCount() {
         return this.$store.state.followingGodCount
       },
-      starName() {
-        if (this.$route.params.starName) return this.$route.params.starName
+      StarName() {
+        if (this.$route.params.StarName) return this.$route.params.StarName
         return ''
       },
       newLoading() {
@@ -110,7 +102,7 @@
         switch (this.type) {
         case 'god':
           {
-            return this.$store.state.message.godsMessages[this.starName] || []
+            return this.$store.state.message.godsMessages[this.StarName] || []
           }
         case 'collect':
           {
@@ -139,10 +131,10 @@
       initLoadMessages: function () {
         if (!this.messages || this.messages.length === 0) {
           if (this.type === 'god') {
-            this.$store.commit('filterGodMessages', this.starName)
+            this.$store.commit('filterGodMessages', this.StarName)
             if (this.messages.length === 0) { // 没有过滤值时
               this.$store.dispatch('oldMessage', {
-                starName: this.starName
+                StarName: this.StarName
               })
             }
           } else {
@@ -217,15 +209,15 @@
       },
       newGodMessage: function () {
         return this.$store.dispatch('newMessage', {
-          starName: this.starName,
-          limit: getCount
+          StarName: this.StarName,
+          Limit: getCount
         })
       },
       newMessage: function (limit = null) {
         let after = null
         if (this.messages.length > 0) after = this.messages[this.messages.length - 1].OutCreatedAt
         return this.$store.dispatch('getNew', {
-          after: after
+          After: after
         })
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card v-if="star">
     <q-img :src="star.Avatar||'/statics/assets/avatar.svg'">
       <div class="absolute-bottom text-center">
         <div class="text-h6">{{star.Name}}</div>
@@ -45,17 +45,17 @@ export default {
     Follow
   },
   computed: {
-    starID() {
-      return this.$store.state.god.starNameIDS[this.starName]
+    StarID() {
+      return this.$store.state.god.StarNameIDS[this.StarName]
     },
     star() {
-      return this.$store.state.god.mapStars[this.starID]
+      return this.$store.state.god.mapStars[this.StarID]
     },
     starSocial() {
-      return this.$store.state.god.mapStarSocials[this.starID]
+      return this.$store.state.god.mapStarSocials[this.StarID]
     },
-    starName() {
-      // return this.$route.params.starName
+    StarName() {
+      // return this.$route.params.StarName
       return this.$store.state.god.nowStar.name
     },
     remark: function () {
@@ -87,12 +87,12 @@ export default {
       } else {
         this.disableEdit = true
         let modifyStarSocial = {
-          starID: this.starID
+          StarID: this.StarID
         }
         // 筛出做了修改的社交
         this.socialTypes.map((o) => {
           if (o.isEdit) {
-            modifyStarSocial[o.socialType] = this.starSocial[o.socialType].socialName
+            modifyStarSocial[o.socialType] = this.starSocial[o.socialType].SocialName
             o.isEdit = false
           }
         })

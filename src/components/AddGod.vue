@@ -17,7 +17,7 @@
       <div class="ui stackable grid">
         <div class="six wide column">
           <div class="god-avatar-bz">
-            <router-link :to="{ name: 'God', params: { starName: starName }}" class="header god-name-bz user-name-a">
+            <router-link :to="{ name: 'God', params: { StarName: StarName }}" class="header god-name-bz user-name-a">
               <img :src="proxy(avatar)" class="avatar-img-bz">
             </router-link>
           </div>
@@ -31,8 +31,8 @@
               <social-badge :loading="tumblrLoading" :info="tumblrInfo"></social-badge>
               <social-badge :loading="facebookLoading" :info="facebookInfo"></social-badge>
             </div>
-            <router-link :to="{ name: 'God', params: { starName: starName }}" class="header newgod-name user-name-a">
-              <h3>{{starName}}</h3>
+            <router-link :to="{ name: 'God', params: { StarName: StarName }}" class="header newgod-name user-name-a">
+              <h3>{{StarName}}</h3>
             </router-link>
             <a class="followers-number-bz">
               {{ $t("AddGod.follownumber") }}
@@ -59,7 +59,7 @@
     },
     data: function () {
       return {
-        starName: '',
+        StarName: '',
         inputName: '',
         stat: 'button',
         godInfo: {},
@@ -143,14 +143,14 @@
       },
       add: function () {
         this.init()
-        this.starName = this.inputName.trim()
+        this.StarName = this.inputName.trim()
         this.stat = 'adding'
         let self = this
         this.adding = true
-        // this.addGod(this.starName, this.$route.params.cat, this.startCheck)
+        // this.addGod(this.StarName, this.$route.params.cat, this.startCheck)
         this.$store.dispatch('postGod', {
-          name: this.starName,
-          cat: this.$route.params.cat
+          Name: this.StarName,
+          Cat: this.$route.params.cat
         }).then(function (data) {
           self.startCheck(data.godInfo)
         })
@@ -161,8 +161,8 @@
         this.twitterLoading = true
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'twitter'
+          Name: this.StarName,
+          Type: 'twitter'
         }).then(function (data) {
           self.twitterDone(data.info)
         })
@@ -175,8 +175,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'github'
+          Name: this.StarName,
+          Type: 'github'
         }).then(function (data) {
           self.githubDone(data.info)
         })
@@ -190,8 +190,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'instagram'
+          Name: this.StarName,
+          Type: 'instagram'
         }).then(function (data) {
           self.instagramDone(data.info)
         })
@@ -205,8 +205,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'tumblr'
+          Name: this.StarName,
+          Type: 'tumblr'
         }).then(function (data) {
           self.tumblrDone(data.info)
         })
@@ -220,8 +220,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'facebook'
+          Name: this.StarName,
+          Type: 'facebook'
         }).then(function (data) {
           self.facebookDone(data.info)
         })
@@ -249,7 +249,7 @@
       },
       setGodSocial: function (type) {
         if (this[type + '_info'].count !== -4) {
-          this.godInfo[type] = this.starName
+          this.godInfo[type] = this.StarName
           this.godInfo[type + '_user'] = this[type + '_info']
         }
       },

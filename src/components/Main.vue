@@ -25,21 +25,21 @@
     },
     computed: {
       godInfo() {
-        if (!this.starName) return
-        let godInfo = this.$store.state.godInfos[this.starName]
+        if (!this.StarName) return
+        let godInfo = this.$store.state.godInfos[this.StarName]
         if (godInfo) {
           return godInfo
         }
         return null
       },
-      starName() {
-        if (this.$route.params.starName) return this.$route.params.starName
+      StarName() {
+        if (this.$route.params.StarName) return this.$route.params.StarName
         return ''
       }
     },
     mounted() {
-      if (this.starName) {
-        this.$store.dispatch('getGod', this.starName)
+      if (this.StarName) {
+        this.$store.dispatch('getGod', this.StarName)
       }
       // $('body').visibility()
     },
@@ -48,8 +48,8 @@
     },
     methods: {
       getGodInfo: function () {
-        if (this.starName) {
-          this.$store.dispatch('getGod', this.starName)
+        if (this.StarName) {
+          this.$store.dispatch('getGod', this.StarName)
         }
       }
     },

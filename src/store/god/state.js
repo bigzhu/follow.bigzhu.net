@@ -2,7 +2,7 @@ export default {
   mapStarSocials: {}, // 所有网红社交帐号
   starSocials: [],
   mapStars: {}, // 所有网红, id 做 key
-  starNameIDS: {}, // 根据 star name 快速索引 id
+  StarNameIDS: {}, // 根据 star name 快速索引 id
   stars: [], // 所有网红
   godInfo: {},
   myCats: {}, // god 我的类别

@@ -16,7 +16,7 @@
 
       <q-item-section>
         <q-item-label>
-          <router-link :to="{ name: 'God', params: { starName: star.Name }}">
+          <router-link :to="{ name: 'God', params: { StarName: star.Name }}">
             {{star.Name}}
           </router-link>
         </q-item-label>

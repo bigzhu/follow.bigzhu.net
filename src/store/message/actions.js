@@ -11,21 +11,21 @@ export const getNew = ({
   commit,
   dispatch
 }, {
-  starName,
+  StarName,
   searchKey,
   after,
-  limit,
+  Limit,
   explore
 }) => {
   commit('newLoading', true)
   var params = {
     not: state.noTypes,
-    limit: limit,
+    Limit: Limit,
     after: after,
-    starName: starName,
+    StarName: StarName,
     searchKey: searchKey
   }
-  return axios.get('/api/messages/new', {
+  return axios.get('/api/messages/New', {
       params: params
     })
     .then(function (response) {
@@ -37,16 +37,16 @@ export const getNew = ({
         state.followingGodCount = data.followingGodCount
         if (searchKey && state.searchMessages.length === 0) {
           // oldMessage({ dispatch, state }, {searchKey: searchKey})
-        } else if (starName && state.godsMessages[starName].length === 0) { // 没数就查出old
-          // oldMessage({ dispatch, state }, {starName: starName})
+        } else if (StarName && state.godsMessages[StarName].length === 0) { // 没数就查出old
+          // oldMessage({ dispatch, state }, {StarName: StarName})
         } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
           // oldMessage({ dispatch, state }, {limit: 2})
         }
       } else {
         // state.followingGodCount = -1
-        if (starName) { // 查god的new
+        if (StarName) { // 查god的new
           commit('godNewMessages', {
-            starName: starName,
+            StarName: StarName,
             messages: data.messages
           })
         } else if (explore) { // explore
@@ -85,9 +85,9 @@ export const recordLastMessage = ({
       if (state.localUnreadMessageCount <= 20) {
         let after = null
         if (state.messages.length > 0) {
-          after = state.messages[state.messages.length - 1].createdAt
+          after = state.messages[state.messages.length - 1].CreatedAt
         }
-        dispatch('getNew', {after: after, limit: 50})
+        dispatch('getNew', {After: after, Limit: 50})
       }
       */
       return response.data
@@ -151,15 +151,15 @@ export const newMessage = ({
   commit,
   dispatch
 }, {
-  starName,
+  StarName,
   searchKey,
-  limit,
+  Limit,
   explore
 }) => {
-  let messages = null
+  let messages = []
   let after = null
-  if (starName) {
-    messages = state.godsMessages[starName]
+  if (StarName) {
+    messages = state.godsMessages[StarName]
   } else if (explore) {
     messages = state.exploreMessages
   } else if (searchKey) {
@@ -167,25 +167,25 @@ export const newMessage = ({
   } else {
     messages = state.messages
   }
-  if (messages.length > 0) {
-    after = messages[messages.length - 1].createdAt
+  if (messages && messages.length > 0) {
+    after = messages[messages.length - 1].CreatedAt
   } else { // 第一次, 找最近3天的
     let dt = new Date()
     dt.setDate(dt.getDate() - 2)
     after = dt.getTime()
-    if (starName) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
+    if (StarName) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
       after = null
     }
   }
-  if (!limit) {
-    limit = 10
+  if (!Limit) {
+    Limit = 10
   }
   return dispatch('getNew', {
-    starName: starName,
-    searchKey: searchKey,
-    after: after,
-    limit: limit,
-    explore: explore
+    StarName: StarName,
+    SearchKey: searchKey,
+    After: after,
+    Limit: Limit,
+    Explore: explore
   })
 }
 export const oldMessage = ({
@@ -193,13 +193,13 @@ export const oldMessage = ({
   commit,
   dispatch
 }, {
-  starName,
+  StarName,
   searchKey
 }) => {
   let messages = null
   let before = null
-  if (starName) {
-    messages = state.godsMessages[starName]
+  if (StarName) {
+    messages = state.godsMessages[StarName]
   } else if (searchKey) {
     messages = state.searchMessages
   } else {
@@ -213,9 +213,9 @@ export const oldMessage = ({
     before = (new Date()).toJSON()
   }
   return dispatch('getOld', {
-    starName: starName,
-    searchKey: searchKey,
-    before: before
+    StarName: StarName,
+    SearchKey: searchKey,
+    Before: before
   })
 }
 
@@ -224,25 +224,25 @@ export const getOld = ({
   commit,
   dispatch
 }, {
-  starName,
+  StarName,
   searchKey,
   before
 }) => {
   commit('oldLoading', true)
   var params = {
-    not: state.noTypes,
-    starName: starName,
-    searchKey: searchKey,
-    before: before
+    Not: state.noTypes,
+    StarName: StarName,
+    SearchKey: searchKey,
+    Before: before
   }
-  return axios.get('/api/messages/old', {
+  return axios.get('/api/messages/Old', {
       params: params
     })
     .then(function (response) {
       let messages = response.data
       if (messages.length === 0) { // 没有取到数
-        if (starName) {
-          // toastr.info(starName + '没有更多的历史消息可以看了')
+        if (StarName) {
+          // toastr.info(StarName + '没有更多的历史消息可以看了')
         } else if (searchKey) {
           // toastr.info('没有更多的历史了')
         } else {
@@ -259,9 +259,9 @@ export const getOld = ({
           }
         }
       } else {
-        if (starName) {
+        if (StarName) {
           commit('godOldMessages', {
-            starName: starName,
+            StarName: StarName,
             messages: messages
           })
         } else if (searchKey) { // search
@@ -284,8 +284,8 @@ export const getTheMessage = ({
   })
   // 在god message里再找找
   if (!message) {
-    for (var starName in state.godsMessages) {
-      message = _.find(state.godsMessages[starName], function (d) {
+    for (var StarName in state.godsMessages) {
+      message = _.find(state.godsMessages[StarName], function (d) {
         return d.id === parseInt(id, 10)
       })
     }
@@ -295,7 +295,7 @@ export const getTheMessage = ({
     return
   }
   let params = {
-    id: id
+    ID: id
   }
   return axios.get('/apiMessage', {
     params: params

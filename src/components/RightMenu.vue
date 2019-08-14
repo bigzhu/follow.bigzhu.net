@@ -32,12 +32,12 @@
         return this.$route.name
       },
       godInfo() {
-        let idStr = this.$store.state.god.starNameIDS[this.starName]
+        let idStr = this.$store.state.god.StarNameIDS[this.StarName]
         let star = this.$store.state.god.mapStars[idStr]
         return star
       },
-      starName() {
-        // return this.$route.params.starName
+      StarName() {
+        // return this.$route.params.StarName
         return this.$store.state.god.nowStar.name
       }
     },

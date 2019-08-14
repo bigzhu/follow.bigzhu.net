@@ -8,7 +8,7 @@
     <!-- ================分割=================== -->
     <div class="card-bz-group">
       <div v-for="bio in newTwo" class="card-bz">
-        <router-link :to="{ name: 'BioDetail', params: { starName: bio.key }}">
+        <router-link :to="{ name: 'BioDetail', params: { StarName: bio.key }}">
           <div class="border-shadow">
             <div class="bio" :style="'background-image:url(' + bio.titleImg + ');'">  
             </div>
@@ -28,7 +28,7 @@
       </div>
       <!-- ================分割=================== -->
       <div v-for="bio in others" class="card-bz">
-        <router-link :to="{ name: 'BioDetail', params: { starName: bio.key }}">
+        <router-link :to="{ name: 'BioDetail', params: { StarName: bio.key }}">
           <div class="border-shadow">
             <div class="bio" :style="'background-image:url(' + bio.titleImg + ');'">
             </div>

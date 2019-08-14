@@ -2,7 +2,7 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <q-item-section avatar>
-        <router-link :to="{ name: 'God', params: { starName: god.Name }}">
+        <router-link :to="{ name: 'God', params: { StarName: god.Name }}">
           <q-avatar size="140px">
             <img :src="god.Avatar||'/statics/assets/avatar.svg'">
           </q-avatar>
@@ -11,7 +11,7 @@
 
       <q-item-section>
         <q-item-label class="black-link-bz">
-          <router-link :to="{ name: 'God', params: { starName: god.Name }}">
+          <router-link :to="{ name: 'God', params: { StarName: god.Name }}">
             {{god.Name}}
           </router-link>
         </q-item-label>

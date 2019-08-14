@@ -80,8 +80,8 @@
           }
         }
       },
-      go: function (starName) {
-        this.$router.push({ name: 'God', params: { starName: starName } })
+      go: function (StarName) {
+        this.$router.push({ name: 'God', params: { StarName: StarName } })
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class='ui center aligned basic segment'>
-      <old :starName="starName" :searchKey="searchKey"></old>
+      <old :StarName="StarName" :searchKey="searchKey"></old>
     </div>
     <q-infinite-scroll :offset="1000" :handler="callBack">
       <message v-for="message in messages" :message='message' :key="message.id">
@@ -65,13 +65,13 @@
       },
       searcOld: function () {
         let self = this
-        this.$store.dispatch('oldMessage', { searchKey: self.searchKey, limit: 10 }).then(function (data) {
+        this.$store.dispatch('oldMessage', { SearchKey: self.searchKey, Limit: 10 }).then(function (data) {
           self.mark()
         })
       },
       searchNew: function () {
         let self = this
-        return this.$store.dispatch('newMessage', { searchKey: this.searchKey }).then(function (data) {
+        return this.$store.dispatch('newMessage', { SearchKey: this.searchKey }).then(function (data) {
           if (self.messages.length !== 0) {
             self.mark()
           }

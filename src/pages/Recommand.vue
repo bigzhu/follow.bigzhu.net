@@ -33,7 +33,7 @@
     computed: {
       orderedStars: function () {
         return _.orderBy(this.filterCat, 'followingAt', 'desc').filter((o) => {
-          return o.name !== this.starName
+          return o.name !== this.StarName
         })
       }
     },

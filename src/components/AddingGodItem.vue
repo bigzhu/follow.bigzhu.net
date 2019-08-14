@@ -4,11 +4,11 @@
     <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
     <q-item>
-      <router-link :to="{ name: 'God', params: { starName: god.name }}">
+      <router-link :to="{ name: 'God', params: { StarName: god.name }}">
         <q-item-section :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-label>
-        <router-link :to="{ name: 'God', params: { starName: god.name }}">
+        <router-link :to="{ name: 'God', params: { StarName: god.name }}">
           <q-item-section label>{{god.name}}</q-item-section>
         </router-link>
         <q-item-section sublabel>
@@ -46,10 +46,10 @@
 
   export default {
     mixins: [GodItem],
-    props: ['starName'],
+    props: ['StarName'],
     watch: {
-      'starName': function () {
-        if (this.starName === '') {
+      'StarName': function () {
+        if (this.StarName === '') {
           return
         }
         this.init()
@@ -91,7 +91,7 @@
         return ''
       },
       init: function () {
-        this.god.name = this.starName
+        this.god.name = this.StarName
       },
       showAddGodInput: function () {
         this.inputName = '' // 清空上次的输入
@@ -103,8 +103,8 @@
       getGodInfo: function () {
         this.loading = true
         this.$store.dispatch('postGod', {
-          name: this.starName,
-          cat: this.cat
+          Name: this.StarName,
+          Cat: this.cat
         }).then((godInfo) => {
           this.startCheck(godInfo)
         })
@@ -115,8 +115,8 @@
         this.twitterLoading = true
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'twitter'
+          Name: this.StarName,
+          Type: 'twitter'
         }).then(function (data) {
           self.twitterDone(data)
         })
@@ -129,8 +129,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'github'
+          Name: this.StarName,
+          Type: 'github'
         }).then(function (data) {
           self.githubDone(data)
         })
@@ -144,8 +144,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'instagram'
+          Name: this.StarName,
+          Type: 'instagram'
         }).then(function (data) {
           self.instagramDone(data)
         })
@@ -159,8 +159,8 @@
         }
         let self = this
         this.$store.dispatch('checkSocial', {
-          name: this.starName,
-          type: 'tumblr'
+          Name: this.StarName,
+          Type: 'tumblr'
         }).then(function (data) {
           self.tumblrDone(data)
         })

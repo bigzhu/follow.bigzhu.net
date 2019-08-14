@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <NotYetFollow v-show="orderedStars.length===0 && getDone && !cat"></NotYetFollow>
-    <AddingGodItem v-show="starName!==''" :starName="starName" @addDone="addDone">
+    <AddingGodItem v-show="StarName!==''" :StarName="StarName" @addDone="addDone">
     </AddingGodItem>
     <GodItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
     </GodItem>
@@ -54,7 +54,7 @@
       // 按照关注时间排序
       orderedStars: function () {
         return _.orderBy(this.filteredMy, 'followingAt', 'desc').filter((o) => {
-          return o.name !== this.starName
+          return o.name !== this.StarName
         })
       },
       filterCat() {
@@ -69,7 +69,7 @@
     data: function () {
       return {
         getDone: false,
-        starName: '',
+        StarName: '',
         key: ''
       }
     },
@@ -79,12 +79,12 @@
     },
     methods: {
       addDone() {
-        this.starName = ''
+        this.StarName = ''
         this.$store.dispatch('getCat', 1)
         // 有可能引起关注数或类型增加, 取 cat
       },
-      add: function (starName) {
-        this.starName = starName
+      add: function (StarName) {
+        this.StarName = StarName
       }
     }
   }

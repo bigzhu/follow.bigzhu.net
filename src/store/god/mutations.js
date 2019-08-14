@@ -18,7 +18,7 @@ export const setNowStar = (state, nowStar) => {
     state.nowStar.percentCenter = nowStar.percentCenter
   }
 }
-// 所有的社交类型重新组合存储 {starID: {'twitter':{}}} 的格式
+// 所有的社交类型重新组合存储 {StarID: {'twitter':{}}} 的格式
 // 为了便于检索和对应
 export const starSocials = (state, starSocials) => {
   _.map(starSocials, (o) => {
@@ -35,7 +35,7 @@ export const starSocials = (state, starSocials) => {
 // 和上面不一样, 这里铺平
 export const stars = (state, stars) => {
   _.map(stars, (o) => {
-    state.starNameIDS[o.Name] = o.ID.toString() // 根据 name 快速索引 id
+    state.StarNameIDS[o.Name] = o.ID.toString() // 根据 name 快速索引 id
     state.mapStars[o.ID.toString()] = o
   })
   state.stars = stars
