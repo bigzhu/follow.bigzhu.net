@@ -179,7 +179,6 @@
         }
       },
       loadMore: function (index, done) {
-        console.log('loadMore')
         if (this.oldLoading) {
           done()
           return

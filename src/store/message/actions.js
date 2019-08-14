@@ -13,7 +13,7 @@ export const getNew = ({
 }, {
   StarName,
   searchKey,
-  after,
+  After,
   Limit,
   explore
 }) => {
@@ -21,7 +21,7 @@ export const getNew = ({
   var params = {
     not: state.noTypes,
     Limit: Limit,
-    after: after,
+    After: After,
     StarName: StarName,
     searchKey: searchKey
   }
@@ -31,35 +31,7 @@ export const getNew = ({
     .then(function (response) {
       let data = response.data
       commit('newMessages', data)
-      /*
-      commit('unreadMessageCount', data.unreadMessageCount)
-      if (data.messages.length === 0) { // 没有取到数
-        state.followingGodCount = data.followingGodCount
-        if (searchKey && state.searchMessages.length === 0) {
-          // oldMessage({ dispatch, state }, {searchKey: searchKey})
-        } else if (StarName && state.godsMessages[StarName].length === 0) { // 没数就查出old
-          // oldMessage({ dispatch, state }, {StarName: StarName})
-        } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
-          // oldMessage({ dispatch, state }, {limit: 2})
-        }
-      } else {
-        // state.followingGodCount = -1
-        if (StarName) { // 查god的new
-          commit('godNewMessages', {
-            StarName: StarName,
-            messages: data.messages
-          })
-        } else if (explore) { // explore
-          commit('setExploreNewMessages', data.messages)
-        } else if (searchKey) { // search
-          commit('setNewSearchMessages', data.messages)
-        } else { // main
-          commit('newMessages', data.messages)
-        }
-      }
-      */
       commit('newLoading', false)
-      // commit('reflashTimeLen')
       return data
     })
     .catch(function (error) {
@@ -79,17 +51,6 @@ export const recordLastMessage = ({
     .then(function (response) {
       state.unreadMessageCount = response.data
       commit('lastTime', parseInt(time, 10))
-      // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
-      // 如果<20了，就预加载一些
-      /*
-      if (state.localUnreadMessageCount <= 20) {
-        let after = null
-        if (state.messages.length > 0) {
-          after = state.messages[state.messages.length - 1].CreatedAt
-        }
-        dispatch('getNew', {After: after, Limit: 50})
-      }
-      */
       return response.data
     })
     .catch(function (error) {
@@ -157,7 +118,7 @@ export const newMessage = ({
   explore
 }) => {
   let messages = []
-  let after = null
+  let After = null
   if (StarName) {
     messages = state.godsMessages[StarName]
   } else if (explore) {
@@ -168,13 +129,13 @@ export const newMessage = ({
     messages = state.messages
   }
   if (messages && messages.length > 0) {
-    after = messages[messages.length - 1].CreatedAt
+    After = messages[messages.length - 1].CreatedAt
   } else { // 第一次, 找最近3天的
     let dt = new Date()
     dt.setDate(dt.getDate() - 2)
-    after = dt.getTime()
+    After = dt.getTime()
     if (StarName) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
-      after = null
+      After = null
     }
   }
   if (!Limit) {
@@ -183,7 +144,7 @@ export const newMessage = ({
   return dispatch('getNew', {
     StarName: StarName,
     SearchKey: searchKey,
-    After: after,
+    After: After,
     Limit: Limit,
     Explore: explore
   })
@@ -208,8 +169,6 @@ export const oldMessage = ({
   if (messages.length > 0) {
     before = messages[0].OutCreatedAt
   } else { // 第一次, 找当前以前的
-    // before = new Date().getTime()
-    // before = (new Date()).toISOString()
     before = (new Date()).toJSON()
   }
   return dispatch('getOld', {
@@ -225,15 +184,15 @@ export const getOld = ({
   dispatch
 }, {
   StarName,
-  searchKey,
-  before
+  SearchKey,
+  Before
 }) => {
   commit('oldLoading', true)
   var params = {
     Not: state.noTypes,
     StarName: StarName,
-    SearchKey: searchKey,
-    Before: before
+    SearchKey: SearchKey,
+    Before: Before
   }
   return axios.get('/api/messages/Old', {
       params: params
@@ -243,7 +202,7 @@ export const getOld = ({
       if (messages.length === 0) { // 没有取到数
         if (StarName) {
           // toastr.info(StarName + '没有更多的历史消息可以看了')
-        } else if (searchKey) {
+        } else if (SearchKey) {
           // toastr.info('没有更多的历史了')
         } else {
           if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
@@ -264,7 +223,7 @@ export const getOld = ({
             StarName: StarName,
             messages: messages
           })
-        } else if (searchKey) { // search
+        } else if (SearchKey) { // search
           commit('SET_OLD_SEARCH_MESSAGES', messages)
         } else { // main
           commit('oldMessages', messages)

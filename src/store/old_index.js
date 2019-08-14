@@ -243,13 +243,13 @@ export const actions = {
     StarName,
     searchKey,
     after,
-    limit,
+    Limit,
     explore
   }) {
     commit('newLoading', true)
     var params = {
       not: state.noTypes,
-      limit: limit,
+      Limit: Limit,
       after: after,
       StarName: StarName,
       searchKey: searchKey
@@ -266,8 +266,8 @@ export const actions = {
             // oldMessage({ dispatch, state }, {searchKey: searchKey})
           } else if (StarName && state.godsMessages[StarName].length === 0) { // 没数就查出old
             // oldMessage({ dispatch, state }, {StarName: StarName})
-          } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
-            // oldMessage({ dispatch, state }, {limit: 2})
+          } else if (state.messages.length === 0 && Limit === 5) { // 只在prenew的时候没有query old 一次就可以了
+            // oldMessage({ dispatch, state }, {Limit: 2})
           }
         } else {
           // state.followingGodCount = -1

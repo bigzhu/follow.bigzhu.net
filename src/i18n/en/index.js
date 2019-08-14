@@ -25,7 +25,8 @@ export default {
   '使用教程': 'Guide',
   '跟踪': 'no follow',
   '演变': 'Change',
-  '注册人数': 'Users'
+  '注册人数': 'Users',
+  '编辑': 'Edit'
   /*
    '添加要跟踪的新目标':'Add what you want to follow',
      example: '帐号名, 比如 bigzhu':'ID, for example: bigzhu',
@@ -37,7 +38,6 @@ export default {
      topdescription: '他们是大人物，他们是小人物，他们在世界各地，演绎着比电影还精彩的人生。',:'Follow your dream'
      dowmtitle: '我们的故事',
      downdescription: '从follow.center上关注我们':'Follow us from follow.center'
-     edit: '编辑':'Edit',
      save: '保存':'Saved'
      public: '公开':'Public',
      biography: '传记':'Biography',
