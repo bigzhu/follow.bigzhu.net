@@ -13,7 +13,7 @@
         <router-link :to="{ name: 'God', params: { starName: god.Name }}">
           <q-item-label>{{god.Name}}</q-item-label>
         </router-link>
-        <q-item-label caption>{{god.FollowingCount||1}} {{ $t("人关注") }}</q-item-label>
+        <q-item-label caption>{{god.Cat}} {{god.FollowingCount||1}} {{ $t("人关注") }}</q-item-label>
       </q-item-section>
     </q-item>
 

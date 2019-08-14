@@ -59,7 +59,7 @@
       },
       filterCat() {
         return this.stars.filter((o) => {
-          return o.cat === this.cat || !this.cat
+          return o.Cat === this.cat || !this.cat
         })
       },
       stars() {

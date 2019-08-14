@@ -2,10 +2,10 @@
   <q-list class="list">
     <q-item clickable v-ripple v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': routeName, params: {'cat': cat}}">
       <q-item-section avatar>
-        <q-icon color="" :name="getIcon(cat)" />
+        <q-icon :color="cat==='NSFW'?'red':''" :name="getIcon(cat)" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>{{cat}}</q-item-label>
+        <q-item-label>{{cat===''?'all':cat}}</q-item-label>
         <q-item-label caption>{{getSublabel(cat)}}</q-item-label>
       </q-item-section>
     </q-item>
@@ -70,7 +70,7 @@
             icon: 'fa fa-link'
           },
           {
-            name: '',
+            name: 'Mishmash',
             icon: 'fa fa-question'
           },
           {
@@ -91,7 +91,7 @@
           },
           {
             name: 'Rich',
-            icon: 'attach_money'
+            icon: 'fa fa-dollar-sign'
           },
           {
             name: 'World',
@@ -159,7 +159,7 @@
           },
           {
             name: 'Programmer',
-            icon: 'code'
+            icon: 'fa fa-code'
           },
           {
             name: '明星',

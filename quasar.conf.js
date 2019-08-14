@@ -64,7 +64,7 @@ module.exports = function (ctx) {
 
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
+      vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -85,7 +85,7 @@ module.exports = function (ctx) {
     devServer: {
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:3003',
+          target: 'http://123.176.102.187:3005',
           changeOrigin: true
         },
         '/medias': {
