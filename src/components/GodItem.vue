@@ -3,23 +3,24 @@
     <q-item>
       <q-item-section avatar>
         <router-link :to="{ name: 'God', params: { starName: god.Name }}">
-          <q-avatar>
+          <q-avatar size="140px">
             <img :src="god.Avatar||'/statics/assets/avatar.svg'">
           </q-avatar>
         </router-link>
       </q-item-section>
 
       <q-item-section>
-        <router-link :to="{ name: 'God', params: { starName: god.Name }}">
-          <q-item-label>{{god.Name}}</q-item-label>
-        </router-link>
-        <q-item-label caption>{{god.Cat}} {{god.FollowingCount||1}} {{ $t("人关注") }}</q-item-label>
+        <q-item-label class="black-link-bz">
+          <router-link :to="{ name: 'God', params: { starName: god.Name }}">
+            {{god.Name}}
+          </router-link>
+        </q-item-label>
+        <q-item-label caption>{{god.Cat}} &nbsp;&nbsp;&nbsp;&nbsp;{{god.FollowingCount||1}} {{ $t("人关注") }}</q-item-label>
+        <q-item-label caption v-for="social in Object.keys(starSocial)" :key="social" v-show="starSocial[social].SocialName!=''">
+          <SocialBadge @click.native="setNow(starSocial[social])" :type="starSocial[social].Social" :info="starSocial[social]" />
+        </q-item-label>
       </q-item-section>
     </q-item>
-
-    <q-card-section>
-      <social-badge v-for="social in Object.keys(starSocial)" :key="social" v-show="starSocial[social].SocialName!=''" @click.native="setNow(starSocial[social])" :type="starSocial[social].Social" :info="starSocial[social]" />
-    </q-card-section>
     <q-card-section class="green-bz">
       <p v-html="bio"></p>
       <GodRemark v-model="god.Remark" :godID="god.ID" class="green-bz remark"></GodRemark>
@@ -93,6 +94,9 @@
 </script>
 
 <style lang="stylus" scoped>
+  .black-link-bz
+    a
+      color black
   .q-card
     max-width 20.9rem
     @media (max-width: 920px)

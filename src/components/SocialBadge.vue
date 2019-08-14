@@ -1,7 +1,8 @@
 <template>
   <a href='javascript:;'>
     <q-icon :name="theClass" />
-    <BzCountUp v-show="count!=-4" :end="count" :duration="2.5" :options="{useEasing : true,
+      &nbsp;
+    <BzCountUp v-show="count!=-4" :end="count" :options="{useEasing : true,
       useGrouping : true,
       separator : ',',
       decimal : '.',
@@ -11,10 +12,6 @@
 </template>
 
 <script>
-  import 'quasar-extras/fontawesome'
-  import {
-    QIcon
-  } from 'quasar'
   import BzCountUp from 'bz-q-lib/src/components/BzCountUp'
   export default {
     props: {
@@ -30,12 +27,11 @@
       }
     },
     components: {
-      QIcon,
       BzCountUp
     },
     computed: {
       count: function () {
-        return this.info.followingCount || 0
+        return this.info.FollowedCount || 0
       },
       href: function () {
         if (this.type === 'twitter') {
