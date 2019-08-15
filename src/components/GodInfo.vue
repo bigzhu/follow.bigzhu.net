@@ -10,7 +10,7 @@
     </q-card-section>
     <q-card-section>
       <GodRemark v-model="remark" :godID="star.ID" class="green-bz remark"></GodRemark>
-      <q-input v-for="s in socialTypes" :key="s.socialType" v-model="starSocial[s.socialType].SocialName" @input="s.isEdit=true" :disable="disableEdit">
+      <q-input v-for="s in socialTypes" v-show="starSocial[s.socialType].SocialName!=''||!disableEdit" :key="s.socialType" v-model="starSocial[s.socialType].SocialName" @input="s.isEdit=true" :disable="disableEdit">
         <template v-slot:prepend>
           <q-icon :name="'fab fa-'+s.socialType" />
           </template>
