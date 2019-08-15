@@ -10,7 +10,7 @@
     import Top from '../components/Top'
     export default {
         mounted() {
-            this.$store.commit('setNowStarForce', this.star.Name)
+            this.$store.commit('setNowStarForce', this.$route.params.StarName)
         },
         components: {
             Top,
