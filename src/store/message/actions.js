@@ -239,13 +239,13 @@ export const getTheMessage = ({
   dispatch
 }, id) => {
   let message = _.find(state.messages, function (d) {
-    return d.id === parseInt(id, 10)
+    return d.ID === parseInt(id, 10)
   })
   // 在god message里再找找
   if (!message) {
-    for (var StarName in state.godsMessages) {
+    for (let StarName in state.godsMessages) {
       message = _.find(state.godsMessages[StarName], function (d) {
-        return d.id === parseInt(id, 10)
+        return d.ID === parseInt(id, 10)
       })
     }
   }
@@ -253,12 +253,7 @@ export const getTheMessage = ({
     commit('theMessage', message)
     return
   }
-  let params = {
-    ID: id
-  }
-  return axios.get('/apiMessage', {
-    params: params
-  }).then((response) => {
+  return axios.get('/api/message/' + id.toString()).then((response) => {
     commit('theMessage', response.data)
     return response.data
   })
