@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Old :StarName="StarName" :show="!(followingStarCount===0)"/>
+    <Old :StarName="starName" :show="!(followingStarCount===0)"/>
     <NotYetFollow v-show="followingStarCount===0 && isLogin"></NotYetFollow>
     <q-slide-transition v-show="!isLogin">
       <div v-show="showNoLogin" class="no-login">
@@ -49,6 +49,10 @@
             type: {
                 type: String, // main god collect search
                 default: 'main'
+            },
+            starName: {
+                type: String,
+                default: ''
             }
         },
         events: {
@@ -80,10 +84,6 @@
             followingStarCount() {
                 return this.$store.state.followingStarCount
             },
-            StarName() {
-                if (this.$route.params.StarName) return this.$route.params.StarName
-                return ''
-            },
             newLoading() {
                 return this.$store.state.message.newLoading
             },
@@ -108,7 +108,7 @@
             messages() {
                 switch (this.type) {
                     case 'god': {
-                        return this.$store.state.message.godsMessages[this.StarName] || []
+                        return this.$store.state.message.godsMessages[this.starName] || []
                     }
                     case 'collect': {
                         return this.$store.state.message.collectMessages
@@ -135,10 +135,10 @@
             initLoadMessages: function () {
                 if (!this.messages || this.messages.length === 0) {
                     if (this.type === 'god') {
-                        this.$store.commit('filterStarMessages', this.StarName)
+                        this.$store.commit('filterStarMessages', this.starName)
                         if (this.messages.length === 0) { // 没有过滤值时
                             this.$store.dispatch('oldMessage', {
-                                StarName: this.StarName
+                                StarName: this.starName
                             })
                         }
                     } else {
@@ -209,7 +209,7 @@
             },
             newStarMessage: function () {
                 return this.$store.dispatch('newMessage', {
-                    StarName: this.StarName,
+                    StarName: this.starName,
                     Limit: getCount
                 })
             },
