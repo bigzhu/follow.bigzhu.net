@@ -156,7 +156,7 @@
         })
       },
       startCheck: function (godInfo) {
-        this.setGodInfo(godInfo)
+        this.setStarInfo(godInfo)
         this.adding = false
         this.twitterLoading = true
         let self = this
@@ -261,7 +261,7 @@
         this.setGodSocial('facebook')
         this.godInfo.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
-      setGodInfo: function (godInfo) {
+      setStarInfo: function (godInfo) {
         this.godInfo = godInfo
       },
       setInfo: function (info) {

@@ -19,7 +19,7 @@ export default {
     downtitle: 'Our story',
     downdescription: 'Follow us from follow.center'
   },
-  GodInfo: {
+  StarInfo: {
     edit: 'Edit',
     save: 'Saved'
   },

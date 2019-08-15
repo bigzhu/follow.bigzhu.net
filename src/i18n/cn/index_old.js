@@ -18,7 +18,7 @@
      dowmtitle: '我们的故事',
      downdescription: '从follow.center上关注我们'
    },
-   GodInfo: {
+   StarInfo: {
      edit: '编辑',
      save: '保存'
    },

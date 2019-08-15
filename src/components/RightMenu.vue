@@ -3,7 +3,7 @@
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
     <Cat v-if="name==='Recommand'" routeName="Recommand"></Cat>
     <Cat v-if="name==='Following'" routeName="Following" :justMy="1"></Cat>
-    <GodInfo class='god-info' v-if="name!='Recommand'" />
+    <StarInfo class='god-info' v-if="name!='Recommand'" />
     <!--
     <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])" />
       <br>
@@ -15,7 +15,7 @@
 
 <script>
   import isInList from 'bz-q-lib/src/functions/isInList.js'
-  import GodInfo from './GodInfo'
+  import StarInfo from './StarInfo'
   import Cat from './Cat'
   import RightInfo from './RightInfo'
   // import MessageConf from './MessageConf'
@@ -24,7 +24,7 @@
     components: {
       // MessageConf,
       Cat,
-      GodInfo,
+      StarInfo,
       RightInfo
     },
     computed: {

@@ -53,7 +53,7 @@
           return
         }
         this.init()
-        this.getGodInfo()
+        this.getStarInfo()
       }
     },
     components: {
@@ -100,7 +100,7 @@
         // 先不取了，连续添加很少见
         // this.queryNotMyGods(this.$route.params.cat)
       },
-      getGodInfo: function () {
+      getStarInfo: function () {
         this.loading = true
         this.$store.dispatch('postGod', {
           Name: this.StarName,
@@ -110,7 +110,7 @@
         })
       },
       startCheck: function (godInfo) {
-        this.setGodInfo(godInfo)
+        this.setStarInfo(godInfo)
         this.adding = false
         this.twitterLoading = true
         let self = this
@@ -194,7 +194,7 @@
         this.$emit('addDone', this.god)
         this.init()
       },
-      setGodInfo: function (god) {
+      setStarInfo: function (god) {
         this.god = god
       },
       setInfo: function (info, type) {

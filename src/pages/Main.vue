@@ -26,13 +26,13 @@
       }
     },
     mounted() {
-      this.getGodInfo()
+      this.getStarInfo()
     },
     watch: {
-      '$route': 'getGodInfo'
+      '$route': 'getStarInfo'
     },
     methods: {
-      getGodInfo: function () {
+      getStarInfo: function () {
         if (this.StarName) {
           this.$store.dispatch('getGod', this.StarName)
         }

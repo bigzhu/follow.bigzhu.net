@@ -10,14 +10,14 @@
   import Messages from './Messages'
   import Top from './Top'
   import UnRead from './UnRead'
-  // import GodInfo from './GodInfo'
+  // import StarInfo from './StarInfo'
   // import RightInfo from './RightInfo'
   export default {
     components: {
       UnRead,
       Top,
       Messages
-      // GodInfo,
+      // StarInfo,
       // RightInfo
     },
     data() {
@@ -44,10 +44,10 @@
       // $('body').visibility()
     },
     watch: {
-      '$route': 'getGodInfo'
+      '$route': 'getStarInfo'
     },
     methods: {
-      getGodInfo: function () {
+      getStarInfo: function () {
         if (this.StarName) {
           this.$store.dispatch('getGod', this.StarName)
         }
