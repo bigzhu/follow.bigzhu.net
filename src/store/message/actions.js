@@ -12,18 +12,18 @@ export const getNew = ({
   dispatch
 }, {
   StarName,
-  searchKey,
+  SearchKey,
   After,
   Limit,
   explore
 }) => {
   commit('newLoading', true)
-  var params = {
+  let params = {
     not: state.noTypes,
     Limit: Limit,
     After: After,
     StarName: StarName,
-    searchKey: searchKey
+    SearchKey: SearchKey
   }
   return axios.get('/api/messages/New', {
       params: params
@@ -113,7 +113,7 @@ export const newMessage = ({
   dispatch
 }, {
   StarName,
-  searchKey,
+  SearchKey,
   Limit,
   explore
 }) => {
@@ -123,13 +123,13 @@ export const newMessage = ({
     messages = state.godsMessages[StarName]
   } else if (explore) {
     messages = state.exploreMessages
-  } else if (searchKey) {
+  } else if (SearchKey) {
     messages = state.searchMessages
   } else {
     messages = state.messages
   }
   if (messages && messages.length > 0) {
-    After = messages[messages.length - 1].CreatedAt
+    After = messages[messages.length - 1].OutCreatedAt
   } else { // 第一次, 找最近3天的
     let dt = new Date()
     dt.setDate(dt.getDate() - 2)
@@ -143,7 +143,7 @@ export const newMessage = ({
   }
   return dispatch('getNew', {
     StarName: StarName,
-    SearchKey: searchKey,
+    SearchKey: SearchKey,
     After: After,
     Limit: Limit,
     Explore: explore

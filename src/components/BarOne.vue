@@ -39,7 +39,7 @@
                 }
             },
             isLogin: function () {
-                return this.$store.state.lib.oauthInfo.name
+                return this.$store.state.lib.oauthInfo.Name
             }
         },
         mounted: function () {

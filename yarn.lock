@@ -1971,7 +1971,7 @@ bytes@3.1.0:
 
 "bz-q-lib@https://github.com/bigzhu/bz-q-lib":
   version "0.0.4"
-  resolved "https://github.com/bigzhu/bz-q-lib#31db8ce5e1c63e2c8f861dfac6bdd73b5015efa4"
+  resolved "https://github.com/bigzhu/bz-q-lib#a372abd2855d1af7f7c27c1849fab8ce8ac72adc"
   dependencies:
     "@quasar/extras" "^1.0.0"
     axios "^0.18.1"
