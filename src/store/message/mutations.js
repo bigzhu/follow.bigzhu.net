@@ -12,11 +12,13 @@ function initStarMessage (state, StarName) {
 }
 
 export const newMessages = (state, messages) => {
-  let mergeMessages = state.messages.concat(messages)
+  state.messages = state.messages.concat(messages)
+  /*
   let uniqMessages = _.uniqBy(mergeMessages, function (d) {
     return d.ID
   })
   state.messages = uniqMessages
+   */
 }
 export const lastTime = (state, time) => {
   state.lastTime = time

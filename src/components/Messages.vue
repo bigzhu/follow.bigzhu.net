@@ -15,9 +15,8 @@
     </q-slide-transition>
 
     <q-infinite-scroll v-scroll="onScroll" :offset="2000" @load="loadMore" :style="`padding-top:${paddingTop}px;`">
-      <message ref="messages" v-for='message in noTypesMessages' :message='message' :key="message.id">
-      </message>
-      <div v-show="followingStarCount>0 && unreadMessageCount===0 && type==='main'" class="center-container-bz">
+      <Message ref="messages" v-for='message in noTypesMessages' :message='message' :key="message.id"/>
+      <div v-show="followingStarCount>0 && unreadMessageCount===0 && type==='main'">
         <p>{{ $t('没有更多内容了, 看看') }}
           <router-link :to="{'name': 'Recommand'}">{{ $t('寻他') }}&gt;</router-link>
         </p>
@@ -147,6 +146,7 @@
                 }
             },
             onScroll: function (position) {
+                /*
                 if (this.$q.platform.is.desktop || this.type !== 'main') return // 桌面不用考虑性能
                 let hideP = this.$store.state.main.hideParams
                 let overTop = position - 500
@@ -170,6 +170,7 @@
                         // console.log('show message')
                     }
                 }
+                 */
             },
             checkShowNoLogin: function () {
                 if (!this.isLogin) {
