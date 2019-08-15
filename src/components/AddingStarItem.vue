@@ -4,11 +4,11 @@
     <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
     <q-item>
-      <router-link :to="{ name: 'God', params: { StarName: god.name }}">
+      <router-link :to="{ name: 'Star', params: { StarName: god.name }}">
         <q-item-section :avatar="god.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-label>
-        <router-link :to="{ name: 'God', params: { StarName: god.name }}">
+        <router-link :to="{ name: 'Star', params: { StarName: god.name }}">
           <q-item-section label>{{god.name}}</q-item-section>
         </router-link>
         <q-item-section sublabel>
@@ -29,7 +29,7 @@
 
     <q-card class="card-content green-bz">
       <p v-html="bio"></p>
-      <GodRemark v-model="god.remark" :godID="god.id" class="card-content green-bz remark"></GodRemark>
+      <StarRemark v-model="god.remark" :godID="god.id" class="card-content green-bz remark"></StarRemark>
     </q-card>
     <q-card-actions align="end">
     </q-card-actions>
@@ -41,11 +41,11 @@
     QIcon,
     QSpinnerPuff
   } from 'quasar'
-  import GodItem from './GodItem'
+  import StarItem from './StarItem'
   import SocialBadge from './SocialBadge'
 
   export default {
-    mixins: [GodItem],
+    mixins: [StarItem],
     props: ['StarName'],
     watch: {
       'StarName': function () {
@@ -93,16 +93,16 @@
       init: function () {
         this.god.name = this.StarName
       },
-      showAddGodInput: function () {
+      showAddStarInput: function () {
         this.inputName = '' // 清空上次的输入
         this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
-        // this.queryNotMyGods(this.$route.params.cat)
+        // this.queryNotMyStars(this.$route.params.cat)
       },
       getStarInfo: function () {
         this.loading = true
-        this.$store.dispatch('postGod', {
+        this.$store.dispatch('postStar', {
           Name: this.StarName,
           Cat: this.cat
         }).then((godInfo) => {
@@ -187,7 +187,7 @@
         // Object.assign(this.godInfo, this.god)
         this.god.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
         this.god.following = 1
-        this.$store.commit('unshiftMyGod', {
+        this.$store.commit('unshiftMyStar', {
           cat: this.cat,
           god: this.god
         })

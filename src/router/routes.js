@@ -20,10 +20,10 @@ import importByName from 'bz-q-lib/src/functions/importByName'
    }, // Default
 
    {
-     path: '/God/:StarName',
-     name: 'God',
+     path: '/Star/:StarName',
+     name: 'Star',
      component: () =>
-       import('pages/God')
+       import('pages/Star')
    },
    {
      path: '/Recommand/:cat*',

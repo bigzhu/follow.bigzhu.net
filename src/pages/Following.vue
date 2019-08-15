@@ -1,11 +1,11 @@
 <template>
   <q-page padding>
     <NotYetFollow v-show="orderedStars.length===0 && getDone && !cat"></NotYetFollow>
-    <AddingGodItem v-show="StarName!==''" :StarName="StarName" @addDone="addDone">
-    </AddingGodItem>
-    <GodItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
-    </GodItem>
-    <AddGodButton v-on:add="add"></AddGodButton>
+    <AddingStarItem v-show="StarName!==''" :StarName="StarName" @addDone="addDone">
+    </AddingStarItem>
+    <StarItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
+    </StarItem>
+    <AddStarButton v-on:add="add"></AddStarButton>
     <Top></Top>
   </q-page>
 </template>
@@ -13,10 +13,10 @@
 <script>
   import Top from '../components/Top'
   import NotYetFollow from '../components/NotYetFollow'
-  import AddingGodItem from '../components/AddingGodItem'
-  import AddGodButton from '../components/AddGodButton'
+  import AddingStarItem from '../components/AddingStarItem'
+  import AddStarButton from '../components/AddStarButton'
   import _ from 'lodash'
-  import GodItem from '../components/GodItem'
+  import StarItem from '../components/StarItem'
   export default {
     events: {
       'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
@@ -34,9 +34,9 @@
     components: {
       Top,
       NotYetFollow,
-      AddingGodItem,
-      AddGodButton,
-      GodItem
+      AddingStarItem,
+      AddStarButton,
+      StarItem
     },
     computed: {
       loading() {

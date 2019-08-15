@@ -24,13 +24,13 @@
 
 <script>
   import Top from './Top'
-  import GodItem from './GodItem'
+  import StarItem from './StarItem'
   import _ from 'lodash'
   import RightInfo from './RightInfo'
   export default {
     components: {
       Top,
-      GodItem,
+      StarItem,
       RightInfo
     },
     data () {
@@ -40,7 +40,7 @@
     },
     props: {},
     mounted () {
-      this.$store.dispatch('getGod', this.StarName)
+      this.$store.dispatch('getStar', this.StarName)
       this.getBio()
     },
     computed: {

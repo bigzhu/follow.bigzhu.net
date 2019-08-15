@@ -32,7 +32,7 @@ export const getStars = ({
   })
 }
 
-export const getGod = ({
+export const getStar = ({
   state,
   commit,
   dispatch
@@ -47,7 +47,7 @@ export const getGod = ({
   if (state.godInfos[StarName]) {
     return
   }
-  return get('/apiGod', {
+  return get('/apiStar', {
       StarName: StarName
     })
     .then((data) => {
@@ -55,7 +55,7 @@ export const getGod = ({
       return data
     })
 }
-export const getPublicGods = ({
+export const getPublicStars = ({
   state,
   commit,
   dispatch
@@ -63,15 +63,15 @@ export const getPublicGods = ({
   let params = {
     cat: cat
   }
-  let gods = state.catGods[cat]
+  let gods = state.catStars[cat]
   if (gods) {
     params.before = gods[gods.length - 1].CreatedAt
   }
-  return axios.get('/apiGods', {
+  return axios.get('/apiStars', {
       params: params
     })
     .then(function(response) {
-      commit('catGods', {
+      commit('catStars', {
         cat: cat,
         gods: response.data
       })
@@ -102,7 +102,7 @@ export const follow = ({
   }
   return post('/api/followers', params)
 }
-export const postGod = ({
+export const postStar = ({
   state,
   commit,
   dispatch

@@ -5,7 +5,7 @@
         <div class="sixteen wide column ui card message-bz nobody-bz">
           <div class="nobody-image-bz">
             <img src="../statics/assets/nobody.svg">
-            <p>{{ $t("GodBlocked.tips") }}</p>
+            <p>{{ $t("StarBlocked.tips") }}</p>
           </div>
         </div>
         <!-- <div class="four wide column top-margin">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import GodItem from './GodItem'
+  import StarItem from './StarItem'
   export default {
     events: {
       'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
@@ -30,17 +30,17 @@
     watch: {
       '$route.params': {
         handler: function () {
-          if (this.myGods.length === 0) {
+          if (this.myStars.length === 0) {
             this.loading = true
           }
-          this.getGods()
+          this.getStars()
         },
         deep: true
       }
     },
     props: [],
     components: {
-      GodItem
+      StarItem
     },
     computed: {},
     data: function () {
@@ -49,12 +49,12 @@
       }
     },
     mounted() {
-      this.getGods()
+      this.getStars()
     },
     methods: {
-      getGods: function () {
+      getStars: function () {
         let self = this
-        this.$store.dispatch('getGods', { cat: this.$route.params.cat, blocked: true }).then(function (data) {
+        this.$store.dispatch('getStars', { cat: this.$route.params.cat, blocked: true }).then(function (data) {
           self.gods = data.gods
         })
       }

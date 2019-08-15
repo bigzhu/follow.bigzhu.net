@@ -34,7 +34,7 @@
     methods: {
       getStarInfo: function () {
         if (this.StarName) {
-          this.$store.dispatch('getGod', this.StarName)
+          this.$store.dispatch('getStar', this.StarName)
         }
       }
     }

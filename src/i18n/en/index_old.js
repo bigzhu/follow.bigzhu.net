@@ -1,6 +1,6 @@
 
 export default {
-  AddGod: {
+  AddStar: {
     addnewgod: 'Add what you want to follow',
     example: 'ID, for example: bigzhu',
     add: 'Add',
@@ -23,13 +23,13 @@ export default {
     edit: 'Edit',
     save: 'Saved'
   },
-  GodItem: {
+  StarItem: {
     follownumber: 'Followers',
     public: 'Public',
     biography: 'Biography',
     block: 'blocking this account'
   },
-  GodRemark: {
+  StarRemark: {
     save: 'Saved'
   },
   Login: {
@@ -50,7 +50,7 @@ export default {
     wanttofollow: 'What to follow',
     newmessage: 'New message'
   },
-  MyGods: {
+  MyStars: {
     search: 'Search'
   },
   Old: {
@@ -105,7 +105,7 @@ export default {
     reset: 'Reset your Anki',
     blockreminder: "You don't want to see this kind of message"
   },
-  GodBlocked: {
+  StarBlocked: {
     tips: 'Nobody is been blocked'
   }
 }

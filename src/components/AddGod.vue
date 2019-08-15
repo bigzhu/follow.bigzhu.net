@@ -1,23 +1,23 @@
 <template>
   <div>
-    <a v-show="stat==='button'||stat==='adding'" @click="showAddGodInput" href="javascript:void(0)">
-      <i>add</i>{{ $t("AddGod.addnewgod") }}
+    <a v-show="stat==='button'||stat==='adding'" @click="showAddStarInput" href="javascript:void(0)">
+      <i>add</i>{{ $t("AddStar.addnewgod") }}
     </a>
     <div v-show="stat==='input'" class="ui action input row">
       <div class="floating-label">
         <input @keyup.13="add" v-model="inputName" required class="">
-        <label>{{$t('AddGod.example')}}</label>
-        <a @click="add" href="javascript:;">{{ $t("AddGod.add") }}<i>keyboardArrowRight</i></a>
+        <label>{{$t('AddStar.example')}}</label>
+        <a @click="add" href="javascript:;">{{ $t("AddStar.add") }}<i>keyboardArrowRight</i></a>
       </div>
     </div>
     <div v-show="stat==='adding'" class="ui segment newgod-info recommand-god-bz god-item">
       <div v-show="adding" class="ui active inverted dimmer">
-        <div class="ui text loader">{{ $t("AddGod.adding") }}</div>
+        <div class="ui text loader">{{ $t("AddStar.adding") }}</div>
       </div>
       <div class="ui stackable grid">
         <div class="six wide column">
           <div class="god-avatar-bz">
-            <router-link :to="{ name: 'God', params: { StarName: StarName }}" class="header god-name-bz user-name-a">
+            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header god-name-bz user-name-a">
               <img :src="proxy(avatar)" class="avatar-img-bz">
             </router-link>
           </div>
@@ -31,11 +31,11 @@
               <social-badge :loading="tumblrLoading" :info="tumblrInfo"></social-badge>
               <social-badge :loading="facebookLoading" :info="facebookInfo"></social-badge>
             </div>
-            <router-link :to="{ name: 'God', params: { StarName: StarName }}" class="header newgod-name user-name-a">
+            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header newgod-name user-name-a">
               <h3>{{StarName}}</h3>
             </router-link>
             <a class="followers-number-bz">
-              {{ $t("AddGod.follownumber") }}
+              {{ $t("AddStar.follownumber") }}
             </a>
             <div class="god-discription-bz" v-html="description"></div>
             <follow :class="{'disabled': disabled}" v-model="godInfo.following" :godID="0" class="button-to-follow-bz"></follow>
@@ -102,13 +102,13 @@
     },
     mounted() {},
     methods: {
-      showAddGodInput: function () {
+      showAddStarInput: function () {
         this.inputName = '' // 清空上次的输入
         this.stat = 'input'
         this.$nextTick()
         // 这时要重新取一下god，以处理连续添加的情况
         // 先不取了，连续添加很少见
-        // this.queryNotMyGods(this.$route.params.cat)
+        // this.queryNotMyStars(this.$route.params.cat)
       },
       init: function () {
         this.twitterInfo = {
@@ -147,8 +147,8 @@
         this.stat = 'adding'
         let self = this
         this.adding = true
-        // this.addGod(this.StarName, this.$route.params.cat, this.startCheck)
-        this.$store.dispatch('postGod', {
+        // this.addStar(this.StarName, this.$route.params.cat, this.startCheck)
+        this.$store.dispatch('postStar', {
           Name: this.StarName,
           Cat: this.$route.params.cat
         }).then(function (data) {
@@ -237,7 +237,7 @@
       },
       allDone: function (info) {
         this.disabled = false
-        this.createGod()
+        this.createStar()
         this.$store.commit('UNSHIFT_MY_GOD', {
           cat: this.cat,
           god: this.godInfo
@@ -247,18 +247,18 @@
         this.$emit('addDone', this.godInfo)
         this.godInfo = {}
       },
-      setGodSocial: function (type) {
+      setStarSocial: function (type) {
         if (this[type + '_info'].count !== -4) {
           this.godInfo[type] = this.StarName
           this.godInfo[type + '_user'] = this[type + '_info']
         }
       },
-      createGod: function () {
-        this.setGodSocial('twitter')
-        this.setGodSocial('github')
-        this.setGodSocial('tumblr')
-        this.setGodSocial('instagram')
-        this.setGodSocial('facebook')
+      createStar: function () {
+        this.setStarSocial('twitter')
+        this.setStarSocial('github')
+        this.setStarSocial('tumblr')
+        this.setStarSocial('instagram')
+        this.setStarSocial('facebook')
         this.godInfo.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
       setStarInfo: function (godInfo) {

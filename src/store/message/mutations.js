@@ -5,7 +5,7 @@ export const someMutation = (state) => {
 import _ from 'lodash'
 import Vue from 'vue'
 
-function initGodMessage (state, StarName) {
+function initStarMessage (state, StarName) {
   if (state.godsMessages[StarName] === undefined) {
     Vue.set(state.godsMessages, StarName, [])
   }
@@ -29,8 +29,8 @@ export const collectMessages = (state, collectMessages) => {
   // 收藏要翻过来排序, 后藏的,显示在最前面
   state.collectMessages = _.reverse(collectMessages)
 }
-export const filterGodMessages = (state, StarName) => { // 从主线messages中把god message 过滤出来，避免页面空白
-  initGodMessage(state, StarName)
+export const filterStarMessages = (state, StarName) => { // 从主线messages中把god message 过滤出来，避免页面空白
+  initStarMessage(state, StarName)
   if (state.messages.length !== 0 && state.godsMessages[StarName].length === 0) {
     let godMessages = _.filter(state.messages, (d) => {
       return d.StarName === StarName
@@ -42,7 +42,7 @@ export const godNewMessages = (state, {
   StarName,
   messages
 }) => {
-  initGodMessage(state, StarName)
+  initStarMessage(state, StarName)
   let mergeMessages = state.godsMessages[StarName].concat(messages)
   let uniqMessages = _.uniqBy(mergeMessages, function (d) {
     return d.ID
@@ -53,7 +53,7 @@ export const godOldMessages = (state, {
   StarName,
   messages
 }) => {
-  initGodMessage(state, StarName)
+  initStarMessage(state, StarName)
   state.godsMessages[StarName] = _.uniq(
     messages.reverse().concat(state.godsMessages[StarName]), false,
     function (item, key, a) {

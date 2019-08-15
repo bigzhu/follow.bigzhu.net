@@ -1,5 +1,5 @@
  export default {
-   AddGod: {
+   AddStar: {
      addnewgod: '添加要跟踪的新目标',
      example: '帐号名，比如 bigzhu',
      add: '添加',
@@ -22,13 +22,13 @@
      edit: '编辑',
      save: '保存'
    },
-   GodItem: {
+   StarItem: {
      follownumber: '人关注',
      public: '公开',
      biography: '传记',
      block: '屏蔽这人'
    },
-   GodRemark: {
+   StarRemark: {
      save: '保存'
    },
    Login: {
@@ -49,7 +49,7 @@
      wanttofollow: '寻他',
      newmessage: '新的消息'
    },
-   MyGods: {
+   MyStars: {
      search: '搜索目标'
    },
    Old: {
@@ -105,7 +105,7 @@
      reset: '重新设置Anki账号',
      blockreminder: '屏蔽之后就看不到此类社交网络的信息'
    },
-   GodBlocked: {
+   StarBlocked: {
      tips: '暂时没有屏蔽的人'
    }
  }

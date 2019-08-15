@@ -2,7 +2,7 @@
   <q-card class="the-hover-bz" inline>
     <q-item>
       <q-item-section avatar>
-        <router-link :to="{ name: 'God', params: { StarName: god.Name }}">
+        <router-link :to="{ name: 'Star', params: { StarName: god.Name }}">
           <q-avatar size="140px">
             <img :src="god.Avatar||'/statics/assets/avatar.svg'">
           </q-avatar>
@@ -11,7 +11,7 @@
 
       <q-item-section>
         <q-item-label class="black-link-bz">
-          <router-link :to="{ name: 'God', params: { StarName: god.Name }}">
+          <router-link :to="{ name: 'Star', params: { StarName: god.Name }}">
             {{god.Name}}
           </router-link>
         </q-item-label>
@@ -23,7 +23,7 @@
     </q-item>
     <q-card-section class="green-bz">
       <p v-html="bio"></p>
-      <GodRemark v-model="god.Remark" :godID="god.ID" class="green-bz remark"></GodRemark>
+      <StarRemark v-model="god.Remark" :godID="god.ID" class="green-bz remark"></StarRemark>
     </q-card-section>
 
     <q-card-actions align="around">
@@ -35,7 +35,7 @@
 <script>
   import myautolinker from '../functions/myautolinker'
   import Follow from './Follow'
-  import GodRemark from './GodRemark'
+  import StarRemark from './StarRemark'
   import SocialBadge from './SocialBadge'
   import godData from '../datas/god'
   import Proxy from './Proxy'
@@ -53,7 +53,7 @@
     components: {
       SocialBadge,
       Follow,
-      GodRemark
+      StarRemark
     },
     mounted() {},
     directives: {},
@@ -70,7 +70,7 @@
         return myautolinker(this.god.Bio, this.god.Social)
       },
       godID() {
-        return this.god.GodID
+        return this.god.StarID
       }
     },
     methods: {
@@ -81,12 +81,12 @@
       block: function (god) {
         this.loading = true
         let self = this
-        this.$store.dispatch('postBlock', god.GodID).then(function (data) {
-          self.$store.commit('REMOVE_THIS_GOD_catMyGods', god.GodID)
+        this.$store.dispatch('postBlock', god.StarID).then(function (data) {
+          self.$store.commit('REMOVE_THIS_GOD_catMyStars', god.StarID)
           self.loading = false
         })
         if (god.Following === 1) {
-          self.$store.dispatch('unfollow', god.GodID)
+          self.$store.dispatch('unfollow', god.StarID)
         }
       }
     }

@@ -4,7 +4,7 @@
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
       </q-inner-loading>
-      <GodItem :god="star" :key="star.ID" style="width: 100%" />
+      <StarItem :god="star" :key="star.ID" style="width: 100%" />
     </q-dialog>
 
     <q-item>
@@ -16,7 +16,7 @@
 
       <q-item-section>
         <q-item-label>
-          <router-link :to="{ name: 'God', params: { StarName: star.Name }}">
+          <router-link :to="{ name: 'Star', params: { StarName: star.Name }}">
             {{star.Name}}
           </router-link>
         </q-item-label>
@@ -59,9 +59,8 @@
 <script>
   import MessageContent from './MessageContent'
   import TimeLen from 'bz-q-lib/src/components/TimeLen'
-  // import Vue from 'vue'
   import Proxy from './Proxy'
-  import GodItem from './GodItem'
+  import StarItem from './StarItem'
   import Vue from 'vue'
   import checkView from 'vue-check-view'
   Vue.use(checkView)
@@ -74,7 +73,7 @@
       }
     },
     components: {
-      GodItem,
+      StarItem,
       TimeLen,
       MessageContent
     },
@@ -104,7 +103,6 @@
         return this.$store.state.lib.loading
       },
       lang() {
-        // return Vue.config.lang
         return this.$i18n.locale
       },
       href: function () {

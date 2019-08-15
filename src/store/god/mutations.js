@@ -5,10 +5,14 @@ export const someMutation = (state) => {
 import Vue from 'vue'
 import _ from 'lodash'
 
-function initCatGod(state, type, cat) {
+function initCatStar(state, type, cat) {
   if (state[type][cat] === undefined) {
     Vue.set(state[type], cat, [])
   }
+}
+
+export const setNowStarForce = (state, name) => {
+  state.nowStar.name = name
 }
 export const setNowStar = (state, nowStar) => {
   if (nowStar.percentCenter < 0) nowStar.percentCenter = 100
@@ -43,16 +47,16 @@ export const stars = (state, stars) => {
 export const godInfos = (state, godInfo) => {
   Vue.set(state.godInfos, godInfo.Name, godInfo)
 }
-export const catGods = (state, {
+export const catStars = (state, {
   cat,
   gods
 }) => {
-  initCatGod(state, 'catGods', cat)
-  let mergeGods = state.catGods[cat].concat(gods)
-  let uniqGods = _.uniqBy(mergeGods, function(d) {
+  initCatStar(state, 'catStars', cat)
+  let mergeStars = state.catStars[cat].concat(gods)
+  let uniqStars = _.uniqBy(mergeStars, function(d) {
     return d.id
   })
-  state.catGods[cat] = uniqGods
+  state.catStars[cat] = uniqStars
 }
 export const countCat = (state, stars) => {
   state.cats = {}
@@ -76,9 +80,9 @@ export const countFollowedCat = (state, stars) => {
     }
   })
 }
-export const unshiftMyGod = (state, {
+export const unshiftMyStar = (state, {
   cat,
   god
 }) => {
-  state.catMyGods[cat].unshift(god)
+  state.catMyStars[cat].unshift(god)
 }

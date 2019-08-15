@@ -90,7 +90,7 @@ export default {
       }
     },
     go: function(StarName) {
-      this.$router.push({ name: "God", params: { StarName: StarName } });
+      this.$router.push({ name: "Star", params: { StarName: StarName } });
     }
   }
 };

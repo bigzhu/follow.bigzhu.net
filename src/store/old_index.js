@@ -29,22 +29,22 @@ export const state = {
 }
 // mutations
 export const mutations = {
-  REMOVE_THIS_GOD_catMyGods(state, godID) {
-    for (var property in state.catMyGods) {
-      if (state.catMyGods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.catMyGods[property], function(d) {
+  REMOVE_THIS_GOD_catMyStars(state, godID) {
+    for (var property in state.catMyStars) {
+      if (state.catMyStars.hasOwnProperty(property)) {
+        let index = _.findIndex(state.catMyStars[property], function(d) {
           return d.godID === godID
         })
-        state.catMyGods[property].splice(index, 1)
+        state.catMyStars[property].splice(index, 1)
       }
     }
 
-    for (property in state.catGods) {
-      if (state.catGods.hasOwnProperty(property)) {
-        let index = _.findIndex(state.catGods[property], function(d) {
+    for (property in state.catStars) {
+      if (state.catStars.hasOwnProperty(property)) {
+        let index = _.findIndex(state.catStars[property], function(d) {
           return d.godID === godID
         })
-        state.catGods[property].splice(index, 1)
+        state.catStars[property].splice(index, 1)
       }
     }
   },
@@ -83,12 +83,12 @@ export const mutations = {
     }))
   },
   DELETE_MY_GOD(state, godID) { // 移除这个god
-    state.myGods = _.without(state.myGods, _.findWhere(state.myGods, {
+    state.myStars = _.without(state.myStars, _.findWhere(state.myStars, {
       id: godID
     }))
   },
   SET_BIG_GODS(state, gods) {
-    state.bigGods = gods
+    state.bigStars = gods
   },
   REFRESH_LOCAL_UNREAD_MESSAGE_COUNT(state) {
     let unreadMessages = _.partition(state.messages, (d) => {
@@ -96,8 +96,8 @@ export const mutations = {
     })[0]
     state.localUnreadMessageCount = unreadMessages.length
   },
-  filterGodMessages(state, StarName) { // 从主线messages中把god message 过滤出来，避免页面空白
-    initGodMessage(state, StarName)
+  filterStarMessages(state, StarName) { // 从主线messages中把god message 过滤出来，避免页面空白
+    initStarMessage(state, StarName)
     if (state.messages.length !== 0 && state.godsMessages[StarName].length === 0) {
       let godMessages = _.filter(state.messages, (d) => {
         return d.StarName === StarName
@@ -261,7 +261,7 @@ export const actions = {
         let data = response.data
         state.unreadMessageCount = data.unreadMessageCount
         if (data.messages.length === 0) { // 没有取到数
-          state.followingGodCount = data.followingGodCount
+          state.followingStarCount = data.followingStarCount
           if (searchKey && state.searchMessages.length === 0) {
             // oldMessage({ dispatch, state }, {searchKey: searchKey})
           } else if (StarName && state.godsMessages[StarName].length === 0) { // 没数就查出old
@@ -270,7 +270,7 @@ export const actions = {
             // oldMessage({ dispatch, state }, {Limit: 2})
           }
         } else {
-          // state.followingGodCount = -1
+          // state.followingStarCount = -1
           if (StarName) { // 查god的new
             commit('godNewMessages', {
               StarName: StarName,
@@ -294,7 +294,7 @@ export const actions = {
       })
   },
 
-  getMyGods({
+  getMyStars({
     state,
     commit,
     dispatch
@@ -303,15 +303,15 @@ export const actions = {
       cat: cat,
       following: true
     }
-    let gods = state.catMyGods[cat]
+    let gods = state.catMyStars[cat]
     if (gods && gods.length > 0) {
       params.before = gods[gods.length - 1].CreatedAt
     }
-    return axios.get('/apiGods', {
+    return axios.get('/apiStars', {
         params: params
       })
       .then(function(response) {
-        commit('SET_catMyGods', {
+        commit('SET_catMyStars', {
           cat: cat,
           gods: response.data
         })
@@ -320,17 +320,17 @@ export const actions = {
         console.log(error)
       })
   },
-  getGods({
+  getStars({
     state,
     commit,
     dispatch
   }, parm) {
     return dispatch('get', {
-      url: '/apiGods',
+      url: '/apiStars',
       body: parm
     })
   },
-  getGod({
+  getStar({
     state,
     commit,
     dispatch
@@ -345,7 +345,7 @@ export const actions = {
     if (state.godInfos[StarName]) {
       return
     }
-    return axios.get('/apiGod', {
+    return axios.get('/apiStar', {
         params: {
           StarName: StarName
         }

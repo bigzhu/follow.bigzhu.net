@@ -37,7 +37,7 @@
       },
       link: function () {
         if (this.justMy) {
-          return 'MyGods'
+          return 'MyStars'
         } else {
           return 'Recommand'
         }

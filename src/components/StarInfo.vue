@@ -9,7 +9,7 @@
     <q-card-section v-html="star.Bio">
     </q-card-section>
     <q-card-section>
-      <GodRemark v-model="remark" :godID="star.ID" class="green-bz remark"></GodRemark>
+      <StarRemark v-model="remark" :godID="star.ID" class="green-bz remark"></StarRemark>
       <q-input v-for="s in socialTypes" v-show="starSocial[s.socialType].SocialName!=''||!disableEdit" :key="s.socialType" v-model="starSocial[s.socialType].SocialName" @input="s.isEdit=true" :disable="disableEdit">
         <template v-slot:prepend>
           <q-icon :name="'fab fa-'+s.socialType" />
@@ -36,12 +36,12 @@
     </template>
 
     <script>
-import GodRemark from './GodRemark'
+import StarRemark from './StarRemark'
 import Follow from './Follow'
 import socialTypes from '../datas/socialTypes'
 export default {
   components: {
-    GodRemark,
+    StarRemark,
     Follow
   },
   computed: {
