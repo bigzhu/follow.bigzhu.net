@@ -18,7 +18,7 @@
       value: {
         // required: true
       },
-      godID: {
+      starID: {
         required: true,
         type: Number
       }
@@ -50,7 +50,7 @@
       save: function () {
         this.remark = this.$el.getElementsByClassName('remark-edit-content')[0].innerHTML
         this.$store.dispatch('UpdateRemark', {
-          StarID: this.godID,
+          StarID: this.starID,
           Remark: this.remark
         })
         this.isEdit = false

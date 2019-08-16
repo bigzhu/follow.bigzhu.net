@@ -3,34 +3,34 @@
     :class="{ 'popup': popup, 'transition': popup, 'centered': !popup }"
     class="ui card column card-radius"
   >
-    <div v-show="god.godID === 0" class="ui active inverted dimmer">
+    <div v-show="star.starID === 0" class="ui active inverted dimmer">
       <div class="ui text loader">{{$t('Loading.loading')}}</div>
     </div>
-    <div v-show="god.name==''" class="ui active inverted dimmer">
+    <div v-show="star.name==''" class="ui active inverted dimmer">
       <div class="ui text loader">{{$t('Loading.loading')}}</div>
     </div>
 
     <a
-      @click="go(god.name)"
+      @click="go(star.name)"
       :class="{'ui': popup, 'small': popup, 'centered': popup}"
       class="image"
     >
       <img :src="proxy(avatar)" class="ui centered image avatar-bz" />
     </a>
     <div class="content delete-border">
-      <a @click="go(god.name)" class="user-name-a">
-        <h3>{{god.name}}</h3>
+      <a @click="go(star.name)" class="user-name-a">
+        <h3>{{star.name}}</h3>
       </a>
       <div class="description" v-html="desc"></div>
     </div>
-    <div class="extra content god-icon-bz delete-border">
-      <social-badge v-show="god.twitterUser" :callBack="setStarInfo" :info="god.twitterUser"></social-badge>
-      <social-badge v-show="god.githubUser" :callBack="setStarInfo" :info="god.githubUser"></social-badge>
-      <social-badge v-show="god.tumblrUser" :callBack="setStarInfo" :info="god.tumblrUser"></social-badge>
-      <social-badge v-show="god.instagramUser" :callBack="setStarInfo" :info="god.instagramUser"></social-badge>
-      <social-badge v-show="god.facebookUser" :callBack="setStarInfo" :info="god.facebookUser"></social-badge>
+    <div class="extra content star-icon-bz delete-border">
+      <social-badge v-show="star.twitterUser" :callBack="setStarInfo" :info="star.twitterUser"></social-badge>
+      <social-badge v-show="star.githubUser" :callBack="setStarInfo" :info="star.githubUser"></social-badge>
+      <social-badge v-show="star.tumblrUser" :callBack="setStarInfo" :info="star.tumblrUser"></social-badge>
+      <social-badge v-show="star.instagramUser" :callBack="setStarInfo" :info="star.instagramUser"></social-badge>
+      <social-badge v-show="star.facebookUser" :callBack="setStarInfo" :info="star.facebookUser"></social-badge>
     </div>
-    <follow class="attached" v-model="god.following" :godID="god.godID"></follow>
+    <follow class="attached" v-model="star.following" :starID="star.starID"></follow>
   </div>
 </template>
 
@@ -40,9 +40,9 @@ import SocialBadge from "./SocialBadge";
 import Proxy from "./Proxy";
 export default {
   mixins: [Proxy],
-  props: ["god", "popup"],
+  props: ["star", "popup"],
   watch: {
-    god: {
+    star: {
       handler: function(val, oldVal) {
         this.setStarInfo();
       },
@@ -73,18 +73,18 @@ export default {
   methods: {
     setStarInfo: function(type) {
       if (type) {
-        this.av = this.god[type + "_user"].avatar;
-        this.desc = this.god[type + "_user"].description;
+        this.av = this.star[type + "_user"].avatar;
+        this.desc = this.star[type + "_user"].description;
       } else {
-        if (this.god.twitterUser) {
+        if (this.star.twitterUser) {
           this.setStarInfo("twitter");
-        } else if (this.god.githubUser) {
+        } else if (this.star.githubUser) {
           this.setStarInfo("github");
-        } else if (this.god.tumblrUser) {
+        } else if (this.star.tumblrUser) {
           this.setStarInfo("tumblr");
-        } else if (this.god.instagramUser) {
+        } else if (this.star.instagramUser) {
           this.setStarInfo("instagram");
-        } else if (this.god.facebookUser) {
+        } else if (this.star.facebookUser) {
           this.setStarInfo("facebook");
         }
       }
@@ -104,8 +104,8 @@ export default {
   max-width: 100%;
 }
 
-.ui.card > .extra.god-icon-bz a:not(.ui):hover,
-.ui.cards > .card > .extra.god-icon-bz a:not(.ui):hover {
+.ui.card > .extra.star-icon-bz a:not(.ui):hover,
+.ui.cards > .card > .extra.star-icon-bz a:not(.ui):hover {
   color: #999999;
   i.icon.icon-hover-twitter {
     color: #41abe1;

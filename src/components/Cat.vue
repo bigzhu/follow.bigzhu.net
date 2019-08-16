@@ -30,9 +30,9 @@
       },
       cats: function () {
         if (this.justMy) {
-          return this.$store.state.god.myCats
+          return this.$store.state.star.myCats
         } else {
-          return this.$store.state.god.cats
+          return this.$store.state.star.cats
         }
       },
       link: function () {

@@ -29,11 +29,11 @@ export const state = {
 }
 // mutations
 export const mutations = {
-  REMOVE_THIS_GOD_catMyStars(state, godID) {
+  REMOVE_THIS_GOD_catMyStars(state, starID) {
     for (var property in state.catMyStars) {
       if (state.catMyStars.hasOwnProperty(property)) {
         let index = _.findIndex(state.catMyStars[property], function(d) {
-          return d.godID === godID
+          return d.starID === starID
         })
         state.catMyStars[property].splice(index, 1)
       }
@@ -42,15 +42,15 @@ export const mutations = {
     for (property in state.catStars) {
       if (state.catStars.hasOwnProperty(property)) {
         let index = _.findIndex(state.catStars[property], function(d) {
-          return d.godID === godID
+          return d.starID === starID
         })
         state.catStars[property].splice(index, 1)
       }
     }
   },
-  REMOVE_THIS_GOD_MESSAGE(state, godID) {
+  REMOVE_THIS_GOD_MESSAGE(state, starID) {
     state.messages = _.filter(state.messages, function(d) {
-      return d.godID !== godID
+      return d.starID !== starID
     })
   },
   CHECK_BAR(state, scrollTarget) {
@@ -75,20 +75,20 @@ export const mutations = {
     state.myCats = cats
   },
   SET_GOD_IS_EXISTS(state, isExists) {
-    state.godIsExists = isExists
+    state.starIsExists = isExists
   },
-  REMOVE_FROM_MY_MESSAGES(state, godID) { // 移除这个god
+  REMOVE_FROM_MY_MESSAGES(state, starID) { // 移除这个star
     state.messages = _.without(state.messages, _.findWhere(state.messages, {
-      godID: godID
+      starID: starID
     }))
   },
-  DELETE_MY_GOD(state, godID) { // 移除这个god
+  DELETE_MY_GOD(state, starID) { // 移除这个star
     state.myStars = _.without(state.myStars, _.findWhere(state.myStars, {
-      id: godID
+      id: starID
     }))
   },
-  SET_BIG_GODS(state, gods) {
-    state.bigStars = gods
+  SET_BIG_GODS(state, stars) {
+    state.bigStars = stars
   },
   REFRESH_LOCAL_UNREAD_MESSAGE_COUNT(state) {
     let unreadMessages = _.partition(state.messages, (d) => {
@@ -96,13 +96,13 @@ export const mutations = {
     })[0]
     state.localUnreadMessageCount = unreadMessages.length
   },
-  filterStarMessages(state, StarName) { // 从主线messages中把god message 过滤出来，避免页面空白
+  filterStarMessages(state, StarName) { // 从主线messages中把star message 过滤出来，避免页面空白
     initStarMessage(state, StarName)
-    if (state.messages.length !== 0 && state.godsMessages[StarName].length === 0) {
-      let godMessages = _.filter(state.messages, (d) => {
+    if (state.messages.length !== 0 && state.starsMessages[StarName].length === 0) {
+      let starMessages = _.filter(state.messages, (d) => {
         return d.StarName === StarName
       })
-      state.godsMessages[StarName] = godMessages
+      state.starsMessages[StarName] = starMessages
     }
   },
   FILTER_SEARCH_MESSAGES(state, searchKey) { // 从主线messages中把查找的信息过滤出来，避免页面空白
@@ -130,8 +130,8 @@ export const mutations = {
     )
   },
 
-  SET_GOD_INFO(state, godInfo) {
-    state.godInfo = godInfo
+  SET_GOD_INFO(state, starInfo) {
+    state.starInfo = starInfo
   },
 
   oldLoading(state, loading) {
@@ -219,9 +219,9 @@ export const actions = {
     state,
     commit,
     dispatch
-  }, godID) {
+  }, starID) {
     let parm = {
-      godID: godID
+      starID: starID
     }
     return dispatch('post', {
       url: '/apiBlock',
@@ -264,15 +264,15 @@ export const actions = {
           state.followingStarCount = data.followingStarCount
           if (searchKey && state.searchMessages.length === 0) {
             // oldMessage({ dispatch, state }, {searchKey: searchKey})
-          } else if (StarName && state.godsMessages[StarName].length === 0) { // 没数就查出old
+          } else if (StarName && state.starsMessages[StarName].length === 0) { // 没数就查出old
             // oldMessage({ dispatch, state }, {StarName: StarName})
           } else if (state.messages.length === 0 && Limit === 5) { // 只在prenew的时候没有query old 一次就可以了
             // oldMessage({ dispatch, state }, {Limit: 2})
           }
         } else {
           // state.followingStarCount = -1
-          if (StarName) { // 查god的new
-            commit('godNewMessages', {
+          if (StarName) { // 查star的new
+            commit('starNewMessages', {
               StarName: StarName,
               messages: data.messages
             })
@@ -303,9 +303,9 @@ export const actions = {
       cat: cat,
       following: true
     }
-    let gods = state.catMyStars[cat]
-    if (gods && gods.length > 0) {
-      params.before = gods[gods.length - 1].CreatedAt
+    let stars = state.catMyStars[cat]
+    if (stars && stars.length > 0) {
+      params.before = stars[stars.length - 1].CreatedAt
     }
     return axios.get('/apiStars', {
         params: params
@@ -313,7 +313,7 @@ export const actions = {
       .then(function(response) {
         commit('SET_catMyStars', {
           cat: cat,
-          gods: response.data
+          stars: response.data
         })
       })
       .catch(function(error) {
@@ -342,7 +342,7 @@ export const actions = {
       StarName = val.StarName
       // loading = val.loading
     }
-    if (state.godInfos[StarName]) {
+    if (state.starInfos[StarName]) {
       return
     }
     return axios.get('/apiStar', {
@@ -351,7 +351,7 @@ export const actions = {
         }
       })
       .then(function(response) {
-        commit('godInfos', response.data)
+        commit('starInfos', response.data)
         return response.data
       })
       .catch(function(error) {

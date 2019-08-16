@@ -2,7 +2,7 @@ export default {
   newLoading: false,
   oldLoading: false,
   showHowToUseCollect: false, // 是否显示收藏引导
-  godsMessages: {},
+  starsMessages: {},
   unreadMessageCount: 0,
   theMessage: {
     avatar: '',

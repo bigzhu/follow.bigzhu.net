@@ -24,11 +24,11 @@
       return {}
     },
     computed: {
-      godInfo() {
+      starInfo() {
         if (!this.StarName) return
-        let godInfo = this.$store.state.godInfos[this.StarName]
-        if (godInfo) {
-          return godInfo
+        let starInfo = this.$store.state.starInfos[this.StarName]
+        if (starInfo) {
+          return starInfo
         }
         return null
       },

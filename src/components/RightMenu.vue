@@ -3,7 +3,7 @@
     <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'Star']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
     <Cat v-if="name==='Recommand'" routeName="Recommand"></Cat>
     <Cat v-if="name==='Following'" routeName="Following" :justMy="1"></Cat>
-    <StarInfo class='god-info' v-if="name!='Recommand'" />
+    <StarInfo class='star-info' v-if="name!='Recommand'" />
     <!--
     <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])" />
       <br>
@@ -31,14 +31,14 @@
       name() {
         return this.$route.name
       },
-      godInfo() {
-        let idStr = this.$store.state.god.StarNameIDS[this.StarName]
-        let star = this.$store.state.god.mapStars[idStr]
+      starInfo() {
+        let idStr = this.$store.state.star.StarNameIDS[this.StarName]
+        let star = this.$store.state.star.mapStars[idStr]
         return star
       },
       StarName() {
         // return this.$route.params.StarName
-        return this.$store.state.god.nowStar.name
+        return this.$store.state.star.nowStar.name
       }
     },
     data: function () {
@@ -56,8 +56,8 @@
 </script>
 
 <style lang="stylus" scoped>
-// god info card 的下缘阴影线不要显示出来
-.god-info
+// star info card 的下缘阴影线不要显示出来
+.star-info
   box-shadow none
 /*
   .blank-padding-20

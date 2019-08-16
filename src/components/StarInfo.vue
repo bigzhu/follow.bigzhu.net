@@ -9,7 +9,7 @@
     <q-card-section v-html="star.Bio">
     </q-card-section>
     <q-card-section>
-      <StarRemark v-model="remark" :godID="star.ID" class="green-bz remark"></StarRemark>
+      <StarRemark v-model="remark" :starID="star.ID" class="green-bz remark"></StarRemark>
       <q-input v-for="s in socialTypes" v-show="starSocial[s.socialType].SocialName!=''||!disableEdit" :key="s.socialType" v-model="starSocial[s.socialType].SocialName" @input="s.isEdit=true" :disable="disableEdit">
         <template v-slot:prepend>
           <q-icon :name="'fab fa-'+s.socialType" />
@@ -19,7 +19,7 @@
       <q-card-actions align="around">
           <q-btn outline v-show="disableEdit" @click="save" color="secondary">{{ $t("编辑") }}</q-btn>
           <q-btn outline color="secondary" v-show="!disableEdit" @click="save">{{ $t("保存") }}</q-btn>
-          <Follow v-model="star.Following" :godID="star.ID" />
+          <Follow v-model="star.Following" :starID="star.ID" />
       </q-card-actions>
         <!--
         <q-card-section>
@@ -29,7 +29,7 @@
           <q-btn float color="secondary" v-show="!disableEdit" @click="save" class="float-right">
             {{ $t("保存") }}
           </q-btn>
-          <Follow v-model="star.Following" :godID="star.ID"></Follow>
+          <Follow v-model="star.Following" :starID="star.ID"></Follow>
         </q-card-section>
         -->
       </q-card>
@@ -46,17 +46,17 @@ export default {
   },
   computed: {
     StarID() {
-      return this.$store.state.god.StarNameIDS[this.StarName]
+      return this.$store.state.star.StarNameIDS[this.StarName]
     },
     star() {
-      return this.$store.state.god.mapStars[this.StarID]
+      return this.$store.state.star.mapStars[this.StarID]
     },
     starSocial() {
-      return this.$store.state.god.mapStarSocials[this.StarID]
+      return this.$store.state.star.mapStarSocials[this.StarID]
     },
     StarName() {
       // return this.$route.params.StarName
-      return this.$store.state.god.nowStar.name
+      return this.$store.state.star.nowStar.name
     },
     remark: function () {
       return this.star.Remark || this.star.AdminRemark
@@ -77,8 +77,8 @@ export default {
       if (key === 'blog') {
         scheme = 'http://'
       }
-      if (!this.god[key]) {
-        this.god[key] = scheme
+      if (!this.star[key]) {
+        this.star[key] = scheme
       }
     },
     save: function () {

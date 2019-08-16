@@ -1,7 +1,7 @@
 <template>
   <div>
     <a v-show="stat==='button'||stat==='adding'" @click="showAddStarInput" href="javascript:void(0)">
-      <i>add</i>{{ $t("AddStar.addnewgod") }}
+      <i>add</i>{{ $t("AddStar.addnewstar") }}
     </a>
     <div v-show="stat==='input'" class="ui action input row">
       <div class="floating-label">
@@ -10,35 +10,35 @@
         <a @click="add" href="javascript:;">{{ $t("AddStar.add") }}<i>keyboardArrowRight</i></a>
       </div>
     </div>
-    <div v-show="stat==='adding'" class="ui segment newgod-info recommand-god-bz god-item">
+    <div v-show="stat==='adding'" class="ui segment newstar-info recommand-star-bz star-item">
       <div v-show="adding" class="ui active inverted dimmer">
         <div class="ui text loader">{{ $t("AddStar.adding") }}</div>
       </div>
       <div class="ui stackable grid">
         <div class="six wide column">
-          <div class="god-avatar-bz">
-            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header god-name-bz user-name-a">
+          <div class="star-avatar-bz">
+            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header star-name-bz user-name-a">
               <img :src="proxy(avatar)" class="avatar-img-bz">
             </router-link>
           </div>
         </div>
         <div class="ten wide column">
-          <div class="god-detail-bz">
-            <div class="god-icon-bz">
+          <div class="star-detail-bz">
+            <div class="star-icon-bz">
               <social-badge :loading="twitterLoading" :info="twitterInfo"></social-badge>
               <social-badge :loading="githubLoading" :info="githubInfo"></social-badge>
               <social-badge :loading="instagramLoading" :info="instagramInfo"></social-badge>
               <social-badge :loading="tumblrLoading" :info="tumblrInfo"></social-badge>
               <social-badge :loading="facebookLoading" :info="facebookInfo"></social-badge>
             </div>
-            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header newgod-name user-name-a">
+            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header newstar-name user-name-a">
               <h3>{{StarName}}</h3>
             </router-link>
             <a class="followers-number-bz">
               {{ $t("AddStar.follownumber") }}
             </a>
-            <div class="god-discription-bz" v-html="description"></div>
-            <follow :class="{'disabled': disabled}" v-model="godInfo.following" :godID="0" class="button-to-follow-bz"></follow>
+            <div class="star-discription-bz" v-html="description"></div>
+            <follow :class="{'disabled': disabled}" v-model="starInfo.following" :starID="0" class="button-to-follow-bz"></follow>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@
         StarName: '',
         inputName: '',
         stat: 'button',
-        godInfo: {},
+        starInfo: {},
         twitterInfo: {
           type: 'twitter',
           count: -4
@@ -106,7 +106,7 @@
         this.inputName = '' // 清空上次的输入
         this.stat = 'input'
         this.$nextTick()
-        // 这时要重新取一下god，以处理连续添加的情况
+        // 这时要重新取一下star，以处理连续添加的情况
         // 先不取了，连续添加很少见
         // this.queryNotMyStars(this.$route.params.cat)
       },
@@ -152,11 +152,11 @@
           Name: this.StarName,
           Cat: this.$route.params.cat
         }).then(function (data) {
-          self.startCheck(data.godInfo)
+          self.startCheck(data.starInfo)
         })
       },
-      startCheck: function (godInfo) {
-        this.setStarInfo(godInfo)
+      startCheck: function (starInfo) {
+        this.setStarInfo(starInfo)
         this.adding = false
         this.twitterLoading = true
         let self = this
@@ -240,17 +240,17 @@
         this.createStar()
         this.$store.commit('UNSHIFT_MY_GOD', {
           cat: this.cat,
-          god: this.godInfo
+          star: this.starInfo
         })
         // this.$store.dispatch('queryCat')
         this.stat = 'button'
-        this.$emit('addDone', this.godInfo)
-        this.godInfo = {}
+        this.$emit('addDone', this.starInfo)
+        this.starInfo = {}
       },
       setStarSocial: function (type) {
         if (this[type + '_info'].count !== -4) {
-          this.godInfo[type] = this.StarName
-          this.godInfo[type + '_user'] = this[type + '_info']
+          this.starInfo[type] = this.StarName
+          this.starInfo[type + '_user'] = this[type + '_info']
         }
       },
       createStar: function () {
@@ -259,10 +259,10 @@
         this.setStarSocial('tumblr')
         this.setStarSocial('instagram')
         this.setStarSocial('facebook')
-        this.godInfo.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.starInfo.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
       },
-      setStarInfo: function (godInfo) {
-        this.godInfo = godInfo
+      setStarInfo: function (starInfo) {
+        this.starInfo = starInfo
       },
       setInfo: function (info) {
         if (info.avatar) {
@@ -277,7 +277,7 @@
 </script>
 
 <style>
-  .ui.segment.add-newgod-bz.new-god-bz {
+  .ui.segment.add-newstar-bz.new-star-bz {
     margin-top: 1.8rem;
   }
 </style>

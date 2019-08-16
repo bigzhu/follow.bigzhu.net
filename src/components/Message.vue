@@ -4,7 +4,7 @@
       <q-inner-loading :dark="false" :visible="loading">
         <q-spinner-gears size="3rem" color="secondary" />
       </q-inner-loading>
-      <StarItem :god="star" :key="star.ID" style="width: 100%" />
+      <StarItem :star="star" :key="star.ID" style="width: 100%" />
     </q-dialog>
 
     <q-item>
@@ -79,7 +79,7 @@
     },
     data: function () {
       return {
-        opened: false, // god 信息是否弹出
+        opened: false, // star 信息是否弹出
         ankiColor: '#B3B3B3' // #57ADE3
       }
     },
@@ -91,13 +91,13 @@
     },
     computed: {
       nowStar() {
-        return this.$store.state.god.nowStar
+        return this.$store.state.star.nowStar
       },
       starSocial() {
-        return this.$store.state.god.mapStarSocials[this.message.StarID.toString()][this.message.Social]
+        return this.$store.state.star.mapStarSocials[this.message.StarID.toString()][this.message.Social]
       },
       star() {
-        return this.$store.state.god.mapStars[this.message.StarID.toString()]
+        return this.$store.state.star.mapStars[this.message.StarID.toString()]
       },
       loading() {
         return this.$store.state.lib.loading

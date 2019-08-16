@@ -44,14 +44,14 @@ export const getStar = ({
     StarName = val.StarName
     // loading = val.loading
   }
-  if (state.godInfos[StarName]) {
+  if (state.starInfos[StarName]) {
     return
   }
   return get('/apiStar', {
       StarName: StarName
     })
     .then((data) => {
-      commit('godInfos', data)
+      commit('starInfos', data)
       return data
     })
 }
@@ -63,9 +63,9 @@ export const getPublicStars = ({
   let params = {
     cat: cat
   }
-  let gods = state.catStars[cat]
-  if (gods) {
-    params.before = gods[gods.length - 1].CreatedAt
+  let stars = state.catStars[cat]
+  if (stars) {
+    params.before = stars[stars.length - 1].CreatedAt
   }
   return axios.get('/apiStars', {
       params: params
@@ -73,7 +73,7 @@ export const getPublicStars = ({
     .then(function(response) {
       commit('catStars', {
         cat: cat,
-        gods: response.data
+        stars: response.data
       })
       return response.data
     })

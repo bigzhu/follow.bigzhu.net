@@ -12,7 +12,7 @@
         // type: Number,
         default: 0
       },
-      godID: {
+      starID: {
         required: true,
         type: Number
       }
@@ -58,13 +58,13 @@
         let self = this
         this.loading = true
         if (this.value === 1) {
-          this.$store.dispatch('unfollow', this.godID).then((data) => {
+          this.$store.dispatch('unfollow', this.starID).then((data) => {
             self.showUnfollow()
           }).catch((error) => {
             this.$q.notify(error.response.data)
           })
         } else {
-          this.$store.dispatch('follow', this.godID).then(function (data) {
+          this.$store.dispatch('follow', this.starID).then(function (data) {
             self.showFollow()
           }).catch((error) => {
             if (error.response.data === "'userId'") {

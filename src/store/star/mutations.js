@@ -44,15 +44,15 @@ export const stars = (state, stars) => {
   })
   state.stars = stars
 }
-export const godInfos = (state, godInfo) => {
-  Vue.set(state.godInfos, godInfo.Name, godInfo)
+export const starInfos = (state, starInfo) => {
+  Vue.set(state.starInfos, starInfo.Name, starInfo)
 }
 export const catStars = (state, {
   cat,
-  gods
+  stars
 }) => {
   initCatStar(state, 'catStars', cat)
-  let mergeStars = state.catStars[cat].concat(gods)
+  let mergeStars = state.catStars[cat].concat(stars)
   let uniqStars = _.uniqBy(mergeStars, function(d) {
     return d.id
   })
@@ -82,7 +82,7 @@ export const countFollowedCat = (state, stars) => {
 }
 export const unshiftMyStar = (state, {
   cat,
-  god
+  star
 }) => {
-  state.catMyStars[cat].unshift(god)
+  state.catMyStars[cat].unshift(star)
 }

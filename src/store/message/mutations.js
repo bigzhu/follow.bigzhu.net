@@ -6,8 +6,8 @@ import _ from 'lodash'
 import Vue from 'vue'
 
 function initStarMessage (state, StarName) {
-  if (state.godsMessages[StarName] === undefined) {
-    Vue.set(state.godsMessages, StarName, [])
+  if (state.starsMessages[StarName] === undefined) {
+    Vue.set(state.starsMessages, StarName, [])
   }
 }
 
@@ -29,33 +29,33 @@ export const collectMessages = (state, collectMessages) => {
   // 收藏要翻过来排序, 后藏的,显示在最前面
   state.collectMessages = _.reverse(collectMessages)
 }
-export const filterStarMessages = (state, StarName) => { // 从主线messages中把god message 过滤出来，避免页面空白
+export const filterStarMessages = (state, StarName) => { // 从主线messages中把star message 过滤出来，避免页面空白
   initStarMessage(state, StarName)
-  if (state.messages.length !== 0 && state.godsMessages[StarName].length === 0) {
-    let godMessages = _.filter(state.messages, (d) => {
+  if (state.messages.length !== 0 && state.starsMessages[StarName].length === 0) {
+    let starMessages = _.filter(state.messages, (d) => {
       return d.StarName === StarName
     })
-    state.godsMessages[StarName] = godMessages
+    state.starsMessages[StarName] = starMessages
   }
 }
-export const godNewMessages = (state, {
+export const starNewMessages = (state, {
   StarName,
   messages
 }) => {
   initStarMessage(state, StarName)
-  let mergeMessages = state.godsMessages[StarName].concat(messages)
+  let mergeMessages = state.starsMessages[StarName].concat(messages)
   let uniqMessages = _.uniqBy(mergeMessages, function (d) {
     return d.ID
   })
-  state.godsMessages[StarName] = uniqMessages
+  state.starsMessages[StarName] = uniqMessages
 }
-export const godOldMessages = (state, {
+export const starOldMessages = (state, {
   StarName,
   messages
 }) => {
   initStarMessage(state, StarName)
-  state.godsMessages[StarName] = _.uniq(
-    messages.reverse().concat(state.godsMessages[StarName]), false,
+  state.starsMessages[StarName] = _.uniq(
+    messages.reverse().concat(state.starsMessages[StarName]), false,
     function (item, key, a) {
       return item.id
     }

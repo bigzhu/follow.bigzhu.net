@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <messages type="god" :starName="this.$route.params.StarName"></messages>
+    <messages type="star" :starName="this.$route.params.StarName"></messages>
     <Top/>
   </q-page>
 </template>

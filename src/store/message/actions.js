@@ -120,7 +120,7 @@ export const newMessage = ({
   let messages = []
   let After = null
   if (StarName) {
-    messages = state.godsMessages[StarName]
+    messages = state.starsMessages[StarName]
   } else if (explore) {
     messages = state.exploreMessages
   } else if (SearchKey) {
@@ -134,7 +134,7 @@ export const newMessage = ({
     let dt = new Date()
     dt.setDate(dt.getDate() - 2)
     After = dt.getTime()
-    if (StarName) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
+    if (StarName) { // 如果是查某个 star, 只看近3天, 可能什么都找不到
       After = null
     }
   }
@@ -160,7 +160,7 @@ export const oldMessage = ({
   let messages = null
   let before = null
   if (StarName) {
-    messages = state.godsMessages[StarName]
+    messages = state.starsMessages[StarName]
   } else if (searchKey) {
     messages = state.searchMessages
   } else {
@@ -219,7 +219,7 @@ export const getOld = ({
         }
       } else {
         if (StarName) {
-          commit('godOldMessages', {
+          commit('starOldMessages', {
             StarName: StarName,
             messages: messages
           })
@@ -241,10 +241,10 @@ export const getTheMessage = ({
   let message = _.find(state.messages, function (d) {
     return d.ID === parseInt(id, 10)
   })
-  // 在god message里再找找
+  // 在star message里再找找
   if (!message) {
-    for (let StarName in state.godsMessages) {
-      message = _.find(state.godsMessages[StarName], function (d) {
+    for (let StarName in state.starsMessages) {
+      message = _.find(state.starsMessages[StarName], function (d) {
         return d.ID === parseInt(id, 10)
       })
     }

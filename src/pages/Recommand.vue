@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="row">
-      <StarItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item self-center">
+      <StarItem v-for="star in orderedStars" :star="star" :key="star.id" class="star-item self-center">
       </StarItem>
     </div>
     <Top></Top>
@@ -42,7 +42,7 @@
 </script>
 
 <style lang="stylus" scoped>
-// god 直接留出间距
+// star 直接留出间距
   .q-card
     margin 0.5rem
   .floating-label

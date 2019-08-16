@@ -3,7 +3,7 @@
     <NotYetFollow v-show="orderedStars.length===0 && getDone && !cat"></NotYetFollow>
     <AddingStarItem v-show="StarName!==''" :StarName="StarName" @addDone="addDone">
     </AddingStarItem>
-    <StarItem v-for="god in orderedStars" :god="god" :key="god.id" class="god-item">
+    <StarItem v-for="star in orderedStars" :star="star" :key="star.id" class="star-item">
     </StarItem>
     <AddStarButton v-on:add="add"></AddStarButton>
     <Top></Top>
@@ -19,8 +19,8 @@
   import StarItem from '../components/StarItem'
   export default {
     events: {
-      'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
-        this.$store.commit('DELETE_MY_GOD', godID)
+      'unfollow': function (starID) { // 监听unfollow事件，移除已经unfollow的star
+        this.$store.commit('DELETE_MY_GOD', starID)
       }
     },
     watch: {
@@ -63,7 +63,7 @@
         })
       },
       stars() {
-        return this.$store.state.god.stars
+        return this.$store.state.star.stars
       }
     },
     data: function () {
@@ -91,7 +91,7 @@
 </script>
 
 <style lang="stylus" scoped>
-// god 直接留出间距
+// star 直接留出间距
   .q-card
     margin 0.5rem
   .floating-label

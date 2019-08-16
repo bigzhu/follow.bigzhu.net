@@ -11,8 +11,8 @@
         <!-- <div class="four wide column top-margin">
         </div>
         <div class="twelve wide column no-padding-bz">
-          <god-item v-for="god in gods" :god="god">
-          </god-item>
+          <star-item v-for="star in stars" :star="star">
+          </star-item>
         </div> -->
       </div>
     </div>
@@ -23,8 +23,8 @@
   import StarItem from './StarItem'
   export default {
     events: {
-      'unfollow': function (godID) { // 监听unfollow事件，移除已经unfollow的god
-        this.$store.commit('DELETE_MY_GOD', godID)
+      'unfollow': function (starID) { // 监听unfollow事件，移除已经unfollow的star
+        this.$store.commit('DELETE_MY_GOD', starID)
       }
     },
     watch: {
@@ -45,7 +45,7 @@
     computed: {},
     data: function () {
       return {
-        gods: []
+        stars: []
       }
     },
     mounted() {
@@ -55,7 +55,7 @@
       getStars: function () {
         let self = this
         this.$store.dispatch('getStars', { cat: this.$route.params.cat, blocked: true }).then(function (data) {
-          self.gods = data.gods
+          self.stars = data.stars
         })
       }
     }

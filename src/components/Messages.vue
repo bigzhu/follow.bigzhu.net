@@ -46,7 +46,7 @@
         },
         props: {
             type: {
-                type: String, // main god collect search
+                type: String, // main star collect search
                 default: 'main'
             },
             starName: {
@@ -55,8 +55,8 @@
             }
         },
         events: {
-            'unfollow': function (godID) { // 监听 unfollow 事件，移除已经unfollow的god的message
-                this.$store.dispatch('removeFromMessages', godID)
+            'unfollow': function (starID) { // 监听 unfollow 事件，移除已经unfollow的star的message
+                this.$store.dispatch('removeFromMessages', starID)
             }
         },
         data: function () {
@@ -106,8 +106,8 @@
             },
             messages() {
                 switch (this.type) {
-                    case 'god': {
-                        return this.$store.state.message.godsMessages[this.starName] || []
+                    case 'star': {
+                        return this.$store.state.message.starsMessages[this.starName] || []
                     }
                     case 'collect': {
                         return this.$store.state.message.collectMessages
@@ -133,7 +133,7 @@
         methods: {
             initLoadMessages: function () {
                 if (!this.messages || this.messages.length === 0) {
-                    if (this.type === 'god') {
+                    if (this.type === 'star') {
                         this.$store.commit('filterStarMessages', this.starName)
                         if (this.messages.length === 0) { // 没有过滤值时
                             this.$store.dispatch('oldMessage', {
@@ -194,7 +194,7 @@
             },
             loadMessages: function () { // 根据类型, 加载 Message
                 switch (this.type) {
-                    case 'god': {
+                    case 'star': {
                         return this.newStarMessage()
                     }
                     case 'collect': {

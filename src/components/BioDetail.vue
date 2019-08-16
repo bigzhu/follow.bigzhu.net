@@ -9,7 +9,7 @@
             <div v-html="bio.text">
             </div>
           </div>
-          <god-item :god='godInfo' isMy="true" class="bio-god-card"></god-item>
+          <star-item :star='starInfo' isMy="true" class="bio-star-card"></star-item>
         </div>
       </div>
 
@@ -44,10 +44,10 @@
       this.getBio()
     },
     computed: {
-      godInfo () {
-        let godInfo = this.$store.state.godInfos[this.StarName]
-        if (godInfo) {
-          return godInfo
+      starInfo () {
+        let starInfo = this.$store.state.starInfos[this.StarName]
+        if (starInfo) {
+          return starInfo
         }
         return { id: 0, name: '' }
       },
@@ -95,7 +95,7 @@
     padding: 1.5rem;
   }
 
-  .bio-god-card.ui.segment.recommand-god-bz {
+  .bio-star-card.ui.segment.recommand-star-bz {
     box-shadow: none;
     border-top: 1px solid #E6E6E6;
     padding-top: 1rem;

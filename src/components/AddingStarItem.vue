@@ -4,32 +4,32 @@
     <q-icon :name="getIcon()" class="social-icon"></q-icon>
 
     <q-item>
-      <router-link :to="{ name: 'Star', params: { StarName: god.name }}">
-        <q-item-section :avatar="god.avatar||'/statics/assets/avatar.svg'" />
+      <router-link :to="{ name: 'Star', params: { StarName: star.name }}">
+        <q-item-section :avatar="star.avatar||'/statics/assets/avatar.svg'" />
       </router-link>
       <q-item-label>
-        <router-link :to="{ name: 'Star', params: { StarName: god.name }}">
-          <q-item-section label>{{god.name}}</q-item-section>
+        <router-link :to="{ name: 'Star', params: { StarName: star.name }}">
+          <q-item-section label>{{star.name}}</q-item-section>
         </router-link>
         <q-item-section sublabel>
-          {{god.followingCount||1}} {{ $t("人关注") }}
+          {{star.followingCount||1}} {{ $t("人关注") }}
         </q-item-section>
       </q-item-label>
     </q-item>
 
     <q-card-title>
       <div slot="subtitle">
-        <social-badge @click.native="setNow(god.twitter)" v-show="haveSocial('twitter')" type="twitter" :info="god.twitter" />
-        <social-badge @click.native="setNow(god.github)" v-show="haveSocial('github')" type="github" :info="god.github" />
-        <social-badge @click.native="setNow(god.tumblr)" v-show="haveSocial('tumblr')" type="tumblr" :info="god.tumblr" />
-        <social-badge @click.native="setNow(god.instagram)" v-show="haveSocial('instagram')" type="instagram" :info="god.instagram" />
-        <social-badge @click.native="setNow(god.facebook)" v-show="haveSocial('facebook')" type="facebook" :info="god.facebook" />
+        <social-badge @click.native="setNow(star.twitter)" v-show="haveSocial('twitter')" type="twitter" :info="star.twitter" />
+        <social-badge @click.native="setNow(star.github)" v-show="haveSocial('github')" type="github" :info="star.github" />
+        <social-badge @click.native="setNow(star.tumblr)" v-show="haveSocial('tumblr')" type="tumblr" :info="star.tumblr" />
+        <social-badge @click.native="setNow(star.instagram)" v-show="haveSocial('instagram')" type="instagram" :info="star.instagram" />
+        <social-badge @click.native="setNow(star.facebook)" v-show="haveSocial('facebook')" type="facebook" :info="star.facebook" />
       </div>
     </q-card-title>
 
     <q-card class="card-content green-bz">
       <p v-html="bio"></p>
-      <StarRemark v-model="god.remark" :godID="god.id" class="card-content green-bz remark"></StarRemark>
+      <StarRemark v-model="star.remark" :starID="star.id" class="card-content green-bz remark"></StarRemark>
     </q-card>
     <q-card-actions align="end">
     </q-card-actions>
@@ -91,12 +91,12 @@
         return ''
       },
       init: function () {
-        this.god.name = this.StarName
+        this.star.name = this.StarName
       },
       showAddStarInput: function () {
         this.inputName = '' // 清空上次的输入
         this.$nextTick()
-        // 这时要重新取一下god，以处理连续添加的情况
+        // 这时要重新取一下star，以处理连续添加的情况
         // 先不取了，连续添加很少见
         // this.queryNotMyStars(this.$route.params.cat)
       },
@@ -105,12 +105,12 @@
         this.$store.dispatch('postStar', {
           Name: this.StarName,
           Cat: this.cat
-        }).then((godInfo) => {
-          this.startCheck(godInfo)
+        }).then((starInfo) => {
+          this.startCheck(starInfo)
         })
       },
-      startCheck: function (godInfo) {
-        this.setStarInfo(godInfo)
+      startCheck: function (starInfo) {
+        this.setStarInfo(starInfo)
         this.adding = false
         this.twitterLoading = true
         let self = this
@@ -124,7 +124,7 @@
       twitterDone: function (info) {
         this.twitterLoading = false
         if (info) {
-          this.god.twitter = info
+          this.star.twitter = info
           this.setInfo(info, 'twitter')
         }
         let self = this
@@ -139,7 +139,7 @@
       githubDone: function (info) {
         this.githubLoading = false
         if (info) {
-          this.god.github = info
+          this.star.github = info
           this.setInfo(info, 'github')
         }
         let self = this
@@ -154,7 +154,7 @@
       instagramDone: function (info) {
         this.instagramLoading = false
         if (info) {
-          this.god.instagram = info
+          this.star.instagram = info
           this.setInfo(info, 'instagram')
         }
         let self = this
@@ -169,7 +169,7 @@
       tumblrDone: function (info) {
         this.tumblrLoading = false
         if (info) {
-          this.god.tumblr = info
+          this.star.tumblr = info
           this.setInfo(info, 'tumblr')
         }
         this.allDone()
@@ -177,25 +177,25 @@
       facebookDone: function (info) {
         this.facebookLoading = false
         if (info) {
-          this.god.facebook = info
+          this.star.facebook = info
           this.setInfo(info, 'facebook')
         }
         this.allDone()
       },
       allDone: function (info) {
         this.loading = false
-        // Object.assign(this.godInfo, this.god)
-        this.god.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
-        this.god.following = 1
+        // Object.assign(this.starInfo, this.star)
+        this.star.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
+        this.star.following = 1
         this.$store.commit('unshiftMyStar', {
           cat: this.cat,
-          god: this.god
+          star: this.star
         })
-        this.$emit('addDone', this.god)
+        this.$emit('addDone', this.star)
         this.init()
       },
-      setStarInfo: function (god) {
-        this.god = god
+      setStarInfo: function (star) {
+        this.star = star
       },
       setInfo: function (info, type) {
         if (info.avatar) {

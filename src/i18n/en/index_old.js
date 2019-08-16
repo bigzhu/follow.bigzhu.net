@@ -1,7 +1,7 @@
 
 export default {
   AddStar: {
-    addnewgod: 'Add what you want to follow',
+    addnewstar: 'Add what you want to follow',
     example: 'ID, for example: bigzhu',
     add: 'Add',
     adding: 'Adding',

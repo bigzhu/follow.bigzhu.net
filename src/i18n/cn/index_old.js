@@ -1,6 +1,6 @@
  export default {
    AddStar: {
-     addnewgod: '添加要跟踪的新目标',
+     addnewstar: '添加要跟踪的新目标',
      example: '帐号名，比如 bigzhu',
      add: '添加',
      adding: '添加中',
