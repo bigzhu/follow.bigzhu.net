@@ -1,35 +1,29 @@
 <template>
   <div :class="{ 'invisible': !show}" class="row flex-center">
-    <q-spinner v-show="old_loading" :size="14" name="tail"></q-spinner>
+    <q-spinner v-show="oldLoading" :size="14" name="tail"></q-spinner>
     <a @click.Native='old' href='javascript:void(0)'>
-      <q-icon name="history" v-show="!old_loading"></q-icon>
+      <q-icon name="history" v-show="!oldLoading"></q-icon>
       {{ $t("历史消息") }}
     </a>
   </div>
 </template>
 
 <script>
-  import {
-    QSpinner,
-    QIcon
-  } from 'quasar'
   export default {
     components: {
-      QIcon,
-      QSpinner
     },
     computed: {
-      old_loading() {
-        return this.$store.state.message.old_loading
+      oldLoading() {
+        return this.$store.state.message.oldLoading
       }
     },
-    props: ['show', 'star_name', 'search_key'],
+    props: ['show', 'StarName', 'searchKey'],
     mounted() {},
     methods: {
-      old: function() {
+      old: function () {
         this.$store.dispatch('oldMessage', {
-          star_name: this.star_name,
-          search_key: this.search_key
+          StarName: this.StarName,
+          SearchKey: this.searchKey
         })
       }
     }

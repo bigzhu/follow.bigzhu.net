@@ -1,18 +1,17 @@
 <template>
-  <div/>
+  <div />
 </template>
 
 <script>
   export default {
     props: [],
-    components: {
-    },
+    components: {},
     computed: {},
-    data: function() {
+    data: function () {
       return {}
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },

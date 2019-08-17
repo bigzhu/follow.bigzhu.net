@@ -1,46 +1,51 @@
 <template>
   <q-scroll-area style="width: 100%; height: 100%">
-    <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'God']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
-    <Cat v-if="name==='Recommand'" route_name="Recommand"></Cat>
-    <Cat v-if="name==='Following'" route_name="Following" :just_my="1"></Cat>
-    <GodInfo v-show="star_name"/>
-    <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])"/>
+    <div :class="{'blank-padding-20':isInList(name, ['Main', 'Collect', 'Star']), 'blank-padding-11': isInList(name, ['Recommand', 'Following'])}" class="blank-padding desktop-only"></div>
+    <Cat v-if="name==='Recommand'" routeName="Recommand"></Cat>
+    <Cat v-if="name==='Following'" routeName="Following" :justMy="1"></Cat>
+    <StarInfo class='star-info' v-if="name!='Recommand'" />
+    <!--
+    <MessageConf v-if="!isInList(name, ['Recommand', 'Following'])" />
+      <br>
+    -->
+    <br>
     <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
   </q-scroll-area>
 </template>
 
 <script>
   import isInList from 'bz-q-lib/src/functions/isInList.js'
-  import GodInfo from './GodInfo'
+  import StarInfo from './StarInfo'
   import Cat from './Cat'
   import RightInfo from './RightInfo'
-  import MessageConf from './MessageConf'
+  // import MessageConf from './MessageConf'
   export default {
     props: [],
     components: {
-      MessageConf,
+      // MessageConf,
       Cat,
-      GodInfo,
+      StarInfo,
       RightInfo
     },
     computed: {
       name() {
         return this.$route.name
       },
-      god_info() {
-        let id_str = this.$store.state.god.star_name_ids[this.star_name]
-        let star = this.$store.state.god.map_stars[id_str]
+      starInfo() {
+        let idStr = this.$store.state.star.StarNameIDS[this.StarName]
+        let star = this.$store.state.star.mapStars[idStr]
         return star
       },
-      star_name() {
-        return this.$route.params.star_name
+      StarName() {
+        // return this.$route.params.StarName
+        return this.$store.state.star.nowStar.name
       }
     },
-    data: function() {
+    data: function () {
       return {}
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // code that assumes this.$el is in-document
       })
     },
@@ -51,12 +56,13 @@
 </script>
 
 <style lang="stylus" scoped>
+// star info card 的下缘阴影线不要显示出来
+.star-info
+  box-shadow none
 /*
-  .q-list + .q-list
-    margin-top 0
-  */
   .blank-padding-20
     padding-top 48px // 字体高度不可知, 我这里是 20px, 只有先写死 20px+2*1rem = 48px
   .blank-padding-11
     padding 11px
+    */
 </style>

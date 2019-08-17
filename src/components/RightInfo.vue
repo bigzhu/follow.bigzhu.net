@@ -1,62 +1,74 @@
 <template>
-  <div>
+  <q-card>
     <!--
     <q-card class="card">
       <div class="info">
         <i class="wechat icon"></i>{{ $t("微信") }}
       </div>
-      <img src="../statics/assets/by_me.png" class="qr-bz">
+      <img src="../statics/assets/byMe.png" class="qr-bz">
       <div class="info">
         <i class="qq icon"></i>{{ $t("QQ") }}
       </div>
     </q-card>
     -->
 
-    <div class="info">
-      <div class="about">
-        <a class="footer-element" href="http://bigzhu.lorstone.com/follow%20center%20%E6%98%AF%E4%BB%80%E4%B9%88.html">{{ $t("关于") }}</a>
-        <a class="footer-element" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
-        <a class="footer-element" href="http://bigzhu.lorstone.com/follow%20center.html">Change Log</a>
+    <q-card-section>
+      <div class="row">
+        <a class="col-md-4" href="http://bigzhu.lorstone.com/follow%20center%20%E6%98%AF%E4%BB%80%E4%B9%88.html">{{ $t("关于") }}</a>
+        <a class="col-md-4 text-center" href="http://bigzhu.lorstone.com/tag/follow.center/index.html">{{ $t("使用教程") }}</a>
+        <a class="col-md-4 text-right" href="http://bigzhu.lorstone.com/follow%20center.html">{{$t("演变")}}</a>
       </div>
-
-      <div class="footer">
-        <span class="footer-element">{{ $t("注册人数") }}: {{registered_count}}</span>
-        <span>© 2017 Follow Center</span>
+    </q-card-section>
+    <q-card-section>
+      <div class="row">
+        <span class="col-md-6">{{ $t("注册人数") }}: {{registeredCount}}</span>
+        <span class="col-md-6 text-right">© 2019 BigZhu</span>
       </div>
-      <q-select type="list" v-model="lang" :options="lang_options">
+    </q-card-section>
+    <q-card-section>
+      <q-select v-model="lang" :options="langOptions">
       </q-select>
-    </div>
-  </div>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script>
   import {
-    QCard,
     QSelect
   } from 'quasar'
   export default {
     props: [],
     components: {
-      QCard,
       QSelect
     },
     computed: {
       lang: {
-        get: function() {
-          return this.$i18n.locale
+        get: function () {
+          // return this.$i18n.locale
+          if (this.$i18n.locale === 'cn') {
+            return {
+              label: '中文',
+              value: 'cn'
+            }
+          } else {
+            return {
+              label: 'English',
+              value: 'en'
+            }
+          }
         },
-        set: function(v) {
-          this.$i18n.locale = v
-          window.localStorage.setItem('lang', v)
+        set: function (v) {
+          this.$i18n.locale = v.value
+          window.localStorage.setItem('lang', v.value)
         }
       },
-      registered_count() {
-        return this.$store.state.user.registered_count
+      registeredCount() {
+        return this.$store.state.user.registeredCount
       }
     },
-    data: function() {
+    data: function () {
       return {
-        lang_options: [{
+        langOptions: [{
             label: 'English',
             value: 'en'
           },
@@ -67,18 +79,18 @@
         ]
       }
     },
-    mounted: function() {
-      this.$nextTick(function() {
+    mounted: function () {
+      this.$nextTick(function () {
         // $(this.$el).find('.ui.dropdown').dropdown()
         // code that assumes this.$el is in-document
       })
     },
     methods: {
-      whichLang: function() {
+      whichLang: function () {
         if (this.lang === 'cn') return '中文'
         if (this.lang === 'en') return 'English'
       },
-      setLang: function(lang) {
+      setLang: function (lang) {
         window.localStorage.setItem('lang', lang)
       }
     }
@@ -86,6 +98,10 @@
 </script>
 
 <style lang="stylus" scoped>
+.q-card
+  box-shadow none
+
+/*
   // 微信框那里不要显示边框
   .q-card
     box-shadow none
@@ -124,4 +140,5 @@
     align-items center
     img
       width 10rem
+      */
 </style>

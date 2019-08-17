@@ -1,6 +1,6 @@
  export default {
-   AddGod: {
-     addnewgod: '添加要跟踪的新目标',
+   AddStar: {
+     addnewstar: '添加要跟踪的新目标',
      example: '帐号名，比如 bigzhu',
      add: '添加',
      adding: '添加中',
@@ -18,17 +18,17 @@
      dowmtitle: '我们的故事',
      downdescription: '从follow.center上关注我们'
    },
-   GodInfo: {
+   StarInfo: {
      edit: '编辑',
      save: '保存'
    },
-   GodItem: {
+   StarItem: {
      follownumber: '人关注',
      public: '公开',
      biography: '传记',
      block: '屏蔽这人'
    },
-   GodRemark: {
+   StarRemark: {
      save: '保存'
    },
    Login: {
@@ -49,7 +49,7 @@
      wanttofollow: '寻他',
      newmessage: '新的消息'
    },
-   MyGods: {
+   MyStars: {
      search: '搜索目标'
    },
    Old: {
@@ -92,20 +92,20 @@
    },
    UserSet: {
      id: '我的账号',
-     change_id: '换账号登录',
+     changeId: '换账号登录',
      logout: '退出登录',
-     anki_id: '我的Anki账号',
+     ankiId: '我的Anki账号',
      username: '用户名',
      password: '密码',
      set: '设置Anki账号',
-     block_sns: '屏蔽社交网络',
-     block_id: '屏蔽的账号',
+     blockSns: '屏蔽社交网络',
+     blockId: '屏蔽的账号',
      number: '屏蔽人数：',
-     block_manage: '屏蔽管理',
+     blockManage: '屏蔽管理',
      reset: '重新设置Anki账号',
      blockreminder: '屏蔽之后就看不到此类社交网络的信息'
    },
-   GodBlocked: {
+   StarBlocked: {
      tips: '暂时没有屏蔽的人'
    }
  }

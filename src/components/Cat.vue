@@ -1,64 +1,105 @@
 <template>
   <q-list class="list">
-    <QItem item v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': route_name, params: {'cat': cat}}">
-      <q-item-side :icon="getIcon(cat)" />
-      <q-item-main>
-        <q-item-tile label>{{cat}}</q-item-tile>
-        <q-item-tile sublabel>{{getSublabel(cat)}}</q-item-tile>
-      </q-item-main>
-    </QItem>
+    <q-item clickable v-ripple v-for="cat in Object.keys(cats)" :key="cat" tag="label" class="item item-link" :class="{'active': $route.params.cat === cat}" :to="{'name': routeName, params: {'cat': cat}}">
+      <q-item-section avatar>
+        <q-icon :color="cat==='NSFW'?'red':''" :name="getIcon(cat)" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{cat===''?'all':cat}}</q-item-label>
+        <q-item-label caption>{{getSublabel(cat)}}</q-item-label>
+      </q-item-section>
+    </q-item>
   </q-list>
 </template>
 
 <script>
   export default {
-    components: {
-    },
+    components: {},
     props: {
-      just_my: {
+      justMy: {
         type: Number,
         default: 0
       },
-      route_name: {
+      routeName: {
         type: String
       }
     },
     computed: {
-      the_route () {
+      theRoute() {
         return this.$route.name
       },
-      cats: function() {
-        if (this.just_my) {
-          return this.$store.state.god.my_cats
+      cats: function () {
+        if (this.justMy) {
+          return this.$store.state.star.myCats
         } else {
-          return this.$store.state.god.cats
+          return this.$store.state.star.cats
         }
       },
-      link: function() {
-        if (this.just_my) {
-          return 'MyGods'
+      link: function () {
+        if (this.justMy) {
+          return 'MyStars'
         } else {
           return 'Recommand'
         }
       }
     },
-    data: function() {
+    data: function () {
       return {
-        icon_map: [{
-            name: '有趣',
+        iconMap: [{
+            name: 'Fun',
             icon: 'thumb_up'
           },
           {
-            name: '动漫',
+            name: 'ACG',
             icon: 'palette'
           },
           {
-            name: '投资',
-            icon: 'attach_money'
+            name: 'ProgrammingLanguage',
+            icon: 'fa fa-python'
           },
           {
-            name: '旅游',
-            icon: 'card_travel'
+            name: 'Immigrant',
+            icon: 'fa fa-suitcase-rolling'
+          },
+          {
+            name: 'NSFW',
+            icon: 'fa fa-grin-hearts'
+          },
+          {
+            name: 'Blockchain',
+            icon: 'fa fa-link'
+          },
+          {
+            name: 'Mishmash',
+            icon: 'fa fa-question'
+          },
+          {
+            name: 'Model',
+            icon: 'fa fa-heart'
+          },
+          {
+            name: 'IT',
+            icon: 'fa fa-info'
+          },
+          {
+            name: 'Star',
+            icon: 'fa fa-star'
+          },
+          {
+            name: 'Fitness',
+            icon: 'fa fa-dumbbell'
+          },
+          {
+            name: 'Rich',
+            icon: 'fa fa-dollar-sign'
+          },
+          {
+            name: 'World',
+            icon: 'fa fa-globe-asia'
+          },
+          {
+            name: 'Photographer',
+            icon: 'photo_camera'
           },
           {
             name: '游戏',
@@ -66,15 +107,15 @@
           },
           {
             name: 'IT',
-            icon: 'important_devices'
+            icon: 'importantDevices'
           },
           {
             name: '大杂烩',
-            icon: 'view_module'
+            icon: 'viewModule'
           },
           {
             name: '18+',
-            icon: 'flight_takeoff'
+            icon: 'flightTakeoff'
           },
           {
             name: '官方',
@@ -82,11 +123,11 @@
           },
           {
             name: '科技',
-            icon: 'laptop_mac'
+            icon: 'laptopMac'
           },
           {
             name: '美女',
-            icon: 'favorite_border'
+            icon: 'favoriteBorder'
           },
           {
             name: '前端',
@@ -94,15 +135,15 @@
           },
           {
             name: '自然界',
-            icon: 'crop_original'
+            icon: 'cropOriginal'
           },
           {
             name: '艺术',
-            icon: 'art_track'
+            icon: 'artTrack'
           },
           {
             name: '新闻',
-            icon: 'fiber_new'
+            icon: 'fiberNew'
           },
           {
             name: '美剧',
@@ -110,15 +151,15 @@
           },
           {
             name: '个人',
-            icon: 'account_circle'
+            icon: 'accountCircle'
           },
           {
             name: '摄影',
-            icon: 'photo_camera'
+            icon: 'photoCamera'
           },
           {
-            name: '程序员',
-            icon: 'code'
+            name: 'Programmer',
+            icon: 'fa fa-code'
           },
           {
             name: '明星',
@@ -129,52 +170,52 @@
             icon: 'book'
           },
           {
-            name: '互联网',
+            name: 'IT',
             icon: 'language'
           }
         ],
-        input_cat: '',
-        add_cat_input_stat: false
+        inputCat: '',
+        addCatInputStat: false
       }
     },
     methods: {
-      getSublabel: function(cat) {
-        if (this.just_my) {
+      getSublabel: function (cat) {
+        if (this.justMy) {
           return `关注${this.cats[cat]}人`
         } else {
           return `收录${this.cats[cat]}人`
         }
       },
-      getIcon: function(cat) {
-        let iconObj = this.icon_map.filter(function(d) {
+      getIcon: function (cat) {
+        let iconObj = this.iconMap.filter(function (d) {
           return d.name === cat
         })
         if (iconObj.length) {
           return iconObj[0].icon
         }
-        return 'label_outline'
+        return 'labelOutline'
       },
-      showAddCatInput: function() {
-        this.add_cat_input_stat = true
-        this.input_cat = '' // 清空上次的输入
+      showAddCatInput: function () {
+        this.addCatInputStat = true
+        this.inputCat = '' // 清空上次的输入
         this.$nextTick()
       },
-      addCat: function() {
-        // window.alert(this.input_cat)
+      addCat: function () {
+        // window.alert(this.inputCat)
         this.cats.splice(0, 0, {
-          cat: this.input_cat
+          cat: this.inputCat
         })
-        this.add_cat_input_stat = false
+        this.addCatInputStat = false
         this.$router.push({
-          name: this.route_name,
+          name: this.routeName,
           params: {
-            cat: this.input_cat
+            cat: this.inputCat
           }
         })
       },
-      selectCat: function() {
+      selectCat: function () {
         this.$router.push({
-          name: this.route_name,
+          name: this.routeName,
           params: {
             cat: this.$route.params.cat
           }

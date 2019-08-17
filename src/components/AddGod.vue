@@ -1,283 +1,285 @@
 <template>
-<div>
-  <a v-show="stat==='button'||stat==='adding'" @click="showAddGodInput" href="javascript:void(0)">
-      <i>add</i>{{ $t("AddGod.addnewgod") }}
+  <div>
+    <a v-show="stat==='button'||stat==='adding'" @click="showAddStarInput" href="javascript:void(0)">
+      <i>add</i>{{ $t('AddStar.addnewstar') }}
     </a>
-  <div v-show="stat==='input'" class="ui action input row">
-    <div class="floating-label">
-      <input @keyup.13="add" v-model="input_name" required class="">
-      <label>{{$t('AddGod.example')}}</label>
-      <a @click="add" href="javascript:;">{{ $t("AddGod.add") }}<i>keyboard_arrow_right</i></a>
-    </div>
-  </div>
-  <div v-show="stat==='adding'" class="ui segment newgod-info recommand-god-bz god-item">
-    <div v-show="adding" class="ui active inverted dimmer">
-      <div class="ui text loader">{{ $t("AddGod.adding") }}</div>
-    </div>
-    <div class="ui stackable grid">
-      <div class="six wide column">
-        <div class="god-avatar-bz">
-          <router-link :to="{ name: 'God', params: { star_name: star_name }}" class="header god-name-bz user-name-a">
-            <img :src="proxy(avatar)" class="avatar-img-bz">
-          </router-link>
-        </div>
+    <div v-show="stat==='input'" class="ui action input row">
+      <div class="floating-label">
+        <input @keyup.13="add" v-model="inputName" required class="">
+        <label>{{$t('AddStar.example')}}</label>
+        <a @click="add" href="javascript:;">{{ $t('AddStar.add') }}<i>keyboardArrowRight</i></a>
       </div>
-      <div class="ten wide column">
-        <div class="god-detail-bz">
-          <div class="god-icon-bz">
-            <social-badge :loading="twitter_loading" :info="twitter_info"></social-badge>
-            <social-badge :loading="github_loading" :info="github_info"></social-badge>
-            <social-badge :loading="instagram_loading" :info="instagram_info"></social-badge>
-            <social-badge :loading="tumblr_loading" :info="tumblr_info"></social-badge>
-            <social-badge :loading="facebook_loading" :info="facebook_info"></social-badge>
+    </div>
+    <div v-show="stat==='adding'" class="ui segment newstar-info recommand-star-bz star-item">
+      <div v-show="adding" class="ui active inverted dimmer">
+        <div class="ui text loader">{{ $t('AddStar.adding') }}</div>
+      </div>
+      <div class="ui stackable grid">
+        <div class="six wide column">
+          <div class="star-avatar-bz">
+            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header star-name-bz user-name-a">
+              <img :src="proxy(avatar)" class="avatar-img-bz">
+            </router-link>
           </div>
-          <router-link :to="{ name: 'God', params: { star_name: star_name }}" class="header newgod-name user-name-a">
-            <h3>{{star_name}}</h3>
-          </router-link>
-          <a class="followers-number-bz">
-              {{ $t("AddGod.follownumber") }}
+        </div>
+        <div class="ten wide column">
+          <div class="star-detail-bz">
+            <div class="star-icon-bz">
+              <social-badge :loading="twitterLoading" :info="twitterInfo"></social-badge>
+              <social-badge :loading="githubLoading" :info="githubInfo"></social-badge>
+              <social-badge :loading="instagramLoading" :info="instagramInfo"></social-badge>
+              <social-badge :loading="tumblrLoading" :info="tumblrInfo"></social-badge>
+              <social-badge :loading="facebookLoading" :info="facebookInfo"></social-badge>
+            </div>
+            <router-link :to="{ name: 'Star', params: { StarName: StarName }}" class="header newstar-name user-name-a">
+              <h3>{{StarName}}</h3>
+            </router-link>
+            <a class="followers-number-bz">
+              {{ $t('AddStar.follownumber') }}
             </a>
-          <div class="god-discription-bz" v-html="description"></div>
-          <follow :class="{'disabled': disabled}" v-model="god_info.following" :god_id="0" class="button-to-follow-bz"></follow>
+            <div class="star-discription-bz" v-html="description"></div>
+            <follow :class="{'disabled': disabled}" v-model="starInfo.following" :starID="0"
+                    class="button-to-follow-bz"></follow>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-import Follow from './Follow'
-import SocialBadge from './SocialBadge'
-import Proxy from './Proxy'
+    import Follow from './Follow'
+    import SocialBadge from './SocialBadge'
+    import Proxy from './Proxy'
 
-export default {
-  mixins: [Proxy],
-  components: {
-    SocialBadge,
-    Follow
-  },
-  data: function () {
-    return {
-      star_name: '',
-      input_name: '',
-      stat: 'button',
-      god_info: {},
-      twitter_info: {
-        type: 'twitter',
-        count: -4
-      },
-      github_info: {
-        type: 'github',
-        count: -4
-      },
-      tumblr_info: {
-        type: 'tumblr',
-        count: -4
-      },
-      instagram_info: {
-        type: 'instagram',
-        count: -4
-      },
-      facebook_info: {
-        type: 'facebook',
-        count: -4
-      },
+    export default {
+        mixins: [Proxy],
+        components: {
+            SocialBadge,
+            Follow
+        },
+        data: function () {
+            return {
+                StarName: '',
+                inputName: '',
+                stat: 'button',
+                starInfo: {},
+                twitterInfo: {
+                    type: 'twitter',
+                    count: -4
+                },
+                githubInfo: {
+                    type: 'github',
+                    count: -4
+                },
+                tumblrInfo: {
+                    type: 'tumblr',
+                    count: -4
+                },
+                instagramInfo: {
+                    type: 'instagram',
+                    count: -4
+                },
+                facebookInfo: {
+                    type: 'facebook',
+                    count: -4
+                },
 
-      disabled: true,
-      adding: false,
-      description: '',
-      avatar: '',
-      twitter_loading: false,
-      github_loading: false,
-      instagram_loading: false,
-      tumblr_loading: false,
-      facebook_loading: false
+                disabled: true,
+                adding: false,
+                description: '',
+                avatar: '',
+                twitterLoading: false,
+                githubLoading: false,
+                instagramLoading: false,
+                tumblrLoading: false,
+                facebookLoading: false
+            }
+        },
+        computed: {
+            cat: function () {
+                return this.$route.params.cat
+            }
+        },
+        mounted() {
+        },
+        methods: {
+            showAddStarInput: function () {
+                this.inputName = '' // 清空上次的输入
+                this.stat = 'input'
+                this.$nextTick()
+                // 这时要重新取一下star，以处理连续添加的情况
+                // 先不取了，连续添加很少见
+                // this.queryNotMyStars(this.$route.params.cat)
+            },
+            init: function () {
+                this.twitterInfo = {
+                    type: 'twitter',
+                    count: -4
+                }
+                this.githubInfo = {
+                    type: 'github',
+                    count: -4
+                }
+                this.tumblrInfo = {
+                    type: 'tumblr',
+                    count: -4
+                }
+                this.instagramInfo = {
+                    type: 'instagram',
+                    count: -4
+                }
+                this.facebookInfo = {
+                    type: 'facebook',
+                    count: -4
+                }
+                this.disabled = true
+                this.adding = false
+                this.description = ''
+                this.avatar = ''
+                this.twitterLoading = false
+                this.githubLoading = false
+                this.instagramLoading = false
+                this.tumblrLoading = false
+                this.facebookLoading = false
+            },
+            add: function () {
+                this.init()
+                this.StarName = this.inputName.trim()
+                this.stat = 'adding'
+                let self = this
+                this.adding = true
+                // this.addStar(this.StarName, this.$route.params.cat, this.startCheck)
+                this.$store.dispatch('postStar', {
+                    Name: this.StarName,
+                    Cat: this.$route.params.cat
+                }).then(function (data) {
+                    self.startCheck(data.starInfo)
+                })
+            },
+            startCheck: function (starInfo) {
+                this.setStarInfo(starInfo)
+                this.adding = false
+                this.twitterLoading = true
+                let self = this
+                this.$store.dispatch('checkSocial', {
+                    Name: this.StarName,
+                    Type: 'twitter'
+                }).then(function (data) {
+                    self.twitterDone(data.info)
+                })
+            },
+            twitterDone: function (info) {
+                this.twitterLoading = false
+                if (info) {
+                    this.twitterInfo = info
+                    this.setInfo(info)
+                }
+                let self = this
+                this.$store.dispatch('checkSocial', {
+                    Name: this.StarName,
+                    Type: 'github'
+                }).then(function (data) {
+                    self.githubDone(data.info)
+                })
+                this.githubLoading = true
+            },
+            githubDone: function (info) {
+                this.githubLoading = false
+                if (info) {
+                    this.githubInfo = info
+                    this.setInfo(info)
+                }
+                let self = this
+                this.$store.dispatch('checkSocial', {
+                    Name: this.StarName,
+                    Type: 'instagram'
+                }).then(function (data) {
+                    self.instagramDone(data.info)
+                })
+                this.instagramLoading = true
+            },
+            instagramDone: function (info) {
+                this.instagramLoading = false
+                if (info) {
+                    this.instagramInfo = info
+                    this.setInfo(info)
+                }
+                let self = this
+                this.$store.dispatch('checkSocial', {
+                    Name: this.StarName,
+                    Type: 'tumblr'
+                }).then(function (data) {
+                    self.tumblrDone(data.info)
+                })
+                this.tumblrLoading = true
+            },
+            tumblrDone: function (info) {
+                this.tumblrLoading = false
+                if (info) {
+                    this.tumblrInfo = info
+                    this.setInfo(info)
+                }
+                let self = this
+                this.$store.dispatch('checkSocial', {
+                    Name: this.StarName,
+                    Type: 'facebook'
+                }).then(function (data) {
+                    self.facebookDone(data.info)
+                })
+                this.facebookLoading = true
+            },
+            facebookDone: function (info) {
+                this.facebookLoading = false
+                if (info) {
+                    this.facebookInfo = info
+                    this.setInfo(info)
+                }
+                this.allDone()
+            },
+            allDone: function (info) {
+                this.disabled = false
+                this.createStar()
+                this.$store.commit('UNSHIFT_MY_GOD', {
+                    cat: this.cat,
+                    star: this.starInfo
+                })
+                // this.$store.dispatch('queryCat')
+                this.stat = 'button'
+                this.$emit('addDone', this.starInfo)
+                this.starInfo = {}
+            },
+            setStarSocial: function (type) {
+                if (this[type + '_info'].count !== -4) {
+                    this.starInfo[type] = this.StarName
+                    this.starInfo[type + '_user'] = this[type + '_info']
+                }
+            },
+            createStar: function () {
+                this.setStarSocial('twitter')
+                this.setStarSocial('github')
+                this.setStarSocial('tumblr')
+                this.setStarSocial('instagram')
+                this.setStarSocial('facebook')
+                this.starInfo.followingAt = window.Date.now() // 当前时间做为follow时间,才会排前面
+            },
+            setStarInfo: function (starInfo) {
+                this.starInfo = starInfo
+            },
+            setInfo: function (info) {
+                if (info.avatar) {
+                    this.avatar = info.avatar
+                }
+                if (info.description) {
+                    this.description = info.description
+                }
+            }
+        }
     }
-  },
-  computed: {
-    cat: function () {
-      return this.$route.params.cat
-    }
-  },
-  mounted() {},
-  methods: {
-    showAddGodInput: function () {
-      this.input_name = '' // 清空上次的输入
-      this.stat = 'input'
-      this.$nextTick()
-      // 这时要重新取一下god，以处理连续添加的情况
-      // 先不取了，连续添加很少见
-      // this.queryNotMyGods(this.$route.params.cat)
-    },
-    init: function () {
-      this.twitter_info = {
-        type: 'twitter',
-        count: -4
-      }
-      this.github_info = {
-        type: 'github',
-        count: -4
-      }
-      this.tumblr_info = {
-        type: 'tumblr',
-        count: -4
-      }
-      this.instagram_info = {
-        type: 'instagram',
-        count: -4
-      }
-      this.facebook_info = {
-        type: 'facebook',
-        count: -4
-      }
-      this.disabled = true
-      this.adding = false
-      this.description = ''
-      this.avatar = ''
-      this.twitter_loading = false
-      this.github_loading = false
-      this.instagram_loading = false
-      this.tumblr_loading = false
-      this.facebook_loading = false
-    },
-    add: function () {
-      this.init()
-      this.star_name = this.input_name.trim()
-      this.stat = 'adding'
-      let self = this
-      this.adding = true
-      // this.addGod(this.star_name, this.$route.params.cat, this.startCheck)
-      this.$store.dispatch('postGod', {
-        name: this.star_name,
-        cat: this.$route.params.cat
-      }).then(function (data) {
-        self.startCheck(data.god_info)
-      })
-    },
-    startCheck: function (god_info) {
-      this.setGodInfo(god_info)
-      this.adding = false
-      this.twitter_loading = true
-      let self = this
-      this.$store.dispatch('checkSocial', {
-        name: this.star_name,
-        type: 'twitter'
-      }).then(function (data) {
-        self.twitterDone(data.info)
-      })
-    },
-    twitterDone: function (info) {
-      this.twitter_loading = false
-      if (info) {
-        this.twitter_info = info
-        this.setInfo(info)
-      }
-      let self = this
-      this.$store.dispatch('checkSocial', {
-        name: this.star_name,
-        type: 'github'
-      }).then(function (data) {
-        self.githubDone(data.info)
-      })
-      this.github_loading = true
-    },
-    githubDone: function (info) {
-      this.github_loading = false
-      if (info) {
-        this.github_info = info
-        this.setInfo(info)
-      }
-      let self = this
-      this.$store.dispatch('checkSocial', {
-        name: this.star_name,
-        type: 'instagram'
-      }).then(function (data) {
-        self.instagramDone(data.info)
-      })
-      this.instagram_loading = true
-    },
-    instagramDone: function (info) {
-      this.instagram_loading = false
-      if (info) {
-        this.instagram_info = info
-        this.setInfo(info)
-      }
-      let self = this
-      this.$store.dispatch('checkSocial', {
-        name: this.star_name,
-        type: 'tumblr'
-      }).then(function (data) {
-        self.tumblrDone(data.info)
-      })
-      this.tumblr_loading = true
-    },
-    tumblrDone: function (info) {
-      this.tumblr_loading = false
-      if (info) {
-        this.tumblr_info = info
-        this.setInfo(info)
-      }
-      let self = this
-      this.$store.dispatch('checkSocial', {
-        name: this.star_name,
-        type: 'facebook'
-      }).then(function (data) {
-        self.facebookDone(data.info)
-      })
-      this.facebook_loading = true
-    },
-    facebookDone: function (info) {
-      this.facebook_loading = false
-      if (info) {
-        this.facebook_info = info
-        this.setInfo(info)
-      }
-      this.allDone()
-    },
-    allDone: function (info) {
-      this.disabled = false
-      this.createGod()
-      this.$store.commit('UNSHIFT_MY_GOD', {
-        cat: this.cat,
-        god: this.god_info
-      })
-      // this.$store.dispatch('queryCat')
-      this.stat = 'button'
-      this.$emit('add_done', this.god_info)
-      this.god_info = {}
-    },
-    setGodSocial: function (type) {
-      if (this[type + '_info'].count !== -4) {
-        this.god_info[type] = this.star_name
-        this.god_info[type + '_user'] = this[type + '_info']
-      }
-    },
-    createGod: function () {
-      this.setGodSocial('twitter')
-      this.setGodSocial('github')
-      this.setGodSocial('tumblr')
-      this.setGodSocial('instagram')
-      this.setGodSocial('facebook')
-      this.god_info.following_at = window.Date.now() // 当前时间做为follow时间,才会排前面
-    },
-    setGodInfo: function (god_info) {
-      this.god_info = god_info
-    },
-    setInfo: function (info) {
-      if (info.avatar) {
-        this.avatar = info.avatar
-      }
-      if (info.description) {
-        this.description = info.description
-      }
-    }
-  }
-}
 </script>
 
 <style>
-.ui.segment.add-newgod-bz.new-god-bz {
-  margin-top: 1.8rem;
-}
+  .ui.segment.add-newstar-bz.new-star-bz {
+    margin-top: 1.8rem;
+  }
 </style>

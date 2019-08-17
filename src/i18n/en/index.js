@@ -21,8 +21,12 @@ export default {
   '里面寻找您感兴趣的人吧!': 'to find what you like!',
   '已跟踪': 'Following',
   '历史消息': 'History',
-  '关于 Follow Center': 'About Follow Center',
-  '跟踪': 'no follow'
+  '关于': 'About',
+  '使用教程': 'Guide',
+  '跟踪': 'no follow',
+  '演变': 'Change',
+  '注册人数': 'Users',
+  '编辑': 'Edit'
   /*
    '添加要跟踪的新目标':'Add what you want to follow',
      example: '帐号名, 比如 bigzhu':'ID, for example: bigzhu',
@@ -34,7 +38,6 @@ export default {
      topdescription: '他们是大人物，他们是小人物，他们在世界各地，演绎着比电影还精彩的人生。',:'Follow your dream'
      dowmtitle: '我们的故事',
      downdescription: '从follow.center上关注我们':'Follow us from follow.center'
-     edit: '编辑':'Edit',
      save: '保存':'Saved'
      public: '公开':'Public',
      biography: '传记':'Biography',
@@ -70,15 +73,15 @@ export default {
      collect: '收藏':'Saved',
      loading: '加载中':'Loading'
      id: '我的账号':'My ID',
-     change_id: '换账号登录':'Change ID to login',
-     anki_id: '我的Anki账号':'My Anki',
+     changeId: '换账号登录':'Change ID to login',
+     ankiId: '我的Anki账号':'My Anki',
      username: '用户名':'Username',
      password: '密码':'Password',
      set: '设置Anki账号':'Set your Anki',
-     block_sns: '屏蔽社交网络':'Blocking the Social Network',
-     block_id: '屏蔽的账号':'Blocked',
+     blockSns: '屏蔽社交网络':'Blocking the Social Network',
+     blockId: '屏蔽的账号':'Blocked',
      number: '屏蔽人数：':'The number of blocked people:',
-     block_manage: '屏蔽管理':'Manage the people you blocked',
+     blockManage: '屏蔽管理':'Manage the people you blocked',
      reset: '重新设置Anki账号':'Reset your Anki',
      blockreminder: '屏蔽之后就看不到此类社交网络的信息':"You don't want to see this kind of message"
      tips: '暂时没有屏蔽的人':'Nobody is been blocked'

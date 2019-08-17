@@ -1,6 +1,6 @@
 {
-  "name": "dev",
-  "version": "1.0.2",
+  "name": "follow.bigzhu.net",
+  "version": "0.0.1",
   "description": "Follow Your Dream",
   "productName": "Follow Center",
   "cordovaId": "org.cordova.quasar.app",
@@ -11,28 +11,23 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "autolinker": "^1.6.2",
-    "axios": "^0.18.0",
+    "@quasar/extras": "^1.0.0",
+    "autolinker": "^3.1.0",
+    "axios": "^0.18.1",
     "bz-q-lib": "https://github.com/bigzhu/bz-q-lib",
-    "countup.js": "^1.9.3",
-    "lib": "https://github.com/bigzhu/bz-q-lib",
-    "marked": "^0.4.0",
-    "npm": "^6.2.0",
-    "vue-i18n": "^7.3.3"
+    "marked": "^0.7.0",
+    "quasar": "^1.0.0",
+    "quasar-extras": "^2.0.9",
+    "vue-check-view": "^0.3.0",
+    "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^4.18.2",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-vue": "^4.3.0",
-    "quasar-cli": "^0.17.20",
-    "strip-ansi": "=3.0.1"
+    "@quasar/app": "^1.0.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^5.0.0"
   },
   "engines": {
     "node": ">= 8.9.0",
@@ -40,8 +35,6 @@
     "yarn": ">= 1.6.0"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 10"
+    "last 1 version, not dead, ie >= 11"
   ]
 }

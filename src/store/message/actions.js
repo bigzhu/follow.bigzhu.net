@@ -11,58 +11,30 @@ export const getNew = ({
   commit,
   dispatch
 }, {
-  star_name,
-  searchKey,
-  after,
-  limit,
+  StarName,
+  SearchKey,
+  After,
+  Limit,
   explore
 }) => {
-  commit('new_loading', true)
-  var params = {
-    not: state.no_types,
-    limit: limit,
-    after: after,
-    star_name: star_name,
-    searchKey: searchKey
+  commit('newLoading', true)
+  let params = {
+    not: state.noTypes,
+    Limit: Limit,
+    After: After,
+    StarName: StarName,
+    SearchKey: SearchKey
   }
-  return axios.get('/api/messages/new', {
+  return axios.get('/api/messages/New', {
       params: params
     })
-    .then(function(response) {
+    .then(function (response) {
       let data = response.data
-      commit('new_messages', data)
-      /*
-      commit('unread_message_count', data.unread_message_count)
-      if (data.messages.length === 0) { // 没有取到数
-        state.following_god_count = data.following_god_count
-        if (searchKey && state.search_messages.length === 0) {
-          // oldMessage({ dispatch, state }, {searchKey: searchKey})
-        } else if (star_name && state.gods_messages[star_name].length === 0) { // 没数就查出old
-          // oldMessage({ dispatch, state }, {star_name: star_name})
-        } else if (state.messages.length === 0 && limit === 5) { // 只在prenew的时候没有query old 一次就可以了
-          // oldMessage({ dispatch, state }, {limit: 2})
-        }
-      } else {
-        // state.following_god_count = -1
-        if (star_name) { // 查god的new
-          commit('god_new_messages', {
-            star_name: star_name,
-            messages: data.messages
-          })
-        } else if (explore) { // explore
-          commit('set_explore_new_messages', data.messages)
-        } else if (searchKey) { // search
-          commit('set_new_search_messages', data.messages)
-        } else { // main
-          commit('new_messages', data.messages)
-        }
-      }
-      */
-      commit('new_loading', false)
-      // commit('reflash_time_len')
+      commit('newMessages', data)
+      commit('newLoading', false)
       return data
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error)
     })
 }
@@ -73,26 +45,15 @@ export const recordLastMessage = ({
   commit,
   dispatch
 }, time) => {
-  return axios.put('/api_last', {
+  return axios.put('/apiLast', {
       last: time
     })
-    .then(function(response) {
-      state.unread_message_count = response.data
-      commit('last_time', parseInt(time, 10))
-      // commit('REFRESH_LOCAL_UNREAD_MESSAGE_COUNT')
-      // 如果<20了，就预加载一些
-      /*
-      if (state.local_unread_message_count <= 20) {
-        let after = null
-        if (state.messages.length > 0) {
-          after = state.messages[state.messages.length - 1].created_at
-        }
-        dispatch('getNew', {after: after, limit: 50})
-      }
-      */
+    .then(function (response) {
+      state.unreadMessageCount = response.data
+      commit('lastTime', parseInt(time, 10))
       return response.data
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error)
     })
 }
@@ -103,11 +64,11 @@ export const collect = ({
   dispatch
 }, messageID) => {
   var params = {
-    message_id: messageID
+    messageId: messageID
   }
-  return axios.post('/api_collect', params)
-    .then(function(response) {})
-    .catch(function(error) {
+  return axios.post('/apiCollect', params)
+    .then(function (response) {})
+    .catch(function (error) {
       console.log(error)
     })
 }
@@ -118,13 +79,13 @@ export const uncollect = ({
   commit,
   dispatch
 }, messageID) => {
-  return axios.delete('/api_collect', {
+  return axios.delete('/apiCollect', {
       params: {
-        message_id: messageID
+        messageId: messageID
       }
     })
-    .then(function(response) {})
-    .catch(function(error) {
+    .then(function (response) {})
+    .catch(function (error) {
       console.log(error)
     })
 }
@@ -133,16 +94,16 @@ export const getCollect = ({
   commit,
   dispatch
 }) => {
-  commit('new_loading', true)
-  return axios.get('/api_collect')
-    .then(function(response) {
-      commit('collect_messages', response.data)
-      if (state.collect_messages.length === 0) {
-        commit('show_how_to_use_collect', true)
+  commit('newLoading', true)
+  return axios.get('/apiCollect')
+    .then(function (response) {
+      commit('collectMessages', response.data)
+      if (state.collectMessages.length === 0) {
+        commit('showHowToUseCollect', true)
       } else {
-        commit('show_how_to_use_collect', false)
+        commit('showHowToUseCollect', false)
       }
-      commit('new_loading', false)
+      commit('newLoading', false)
       return response.data
     })
 }
@@ -151,41 +112,41 @@ export const newMessage = ({
   commit,
   dispatch
 }, {
-  star_name,
-  searchKey,
-  limit,
+  StarName,
+  SearchKey,
+  Limit,
   explore
 }) => {
-  let messages = null
-  let after = null
-  if (star_name) {
-    messages = state.gods_messages[star_name]
+  let messages = []
+  let After = null
+  if (StarName) {
+    messages = state.starsMessages[StarName]
   } else if (explore) {
-    messages = state.explore_messages
-  } else if (searchKey) {
-    messages = state.search_messages
+    messages = state.exploreMessages
+  } else if (SearchKey) {
+    messages = state.searchMessages
   } else {
     messages = state.messages
   }
-  if (messages.length > 0) {
-    after = messages[messages.length - 1].created_at
+  if (messages && messages.length > 0) {
+    After = messages[messages.length - 1].OutCreatedAt
   } else { // 第一次, 找最近3天的
     let dt = new Date()
     dt.setDate(dt.getDate() - 2)
-    after = dt.getTime()
-    if (star_name) { // 如果是查某个 god, 只看近3天, 可能什么都找不到
-      after = null
+    After = dt.getTime()
+    if (StarName) { // 如果是查某个 star, 只看近3天, 可能什么都找不到
+      After = null
     }
   }
-  if (!limit) {
-    limit = 10
+  if (!Limit) {
+    Limit = 10
   }
   return dispatch('getNew', {
-    star_name: star_name,
-    searchKey: searchKey,
-    after: after,
-    limit: limit,
-    explore: explore
+    StarName: StarName,
+    SearchKey: SearchKey,
+    After: After,
+    Limit: Limit,
+    Explore: explore
   })
 }
 export const oldMessage = ({
@@ -193,29 +154,27 @@ export const oldMessage = ({
   commit,
   dispatch
 }, {
-  star_name,
+  StarName,
   searchKey
 }) => {
   let messages = null
   let before = null
-  if (star_name) {
-    messages = state.gods_messages[star_name]
+  if (StarName) {
+    messages = state.starsMessages[StarName]
   } else if (searchKey) {
-    messages = state.search_messages
+    messages = state.searchMessages
   } else {
     messages = state.messages
   }
   if (messages.length > 0) {
-    before = messages[0].out_created_at
+    before = messages[0].OutCreatedAt
   } else { // 第一次, 找当前以前的
-    // before = new Date().getTime()
-    // before = (new Date()).toISOString()
     before = (new Date()).toJSON()
   }
   return dispatch('getOld', {
-    star_name: star_name,
-    searchKey: searchKey,
-    before: before
+    StarName: StarName,
+    SearchKey: searchKey,
+    Before: before
   })
 }
 
@@ -224,26 +183,26 @@ export const getOld = ({
   commit,
   dispatch
 }, {
-  star_name,
-  searchKey,
-  before
+  StarName,
+  SearchKey,
+  Before
 }) => {
-  commit('old_loading', true)
+  commit('oldLoading', true)
   var params = {
-    not: state.no_types,
-    star_name: star_name,
-    searchKey: searchKey,
-    before: before
+    Not: state.noTypes,
+    StarName: StarName,
+    SearchKey: SearchKey,
+    Before: Before
   }
-  return axios.get('/api/messages/old', {
+  return axios.get('/api/messages/Old', {
       params: params
     })
-    .then(function(response) {
+    .then(function (response) {
       let messages = response.data
       if (messages.length === 0) { // 没有取到数
-        if (star_name) {
-          // toastr.info(star_name + '没有更多的历史消息可以看了')
-        } else if (searchKey) {
+        if (StarName) {
+          // toastr.info(StarName + '没有更多的历史消息可以看了')
+        } else if (SearchKey) {
           // toastr.info('没有更多的历史了')
         } else {
           if (state.messages.length === 0) { // 什么都没有，估计是第一次进来, 还没关注人
@@ -259,19 +218,19 @@ export const getOld = ({
           }
         }
       } else {
-        if (star_name) {
-          commit('god_old_messages', {
-            star_name: star_name,
+        if (StarName) {
+          commit('starOldMessages', {
+            StarName: StarName,
             messages: messages
           })
-        } else if (searchKey) { // search
+        } else if (SearchKey) { // search
           commit('SET_OLD_SEARCH_MESSAGES', messages)
         } else { // main
-          commit('old_messages', messages)
+          commit('oldMessages', messages)
         }
       }
-      commit('old_loading', false)
-      commit('reflash_time_len')
+      commit('oldLoading', false)
+      commit('reflashTimeLen')
     })
 }
 export const getTheMessage = ({
@@ -279,28 +238,23 @@ export const getTheMessage = ({
   commit,
   dispatch
 }, id) => {
-  let message = _.find(state.messages, function(d) {
-    return d.id === parseInt(id, 10)
+  let message = _.find(state.messages, function (d) {
+    return d.ID === parseInt(id, 10)
   })
-  // 在god message里再找找
+  // 在star message里再找找
   if (!message) {
-    for (var star_name in state.gods_messages) {
-      message = _.find(state.gods_messages[star_name], function(d) {
-        return d.id === parseInt(id, 10)
+    for (let StarName in state.starsMessages) {
+      message = _.find(state.starsMessages[StarName], function (d) {
+        return d.ID === parseInt(id, 10)
       })
     }
   }
   if (message) {
-    commit('the_message', message)
+    commit('theMessage', message)
     return
   }
-  let params = {
-    id: id
-  }
-  return axios.get('/api_message', {
-    params: params
-  }).then((response) => {
-    commit('the_message', response.data)
+  return axios.get('/api/message/' + id.toString()).then((response) => {
+    commit('theMessage', response.data)
     return response.data
   })
 }

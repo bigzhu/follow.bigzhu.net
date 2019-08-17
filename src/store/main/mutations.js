@@ -2,12 +2,12 @@
 export const someMutation = (state) => {
 }
 */
-export const show_header = (state, show_header) => {
-  state.show_header = show_header
+export const showHeader = (state, showHeader) => {
+  state.showHeader = showHeader
 }
-export const show_right = (state, show_right) => {
-  state.show_right = show_right
+export const showRight = (state, showRight) => {
+  state.showRight = showRight
 }
-export const show_left = (state, show_left) => {
-  state.show_left = show_left
+export const showLeft = (state, showLeft) => {
+  state.showLeft = showLeft
 }

@@ -7,10 +7,10 @@
     </div>
     <!-- ================分割=================== -->
     <div class="card-bz-group">
-      <div v-for="bio in new_two" class="card-bz">
-        <router-link :to="{ name: 'BioDetail', params: { star_name: bio.key }}">
+      <div v-for="bio in newTwo" class="card-bz">
+        <router-link :to="{ name: 'BioDetail', params: { StarName: bio.key }}">
           <div class="border-shadow">
-            <div class="bio" :style="'background-image:url(' + bio.title_img + ');'">  
+            <div class="bio" :style="'background-image:url(' + bio.titleImg + ');'">  
             </div>
             <div class="mask">
               <div class="bio-content">
@@ -28,9 +28,9 @@
       </div>
       <!-- ================分割=================== -->
       <div v-for="bio in others" class="card-bz">
-        <router-link :to="{ name: 'BioDetail', params: { star_name: bio.key }}">
+        <router-link :to="{ name: 'BioDetail', params: { StarName: bio.key }}">
           <div class="border-shadow">
-            <div class="bio" :style="'background-image:url(' + bio.title_img + ');'">
+            <div class="bio" :style="'background-image:url(' + bio.titleImg + ');'">
             </div>
             <div class="mask">
               <div class="bio-content">
@@ -54,11 +54,11 @@
       return store.dispatch('getRichList')
     },
     computed: {
-      new_two: function () {
-        return _.take(this.$store.state.p.rich_list, 2)
+      newTwo: function () {
+        return _.take(this.$store.state.p.richList, 2)
       },
       others: function () {
-        return _.slice(this.$store.state.p.rich_list, 2)
+        return _.slice(this.$store.state.p.richList, 2)
       }
     },
     data: function () {

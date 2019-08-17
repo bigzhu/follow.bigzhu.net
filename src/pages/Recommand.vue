@@ -1,7 +1,9 @@
 <template>
   <q-page padding>
-    <GodItem v-for="god in ordered_stars" :god="god" :key="god.id" class="god-item">
-    </GodItem>
+    <div class="row">
+      <StarItem v-for="star in orderedStars" :star="star" :key="star.id" class="star-item self-center">
+      </StarItem>
+    </div>
     <Top></Top>
   </q-page>
 </template>
@@ -9,16 +11,16 @@
 <script>
   import _ from 'lodash'
   import Top from '../components/Top'
-  import GodItem from '../components/GodItem'
+  import StarItem from '../components/StarItem'
   import Following from './Following'
   export default {
     mixins: [Following],
     props: {
       message: {
         type: Object,
-        default: function() {
+        default: function () {
           return {
-            user_name: '',
+            userName: '',
             id: 0
           }
         }
@@ -26,22 +28,21 @@
     },
     components: {
       Top,
-      GodItem
+      StarItem
     },
     computed: {
-      ordered_stars: function() {
-        return _.orderBy(this.filter_cat, 'following_at', 'desc').filter((o) => {
-          return o.name !== this.star_name
+      orderedStars: function () {
+        return _.orderBy(this.filterCat, 'followingAt', 'desc').filter((o) => {
+          return o.name !== this.StarName
         })
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style lang="stylus" scoped>
-// god 直接留出间距
+// star 直接留出间距
   .q-card
     margin 0.5rem
   .floating-label

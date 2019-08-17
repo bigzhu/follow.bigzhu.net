@@ -1,7 +1,7 @@
 <template>
   <div>
     <QPageSticky corner="bottom-right" :offset="[-286, 0]" class="bz">
-      <q-fab :content="unread_message_count" color="" icon="" activeIcon="" direction="left">
+      <q-fab :content="unreadMessageCount" color="" icon="" activeIcon="" direction="left">
         <q-fab-action color="" @click="updateLast" icon="whatshot">
           <q-tooltip anchor="center left" self="center right" :offset="[20, 0]">清空未读!</q-tooltip>
         </q-fab-action>
@@ -15,10 +15,7 @@
     QTooltip,
     QFab,
     QFabAction,
-    QCard,
-    QBtn,
-    QPageSticky,
-    QModal
+    QPageSticky
   } from 'quasar'
   export default {
     props: [],
@@ -26,28 +23,25 @@
       QTooltip,
       QFab,
       QFabAction,
-      QCard,
-      QBtn,
-      QPageSticky,
-      QModal
+      QPageSticky
     },
     computed: {
-      unread_message_count() {
-        return this.$store.state.unread_message_count
+      unreadMessageCount() {
+        return this.$store.state.unreadMessageCount
       }
     },
-    data: function() {
+    data: function () {
       return {}
     },
     mounted() {
       // $(this.$el).popup()
     },
     methods: {
-      updateLast: function() {
+      updateLast: function () {
         let now = (new Date()).setHours(0, 0, 0, 0)
-        this.$store.dispatch('recordLastMessage', now).then(function(data) {
+        this.$store.dispatch('recordLastMessage', now).then(function (data) {
           // toast('已清空, 只保留今天的未读')
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.reload()
           }, 3000)
         })

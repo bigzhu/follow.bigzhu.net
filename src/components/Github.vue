@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="description">
-      {{type}} <a :href='repo_url' target='_blank'>{{repo_name}}</a>
-      <p v-html="issue_content">
+      {{type}} <a :href='repoUrl' target='_blank'>{{repoName}}</a>
+      <p v-html="issueContent">
       </p>
       <li v-for="(commit, index) in commits" :key="index">
         <a target="_blank" :href="commit.url.replace('api.github.com/repos', 'github.com')">
@@ -11,7 +11,7 @@
       </li>
       <p v-html="issueCommentLink">
       </p>
-      <p v-show="issue_comment_body" v-html="marked_issue_comment_body"></p>
+      <p v-show="issueCommentBody" v-html="markedIssueCommentBody"></p>
     </div>
   </div>
 </template>
@@ -23,47 +23,47 @@
   export default {
     props: ['message'],
     computed: {
-      marked_issue_comment_body: () => {
-        if (this.issue_comment_body) {
-          return marked(this.issue_comment_body, {
+      markedIssueCommentBody: () => {
+        if (this.issueCommentBody) {
+          return marked(this.issueCommentBody, {
             sanitize: true
           })
         }
       },
-      repo_url: function() {
+      repoUrl: function () {
         return this.message.content.repo.url.replace('api.github.com/repos', 'github.com')
       },
-      repo_name: function() {
+      repoName: function () {
         return this.message.content.repo.name
       },
-      repo_link: function() {
-        return '<a href="' + this.repo_url + '" target="_blank">' + this.repo_name + '</a>'
+      repoLink: function () {
+        return '<a href="' + this.repoUrl + '" target="_blank">' + this.repoName + '</a>'
       },
-      type: function() {
+      type: function () {
         return this.message.content.type
       },
-      payload: function() {
+      payload: function () {
         return this.message.content.payload
       },
-      action: function() {
+      action: function () {
         return this.payload.action
       },
-      commits: function() {
+      commits: function () {
         return this.payload.commits
       },
-      issue: function() {
+      issue: function () {
         if (_.has(this.payload, 'issue')) {
           return this.payload.issue
         }
       },
-      issueLink: function() {
+      issueLink: function () {
         var issueLink
         if (this.issue) {
-          issueLink = '<a target="_blank" href="' + this.issue.html_url + '" >' + this.issue.title + '</a>'
+          issueLink = '<a target="_blank" href="' + this.issue.htmlUrl + '" >' + this.issue.title + '</a>'
           return issueLink
         }
       },
-      issue_content: function() {
+      issueContent: function () {
         var content
         content = ''
         if (this.action) {
@@ -71,18 +71,18 @@
           return content
         }
       },
-      issueCommentLink: function() {
+      issueCommentLink: function () {
         var issueCommentLink, issueCommentURL
         if (this.issue) {
           if (!this.payload.comment) {
             return
           }
-          issueCommentURL = this.payload.comment.html_url
+          issueCommentURL = this.payload.comment.htmlUrl
           issueCommentLink = '<a target="_blank" href="' + issueCommentURL + '" >' + this.issue.title + '</a>'
           return issueCommentLink
         }
       },
-      issue_comment_body: function() {
+      issueCommentBody: function () {
         if (_.has(this.payload, 'comment')) {
           return this.payload['comment']['body']
         }

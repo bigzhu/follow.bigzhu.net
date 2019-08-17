@@ -7,11 +7,11 @@
     </a>
 
     <!--
-    <a v-for="(image, index) in message.extended_entities" :key="index" v-if="type==='images'" @click="openImg(proxy(image.url))">
+    <a v-for="(image, index) in message.extendedEntities" :key="index" v-if="type==='images'" @click="openImg(proxy(image.url))">
       <img :src="proxy(image.url)" class="responsive">
     </a>
-    <a v-if="type==='image'" @click="openImg(proxy(message.extended_entities.url))">
-      <img :src="proxy(message.extended_entities.url)" class="responsive">
+    <a v-if="type==='image'" @click="openImg(proxy(message.extendedEntities.url))">
+      <img :src="proxy(message.extendedEntities.url)" class="responsive">
     </a>
     -->
     <video v-if="type==='video'" :controls="true" type='video/mp4'>
@@ -27,29 +27,30 @@
     mixins: [Proxy],
     props: ['message'],
     computed: {
-      type: function() {
+      type: function () {
         return this.message.type
       },
-      video: function() {
-        if (this.message.extended_entities && this.message.type === 'video') {
-          return this.message.extended_entities.video_url
+      video: function () {
+        if (this.message.extendedEntities && this.message.type === 'video') {
+          return this.message.extendedEntities.videoUrl
         }
+        return ''
       },
       // height: function () {
-      //   var img_height, img_width, real_height
-      //   img_height = this.message.extended_entities.height
-      //   img_width = this.message.extended_entities.width
-      //   real_height = getFitHeightForSemantic(img_height, img_width)
-      //   return real_height
+      //   var imgHeight, imgWidth, realHeight
+      //   imgHeight = this.message.extendedEntities.height
+      //   imgWidth = this.message.extendedEntities.width
+      //   realHeight = getFitHeightForSemantic(imgHeight, imgWidth)
+      //   return realHeight
       // },
-      description: function() {
+      description: function () {
         return myautolinker(this.message.text, 'instagram')
       }
     },
     methods: {
-      openImg: function(img_url) {
+      openImg: function (imgURL) {
         if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-          window.open(img_url, '_blank')
+          window.open(imgURL, '_blank')
         } else {
           this.$router.push({
             name: 'TheMessage',
@@ -64,9 +65,11 @@
 </script>
 
 <style scoped>
-  video, img.responsive {
+  video,
+  img.responsive {
     padding-top: 1rem
   }
+
   video {
     max-width: 100%;
     max-height: 40rem;

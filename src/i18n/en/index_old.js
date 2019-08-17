@@ -1,7 +1,7 @@
 
 export default {
-  AddGod: {
-    addnewgod: 'Add what you want to follow',
+  AddStar: {
+    addnewstar: 'Add what you want to follow',
     example: 'ID, for example: bigzhu',
     add: 'Add',
     adding: 'Adding',
@@ -19,17 +19,17 @@ export default {
     downtitle: 'Our story',
     downdescription: 'Follow us from follow.center'
   },
-  GodInfo: {
+  StarInfo: {
     edit: 'Edit',
     save: 'Saved'
   },
-  GodItem: {
+  StarItem: {
     follownumber: 'Followers',
     public: 'Public',
     biography: 'Biography',
     block: 'blocking this account'
   },
-  GodRemark: {
+  StarRemark: {
     save: 'Saved'
   },
   Login: {
@@ -50,7 +50,7 @@ export default {
     wanttofollow: 'What to follow',
     newmessage: 'New message'
   },
-  MyGods: {
+  MyStars: {
     search: 'Search'
   },
   Old: {
@@ -92,20 +92,20 @@ export default {
   },
   UserSet: {
     id: 'My ID',
-    change_id: 'Change ID to login',
+    changeId: 'Change ID to login',
     logout: 'logout',
-    anki_id: 'My Anki',
+    ankiId: 'My Anki',
     username: 'Username',
     password: 'Password',
     set: 'Set your Anki',
-    block_sns: 'Blocking the Social Network',
-    block_id: 'Blocked',
+    blockSns: 'Blocking the Social Network',
+    blockId: 'Blocked',
     number: 'The number of blocked people:',
-    block_manage: 'Manage the people you blocked',
+    blockManage: 'Manage the people you blocked',
     reset: 'Reset your Anki',
     blockreminder: "You don't want to see this kind of message"
   },
-  GodBlocked: {
+  StarBlocked: {
     tips: 'Nobody is been blocked'
   }
 }

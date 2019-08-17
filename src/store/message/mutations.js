@@ -5,98 +5,98 @@ export const someMutation = (state) => {
 import _ from 'lodash'
 import Vue from 'vue'
 
-function initGodMessage(state, star_name) {
-  if (state.gods_messages[star_name] === undefined) {
-    Vue.set(state.gods_messages, star_name, [])
+function initStarMessage (state, StarName) {
+  if (state.starsMessages[StarName] === undefined) {
+    Vue.set(state.starsMessages, StarName, [])
   }
 }
 
-export const new_messages = (state, messages) => {
+export const newMessages = (state, messages) => {
   let mergeMessages = state.messages.concat(messages)
-  let uniqMessages = _.uniqBy(mergeMessages, function(d) {
-    return d.id
+  let uniqMessages = _.uniqBy(mergeMessages, function (d) {
+    return d.ID
   })
   state.messages = uniqMessages
 }
-export const last_time = (state, time) => {
-  state.last_time = time
+export const lastTime = (state, time) => {
+  state.lastTime = time
 }
-export const show_how_to_use_collect = (state, show) => {
-  state.show_how_to_use_collect = show
+export const showHowToUseCollect = (state, show) => {
+  state.showHowToUseCollect = show
 }
 
-export const collect_messages = (state, collect_messages) => {
+export const collectMessages = (state, collectMessages) => {
   // 收藏要翻过来排序, 后藏的,显示在最前面
-  state.collect_messages = _.reverse(collect_messages)
+  state.collectMessages = _.reverse(collectMessages)
 }
-export const filter_god_messages = (state, star_name) => { // 从主线messages中把god message 过滤出来，避免页面空白
-  initGodMessage(state, star_name)
-  if (state.messages.length !== 0 && state.gods_messages[star_name].length === 0) {
-    let godMessages = _.filter(state.messages, (d) => {
-      return d.star_name === star_name
+export const filterStarMessages = (state, StarName) => { // 从主线messages中把star message 过滤出来，避免页面空白
+  initStarMessage(state, StarName)
+  if (state.messages.length !== 0 && state.starsMessages[StarName].length === 0) {
+    let starMessages = _.filter(state.messages, (d) => {
+      return d.StarName === StarName
     })
-    state.gods_messages[star_name] = godMessages
+    state.starsMessages[StarName] = starMessages
   }
 }
-export const god_new_messages = (state, {
-  star_name,
+export const starNewMessages = (state, {
+  StarName,
   messages
 }) => {
-  initGodMessage(state, star_name)
-  let mergeMessages = state.gods_messages[star_name].concat(messages)
-  let uniqMessages = _.uniqBy(mergeMessages, function(d) {
-    return d.id
+  initStarMessage(state, StarName)
+  let mergeMessages = state.starsMessages[StarName].concat(messages)
+  let uniqMessages = _.uniqBy(mergeMessages, function (d) {
+    return d.ID
   })
-  state.gods_messages[star_name] = uniqMessages
+  state.starsMessages[StarName] = uniqMessages
 }
-export const god_old_messages = (state, {
-  star_name,
+export const starOldMessages = (state, {
+  StarName,
   messages
 }) => {
-  initGodMessage(state, star_name)
-  state.gods_messages[star_name] = _.uniq(
-    messages.reverse().concat(state.gods_messages[star_name]), false,
-    function(item, key, a) {
+  initStarMessage(state, StarName)
+  state.starsMessages[StarName] = _.uniq(
+    messages.reverse().concat(state.starsMessages[StarName]), false,
+    function (item, key, a) {
       return item.id
     }
   )
 }
-export const reflash_time_len = (state) => { // 更新时间隔
-  if (state.last_reflash_oper) {
+export const reflashTimeLen = (state) => { // 更新时间隔
+  if (state.lastReflashOper) {
     _.map(state.messages,
       (d) => {
-        d.created_at = d.created_at + 1
+        d.CreatedAt = d.CreatedAt + 1
         return d
       }
     )
-    state.last_reflash_oper = 0
+    state.lastReflashOper = 0
   } else {
     _.map(state.messages,
       (d) => {
-        d.created_at = d.created_at - 1
+        d.CreatedAt = d.CreatedAt - 1
         return d
       }
     )
-    state.last_reflash_oper = 1
+    state.lastReflashOper = 1
   }
 }
-export const old_messages = (state, messages) => {
+export const oldMessages = (state, messages) => {
   state.messages = _.uniq(
     messages.reverse().concat(state.messages), false,
-    function(item, key, a) {
+    function (item, key, a) {
       return item.id
     }
   )
 }
-export const new_loading = (state, loading) => {
-  state.new_loading = loading
+export const newLoading = (state, loading) => {
+  state.newLoading = loading
 }
-export const old_loading = (state, loading) => {
-  state.old_loading = loading
+export const oldLoading = (state, loading) => {
+  state.oldLoading = loading
 }
-export const unread_message_count = (state, unread_message_count) => {
-  state.unread_message_count = unread_message_count
+export const unreadMessageCount = (state, unreadMessageCount) => {
+  state.unreadMessageCount = unreadMessageCount
 }
-export const the_message = (state, the_message) => {
-  state.the_message = the_message
+export const theMessage = (state, theMessage) => {
+  state.theMessage = theMessage
 }

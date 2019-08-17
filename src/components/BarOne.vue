@@ -1,69 +1,66 @@
 <template>
   <!-- 第一栏标题 -->
-  <q-toolbar color="primary" inverted>
+  <q-toolbar class="text-black">
     <!--logo-->
     <router-link :to="{name: 'Main'}">
-      <img class="logo-img" src="../statics/assets/logo.svg">
+      <img class="logo-img" src="../statics/assets/logo.svg"/>
     </router-link>
     <!--title-->
     <q-toolbar-title>
-      <router-link :to="{name: 'Main'}">
-        Follow Center
-      </router-link>
+      <router-link :to="{name: 'Main'}">Follow Center</router-link>
       <span slot="subtitle">Follow your dream</span>
     </q-toolbar-title>
     <!--login-->
-    <q-btn v-show="!is_login" @click="login" flat small icon="ion-log-in">
-      {{ $t("登录") }}
-    </q-btn>
+    <q-btn v-show="!isLogin" @click="login" flat small icon="ion-log-in">{{ $t('登录') }}</q-btn>
     <!--userInfo-->
-    <UserInfo v-show="is_login" />
+    <UserInfo v-show="isLogin"/>
     <!--点击呼出右侧菜单-->
-    <q-btn flat @click="$store.commit('show_right', !show_right)">
-      <q-icon name="menu" />
+    <q-btn flat @click="$store.commit('showRight', !showRight)">
+      <q-icon name="menu"/>
     </q-btn>
   </q-toolbar>
 </template>
 
 <script>
-  import UserInfo from './UserInfo'
-  export default {
-    props: [],
-    components: {
-      UserInfo
-    },
-    computed: {
-      show_right: {
-        get: function() {
-          return this.$store.state.main.show_right
+    import UserInfo from './UserInfo'
+
+    export default {
+        props: [],
+        components: {
+            UserInfo
         },
-        set: function(show_right) {
-          this.$store.commit('show_right', show_right)
+        computed: {
+            showRight: {
+                get: function () {
+                    return this.$store.state.main.showRight
+                },
+                set: function (showRight) {
+                    this.$store.commit('showRight', showRight)
+                }
+            },
+            isLogin: function () {
+                return this.$store.state.lib.oauthInfo.Name
+            }
+        },
+        mounted: function () {
+            if (this.isLogin === '') {
+                // 取用户信息
+                this.$store.dispatch('lib/getOauthInfo')
+                // 取用户不关注社交类型
+                // this.$store.dispatch('getNoTypes')
+            }
+            this.$nextTick(function () {
+                // code that assumes this.$el is in-document
+            })
+        },
+        methods: {
+            login: function () {
+                this.$router.push({
+                    name: 'Oauth'
+                })
+            }
         }
-      },
-      is_login: function() {
-        return this.$store.state.lib.oauth_info.name
-      }
-    },
-    mounted: function() {
-      if (this.is_login === '') {
-        // 取用户信息
-        this.$store.dispatch('lib/getOauthInfo')
-        // 取用户不关注社交类型
-        // this.$store.dispatch('getNoTypes')
-      }
-      this.$nextTick(function() {
-        // code that assumes this.$el is in-document
-      })
-    },
-    methods: {
-      login: function() {
-        this.$router.push({
-          name: 'Oauth'
-        })
-      }
     }
-  }
 </script>
 
 <style lang="stylus" scoped>

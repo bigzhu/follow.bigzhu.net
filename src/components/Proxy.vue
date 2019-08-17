@@ -5,13 +5,10 @@
 <script>
   export default {
     props: [],
-    components: {
-    },
-    computed: {
-    },
+    components: {},
+    computed: {},
     data: function () {
-      return {
-      }
+      return {}
     },
     mounted: function () {
       this.$nextTick(function () {
@@ -19,15 +16,15 @@
       })
     },
     methods: {
-      changeImgURL: function (img_url) {
-        return img_url.replace('s18.postimg.org', 's18.postimg.cc')
+      changeImgURL: function (imgURL) {
+        return imgURL.replace('s18.postimg.org', 's18.postimg.cc')
       },
       proxy: function (url) {
         if (!url) {
           return ''
         }
-        // let p_url = window.btoa(window.btoa(url))
-        // return '/api_sp/' + p_url
+        // let pUrl = window.btoa(window.btoa(url))
+        // return '/apiSp/' + pUrl
         // return '/p?url=' + encodeURIComponent(url)
         return '/p/' + url
       },
@@ -45,4 +42,5 @@
 </script>
 
 <style>
+
 </style>

@@ -1,0 +1,100 @@
+// app global css
+// 一些覆盖不可配置样式的
+a
+  color: #767676;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+  transition: color .25s;
+.green-bz a // 让 green-bz 里的a高亮绿色
+  color #2ea974
+.fixed-bottom-right.bz
+  .q-btn-round // 不要阴影
+    box-shadow none
+  button
+    &:hover
+      background #FFF
+      color #26A69A
+      border 1px solid #26A69A
+    color: #DADADA;
+    border: 1px solid #DADADA;
+  @media (min-width: 1100px) and (max-width: 1300px)
+    right: .5em;
+
+// 左下角的功能按钮
+
+// 字体和灰背景 
+html
+    font-size 14px
+    background #fafafa
+.q-card
+  background #FFF // card 背景要白色
+  &:hover
+    box-shadow .5px 1px 1px 1px rgba(0,0,0,0.15)
+
+
+// 手机上
+@media only screen and (max-width: 600px)
+  .layout-padding
+    padding: 1.5rem 0rem
+  .q-card
+    margin: 1rem 0rem
+
+// text也能自动换行
+.word-wrap-bz 
+  white-space: pre-wrap
+  word-wrap:break-word
+
+// 居中的 container
+.center-container-bz
+  display flex
+  flex-direction column
+  justify-content space-between
+  align-items center
+// 小屏幕一律显示
+@media (max-width: 767px)
+  .hover-show-bz
+    opacity: 1;
+
+// hover 时才显示
+.hover-show-bz
+  transition: color 0.3s ease
+  transition: visibility 0s, opacity 0.3s linear
+  opacity: 0
+
+// 哪个被 hover
+.the-hover-bz:hover .hover-show-bz
+  opacity: 1
+
+// 居中
+.justify-content-bz
+  display flex
+  justify-content center
+// 平均居中
+.space-between-bz
+  display flex
+  justify-content space-between
+
+
+// select 弹出的样式
+.item,&.no-border
+  font-size 0.9rem;
+  &.active, &.router-link-active, &:focus
+    background rgba(0, 0, 0, 0)
+
+/*
+.list
+  border: 0
+  box-shadow 0.5px 1px 1px 1px rgba(0,0,0,0.1)
+  > .item, &.no-border
+    &:first-child
+      margin-top 0px
+    &:last-child
+      margin-bottom 0px
+*/
+
+body.desktop .item.item-link:hover
+ background rgba(0, 0, 0, .03)
+// q-if 的字体写死了 16px, 这样不行
+.q-if
+  font-size inherit

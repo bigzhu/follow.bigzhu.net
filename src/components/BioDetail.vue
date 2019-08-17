@@ -3,13 +3,13 @@
     <div class="row gutter sm-column">
       <div class="width-5of5 no-top-padding-bz">
         <div class="ui segment bio-background">
-          <img class="responsive" :src='bio.title_img'>
+          <img class="responsive" :src='bio.titleImg'>
           <div class="bio-article">
             <h3>{{bio.title}}</h3>
             <div v-html="bio.text">
             </div>
           </div>
-          <god-item :god='god_info' is_my="true" class="bio-god-card"></god-item>
+          <star-item :star='starInfo' isMy="true" class="bio-star-card"></star-item>
         </div>
       </div>
 
@@ -24,51 +24,50 @@
 
 <script>
   import Top from './Top'
-  import GodItem from './GodItem'
+  import StarItem from './StarItem'
   import _ from 'lodash'
   import RightInfo from './RightInfo'
   export default {
     components: {
       Top,
-      GodItem,
+      StarItem,
       RightInfo
     },
     data () {
       return {
-        star_name: this.$route.params.star_name
+        StarName: this.$route.params.StarName
       }
     },
-    props: {
-    },
+    props: {},
     mounted () {
-      this.$store.dispatch('getGod', this.star_name)
+      this.$store.dispatch('getStar', this.StarName)
       this.getBio()
     },
     computed: {
-      god_info () {
-        let god_info = this.$store.state.god_infos[this.star_name]
-        if (god_info) {
-          return god_info
+      starInfo () {
+        let starInfo = this.$store.state.starInfos[this.StarName]
+        if (starInfo) {
+          return starInfo
         }
-        return {id: 0, name: ''}
+        return { id: 0, name: '' }
       },
       bio () {
         let self = this
-        let bio = _.find(this.$store.state.p.rich_list, function (d) { return d.key === self.star_name })
+        let bio = _.find(this.$store.state.p.richList, function (d) { return d.key === self.StarName })
         if (bio) return bio
-        else return {title_img: ''}
+        else return { titleImg: '' }
       }
     },
     methods: {
       getDetail: function () {
         let self = this
-        this.$store.dispatch('getRichText', {key: this.star_name}).then(function (data) {
-          self.bio.text = data.rich_text[0].text
+        this.$store.dispatch('getRichText', { Key: this.StarName }).then(function (data) {
+          self.bio.text = data.richText[0].text
         })
       },
       getBio: function () {
         let self = this
-        if (this.bio.title_img !== '') {
+        if (this.bio.titleImg !== '') {
           if (!this.bio.text) { // 没有详情，取之
             this.getDetail()
           }
@@ -86,15 +85,17 @@
 <style scoped>
   .ui.segment.bio-background {
     border-radius: 0.06em;
-    box-shadow: .5px 1px 1px 1px rgba(0,0,0,0.1);
+    box-shadow: .5px 1px 1px 1px rgba(0, 0, 0, 0.1);
     position: relative;
     border: none;
     background-color: #fff;
   }
+
   .bio-article {
     padding: 1.5rem;
   }
-  .bio-god-card.ui.segment.recommand-god-bz {
+
+  .bio-star-card.ui.segment.recommand-star-bz {
     box-shadow: none;
     border-top: 1px solid #E6E6E6;
     padding-top: 1rem;
