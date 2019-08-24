@@ -28,13 +28,15 @@
       </q-item-section>
 
       <q-item-section side top>
-        <q-item-label caption>
+        <q-item-label>
           <a target="_blank" :href="href">
             {{message.Social}}
             <q-icon :name="'fab fa-'+message.Social" />
           </a>
         </q-item-label>
-        <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
+        <q-item-label caption>
+          <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
+        </q-item-label>
       </q-item-section>
     </q-item>
 

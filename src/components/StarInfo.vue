@@ -87,7 +87,7 @@ export default {
       } else {
         this.disableEdit = true
         let modifyStarSocial = {
-          StarID: this.StarID
+          StarID: parseInt(this.StarID)
         }
         // 筛出做了修改的社交
         this.socialTypes.map((o) => {
