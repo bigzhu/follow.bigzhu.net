@@ -23,6 +23,7 @@
 <script>
     import myautolinker from '../functions/myautolinker'
     import Proxy from './Proxy'
+
     export default {
         mixins: [Proxy],
         props: ['message'],
@@ -49,20 +50,26 @@
 </script>
 
 <style lang="stylus" scoped>
+  video
+    outline none
+
   // description 的内容是后来渲染的, 无法应用 scoped 特性
   .description
     a
       // 避免 url 撑开 message, 导致手机屏幕左右滑动
       word-wrap break-word
       word-break break-all
+
   // 约束视频不要越界
   video
     max-width 100%
+
   // 手机上
   @media only screen and (max-width: 600px)
     // 取消边上的 padding 扩大可视范围
     .q-layout-padding
       padding: 1.5rem 0rem
+
     // padding 扩大可视范围
     .media
       padding: 0rem 0rem

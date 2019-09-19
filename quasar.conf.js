@@ -61,7 +61,7 @@ module.exports = function(ctx) {
         'QItemLabel'
       ],
 
-      directives: ['Ripple','Scroll'],
+      directives: ['Ripple', 'Scroll'],
 
       // Quasar plugins
       plugins: ['Notify']
@@ -92,12 +92,13 @@ module.exports = function(ctx) {
     devServer: {
       proxy: {
         '/api': {
-          target: 'http://123.176.102.187:8080',
+          // target: 'http://123.176.102.187:8080',
+          target: 'https://follow.bigzhu.net',
           changeOrigin: true
         },
         '/medias': {
           // target: 'http://follow.bigzhu.net',
-          target: 'http://123.176.102.187:8080',
+          target: 'https://follow.bigzhu.net',
           changeOrigin: true
         }
       },
