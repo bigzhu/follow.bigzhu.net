@@ -6,17 +6,7 @@ export const someAction = (state) => {
 */
 
 // 获取新信息
-export const getNew = ({
-  state,
-  commit,
-  dispatch
-}, {
-  StarName,
-  SearchKey,
-  After,
-  Limit,
-  explore
-}) => {
+export const getNew = ({ state, commit, dispatch }, { StarName, SearchKey, After, Limit, explore }) => {
   commit('newLoading', true)
   let params = {
     not: state.noTypes,
@@ -26,74 +16,45 @@ export const getNew = ({
     SearchKey: SearchKey
   }
   return axios.get('/api/messages/New', {
-      params: params
-    })
-    .then(function (response) {
-      let data = response.data
-      commit('newMessages', data)
-      commit('newLoading', false)
-      return data
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+    params: params
+  }).then(function (response) {
+    let data = response.data
+    commit('newMessages', data)
+    commit('newLoading', false)
+    return data
+  })
 }
 
 // 记录看到哪条信息
-export const recordLastMessage = ({
-  state,
-  commit,
-  dispatch
-}, time) => {
+export const recordLastMessage = ({ state, commit, dispatch }, time) => {
   return axios.put('/apiLast', {
-      last: time
-    })
-    .then(function (response) {
-      state.unreadMessageCount = response.data
-      commit('lastTime', parseInt(time, 10))
-      return response.data
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+    last: time
+  }).then(function (response) {
+    state.unreadMessageCount = response.data
+    commit('lastTime', parseInt(time, 10))
+    return response.data
+  })
 }
 // 收藏
-export const collect = ({
-  state,
-  commit,
-  dispatch
-}, messageID) => {
-  var params = {
+export const collect = ({ state, commit, dispatch }, messageID) => {
+  let params = {
     messageId: messageID
   }
   return axios.post('/apiCollect', params)
-    .then(function (response) {})
-    .catch(function (error) {
-      console.log(error)
+    .then(function (response) {
     })
 }
 
 // 取消收藏
-export const uncollect = ({
-  state,
-  commit,
-  dispatch
-}, messageID) => {
+export const uncollect = ({ state, commit, dispatch }, messageID) => {
   return axios.delete('/apiCollect', {
-      params: {
-        messageId: messageID
-      }
-    })
-    .then(function (response) {})
-    .catch(function (error) {
-      console.log(error)
-    })
+    params: {
+      messageId: messageID
+    }
+  }).then(function (response) {
+  })
 }
-export const getCollect = ({
-  state,
-  commit,
-  dispatch
-}) => {
+export const getCollect = ({ state, commit, dispatch }) => {
   commit('newLoading', true)
   return axios.get('/apiCollect')
     .then(function (response) {
@@ -107,16 +68,7 @@ export const getCollect = ({
       return response.data
     })
 }
-export const newMessage = ({
-  state,
-  commit,
-  dispatch
-}, {
-  StarName,
-  SearchKey,
-  Limit,
-  explore
-}) => {
+export const newMessage = ({ state, commit, dispatch }, { StarName, SearchKey, Limit, explore }) => {
   let messages = []
   let After = null
   if (StarName) {
@@ -149,14 +101,7 @@ export const newMessage = ({
     Explore: explore
   })
 }
-export const oldMessage = ({
-  state,
-  commit,
-  dispatch
-}, {
-  StarName,
-  searchKey
-}) => {
+export const oldMessage = ({ state, commit, dispatch }, { StarName, searchKey }) => {
   let messages = null
   let before = null
   if (StarName) {
@@ -178,25 +123,17 @@ export const oldMessage = ({
   })
 }
 
-export const getOld = ({
-  state,
-  commit,
-  dispatch
-}, {
-  StarName,
-  SearchKey,
-  Before
-}) => {
+export const getOld = ({ state, commit, dispatch }, { StarName, SearchKey, Before }) => {
   commit('oldLoading', true)
-  var params = {
+  let params = {
     Not: state.noTypes,
     StarName: StarName,
     SearchKey: SearchKey,
     Before: Before
   }
   return axios.get('/api/messages/Old', {
-      params: params
-    })
+    params: params
+  })
     .then(function (response) {
       let messages = response.data
       if (messages.length === 0) { // 没有取到数
@@ -233,11 +170,7 @@ export const getOld = ({
       commit('reflashTimeLen')
     })
 }
-export const getTheMessage = ({
-  state,
-  commit,
-  dispatch
-}, id) => {
+export const getTheMessage = ({ state, commit, dispatch }, id) => {
   let message = _.find(state.messages, function (d) {
     return d.ID === parseInt(id, 10)
   })

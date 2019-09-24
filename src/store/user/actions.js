@@ -6,17 +6,10 @@ import {
   // get
 } from 'bz-q-lib/src/functions/http'
 
-export const getNoTypes = ({
-  state,
-  commit,
-  dispatch
-}) => {
+export const getNoTypes = ({ state, commit, dispatch }) => {
   return axios.get('/apiNoTypes')
     .then((response) => {
       commit('noTypes', response.data)
       return response.data
-    })
-    .catch(function (error) {
-      console.log(error)
     })
 }
