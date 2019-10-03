@@ -2,9 +2,9 @@
   <q-card v-view="setStar" class="the-hover-bz">
     <q-dialog v-model="opened" position="left" :content-css="{padding: '0px'}">
       <q-inner-loading :dark="false" :visible="loading">
-        <q-spinner-gears size="3rem" color="secondary" />
+        <q-spinner-gears size="3rem" color="secondary"/>
       </q-inner-loading>
-      <StarItem :star="star" :key="star.ID" style="width: 100%" />
+      <StarItem :star="star" :key="star.ID" style="width: 100%"/>
     </q-dialog>
 
     <q-item>
@@ -31,126 +31,131 @@
         <q-item-label>
           <a target="_blank" :href="href">
             {{message.Social}}
-            <q-icon :name="'fab fa-'+message.Social" />
+            <q-icon :name="'fab fa-'+message.Social"/>
           </a>
         </q-item-label>
         <q-item-label caption>
-          <TimeLen :dateTime="message.OutCreatedAt" :lang="lang" />
+          <TimeLen :dateTime="message.OutCreatedAt" :lang="lang"/>
         </q-item-label>
       </q-item-section>
     </q-item>
 
     <q-card class="green-bz">
-      <MessageContent class="content-bz" :message="message" />
+      <MessageContent class="content-bz" :message="message"/>
     </q-card>
 
     <q-card-actions align="right" class="card-actions bz">
       <router-link :to="{ name:'TheMessage', params: {id:message.ID}}" class="more-infor-bz hover-show-bz">
-        <q-icon name="more_horiz" />
+        <q-icon name="more_horiz"/>
       </router-link>
       <a @click="toggleCollect(message)" :class="{'hover-show-bz':!message.Collect}" class="bookmark">
-        <q-icon :class="{'bookmark-light': message.Collect}" name="bookmark_border" />
+        <q-icon :class="{'bookmark-light': message.Collect}" name="bookmark_border"/>
       </a>
       <a @click="anki" :class="{'hover-show-bz':!message.Anki}" class="anki">
-        <q-icon :class="{'anki-light': message.Anki}" name="stars" />
+        <q-icon :class="{'anki-light': message.Anki}" name="stars"/>
       </a>
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
-  import MessageContent from './MessageContent'
-  import TimeLen from 'bz-q-lib/src/components/TimeLen'
-  import Proxy from './Proxy'
-  import StarItem from './StarItem'
-  import Vue from 'vue'
-  import checkView from 'vue-check-view'
-  Vue.use(checkView)
+    import MessageContent from './MessageContent'
+    import TimeLen from 'bz-q-lib/src/components/TimeLen'
+    import Proxy from './Proxy'
+    import StarItem from './StarItem'
+    import Vue from 'vue'
+    import checkView from 'vue-check-view'
 
-  export default {
-    mixins: [Proxy],
-    props: {
-      message: {
-        type: Object
-      }
-    },
-    components: {
-      StarItem,
-      TimeLen,
-      MessageContent
-    },
-    data: function () {
-      return {
-        opened: false, // star 信息是否弹出
-        ankiColor: '#B3B3B3' // #57ADE3
-      }
-    },
-    mounted() {
-      this.$nextTick(function () {
-        // 给 anki 用
-        this.message.el = this.$el
-      })
-    },
-    computed: {
-      nowStar() {
-        return this.$store.state.star.nowStar
-      },
-      starSocial() {
-        return this.$store.state.star.mapStarSocials[this.message.StarID.toString()][this.message.Social]
-      },
-      star() {
-        return this.$store.state.star.mapStars[this.message.StarID.toString()]
-      },
-      loading() {
-        return this.$store.state.lib.loading
-      },
-      lang() {
-        return this.$i18n.locale
-      },
-      href: function () {
-        if (this.message.mType === 'github') {
-          return `https://github.com/${this.message.name}`
+    Vue.use(checkView)
+
+    export default {
+        mixins: [Proxy],
+        props: {
+            message: {
+                type: Object
+            }
+        },
+        components: {
+            StarItem,
+            TimeLen,
+            MessageContent
+        },
+        data: function () {
+            return {
+                opened: false, // star 信息是否弹出
+                ankiColor: '#B3B3B3' // #57ADE3
+            }
+        },
+        mounted() {
+            this.$nextTick(function () {
+                // 给 anki 用
+                this.message.el = this.$el
+            })
+        },
+        computed: {
+            nowStar() {
+                return this.$store.state.star.nowStar
+            },
+            starSocial() {
+                let starSocial = this.$store.state.star.mapStarSocials[this.message.StarID.toString()]
+                if (!starSocial) return {}
+                return starSocial[this.message.Social]
+            },
+            star() {
+                return this.$store.state.star.mapStars[this.message.StarID.toString()]
+            },
+            loading() {
+                return this.$store.state.lib.loading
+            },
+            lang() {
+                return this.$i18n.locale
+            },
+            href: function () {
+                if (this.message.mType === 'github') {
+                    return `https://github.com/${this.message.name}`
+                }
+                return this.message.Href
+            },
+            avatar: function () {
+                return this.starSocial.Avatar
+            }
+        },
+        methods: {
+            setStar: function (e) {
+                this.$store.commit('setNowStar', { name: this.star.Name, percentCenter: e.percentCenter })
+            },
+            anki: function () {
+                if (this.message.Anki) return
+                this.message.Anki = 1
+                let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
+                this.$store
+                    .dispatch('postAnki', {
+                        front: front,
+                        messageId: this.message.ID
+                    })
+                    .then(function () {
+                    }).catch((error) => {
+                    this.$q.notify(error.response.data)
+                })
+            },
+            toggleCollect: function (message) {
+                if (message.Collect) {
+                    message.Collect = 0
+                    this.$store.dispatch('uncollect', message.ID)
+                } else {
+                    message.collect = 1
+                    this.$store.dispatch('collect', message.ID)
+                }
+            }
         }
-        return this.message.Href
-      },
-      avatar: function () {
-        return this.starSocial.Avatar
-      }
-    },
-    methods: {
-      setStar: function (e) {
-        this.$store.commit('setNowStar', { name: this.star.Name, percentCenter: e.percentCenter })
-      },
-      anki: function () {
-        if (this.message.Anki) return
-        this.message.Anki = 1
-        let front = this.$el.getElementsByClassName('content-bz')[0].innerHTML
-        this.$store
-          .dispatch('postAnki', {
-            front: front,
-            messageId: this.message.ID
-          })
-          .then(function () {}).catch((error) => {
-            this.$q.notify(error.response.data)
-          })
-      },
-      toggleCollect: function (message) {
-        if (message.Collect) {
-          message.Collect = 0
-          this.$store.dispatch('uncollect', message.ID)
-        } else {
-          message.collect = 1
-          this.$store.dispatch('collect', message.ID)
-        }
-      }
     }
-  }
 </script>
 
 <style lang="stylus" scoped>
-.q-card.the-hover-bz
-  box-shadow none
-  border-bottom 1px solid #eee
+  .q-card.the-hover-bz
+    box-shadow none
+    border-bottom 1px solid #eee
+
   /*
 取消原本设定的图片大小
   .q-item-avatar {
