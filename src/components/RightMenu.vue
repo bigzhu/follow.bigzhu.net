@@ -9,7 +9,7 @@
       <br>
     -->
     <br>
-    <RightInfo v-if="name==='Main' || name==='Collect'"></RightInfo>
+    <RightInfo />
   </q-scroll-area>
 </template>
 

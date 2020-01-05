@@ -93,12 +93,13 @@ module.exports = function(ctx) {
       proxy: {
         '/api': {
           // target: 'http://123.176.102.187:8080',
-          target: 'https://follow.bigzhu.net',
+          // target: 'https://follow.bigzhu.net',
+          target: 'http://127.0.0.1:3003',
           changeOrigin: true
         },
         '/medias': {
-          // target: 'http://follow.bigzhu.net',
-          target: 'https://follow.bigzhu.net',
+          // target: 'https://follow.bigzhu.net',
+          target: 'http://127.0.0.1:8081',
           changeOrigin: true
         }
       },
