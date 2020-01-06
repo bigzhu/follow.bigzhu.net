@@ -24,7 +24,7 @@
     <q-card-section>
       <div class="row">
         <span class="col-md-6">{{ $t("注册人数") }}: {{registeredCount}}</span>
-        <span class="col-md-6 text-right">© 2019 BigZhu</span>
+        <span class="col-md-6 text-right">© 2020 BigZhu</span>
       </div>
     </q-card-section>
     <q-card-section>
