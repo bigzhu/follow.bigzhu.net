@@ -21,32 +21,34 @@
 </template>
 
 <script>
-    import myautolinker from '../functions/myautolinker'
-    import Proxy from './Proxy'
+  import myautolinker from '../functions/myautolinker'
+  import addClassToHtmlStr from '../functions/add_class_to_html_str'
+  import Proxy from './Proxy'
 
-    export default {
-        mixins: [Proxy],
-        props: ['message'],
-        computed: {
-            text: function () {
-                return myautolinker(this.message.Text, this.message.Social)
+  export default {
+    mixins: [Proxy],
+    props: ['message'],
+    computed: {
+      text: function () {
+        let newText = addClassToHtmlStr(this.message.Text, 'img', 'responsive')
+        return myautolinker(newText, this.message.Social)
+      }
+    },
+    methods: {
+      openImg: function (imgURL) {
+        if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
+          window.open(imgURL, '_blank')
+        } else {
+          this.$router.push({
+            name: 'TheMessage',
+            params: {
+              id: this.message.ID
             }
-        },
-        methods: {
-            openImg: function (imgURL) {
-                if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-                    window.open(imgURL, '_blank')
-                } else {
-                    this.$router.push({
-                        name: 'TheMessage',
-                        params: {
-                            id: this.message.ID
-                        }
-                    })
-                }
-            }
+          })
         }
+      }
     }
+  }
 </script>
 
 <style lang="stylus" scoped>
