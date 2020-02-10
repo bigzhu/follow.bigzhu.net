@@ -21,48 +21,57 @@
 </template>
 
 <script>
-    import myautolinker from '../functions/myautolinker'
-    import Proxy from './Proxy'
-    export default {
-        mixins: [Proxy],
-        props: ['message'],
-        computed: {
-            text: function () {
-                return myautolinker(this.message.Text, this.message.Social)
+  import myautolinker from '../functions/myautolinker'
+  import addClassToHtmlStr from '../functions/add_class_to_html_str'
+  import Proxy from './Proxy'
+
+  export default {
+    mixins: [Proxy],
+    props: ['message'],
+    computed: {
+      text: function () {
+        let newText = addClassToHtmlStr(this.message.Text, 'img', 'responsive')
+        return myautolinker(newText, this.message.Social)
+      }
+    },
+    methods: {
+      openImg: function (imgURL) {
+        if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
+          window.open(imgURL, '_blank')
+        } else {
+          this.$router.push({
+            name: 'TheMessage',
+            params: {
+              id: this.message.ID
             }
-        },
-        methods: {
-            openImg: function (imgURL) {
-                if (this.$route.name === 'TheMessage') { // 在 TheMessage 还点了图，就在新页中打开图
-                    window.open(imgURL, '_blank')
-                } else {
-                    this.$router.push({
-                        name: 'TheMessage',
-                        params: {
-                            id: this.message.ID
-                        }
-                    })
-                }
-            }
+          })
         }
+      }
     }
+  }
 </script>
 
 <style lang="stylus" scoped>
+  video
+    outline none
+
   // description 的内容是后来渲染的, 无法应用 scoped 特性
   .description
     a
       // 避免 url 撑开 message, 导致手机屏幕左右滑动
       word-wrap break-word
       word-break break-all
+
   // 约束视频不要越界
   video
     max-width 100%
+
   // 手机上
   @media only screen and (max-width: 600px)
     // 取消边上的 padding 扩大可视范围
     .q-layout-padding
       padding: 1.5rem 0rem
+
     // padding 扩大可视范围
     .media
       padding: 0rem 0rem

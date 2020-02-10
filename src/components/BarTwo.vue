@@ -8,7 +8,9 @@
       <q-route-tab :to="{ name:'Following'}" replace :label="$t('跟踪')" v-show="isLogin" />
       -->
       <q-route-tab :to="{ name:'Collect'}" replace :label="$t('收藏')" v-show="isLogin" />
+      <!--
       <q-tab @click="open('http://bigzhu.lorstone.com/tag/%E4%BC%A0%E8%AE%B0/')" :label="$t('传记')" />
+      -->
     </q-tabs>
   </q-toolbar>
 </template>

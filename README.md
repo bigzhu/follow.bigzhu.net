@@ -10,3 +10,9 @@
 
 
 ![test.jpg](https://www.bigzhu.net/assets/img/test.jpg)
+
+## changelog
+
+v2.0.12
+
+* Make sure tumblr images don't out of card 
