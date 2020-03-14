@@ -10,27 +10,27 @@ export default {
     dialog: function() {
       this.$q
         .dialog({
-          title: this.$t("添加"),
-          message: this.$t("帐号名, 比如: bigzhu"),
-          ok: this.$t("分析"),
-          color: "secondary",
+          title: this.$t('添加'),
+          message: this.$t('帐号名, 比如: bigzhu'),
+          ok: this.$t('分析'),
+          color: 'secondary',
           prompt: {
-            model: "",
-            type: "text" // optional
+            model: '',
+            type: 'text' // optional
           }
         })
         .then(data => {
-          this.$emit("add", data.trim());
+          this.$emit('add', data.trim())
         })
         .catch(() => {
-          this.$q.notify("Ok, no mood for talking, right?");
-        });
+          this.$q.notify('Ok, no mood for talking, right?')
+        })
     }
   }
-};
+}
 </script>
 
-<style lang="stylus" scoped>
+<style lang='stylus' scoped>
 .fixed-bottom-right {
   z-index: 9999; // 浮动在最上面
 }
