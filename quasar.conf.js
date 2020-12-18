@@ -5,20 +5,20 @@ module.exports = function(ctx) {
   return {
     // app boot file (/src/boot)
     // --> boot files are part of 'main.js'
-    boot: ['i18n', 'axios'],
+    boot: ["i18n", "axios"],
 
-    css: ['app.styl'],
+    css: ["app.styl"],
 
     extras: [
-      'ionicons-v4',
+      "ionicons-v4",
       // 'mdi-v3',
-      'fontawesome-v5',
+      "fontawesome-v5",
       // 'eva-icons',
       // 'themify',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       // 'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      "material-icons" // optional, you are not bound to it
     ],
 
     framework: {
@@ -28,77 +28,71 @@ module.exports = function(ctx) {
       // all: true, // --- includes everything; for dev only!
 
       components: [
-        'QRouteTab',
-        'QCardActions',
-        'QImg',
-        'QInput',
-        'QSpinner',
-        'QSlideTransition',
-        'QInfiniteScroll',
-        'QPageScroller',
-        'QAvatar',
-        'QLayout',
-        'QScrollArea',
-        'QCard',
-        'QCardSection',
-        'QDialog',
-        'QPage',
-        'QAjaxBar',
-        'QMenu',
-        'QTabs',
-        'QTab',
-        'QHeader',
-        'QDrawer',
-        'QPageContainer',
-        'QPage',
-        'QToolbar',
-        'QToolbarTitle',
-        'QBtn',
-        'QIcon',
-        'QList',
-        'QItem',
-        'QItemSection',
-        'QItemLabel'
+        "QRouteTab",
+        "QCardActions",
+        "QImg",
+        "QInput",
+        "QSpinner",
+        "QSlideTransition",
+        "QInfiniteScroll",
+        "QPageScroller",
+        "QAvatar",
+        "QLayout",
+        "QScrollArea",
+        "QCard",
+        "QCardSection",
+        "QDialog",
+        "QPage",
+        "QAjaxBar",
+        "QMenu",
+        "QTabs",
+        "QTab",
+        "QHeader",
+        "QDrawer",
+        "QPageContainer",
+        "QPage",
+        "QToolbar",
+        "QToolbarTitle",
+        "QBtn",
+        "QIcon",
+        "QList",
+        "QItem",
+        "QItemSection",
+        "QItemLabel"
       ],
 
-      directives: ['Ripple', 'Scroll'],
+      directives: ["Ripple", "Scroll"],
 
       // Quasar plugins
-      plugins: ['Notify']
+      plugins: ["Notify"]
     },
 
     supportIE: false,
 
     build: {
       scopeHoisting: true,
-      vueRouterMode: 'history',
+      vueRouterMode: "history",
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
       extendWebpack(cfg) {
         cfg.module.rules.push({
-          enforce: 'pre',
+          enforce: "pre",
           test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
+          loader: "eslint-loader",
           exclude: /node_modules/,
           options: {
-            formatter: require('eslint').CLIEngine.getFormatter('stylish')
+            formatter: require("eslint").CLIEngine.getFormatter("stylish")
           }
-        })
+        });
       }
     },
 
     devServer: {
       proxy: {
-        '/api': {
-          target: 'https://follow.bigzhu.net',
-          // target: 'http://127.0.0.1:3003',
-          changeOrigin: true
-        },
-        '/medias': {
-          target: 'https://follow.bigzhu.net',
-          // target: 'http://127.0.0.1:8081',
+        "/api": {
+          target: "http://127.0.0.1:8000",
           changeOrigin: true
         }
       },
@@ -121,35 +115,35 @@ module.exports = function(ctx) {
         // name: 'Follow Center',
         // short_name: 'Follow Center',
         // description: 'Follow Your Dream',
-        display: 'standalone',
-        orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        display: "standalone",
+        orientation: "portrait",
+        background_color: "#ffffff",
+        theme_color: "#027be3",
         icons: [
           {
-            src: 'statics/icons/icon-128x128.png',
-            sizes: '128x128',
-            type: 'image/png'
+            src: "statics/icons/icon-128x128.png",
+            sizes: "128x128",
+            type: "image/png"
           },
           {
-            src: 'statics/icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
+            src: "statics/icons/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png"
           },
           {
-            src: 'statics/icons/icon-256x256.png',
-            sizes: '256x256',
-            type: 'image/png'
+            src: "statics/icons/icon-256x256.png",
+            sizes: "256x256",
+            type: "image/png"
           },
           {
-            src: 'statics/icons/icon-384x384.png',
-            sizes: '384x384',
-            type: 'image/png'
+            src: "statics/icons/icon-384x384.png",
+            sizes: "384x384",
+            type: "image/png"
           },
           {
-            src: 'statics/icons/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
+            src: "statics/icons/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png"
           }
         ]
       }
@@ -184,5 +178,5 @@ module.exports = function(ctx) {
         // appId: 'follow.bigzhu.net'
       }
     }
-  }
-}
+  };
+};
